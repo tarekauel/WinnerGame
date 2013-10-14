@@ -64,7 +64,7 @@ public class Server {
 	public static Server getServer() throws Exception {
 		if (server == null) {
 			Location.initLocations();
-			//Benefit.initBenefits();
+			Benefit.initBenefits();
 			server = new Server(Constant.Server.TCP_PORT);
 		}
 
