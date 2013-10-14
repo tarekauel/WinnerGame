@@ -161,6 +161,8 @@ public class KI extends Thread {
 			newQuality ++;
 		}
 		newQuality = qualityTry;
+		System.out.println("KI-"+id+" meldet: " + bankAmounts.get(bankAmounts.size()-1));
+		System.out.println("KI-"+id+" meldet: Frage Qualität " + qualityTry + " an.");
 
 		/******************************
 		 * SECTION BESCHAFFUNG
