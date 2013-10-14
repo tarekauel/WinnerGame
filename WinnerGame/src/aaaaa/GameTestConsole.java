@@ -4,27 +4,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import message.GameDataMessageFromClient;
-import message.GameDataMessageToClient;
 import message.GameDataMessageFromClient.DistributionFromClient;
-import message.GameDataMessageFromClient.HumanResourcesFromClient;
-import message.GameDataMessageFromClient.ProductionFromClient;
-import message.GameDataMessageFromClient.PurchaseFromClient;
 import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient;
 import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient;
 import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
 import message.GameDataMessageToClient.ProductionToClient.ProductionOrderToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
-import Client.UI.ClientGameUIController;
-import Client.UI.ClientUIStart;
-import Server.Benefit;
-import Server.Company;
-import Server.GameEngine;
-import Server.Location;
+import server.Benefit;
+import server.Company;
+import server.GameEngine;
+import server.Location;
+import client.ui.ClientUIStart;
 
 public class GameTestConsole {
 
