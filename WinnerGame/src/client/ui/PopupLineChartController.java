@@ -2,18 +2,13 @@ package client.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale.Category;
 import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.chart.Axis;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;

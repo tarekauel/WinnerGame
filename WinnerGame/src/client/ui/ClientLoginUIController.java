@@ -7,13 +7,10 @@ package client.ui;
  * Time: 16:38
  */
 
-import java.awt.Dialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import message.LoginConfirmationMessage;
-import message.LoginMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +23,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
 import client.connection.Client;
 import client.connection.UDPClient;
 

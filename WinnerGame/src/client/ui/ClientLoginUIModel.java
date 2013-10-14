@@ -1,8 +1,7 @@
 package client.ui;
 
-import client.Connection.Client;
-import client.Connection.UDPClient;
-import javafx.stage.Stage;
+import client.connection.Client;
+import client.connection.UDPClient;
 
 public class ClientLoginUIModel {
 
