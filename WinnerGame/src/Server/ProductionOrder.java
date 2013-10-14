@@ -3,7 +3,7 @@
  */
 package Server;
 
-import Constant.Constant;
+import constant.Constant;
 
 /**
  * Klasse für den Produktionsauftrag
@@ -154,13 +154,13 @@ public class ProductionOrder {
 		double additionalFactor = advantage / 100.0;
 		// durchschnittsqualität der Produkte mit Gewichtung:
 		double midQuality = (wafer.getQuality()
-				* Constant.Production.IMPACT_WAFER + cases.getQuality()
-				* Constant.Production.IMPACT_CASE) / 100.0;
+				* constant.Production.IMPACT_WAFER + cases.getQuality()
+				* constant.Production.IMPACT_CASE) / 100.0;
 		// neue Qualität (nicht mehr als double)
 		int newQuality = (int) (midQuality * additionalFactor) ;
 
 		// Prüfe ob die neue Qualität durch den Zuschlag zu sehr verändert wurde
-		newQuality = (newQuality - midQuality > Constant.Production.MAX_QUALITY_ADDITION) ? (int) (midQuality + Constant.Production.MAX_QUALITY_ADDITION)
+		newQuality = (newQuality - midQuality > constant.Production.MAX_QUALITY_ADDITION) ? (int) (midQuality + constant.Production.MAX_QUALITY_ADDITION)
 				: newQuality;
 
 		// Qualitaet auf 100 cappen 
@@ -169,7 +169,7 @@ public class ProductionOrder {
 		newQuality = (newQuality < 1) ? 1 : newQuality;
 		
 		// Berechne herstellkosten (ohne Berücksichtigung vom Ausschuss):
-		int costs = wafer.getCosts() * Constant.Production.WAFERS_PER_PANEL
+		int costs = wafer.getCosts() * constant.Production.WAFERS_PER_PANEL
 				+ cases.getCosts() + m.getPieceCosts();
 
 		// neues Panel erzeugen
@@ -181,7 +181,7 @@ public class ProductionOrder {
 		this.panel = FinishedGood
 				.create(panel.getQuality(),
 						(int) (((double) panel.getCosts() * (quantityProduced + waste)
-								+ Constant.Production.WORKING_HOURS_PER_PANEL + Constant.Production.WORKING_HOURS_PER_PANEL
+								+ constant.Production.WORKING_HOURS_PER_PANEL + constant.Production.WORKING_HOURS_PER_PANEL
 								* (quantityProduced + waste)
 								* s.getCompany().getHumanResources()
 										.getWagesPerHour().getAmount()) / quantityProduced));

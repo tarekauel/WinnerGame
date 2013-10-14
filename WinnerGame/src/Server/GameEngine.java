@@ -3,13 +3,13 @@ package Server;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Constant.Constant;
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
-import Message.GameDataMessageToClient.StorageToClient;
+import message.GameDataMessageFromClient;
+import message.GameDataMessageToClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageToClient.HumanResourcesToClient;
+import message.GameDataMessageToClient.StorageToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
+import constant.Constant;
 import Server.Connection.Server;
 
 public class GameEngine {
@@ -68,9 +68,9 @@ public class GameEngine {
 
 	public GameDataMessageToClient getInitialGameDataMessageToClient() {
 		StorageToClient storage = new StorageToClient(
-				Constant.Product.STORAGECOST_WAFER,
-				Constant.Product.STORAGECOST_CASE,
-				Constant.Product.STORAGECOST_PANEL, null);
+				constant.Product.STORAGECOST_WAFER,
+				constant.Product.STORAGECOST_CASE,
+				constant.Product.STORAGECOST_PANEL, null);
 
 		ArrayList<PossibleBenefit> possibleBenefits = new ArrayList<PossibleBenefit>();
 		for (Benefit benefit : Benefit.getBookableBenefits()) {
@@ -82,8 +82,8 @@ public class GameEngine {
 				possibleBenefits, null, averageWage, 0, 40, 0);
 		GameDataMessageToClient initialMessage = new GameDataMessageToClient(
 				"", null, null, storage, null, hr, null, null,
-				Constant.BankAccount.START_CAPITAL,
-				Constant.BankAccount.MAX_CREDIT);
+				constant.BankAccount.START_CAPITAL,
+				constant.BankAccount.MAX_CREDIT);
 		return initialMessage;
 	}
 

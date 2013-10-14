@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,8 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Client.Connection.Client;
 import Client.Connection.UDPClient;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
 
 /**
  * Dies ist die Controller-Klasse der Login-Stage. Hier wird alles implementiert, was das Login-UI manipulieren soll.

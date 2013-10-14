@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Constant.Constant;
+import constant.Constant;
 import Server.BankAccount;
 import Server.Company;
 import Server.Location;
@@ -60,7 +60,7 @@ public class TestCreateProductionOrder {
 	public void createProductionOrderBancAccountToLow() throws Exception {
 		BankAccount b = c.getBankAccount();
 		b.decreaseBalance(b.getBankBalance());
-		b.decreaseBalance(Constant.BankAccount.MAX_CREDIT-1);
+		b.decreaseBalance(constant.BankAccount.MAX_CREDIT-1);
 		assertEquals(false,c.getProduction().createProductionOrder(wafer, cases, 100));
 	}
 

@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,9 +64,6 @@ import Client.UI.ClientGameUIModel.ProductionOrder;
 import Client.UI.ClientGameUIModel.Request;
 import Client.UI.ClientGameUIModel.StoragePosition;
 import Client.UI.ClientGameUIModel.SupplierOffer;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
-import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 
 
 /**

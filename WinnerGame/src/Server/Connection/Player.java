@@ -19,8 +19,8 @@ public class Player {
 	private String ip = "";
 	private int port;
 	private ServerConnection serverConnection;
-	private ArrayList<Message.IMessage> messagesFromClient = new ArrayList<Message.IMessage>();
-	private ArrayList<Message.IMessage> messagesToClient = new ArrayList<Message.IMessage>();
+	private ArrayList<message.IMessage> messagesFromClient = new ArrayList<message.IMessage>();
+	private ArrayList<message.IMessage> messagesToClient = new ArrayList<message.IMessage>();
 	
 
 	public ServerConnection getServerConnection() {
@@ -87,19 +87,19 @@ public class Player {
 		this.port = port;
 	}
 
-	public void addMessagesToClient(Message.IMessage messagesToClient) {
+	public void addMessagesToClient(message.IMessage messagesToClient) {
 		this.messagesToClient.add(messagesToClient);
 	}
 
-	public void addMessagesFromClient(Message.IMessage messagesFromClient) {
+	public void addMessagesFromClient(message.IMessage messagesFromClient) {
 		this.messagesFromClient.add(messagesFromClient);
 	}
 
-	public ArrayList<Message.IMessage> getMessagesToClient() {
+	public ArrayList<message.IMessage> getMessagesToClient() {
 		return messagesToClient;
 	}
 
-	public ArrayList<Message.IMessage> getMessagesFromClient() {
+	public ArrayList<message.IMessage> getMessagesFromClient() {
 		return messagesFromClient;
 	}
 

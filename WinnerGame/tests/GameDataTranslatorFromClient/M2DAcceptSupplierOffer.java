@@ -5,22 +5,23 @@ package GameDataTranslatorFromClient;
 import java.util.ArrayList;
 import java.util.Random;
 
+import message.GameDataMessageFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import AspectLogger.FakeRandom;
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import aspectlogger.FakeRandom;
 import Server.Company;
 import Server.GameDataTranslator;
 import Server.GameEngine;

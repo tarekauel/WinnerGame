@@ -2,7 +2,7 @@ package Server;
 
 import java.util.ArrayList;
 
-import Constant.Constant;
+import constant.Constant;
 
 public class Production extends DepartmentRoundSensitive {
 	// Liste aller jemals erstellten Produktions auftrï¿½ge
@@ -26,7 +26,7 @@ public class Production extends DepartmentRoundSensitive {
 	 *             falls Abteilung nicht erstellt werden konnte
 	 */
 	public Production(Company c) throws Exception {
-		super(c, "Produktion", Constant.DepartmentFixcost.PRODUCTION);
+		super(c, "Produktion", constant.DepartmentFixcost.PRODUCTION);
 		machine = new Machinery();
 	}
 
@@ -81,7 +81,7 @@ public class Production extends DepartmentRoundSensitive {
 	 */
 	public boolean createProductionOrder(Resource wafer, Resource cases, int quantity) throws Exception {
 		// Prüfen, ob genug Geld für die Order (Orderkosten) auf dem Konto ist
-		if (getCompany().getBankAccount().decreaseBalance( Constant.Production.COST_PER_ORDER )) {
+		if (getCompany().getBankAccount().decreaseBalance( constant.Production.COST_PER_ORDER )) {
 
 			// erzeuge den Auftrag:
 			ProductionOrder po = new ProductionOrder(wafer, cases, quantity);
@@ -109,8 +109,8 @@ public class Production extends DepartmentRoundSensitive {
 		// Den Zuschlag auf die Qualität berechnen
 		int wageMotivation= getCompany().getHumanResources().getMotivation();
 		int locationAdvantage = getCompany().getLocation().getAdvantage();
-		int advantage= wageMotivation*Constant.Production.MOTIVATION_IMPACT/100+
-				locationAdvantage*Constant.Production.LOCATION_IMPACT/100;
+		int advantage= wageMotivation*constant.Production.MOTIVATION_IMPACT/100+
+				locationAdvantage*constant.Production.LOCATION_IMPACT/100;
 
 		// Es muss sicher gestellt werden, dass nicht mehr Werkstuecke auf der
 		// Maschine lagen, als diese kann.
@@ -136,7 +136,7 @@ public class Production extends DepartmentRoundSensitive {
 
 				// Zieht den Lohn für die Produktion vom Konto ab
 				if (!getCompany().getBankAccount().decreaseBalance(
-						Constant.Production.WORKING_HOURS_PER_PANEL * getCompany().getHumanResources().getWagesPerHour().getAmount())) {
+						constant.Production.WORKING_HOURS_PER_PANEL * getCompany().getHumanResources().getWagesPerHour().getAmount())) {
 					innerBreak = true;
 					break;					
 				}
@@ -146,7 +146,7 @@ public class Production extends DepartmentRoundSensitive {
 				// Zieh die Storage elemente aus dem Storage ab:
 				// nutze dafï¿½r das lager des spielers:
 				// Wafer abbuchen (direkt in der Anzahl waferPerPanel)
-				if (!this.getCompany().getStorage().unstore(p.getWafer(), Constant.Production.WAFERS_PER_PANEL)){
+				if (!this.getCompany().getStorage().unstore(p.getWafer(), constant.Production.WAFERS_PER_PANEL)){
 					innerBreak = true;
 					break;	
 				};
@@ -154,11 +154,11 @@ public class Production extends DepartmentRoundSensitive {
 				if(!this.getCompany().getStorage().unstore(p.getCase(), 1)){
 					innerBreak = true;
 					//falls nicht genuegend cases vorhanden muessen Wafer wieder zurueckgebucht werden
-					this.getCompany().getStorage().store(p.getWafer(),Constant.Production.WAFERS_PER_PANEL);
+					this.getCompany().getStorage().store(p.getWafer(),constant.Production.WAFERS_PER_PANEL);
 					break;	
 				};
 				//Bucht die Stunden im HR ein:
-				this.getCompany().getHumanResources().increaseWorkingHour(Constant.Production.WORKING_HOURS_PER_PANEL);
+				this.getCompany().getHumanResources().increaseWorkingHour(constant.Production.WORKING_HOURS_PER_PANEL);
 
 				// "Werkstï¿½ck auf Maschine legen":
 				triedToProduce++;

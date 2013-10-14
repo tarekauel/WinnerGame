@@ -1,15 +1,15 @@
-package KIGegner;
+package kigegner;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import message.GameDataMessageToClient;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import message.GameDataMessageToClient.Loser;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import Client.Connection.Client;
 import Client.UI.ClientGameUIStart;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.Loser;
-import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
 
 public class UITestKISchlau extends Thread {
 	private Client c;
@@ -60,7 +60,7 @@ public class UITestKISchlau extends Thread {
 		// initialisiere den Client
 		c = new Client();
 		// erstelle die TCP-Verbindung
-		c.connect("127.0.0.1", Constant.Constant.Server.TCP_PORT);
+		c.connect("127.0.0.1", constant.Constant.Server.TCP_PORT);
 		// Sende die Daten an den Server
 		c.writeMessage(new LoginMessage(playerName, "KI-Programmed",
 				"deutschland"));
@@ -261,7 +261,7 @@ public class UITestKISchlau extends Thread {
 		}
 		// Berechnen der maximalen Stücke mit dem momentanen Geld
 		int maxByMoney = (int) ((readMessage.cash * 1.0) / (casePrice + waferPrice
-				* Constant.Constant.Production.WAFERS_PER_PANEL));
+				* constant.Constant.Production.WAFERS_PER_PANEL));
 		// Entscheidung (toBuy ist hier maxByMachine)
 		// Entscheidung wieviel ich mir leisten kann
 		toBuy = (toBuy < maxByMoney) ? toBuy : maxByMoney;
@@ -285,7 +285,7 @@ public class UITestKISchlau extends Thread {
 
 		// Tatsächliche Bestellung
 		m.addAccepted("Wafer", waferQuality,
-				(toBuy * Constant.Constant.Production.WAFERS_PER_PANEL));
+				(toBuy * constant.Constant.Production.WAFERS_PER_PANEL));
 		m.addAccepted("Gehäuse", caseQuality, (toBuy));
 
 		/*************************************
@@ -308,10 +308,10 @@ public class UITestKISchlau extends Thread {
 
 				// Absicherung, dass wenigsten fuer ein Panel genug Wafer da
 				// sind!
-				if ((int) (readMessage.storage.storageElements.get(i).quantity / Constant.Constant.Production.WAFERS_PER_PANEL) > noOfPanelsWafer) {
+				if ((int) (readMessage.storage.storageElements.get(i).quantity / constant.Constant.Production.WAFERS_PER_PANEL) > noOfPanelsWafer) {
 
 					noOfPanelsWafer = (int) (readMessage.storage.storageElements
-							.get(i).quantity / Constant.Constant.Production.WAFERS_PER_PANEL);
+							.get(i).quantity / constant.Constant.Production.WAFERS_PER_PANEL);
 					indexWafer = i;
 				}
 
@@ -402,7 +402,7 @@ public class UITestKISchlau extends Thread {
 						readMessage.purchase.requests.get(i).supplierOffers
 								.get(index).name, readMessage.purchase.requests
 								.get(i).supplierOffers.get(index).quality,
-						toBuy * Constant.Constant.Production.WAFERS_PER_PANEL);
+						toBuy * constant.Constant.Production.WAFERS_PER_PANEL);
 			} else {
 				// Bestelle Cases
 				m.addAccepted(

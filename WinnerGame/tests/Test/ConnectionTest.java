@@ -1,17 +1,17 @@
 package Test;
 
 import static org.junit.Assert.assertEquals;
+import message.IMessage;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
 
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import constant.Constant;
 import Client.Connection.Client;
 import Client.Connection.UDPClient;
-import Constant.Constant;
-import Message.IMessage;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
 import Server.Location;
 import Server.Connection.Server;
 import Server.Connection.UDPServer;
@@ -27,7 +27,7 @@ public class ConnectionTest {
 	public static void setUpBeforeClass() throws Exception {
 		Location.initLocations();
 		String ip = "127.0.0.1";
-		int port = Constant.Server.TCP_PORT;
+		int port = constant.Server.TCP_PORT;
 		server = Server.getServer();
 		client1 = new Client();
 		client1.connect(ip, port);
@@ -99,7 +99,7 @@ public class ConnectionTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(Constant.Server.TCP_PORT,udpClient.getTcpPortOfServer());
+		assertEquals(constant.Server.TCP_PORT,udpClient.getTcpPortOfServer());
 		
 		
 	}

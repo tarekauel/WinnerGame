@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Constant.Constant;
+import constant.Constant;
 import Server.BankAccount;
 import Server.Company;
 import Server.Location;
@@ -73,7 +73,7 @@ public class TestBankAccount {
 		assertEquals(
 				false,
 				b.decreaseBalance(b.getBankBalance()
-						+ Constant.BankAccount.MAX_CREDIT + 50));
+						+ constant.BankAccount.MAX_CREDIT + 50));
 	}
 
 	@After

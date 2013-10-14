@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.io.*;
 
-import Message.IMessage;
+import message.IMessage;
 
 /**
  * 

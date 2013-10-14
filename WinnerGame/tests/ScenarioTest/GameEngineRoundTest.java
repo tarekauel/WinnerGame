@@ -4,26 +4,27 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import message.GameDataMessageFromClient;
+import message.GameDataMessageToClient;
+import message.IMessage;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import message.GameDataMessageFromClient.DistributionFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import constant.Constant;
 import Client.Connection.Client;
-import Constant.Constant;
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageToClient;
-import Message.IMessage;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
-import Message.GameDataMessageFromClient.DistributionFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
 import Server.GameEngine;
 import Server.Location;
 import Server.Connection.Server;
@@ -40,17 +41,17 @@ public class GameEngineRoundTest {
 		// Client 1 connect
 		Client c1 = new Client();
 		String ip="localhost";
-		c1.connect(ip, Constant.Server.TCP_PORT);
+		c1.connect(ip, constant.Server.TCP_PORT);
 		
 
 		// Client 2 connect
 		Client c2 = new Client();
-		c2.connect(ip, Constant.Server.TCP_PORT);
+		c2.connect(ip, constant.Server.TCP_PORT);
 		
 
 		// Client 3 connect
 		Client c3 = new Client();
-		c3.connect(ip, Constant.Server.TCP_PORT);
+		c3.connect(ip, constant.Server.TCP_PORT);
 		
 		c1.writeMessage(new LoginMessage("SolarWorld", "passwort1", "Deutschland"));
 		c2.writeMessage(new LoginMessage("SolarPlus", "passwort1", "USA"));
@@ -133,7 +134,7 @@ public class GameEngineRoundTest {
 	
 		//Neuer Client versucht sich einzuloggen, was nicht funktionieren darf
 		Client c4 = new Client();
-		c4.connect(ip, Constant.Server.TCP_PORT);
+		c4.connect(ip, constant.Server.TCP_PORT);
 		c4.writeMessage(new LoginMessage("Neue Firma", "passwort", "China"));
 		LoginConfirmationMessage messageBack4 = (LoginConfirmationMessage) c4.readMessage();
 		assertEquals(false, messageBack4.getSuccess());

@@ -1,4 +1,4 @@
-package AspectLogger;
+package aspectlogger;
 
 public aspect ALogger {
 /*

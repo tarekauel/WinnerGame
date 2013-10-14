@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
-import Constant.Constant;
+import constant.Constant;
 
 /**
  * Der CustomerMarket existiert für alle Spieler gemeinsam. Er arbeitet die
@@ -125,20 +125,20 @@ public class CustomerMarket {
 	// TODO
 	private CustomerMarket() {
 		// Initialisierungsvariablen setzen
-		this.aMarketPeak = Constant.CustomerMarket.aMarketPeak;
-		this.aMarketQuantity = Constant.CustomerMarket.aMarketQuantity;
-		this.aMarketVariance = Constant.CustomerMarket.aMarketVariance;
-		this.aMarketIncreaseFactor = Constant.CustomerMarket.aMarketIncreaseFactor;
-		this.aMarketDecreaseFactor = Constant.CustomerMarket.aMarketDecreaseFactor;
-		this.cMarketPeak = Constant.CustomerMarket.cMarketPeak;
-		this.cMarketQuantity = Constant.CustomerMarket.cMarketQuantity;
-		this.cMarketVariance = Constant.CustomerMarket.cMarketVariance;
-		this.cMarketIncreaseFactor = Constant.CustomerMarket.cMarketIncreaseFactor;
-		this.cMarketDecreaseFactor = Constant.CustomerMarket.cMarketDecreaseFactor;
-		this.aMarketAvgPriceLastRound = Constant.CustomerMarket.aMarketAvgPriceLastRound;
-		this.aMarketAvgQualityLastRound = Constant.CustomerMarket.aMarketAvgQualityLastRound;
-		this.cMarketAvgPriceLastRound = Constant.CustomerMarket.cMarketAvgPriceLastRound;
-		this.cMarketAvgQualityLastRound = Constant.CustomerMarket.cMarketAvgQualityLastRound;
+		this.aMarketPeak = constant.CustomerMarket.aMarketPeak;
+		this.aMarketQuantity = constant.CustomerMarket.aMarketQuantity;
+		this.aMarketVariance = constant.CustomerMarket.aMarketVariance;
+		this.aMarketIncreaseFactor = constant.CustomerMarket.aMarketIncreaseFactor;
+		this.aMarketDecreaseFactor = constant.CustomerMarket.aMarketDecreaseFactor;
+		this.cMarketPeak = constant.CustomerMarket.cMarketPeak;
+		this.cMarketQuantity = constant.CustomerMarket.cMarketQuantity;
+		this.cMarketVariance = constant.CustomerMarket.cMarketVariance;
+		this.cMarketIncreaseFactor = constant.CustomerMarket.cMarketIncreaseFactor;
+		this.cMarketDecreaseFactor = constant.CustomerMarket.cMarketDecreaseFactor;
+		this.aMarketAvgPriceLastRound = constant.CustomerMarket.aMarketAvgPriceLastRound;
+		this.aMarketAvgQualityLastRound = constant.CustomerMarket.aMarketAvgQualityLastRound;
+		this.cMarketAvgPriceLastRound = constant.CustomerMarket.cMarketAvgPriceLastRound;
+		this.cMarketAvgQualityLastRound = constant.CustomerMarket.cMarketAvgQualityLastRound;
 		this.marketMiddleQualityLastRound = (aMarketAvgQualityLastRound + cMarketAvgQualityLastRound) / 2;
 		this.marketMiddlePriceLastRound = (aMarketAvgPriceLastRound + cMarketAvgPriceLastRound) / 2 + (int) 0.5
 				* (aMarketAvgPriceLastRound - cMarketAvgPriceLastRound) / 2;
@@ -319,14 +319,14 @@ public class CustomerMarket {
 		aMarketQuantity += servedCustomersAMarket / aMarketIncreaseFactor - notServedCustomersAMarket
 				/ aMarketDecreaseFactor;
 
-		aMarketQuantity = (aMarketQuantity < Constant.CustomerMarket.aMarketQuantity) ? Constant.CustomerMarket.aMarketQuantity : aMarketQuantity;
+		aMarketQuantity = (aMarketQuantity < constant.CustomerMarket.aMarketQuantity) ? constant.CustomerMarket.aMarketQuantity : aMarketQuantity;
 		
 		
 		// Berechnung des Wachstums des C-Marktes für die nächste Runde
 		cMarketQuantity += servedCustomersCMarket / cMarketIncreaseFactor - notServedCustomersCMarket
 				/ cMarketDecreaseFactor;
 		
-		cMarketQuantity = (cMarketQuantity < Constant.CustomerMarket.cMarketQuantity) ? Constant.CustomerMarket.cMarketQuantity : cMarketQuantity;
+		cMarketQuantity = (cMarketQuantity < constant.CustomerMarket.cMarketQuantity) ? constant.CustomerMarket.cMarketQuantity : cMarketQuantity;
 
 		// Berechnung des Durchschnittspreises der gekauften Artikel im A-Markt
 		int sumPriceA = 0;

@@ -1,19 +1,19 @@
-package KIGegner;
+package kigegner;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import message.GameDataMessageToClient;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
+import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import constant.Constant;
 import Client.Connection.Client;
 import Client.UI.ClientGameUIStart;
-import Constant.Constant;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.DistributionToClient.OfferToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
-import Message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
-import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
 
 public class KITarek extends Thread {
 		
@@ -47,7 +47,7 @@ public class KITarek extends Thread {
 	
 	private boolean login() {
 		this.c = new Client();
-		this.c.connect("127.0.0.1", Constant.Server.TCP_PORT);
+		this.c.connect("127.0.0.1", constant.Server.TCP_PORT);
 		playerName = "KiTarek";
 		// Sende die Daten an den Server
 		c.writeMessage(new LoginMessage(playerName, "KI-Programmed",
@@ -149,7 +149,7 @@ public class KITarek extends Thread {
 			}
 		}
 		
-		int quantityA = (toAcceptA.name.equals("Wafer")) ? toProduce * Constant.Production.WAFERS_PER_PANEL : toProduce; 
+		int quantityA = (toAcceptA.name.equals("Wafer")) ? toProduce * constant.Production.WAFERS_PER_PANEL : toProduce; 
 		m.addAccepted(toAcceptA.name, toAcceptA.quality, quantityA);
 		
 		double plB = 0.0;
@@ -161,7 +161,7 @@ public class KITarek extends Thread {
 			}
 		}
 		
-		int quantityB = (toAcceptB.name.equals("Wafer")) ? toProduce * Constant.Production.WAFERS_PER_PANEL : toProduce; 
+		int quantityB = (toAcceptB.name.equals("Wafer")) ? toProduce * constant.Production.WAFERS_PER_PANEL : toProduce; 
 		m.addAccepted(toAcceptB.name, toAcceptB.quality, quantityB);
 		
 	}
@@ -179,7 +179,7 @@ public class KITarek extends Thread {
 		for( StorageElementToClient elem : reply.storage.storageElements) {
 			if( elem.type.equals("Wafer")) {
 				if( elem.quantity > maxWaferCount) {
-					toProduce = elem.quantity / Constant.Production.WAFERS_PER_PANEL;
+					toProduce = elem.quantity / constant.Production.WAFERS_PER_PANEL;
 					maxWaferCount = elem.quantity;
 					waferQuality = elem.quality;
 				}				

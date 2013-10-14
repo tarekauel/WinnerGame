@@ -2,33 +2,33 @@ package Server;
 
 import java.util.ArrayList;
 
-import Constant.Constant;
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.DistributionToClient;
-import Message.GameDataMessageToClient.DistributionToClient.OfferToClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
-import Message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
-import Message.GameDataMessageToClient.MarketingToClient;
-import Message.GameDataMessageToClient.MarketingToClient.MarketShareToClient;
-import Message.GameDataMessageToClient.MarketingToClient.MotivationRoundToClient;
-import Message.GameDataMessageToClient.MarketingToClient.RessourcePriceToClient;
-import Message.GameDataMessageToClient.ProductionToClient;
-import Message.GameDataMessageToClient.ProductionToClient.ProductionOrderToClient;
-import Message.GameDataMessageToClient.PurchaseToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
-import Message.GameDataMessageToClient.ReportingToClient;
-import Message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
-import Message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
-import Message.GameDataMessageToClient.StorageToClient;
-import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import message.GameDataMessageFromClient;
+import message.GameDataMessageToClient;
+import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient.DistributionToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient;
+import message.GameDataMessageToClient.MarketingToClient;
+import message.GameDataMessageToClient.ProductionToClient;
+import message.GameDataMessageToClient.PurchaseToClient;
+import message.GameDataMessageToClient.ReportingToClient;
+import message.GameDataMessageToClient.StorageToClient;
+import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
+import message.GameDataMessageToClient.MarketingToClient.MarketShareToClient;
+import message.GameDataMessageToClient.MarketingToClient.MotivationRoundToClient;
+import message.GameDataMessageToClient.MarketingToClient.RessourcePriceToClient;
+import message.GameDataMessageToClient.ProductionToClient.ProductionOrderToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
+import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
+import message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import constant.Constant;
 
 public class GameDataTranslator {
 
@@ -268,7 +268,7 @@ public class GameDataTranslator {
 		StorageToClient storage = createStorage(company);
 		// Hauptdaten erstellen
 		long cash = company.getBankAccount().getBankBalance();
-		long maxCredit = Constant.BankAccount.MAX_CREDIT;
+		long maxCredit = constant.BankAccount.MAX_CREDIT;
 
 		// Message erstellen
 		GameDataMessageToClient message = new GameDataMessageToClient(
@@ -289,9 +289,9 @@ public class GameDataTranslator {
 		}
 
 		StorageToClient storage = new StorageToClient(
-				Constant.Product.STORAGECOST_WAFER,
-				Constant.Product.STORAGECOST_CASE,
-				Constant.Product.STORAGECOST_PANEL, storageElements);
+				constant.Product.STORAGECOST_WAFER,
+				constant.Product.STORAGECOST_CASE,
+				constant.Product.STORAGECOST_PANEL, storageElements);
 		return storage;
 	}
 
@@ -422,7 +422,7 @@ public class GameDataTranslator {
 					.getQuantitySold(), offer.getPrice(), offer.getRound(),
 					offer.getStorageElement().getProduct().getCosts()));
 		}
-		DistributionToClient distribution = new DistributionToClient(offers, Constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL);
+		DistributionToClient distribution = new DistributionToClient(offers, constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL);
 		return distribution;
 	}
 

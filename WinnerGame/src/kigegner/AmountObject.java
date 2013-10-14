@@ -1,4 +1,4 @@
-package KIGegner;
+package kigegner;
 
 public class AmountObject {
 	public final long amount;

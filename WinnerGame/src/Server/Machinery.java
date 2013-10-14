@@ -6,7 +6,7 @@ package Server;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Constant.Constant;
+import constant.Constant;
 
 /**
  * @author Lars
@@ -108,7 +108,7 @@ public class Machinery {
 		// Zufallszahlgenerator initialisieren
 		Random r = new Random();
 		// Chance auf Produktion: 84% + level.. also mindestens 85%
-		boolean ret = (r.nextInt(100) < (Constant.Machinery.JUNK_INIT + level)) ? false
+		boolean ret = (r.nextInt(100) < (constant.Machinery.JUNK_INIT + level)) ? false
 				: true;
 
 		return ret;
@@ -122,7 +122,7 @@ public class Machinery {
 	 */
 	public int getMaxCapacity() {
 
-		return Constant.Machinery.CAPACITY[level-1];
+		return constant.Machinery.CAPACITY[level-1];
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class Machinery {
 		if (level==10){
 			return 0;
 		}
-		return Constant.Machinery.BUILD_COSTS[level];
+		return constant.Machinery.BUILD_COSTS[level];
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class Machinery {
 		// Prüfe ob genug Geld da ist, wenn ja, dann bucht der Befehl es auch
 		// direkt ab!
 		// drank denken dass der array bei 0 beginnt, maschine aber bei 1
-		if (!b.decreaseBalance(Constant.Machinery.BUILD_COSTS[level])) {
+		if (!b.decreaseBalance(constant.Machinery.BUILD_COSTS[level])) {
 
 			return false;
 
@@ -203,7 +203,7 @@ public class Machinery {
 	 */
 	public int getCosts() {
 
-		return (level * level) * Constant.Machinery.FIX_COST;
+		return (level * level) * constant.Machinery.FIX_COST;
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class Machinery {
 	 */
 	public int getPieceCosts() {
 
-		return Constant.Machinery.PIECE_COST_BASIC * (11 - level);
+		return constant.Machinery.PIECE_COST_BASIC * (11 - level);
 	}
 
 }

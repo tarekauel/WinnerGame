@@ -3,7 +3,7 @@ package Server;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Constant.Constant;
+import constant.Constant;
 
 /**
  * Die Purchase-Klasse stellt die Einkaufsabteilung des Unternehmens dar. Sie
@@ -39,7 +39,7 @@ public class Purchase extends DepartmentRoundSensitive {
 	 *             falls keine Korrekte erstellung
 	 */
 	public Purchase(Company c) throws Exception {
-		super(c, "Einkauf", Constant.DepartmentFixcost.PURCHASE);
+		super(c, "Einkauf", constant.DepartmentFixcost.PURCHASE);
 		SupplierMarket.getMarket().addPurchase(this);
 	}
 

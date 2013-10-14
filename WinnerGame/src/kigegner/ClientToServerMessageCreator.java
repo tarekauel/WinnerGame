@@ -1,17 +1,17 @@
-package KIGegner;
+package kigegner;
 
 import java.util.ArrayList;
 
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
 
 public class ClientToServerMessageCreator {
 	// Liste aller bisher erstellten KI-Messages

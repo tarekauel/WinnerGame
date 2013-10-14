@@ -3,7 +3,7 @@ package Server;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import Constant.Constant;
+import constant.Constant;
 
 public class Distribution extends DepartmentRoundSensitive {
 	
@@ -24,7 +24,7 @@ public class Distribution extends DepartmentRoundSensitive {
 	 *             falls Abteilung nicht erstellt werden konnte
 	 */
 	public Distribution(Company c)throws Exception{
-		super(c,"Verkauf",Constant.DepartmentFixcost.DISTRIBUTION);
+		super(c,"Verkauf",constant.DepartmentFixcost.DISTRIBUTION);
 		
 		CustomerMarket.getMarket().addDistribution(this);
 		
@@ -75,7 +75,7 @@ public class Distribution extends DepartmentRoundSensitive {
 			listOfOffers.add(offer);
 			listOfLatestOffers.add(offer);
 	
-		getCompany().getBankAccount().decreaseBalance(Constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL*quantityToSell);
+		getCompany().getBankAccount().decreaseBalance(constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL*quantityToSell);
 		
 		
 	}// createOffer

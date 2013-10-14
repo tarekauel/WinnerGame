@@ -2,21 +2,22 @@ package ScenarioTest;
 
 import java.util.ArrayList;
 
+import message.GameDataMessageFromClient;
+import message.GameDataMessageToClient;
+import message.GameDataMessageFromClient.DistributionFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient;
+import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
+import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
+import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
+
 import org.junit.Test;
 
-import Message.GameDataMessageFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient;
-import Message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient;
-import Message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient;
-import Message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
-import Message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
-import Message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
 import Server.Benefit;
 import Server.Company;
 import Server.GameEngine;

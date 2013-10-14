@@ -4,12 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import message.GameDataMessageToClient;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Message.GameDataMessageToClient;
 import Server.Company;
 import Server.GameDataTranslator;
 import Server.GameEngine;

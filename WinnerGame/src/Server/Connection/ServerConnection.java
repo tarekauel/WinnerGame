@@ -5,7 +5,7 @@ package Server.Connection;
 import java.net.Socket;
 import java.io.*;
 
-import Message.*;
+import message.*;
 import Server.GameEngine;
 
 /**

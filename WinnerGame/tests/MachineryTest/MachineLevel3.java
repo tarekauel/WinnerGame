@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import AspectLogger.FakeRandom;
+import aspectlogger.FakeRandom;
 import Server.BankAccount;
 import Server.Company;
 import Server.Location;
@@ -84,7 +84,7 @@ public class MachineLevel3 {
 		b.decreaseBalance(b.getBankBalance());
 
 		// Reize Dispo aus, bis auf 1 cent
-		b.decreaseBalance(Constant.Constant.BankAccount.MAX_CREDIT - 1);
+		b.decreaseBalance(constant.Constant.BankAccount.MAX_CREDIT - 1);
 		assertEquals(false, m.increaseLevel(b));
 	}
 

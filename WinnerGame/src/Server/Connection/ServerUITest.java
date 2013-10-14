@@ -1,6 +1,6 @@
 package Server.Connection;
 
-import KIGegner.KITarek;
+import kigegner.KITarek;
 
 /**
  * 

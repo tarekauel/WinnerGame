@@ -2,7 +2,7 @@ package Server;
 
 import java.util.ArrayList;
 
-import Constant.Constant;
+import constant.Constant;
 
 /**
  * Das Storage/Lager verwaltet alle StorageElemente und lagert diese ein und
@@ -26,7 +26,7 @@ public class Storage extends DepartmentRoundSensitive {
 	 *             fehlerhaft
 	 */
 	public Storage(Company c) throws Exception {
-		super(c, "Lager", Constant.DepartmentFixcost.STORAGE);
+		super(c, "Lager", constant.DepartmentFixcost.STORAGE);
 
 	}
 

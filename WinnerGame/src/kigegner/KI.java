@@ -1,18 +1,18 @@
-package KIGegner;
+package kigegner;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import message.GameDataMessageToClient;
+import message.GameOverMessage;
+import message.IMessage;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import message.GameDataMessageToClient.Loser;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import Client.Connection.Client;
-import Client.UI.ClientGameUIStart;
-import Client.UI.ClientUIStart;
-import Message.GameDataMessageToClient;
-import Message.GameDataMessageToClient.Loser;
-import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import Message.LoginConfirmationMessage;
-import Message.LoginMessage;
-import Server.Connection.Server;
 
-public class UITestKI extends Thread {
+public class KI extends Thread {
 	private Client c;
 	// Die KI versucht diese Qualität zu erreichen, oder zu überbieten
 	private int qualityTry;
@@ -21,21 +21,23 @@ public class UITestKI extends Thread {
 	private static int counter = 1;
 	private final int id;
 	public static GameDataMessageToClient data;
+	private int lastBought = 200;
+	private final int round;
 
 	public static void main(String[] args) {
 		// starte den Server
 		// Server.main(null);
 		// in welchen Sektor soll die KI?
 		// Je niedriger die Zahl, desto mehr ist es im billigen Secotr:
-		new UITestKI(60);
+		new KI(50);
 
 	}
 
-	private UITestKI(int sector) {
+	public KI(int round) {
 		id = counter;
 		System.out.println("KI-" + id + " wurde gestartet!");
-
-		this.qualityTry = sector;
+		this.round = round;
+		this.qualityTry = 40;
 		this.playerName = "KI-Solar" + id;
 
 		counter++;
@@ -60,9 +62,10 @@ public class UITestKI extends Thread {
 		// initialisiere den Client
 		c = new Client();
 		// erstelle die TCP-Verbindung
-		c.connect("127.0.0.1", Constant.Constant.Server.TCP_PORT);
+		c.connect("127.0.0.1", constant.Constant.Server.TCP_PORT);
 		// Sende die Daten an den Server
-		c.writeMessage(new LoginMessage(playerName, "KI-Programmed", "deutschland"));
+		c.writeMessage(new LoginMessage(playerName, "KI-Programmed",
+				"deutschland"));
 		// Empfange die Daten
 		LoginConfirmationMessage msg = (LoginConfirmationMessage) c
 				.readMessage();
@@ -83,11 +86,15 @@ public class UITestKI extends Thread {
 	@Override
 	public void run() {
 		boolean noLoser = false;
+		IMessage read;
+		
+		GameDataMessageToClient data;
+		// data= (GameDataMessageToClient) c.readMessage();
 		// Bereite Requests und sonstiges für die Erste Runde vor!
 		doFirstRound();
 		// zweite Runde
-		GameDataMessageToClient data = (GameDataMessageToClient) c
-				.readMessage();
+		read =  c.readMessage();
+		data = (GameDataMessageToClient) read;
 		if (noLoser(data)) {
 			doSecondRound(data);
 			noLoser = true;
@@ -95,27 +102,34 @@ public class UITestKI extends Thread {
 
 		// nteRunde
 		try {
-
-			while (noLoser) {
-				data = (GameDataMessageToClient) c.readMessage();
+			boolean stopByRound = false;
+			while (noLoser && !stopByRound) {
+				read =  c.readMessage();
+				data = (GameDataMessageToClient) read;
 				if (noLoser(data)) {
 					doJob(data);
+					stopByRound = (data.round > this.round);
 				} else {
 					noLoser = false;
-					System.out.println("KI-" + id+ " hat verloren! (Kein Geld mehr)");
+					System.out.println("KI-" + id
+							+ " hat verloren! (Kein Geld mehr)");
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(read == null){
+				System.out.println("KI-" + id + ": Null Nachricht vom Server.");
+			}else{
+				try{
+				GameOverMessage go = (GameOverMessage) read;
+				System.out.println("KI-" + id + ":" + go.toString());
+				}catch(Exception e2){
+					
+				}
+			}
 		}
-		
+
 		System.out.println("KI-" + id + " wurde beendet");
-		for (int i = 0; i < bankAmounts.size(); i++) {
-
-			System.out.println("KI-" + id + " meldet:"
-					+ bankAmounts.get(i).toString());
-		}
-
+		
 	}
 
 	/**
@@ -127,17 +141,7 @@ public class UITestKI extends Thread {
 	private void doJob(GameDataMessageToClient readMessage) throws Exception {
 
 		data = readMessage;
-		
-		if (data.round == 6) {
-			ClientGameUIStart.main(null);
-			this.stop();
-		}
-		
-		if (data.round == 100) {
-			throw new Exception("Runde!");
-			
-		}
-	
+
 		if (readMessage == null) {
 			throw new Exception("Fehler bei der Nachricht");
 
@@ -153,6 +157,18 @@ public class UITestKI extends Thread {
 		// Erzeuge neue KI-Message
 		ClientToServerMessageCreator m = new ClientToServerMessageCreator(
 				playerName);
+
+		// erstelle ein Random request mit Maximal 30 Abweichung von qualityTry
+		Random r = new Random();
+		int newQuality = 140;
+		while (Math.abs(newQuality - qualityTry) > 30) {
+			newQuality = r.nextInt(99);
+			newQuality ++;
+		}
+		qualityTry=newQuality ;
+		System.out.println("KI-"+id+" meldet: " + bankAmounts.get(bankAmounts.size()-1));
+		System.out.println("KI-"+id+" meldet: Frage Qualität " + qualityTry + " an.");
+
 		/******************************
 		 * SECTION BESCHAFFUNG
 		 */
@@ -166,7 +182,7 @@ public class UITestKI extends Thread {
 		m.setWage(1000);
 
 		// Intelligenter Ausbau der Maschine (bis Marktsättigung)
-		m.setMachine(true);
+		m.setMachine(false);
 		for (StorageElementToClient s : readMessage.storage.storageElements) {
 			// Es liegen noch Panels auf Lager, wir produzieren also zuviel.
 			if (s.type.equals("Panel")) {
@@ -192,8 +208,7 @@ public class UITestKI extends Thread {
 
 		int casePrice = 0;
 		int caseQuality = 0;
-		
-		
+
 		for (int i = 0; i < readMessage.purchase.requests.size(); i++) {
 			// index des bisher besten angebots zur anfrage:
 			int index = 0;
@@ -236,23 +251,31 @@ public class UITestKI extends Thread {
 		}
 		// Berechnen der maximalen Stücke mit dem momentanen Geld
 		int maxByMoney = (int) ((readMessage.cash * 1.0) / (casePrice + waferPrice
-				* Constant.Constant.Production.WAFERS_PER_PANEL));
-		// Entscheidung (toBuy ist hier maxByMachine
+				* constant.Constant.Production.WAFERS_PER_PANEL));
+		// Entscheidung (toBuy ist hier maxByMachine)
+		// Entscheidung wieviel ich mir leisten kann
 		toBuy = (toBuy < maxByMoney) ? toBuy : maxByMoney;
-		boolean marketFull = false;
-		for (StorageElementToClient s : readMessage.storage.storageElements) {
-			// Es liegen noch Panels auf Lager, wir produzieren also zuviel.
-			if (s.type.equals("Panel")) {
-				m.setMachine(true);
-				break;
-			}
-		}
-		if (marketFull){
-			toBuy = toBuy / 10;
-		}
+		// geschätzte Vorhersage
+		int market = lastBought * (1 + (readMessage.round / 5));
+		// Entscheidung ob nach market oder nach toBuy gearbeitet wird
+		toBuy = (toBuy < market) ? toBuy : market;
+
+		// boolean marketFull = false;
+		// for (StorageElementToClient s : readMessage.storage.storageElements)
+		// {
+		// // Es liegen noch Panels auf Lager, wir produzieren also zuviel.
+		// if (s.type.equals("Panel")) {
+		// m.setMachine(true);
+		// break;
+		// }
+		// }
+		// if (marketFull){
+		// toBuy = toBuy / 10;
+		// }
+
 		// Tatsächliche Bestellung
-		m.addAccepted("Wafer", waferQuality, (toBuy
-				* Constant.Constant.Production.WAFERS_PER_PANEL));
+		m.addAccepted("Wafer", waferQuality,
+				(toBuy * constant.Constant.Production.WAFERS_PER_PANEL));
 		m.addAccepted("Gehäuse", caseQuality, (toBuy));
 
 		/*************************************
@@ -265,21 +288,20 @@ public class UITestKI extends Thread {
 		for (int i = 0; i < readMessage.storage.storageElements.size(); i++) {
 			if (readMessage.storage.storageElements.get(i).type.equals("Panel")) {
 				// Vertick die fertigen Panels
-				double newCosts = (readMessage.storage.storageElements.get(i).costs * 1.1);
-				m.addOffer(
-						readMessage.storage.storageElements.get(i).quality,
+				double newCosts = (readMessage.storage.storageElements.get(i).costs * 2.05);
+				m.addOffer(readMessage.storage.storageElements.get(i).quality,
 						readMessage.storage.storageElements.get(i).quantity,
-						(int) newCosts );
+						(int) newCosts);
 
 			} else if (readMessage.storage.storageElements.get(i).type
 					.equals("Wafer")) {
 
 				// Absicherung, dass wenigsten fuer ein Panel genug Wafer da
 				// sind!
-				if ((int) (readMessage.storage.storageElements.get(i).quantity / Constant.Constant.Production.WAFERS_PER_PANEL) > noOfPanelsWafer) {
+				if ((int) (readMessage.storage.storageElements.get(i).quantity / constant.Constant.Production.WAFERS_PER_PANEL) > noOfPanelsWafer) {
 
 					noOfPanelsWafer = (int) (readMessage.storage.storageElements
-							.get(i).quantity / Constant.Constant.Production.WAFERS_PER_PANEL);
+							.get(i).quantity / constant.Constant.Production.WAFERS_PER_PANEL);
 					indexWafer = i;
 				}
 
@@ -300,6 +322,9 @@ public class UITestKI extends Thread {
 					readMessage.storage.storageElements.get(indexCase).quality,
 					maxProduction);
 		}
+
+		// merken der Produktion
+		lastBought = toBuy;
 
 		// Sende daten zurück an Server:
 		sendData(m);
@@ -367,7 +392,7 @@ public class UITestKI extends Thread {
 						readMessage.purchase.requests.get(i).supplierOffers
 								.get(index).name, readMessage.purchase.requests
 								.get(i).supplierOffers.get(index).quality,
-						toBuy * Constant.Constant.Production.WAFERS_PER_PANEL);
+						toBuy * constant.Constant.Production.WAFERS_PER_PANEL);
 			} else {
 				// Bestelle Cases
 				m.addAccepted(
