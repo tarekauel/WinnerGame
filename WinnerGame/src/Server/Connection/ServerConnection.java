@@ -33,9 +33,7 @@ public class ServerConnection extends Thread {
 	public void run() {
 		super.run();
 		while (true) {
-			String txt = "Daten empfangen-> Client Nr." + clientId;
-			System.out.println(txt);
-
+			
 			IMessage message = readMessage();
 			if (message == null) {
 				return;
@@ -43,16 +41,21 @@ public class ServerConnection extends Thread {
 			switch (message.getType()) {
 			case "LoginMessage": // Es handelt sich um eine Loginanfrage des
 									// Clients
+				System.out.println("Login requested empfangen-> Client Nr." + clientId);
 				Boolean success =login((LoginMessage) message);
 				
 				if(success){
+					System.out.println("Login erfolgreich-> Client Nr." + clientId);
 					//Sende Initialnachricht
 					//writeMessage(GameEngine.getGameEngine().getInitialGameDataMessageToClient());
+				}else{
+					System.out.println("Login fehlgeschlagen-> Client Nr." + clientId);
 				}
 				break;
 			case "GameDataMessageFromClient": 
 				// Es handelt sich um eine Message mit Spieldaten											
 				try {
+					System.out.println("Spielnachricht empfangen -> Client Nr." + clientId);
 					handleGameDataMessageFromClient((GameDataMessageFromClient) message);
 				} catch (Exception e) {
 					
