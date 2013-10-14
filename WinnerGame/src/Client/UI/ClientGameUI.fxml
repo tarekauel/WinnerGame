@@ -100,23 +100,19 @@
                   <children>
                     <Button fx:id="newProductionOrderButton" layoutX="24.0" layoutY="15.0" mnemonicParsing="false" text="Auftrag erstellen" />
                     <Button fx:id="newProductionOrderSaveButton" disable="true" layoutX="151.0" layoutY="15.0" mnemonicParsing="false" text="Auftrag abschicken" />
-                    <TitledPane fx:id="newProductionOrderTitledPane" animated="true" collapsible="false" disable="true" layoutX="24.0" layoutY="49.0" maxHeight="122.0" minHeight="100.0" minWidth="672.0" prefHeight="107.0" prefWidth="727.0" text="Produktionsauftrag erstellen">
+                    <TitledPane fx:id="newProductionOrderTitledPane" animated="true" collapsible="false" disable="false" layoutX="24.0" layoutY="49.0" maxHeight="122.0" minHeight="100.0" minWidth="672.0" prefHeight="107.0" prefWidth="727.0" text="Produktionsauftrag erstellen">
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="84.0" prefWidth="723.0">
                           <children>
                             <Label layoutX="14.0" layoutY="14.0" text="Wafer:" />
                             <Label layoutX="14.0" layoutY="48.0" text="Gehäuse:" />
-                            <ChoiceBox fx:id="newProductionOrderWaferChoiceBox" layoutX="76.0" layoutY="12.0" prefWidth="148.0" />
-                            <Slider fx:id="newProductionOrderOutputQuantitySlider" layoutX="484.0" layoutY="16.0" prefWidth="160.0" />
-                            <ChoiceBox fx:id="newProductionOrderCaseChoiceBox" layoutX="76.0" layoutY="46.0" prefWidth="148.0" />
-                            <Label layoutX="242.0" layoutY="15.0" text="Stück auf Lager:" />
-                            <Label layoutX="242.0" layoutY="48.0" text="Stück auf Lager:" />
-                            <TextField fx:id="newProductionOrderWaferStorageQuantityTextField" disable="true" layoutX="342.0" layoutY="11.0" opacity="0.75" prefHeight="25.0" prefWidth="51.0" />
-                            <TextField fx:id="newProductionOrderCaseStorageQuantityTextField" disable="true" layoutX="342.0" layoutY="44.0" opacity="0.75" prefHeight="25.0" prefWidth="51.0" />
-                            <TextField fx:id="newProductionOrderCostsTextField" disable="true" editable="false" layoutX="528.0" layoutY="44.0" opacity="0.75" prefHeight="25.0" prefWidth="73.0" />
+                            <ChoiceBox fx:id="newProductionOrderWaferChoiceBox" layoutX="76.0" layoutY="12.0" prefWidth="224.0" />
+                            <Slider fx:id="newProductionOrderOutputQuantitySlider" layoutX="397.0" layoutY="16.0" prefWidth="247.0" />
+                            <ChoiceBox fx:id="newProductionOrderCaseChoiceBox" layoutX="76.0" layoutY="46.0" prefWidth="224.0" />
+                            <TextField fx:id="newProductionOrderCostsTextField" disable="true" editable="false" layoutX="438.0" layoutY="44.0" opacity="0.75" prefHeight="25.0" prefWidth="82.0" />
                             <TextField id="newProductionOrderOutputQuantityTextBox" fx:id="newProductionOrderOutputQuantityTextField" layoutX="658.0" layoutY="10.0" prefHeight="25.0" prefWidth="51.0" />
-                            <Label layoutX="431.0" layoutY="48.0" text="Materialkosten:" />
-                            <Label layoutX="431.0" layoutY="15.0" text="Menge:" />
+                            <Label layoutX="342.0" layoutY="48.0" text="Materialkosten:" />
+                            <Label layoutX="342.0" layoutY="14.0" text="Menge:" />
                           </children>
                         </AnchorPane>
                       </content>
@@ -491,7 +487,7 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button id="EndRoundButton" fx:id="endRoundButton" layoutX="650.0" layoutY="15.0" mnemonicParsing="false" text="Runde beenden" />
+    <Button id="EndRoundButton" fx:id="endRoundButton" layoutX="649.0" layoutY="15.0" mnemonicParsing="false" text="Runde beenden" />
   </children>
   <stylesheets>
     <URL value="@style.css" />
