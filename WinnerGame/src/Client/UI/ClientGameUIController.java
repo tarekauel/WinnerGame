@@ -486,24 +486,30 @@ public class ClientGameUIController implements Initializable{
     	
     	newPurchaseRequestSaveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {             	
-            	model.getPurchaseRequestTableData().add(
-        			new Request(
-    					newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
-    					newPurchaseRequestArticleQualityTextField.getText()
-        			)
-            	); 
-    			model.addRequest(
-					new RequestFromClient(
-						newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
-						Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText())
-					)
-    			);
+            public void handle(ActionEvent actionEvent) {
+            	
+            	if(!newPurchaseRequestArticleNameChoiceBox.getValue().equals("")){
+            		
+            		model.getPurchaseRequestTableData().add(
+            			new Request(
+        					newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
+        					newPurchaseRequestArticleQualityTextField.getText()
+            			)
+                	); 
+        			model.addRequest(
+    					new RequestFromClient(
+    						newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
+    						Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText())
+    					)
+        			);
+            		
+            	}           	
     			
     			newPurchaseRequestArticleNameChoiceBox.getSelectionModel().clearSelection();
             	newPurchaseRequestArticleQualitySlider.adjustValue(1.0);
             	newPurchaseRequestTitledPane.setDisable(true);    
             	newPurchaseRequestSaveButton.setDisable(true);
+            	
             }
         });
 		
@@ -535,16 +541,17 @@ public class ClientGameUIController implements Initializable{
 		int qCasesInStorage = Integer.parseInt(newProductionOrderCaseStorageQuantityTextField.getText());
 		int qCasesNeededforMaxPanels = qWaferInStorage/54;
 		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity - Integer.parseInt(machineryPlannedCapacityTextField.getText());
-		
+		System.out.println(remainingMachineCapacity);
 		//System.out.println(qCasesNeededforMaxPanels);
 		
-		if(qCasesNeededforMaxPanels > qCasesInStorage && qCasesInStorage <= model.getIn().reporting.machinery.maxCapacity){
+		if(qCasesNeededforMaxPanels > qCasesInStorage && qCasesInStorage <= remainingMachineCapacity){
 			newProductionOrderOutputQuantitySlider.setMax(qCasesInStorage);
 			newProductionOrderOutputQuantitySlider.setValue(qCasesInStorage);			
-		} else if(qCasesNeededforMaxPanels <= qCasesInStorage && qCasesNeededforMaxPanels <= model.getIn().reporting.machinery.maxCapacity) {			
+		} else if(qCasesNeededforMaxPanels <= qCasesInStorage && qCasesNeededforMaxPanels <= remainingMachineCapacity) {			
 			newProductionOrderOutputQuantitySlider.setMax(qCasesNeededforMaxPanels);
 			newProductionOrderOutputQuantitySlider.setValue(qCasesNeededforMaxPanels);
 		} else if(qCasesInStorage > remainingMachineCapacity || qCasesNeededforMaxPanels > remainingMachineCapacity){
+			System.out.println(remainingMachineCapacity);
 			newProductionOrderOutputQuantitySlider.setMax(remainingMachineCapacity);
 			newProductionOrderOutputQuantitySlider.setValue(remainingMachineCapacity);
 		} else if(qCasesInStorage > model.getIn().reporting.machinery.maxCapacity || qCasesNeededforMaxPanels > model.getIn().reporting.machinery.maxCapacity){
@@ -641,8 +648,7 @@ public class ClientGameUIController implements Initializable{
 		
 		/**
     	 * Misc
-    	 */
-		
+    	 */		
 		
 		machineryLevelTextField.setText(model.getIn().reporting.machinery.level+"");
 		machineryMaximumCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity+"");
@@ -708,7 +714,7 @@ public class ClientGameUIController implements Initializable{
     			if(newProductionOrderCaseChoiceBox.getValue() != null && newProductionOrderWaferChoiceBox.getValue() != null){
 					boolean isPossibleMachinery = calcAndSetMachinery(Integer.parseInt(newProductionOrderOutputQuantityTextField.getText()));
 					
-					if(isPossibleMachinery == true){
+					if(isPossibleMachinery == true && !newProductionOrderOutputQuantityTextField.getText().equals("0")){
 						model.getProductionOrdersTableData().add(
 		        			new ProductionOrder(
 		        				newProductionOrderWaferChoiceBox.getValue().quality+"", 
@@ -716,9 +722,7 @@ public class ClientGameUIController implements Initializable{
 		        				newProductionOrderOutputQuantityTextField.getText()
 		        			)
 			            ); 						
-					} else {
-						
-					}
+					} 
 					
 				}
     			
