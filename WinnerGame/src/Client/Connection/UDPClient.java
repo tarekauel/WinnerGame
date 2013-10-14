@@ -64,7 +64,7 @@ public class UDPClient extends Thread {
 		while (true) {
 
 			send(socket, "Ich suche den Spielserver!", "255.255.255.255",
-					constant.Server.UDP_PORT);
+					Constant.Server.UDP_PORT);
 
 			// Nach einer Minute wird erneut eine Nachricht gesendet, da UDP
 			// "unzuverlässig" ist.
@@ -91,7 +91,7 @@ public class UDPClient extends Thread {
 			@Override
 			public void run() {
 				send(socket,"Ich suche den Spielserver!", "255.255.255.255",
-						constant.Server.UDP_PORT);
+						Constant.Server.UDP_PORT);
 				if (sentMessages>3) {
 					tcpServerPort=-1;
 					serverIP="Can't find Server";
