@@ -1,4 +1,4 @@
-package Client.UI;
+package client.ui;
 
 /**
  * Created by:
@@ -26,8 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import Client.Connection.Client;
-import Client.Connection.UDPClient;
+import client.connection.Client;
+import client.connection.UDPClient;
 
 /**
  * Dies ist die Controller-Klasse der Login-Stage. Hier wird alles implementiert, was das Login-UI manipulieren soll.

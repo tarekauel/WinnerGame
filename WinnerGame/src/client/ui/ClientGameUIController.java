@@ -1,4 +1,4 @@
-package Client.UI;
+package client.ui;
 
 /**
  * Created by:
@@ -58,12 +58,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import Client.UI.ClientGameUIModel.BenefitBooking;
-import Client.UI.ClientGameUIModel.Offer;
-import Client.UI.ClientGameUIModel.ProductionOrder;
-import Client.UI.ClientGameUIModel.Request;
-import Client.UI.ClientGameUIModel.StoragePosition;
-import Client.UI.ClientGameUIModel.SupplierOffer;
+import client.ui.ClientGameUIModel.BenefitBooking;
+import client.ui.ClientGameUIModel.Offer;
+import client.ui.ClientGameUIModel.ProductionOrder;
+import client.ui.ClientGameUIModel.Request;
+import client.ui.ClientGameUIModel.StoragePosition;
+import client.ui.ClientGameUIModel.SupplierOffer;
 
 
 /**

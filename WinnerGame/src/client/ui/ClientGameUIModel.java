@@ -1,4 +1,4 @@
-package Client.UI;
+package client.ui;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import kigegner.KITarek;
-import Server.TMotivation;
+import server.TMotivation;
 
 public class ClientGameUIModel {
 

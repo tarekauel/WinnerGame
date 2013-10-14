@@ -1,4 +1,4 @@
-package Client.Connection;
+package client.connection;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

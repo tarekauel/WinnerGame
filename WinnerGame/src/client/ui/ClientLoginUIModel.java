@@ -1,13 +1,12 @@
-package Client.UI;
+package client.ui;
 
-import Client.Connection.Client;
-import Client.Connection.UDPClient;
+import client.Connection.Client;
+import client.Connection.UDPClient;
 import javafx.stage.Stage;
 
 public class ClientLoginUIModel {
-	
+
 	UDPClient udpClient = new UDPClient();
 	Client client = new Client();
-	
 
 }
