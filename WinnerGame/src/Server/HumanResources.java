@@ -2,7 +2,6 @@ package Server;
 
 import java.util.ArrayList;
 
-import aspectlogger.NoGet;
 import constant.Constant;
 
 /**
@@ -185,7 +184,6 @@ public class HumanResources extends DepartmentRoundSensitive {
 	 * @return Motivation in Prozent * 100
 	 * @throws Exception
 	 */
-	@NoGet
 	public int getMotivation() throws Exception {
 		// TODO: testen mit unterschieden zur letzten Runde!
 		// Gehaltsunterschied zur Vorrunde

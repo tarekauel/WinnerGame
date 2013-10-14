@@ -20,7 +20,7 @@ public class Server {
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	private ConnectionListener connectionListener = null;
 	private int receivedGameMessages = 0;
-	private int maxPlayer = constant.Server.MAX_PLAYER;
+	private int maxPlayer = Constant.Server.MAX_PLAYER;
 
 	/**
 	 * startet den Server
@@ -30,15 +30,15 @@ public class Server {
 
 	public static void main(String[] args) {
 		try {
-			UDPServer udpServer = new UDPServer(constant.Server.TCP_PORT,
-					constant.Server.UDP_PORT);
+			UDPServer udpServer = new UDPServer(Constant.Server.TCP_PORT,
+					Constant.Server.UDP_PORT);
 			udpServer.start();
 			getServer();
 			int round = 100;
-			for (int i = 0; i < constant.Server.PLAYER_KI_TAREK; i++) {
+			for (int i = 0; i < Constant.Server.PLAYER_KI_TAREK; i++) {
 				new kigegner.KITarek(round);
 			}
-			for (int i = 0; i < constant.Server.PLAYER_KI_LARS; i++) {
+			for (int i = 0; i < Constant.Server.PLAYER_KI_LARS; i++) {
 				new kigegner.KI(round);
 			}
 
@@ -62,7 +62,7 @@ public class Server {
 		if (server == null) {
 			Location.initLocations();
 			Benefit.initBenefits();
-			server = new Server(constant.Server.TCP_PORT);
+			server = new Server(Constant.Server.TCP_PORT);
 		}
 
 		return server;
@@ -91,7 +91,7 @@ public class Server {
 		// müssen, um mit 3 Leuten zu spielen!!
 		receivedGameMessages++;
 		// KIs werden mit berücksichtigt
-		if (receivedGameMessages >= ((maxPlayer + constant.Server.PLAYER_KI_LARS + constant.Server.PLAYER_KI_TAREK) - GameEngine.getGameEngine().getListOfLosers().size())) {
+		if (receivedGameMessages >= ((maxPlayer + Constant.Server.PLAYER_KI_LARS + Constant.Server.PLAYER_KI_TAREK) - GameEngine.getGameEngine().getListOfLosers().size())) {
 			// All Clients are ready
 			System.out.println("***************************************************");
 			System.out.println();

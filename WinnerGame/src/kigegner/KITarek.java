@@ -149,7 +149,7 @@ public class KITarek extends Thread {
 			}
 		}
 		
-		int quantityA = (toAcceptA.name.equals("Wafer")) ? toProduce * constant.Production.WAFERS_PER_PANEL : toProduce; 
+		int quantityA = (toAcceptA.name.equals("Wafer")) ? toProduce * Constant.Production.WAFERS_PER_PANEL : toProduce; 
 		m.addAccepted(toAcceptA.name, toAcceptA.quality, quantityA);
 		
 		double plB = 0.0;
@@ -161,7 +161,7 @@ public class KITarek extends Thread {
 			}
 		}
 		
-		int quantityB = (toAcceptB.name.equals("Wafer")) ? toProduce * constant.Production.WAFERS_PER_PANEL : toProduce; 
+		int quantityB = (toAcceptB.name.equals("Wafer")) ? toProduce * Constant.Production.WAFERS_PER_PANEL : toProduce; 
 		m.addAccepted(toAcceptB.name, toAcceptB.quality, quantityB);
 		
 	}
@@ -179,7 +179,7 @@ public class KITarek extends Thread {
 		for( StorageElementToClient elem : reply.storage.storageElements) {
 			if( elem.type.equals("Wafer")) {
 				if( elem.quantity > maxWaferCount) {
-					toProduce = elem.quantity / constant.Production.WAFERS_PER_PANEL;
+					toProduce = elem.quantity / Constant.Production.WAFERS_PER_PANEL;
 					maxWaferCount = elem.quantity;
 					waferQuality = elem.quality;
 				}				
