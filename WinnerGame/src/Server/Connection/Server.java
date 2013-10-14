@@ -96,6 +96,13 @@ public class Server {
 		// KIs werden mit berücksichtigt
 		if (receivedGameMessages >= ((maxPlayer + Constant.Server.PLAYER_KI_LARS + Constant.Server.PLAYER_KI_TAREK) - GameEngine.getGameEngine().getListOfLosers().size())) {
 			// All Clients are ready
+			System.out.println("***************************************************");
+			System.out.println();
+			System.out.println("Server startet Spielrunde: " + GameEngine.getGameEngine().getRound());
+			System.out.println("");
+			System.out.println("Clients zu beginn des Spiels: "+ playerList.size());
+			System.out.println("Noch verbliebene Clients: " + receivedGameMessages);
+			System.out.println("***************************************************");
 			handleRound();
 			return;
 		}
