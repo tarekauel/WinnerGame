@@ -16,6 +16,6 @@ public class ServerUITest  {
 
 	public static void main(String[] args) throws Exception {
 		Server.getServer();
-		new KITarek(15);
+		new KITarek(6);
 	}
 }

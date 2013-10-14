@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPopup" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Client.UI.PopupLineChartController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <LineChart layoutX="0.0" layoutY="0.0" prefHeight="300" prefWidth="800" fx:id="lineChart" >
+      <xAxis >
+        <CategoryAxis side="BOTTOM" fx:id="lineChartX"/>
+      </xAxis>
+      <yAxis >
+        <NumberAxis side="LEFT" fx:id="lineChartY"/>
+      </yAxis>
+    </LineChart>
+  </children>
+</AnchorPane>

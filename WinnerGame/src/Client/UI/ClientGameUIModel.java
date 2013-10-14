@@ -238,7 +238,7 @@ public class ClientGameUIModel {
 		for(TMotivation m : in.historyMotivation) {		
 			HashMap<String, Double> map = new HashMap<String, Double>();		
 			motivationChartData.add(map);
-			map.put("", m.getMotivation() / 10000.0);	
+			map.put("Motivation", m.getMotivation() / 10000.0);	
 		}
 	}
 	
@@ -246,13 +246,13 @@ public class ClientGameUIModel {
 		for( RessourcePriceToClient p : in.waferPrice ) {
 			HashMap<String, Double> map = new HashMap<String, Double>();		
 			waferPriceListChartData.add(map);
-			map.put("", p.price / 100.0);	
+			map.put("Wafer", p.price / 100.0);	
 		}
 		
 		for( RessourcePriceToClient p : in.casePrice ) {
 			HashMap<String, Double> map = new HashMap<String, Double>();		
 			casePriceListChartData.add(map);
-			map.put("", p.price / 100.0);	
+			map.put("Case", p.price / 100.0);	
 		}
 		
 		for( MarketShareToClient m :  in.marketShares ) {

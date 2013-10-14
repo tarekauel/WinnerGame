@@ -7,6 +7,7 @@ package Client.UI;
  * Time: 16:35
  */
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +21,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -45,6 +48,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import Client.UI.ClientGameUIModel.BenefitBooking;
@@ -191,6 +199,127 @@ public class ClientGameUIController implements Initializable{
 	@FXML private CategoryAxis reportingSalesBarChatXAxis;
 	@FXML private NumberAxis reportingSalesBarChatYAxis; 
 	@FXML private LineChart reportingCompanyValueLineChart;
+	
+	// Variablen fuer'n Zoom
+	private Stage dialogStage;
+	
+	private void loadLineChart(String title, MouseEvent event, ArrayList<HashMap<String, Double>> data, String[] cat, boolean symbols) {
+		try {
+		    // Load the fxml file and create a new stage for the popup
+		    FXMLLoader loader = new FXMLLoader(ClientUIStart.class.getResource("PopupLineChart.fxml"));
+		    AnchorPane page = (AnchorPane) loader.load();
+		    Stage dialogStage = new Stage(StageStyle.TRANSPARENT);
+		    dialogStage.setTitle(title);
+		    dialogStage.initModality(Modality.NONE);
+		    Scene scene = new Scene(page);
+		    dialogStage.setScene(scene);
+		    dialogStage.setX(event.getScreenX() + 75);
+			dialogStage.setY(event.getScreenY() + 30 - dialogStage.getHeight());
+		    
+			PopupLineChartController controller = (PopupLineChartController) loader.getController();
+		    controller.setDialogStage(dialogStage);
+		    controller.setGraphData( data, cat, symbols );
+		    this.dialogStage = dialogStage;
+		    dialogStage.show();   
+
+		  } catch (IOException e) {
+		    // Exception gets thrown if the fxml file could not be loaded
+		    e.printStackTrace();
+		  }
+	}
+	
+	@FXML
+	public void onMouseEnteredSales(MouseEvent event) {
+		try {
+		    // Load the fxml file and create a new stage for the popup
+		    FXMLLoader loader = new FXMLLoader(ClientUIStart.class.getResource("PopUpStackedBarChart.fxml"));
+		    AnchorPane page = (AnchorPane) loader.load();
+		    Stage dialogStage = new Stage(StageStyle.TRANSPARENT);
+		    dialogStage.setTitle("Sales");
+		    dialogStage.initModality(Modality.NONE);
+		    Scene scene = new Scene(page);
+		    dialogStage.setScene(scene);
+		    dialogStage.setX(event.getScreenX() + 75);
+			dialogStage.setY(event.getScreenY() + 30 - dialogStage.getHeight());
+		    
+			PopupStackedBarChartController controller = (PopupStackedBarChartController) loader.getController();
+		    controller.setDialogStage(dialogStage);
+		    
+		    ArrayList<HashMap<String, Double>> data = this.model.getSalesChartData();
+		    
+		    String[] cat = new String[5];
+		    
+		    int index=0;
+		    for(int i=this.model.getRound()-5; i < this.model.getRound(); i++) {
+			   cat[index++] = "Runde " + i;
+		    }	
+			
+			controller.setGraphData( data, cat );
+
+		    // Show the dialog and wait until the user closes it
+		    dialogStage.show();
+		    this.dialogStage = dialogStage;
+
+		  } catch (IOException e) {
+		    // Exception gets thrown if the fxml file could not be loaded
+		    e.printStackTrace();
+		  }
+		
+	}
+	
+	@FXML
+	public void onMouseEnteredWafer( MouseEvent event) {
+
+		
+	    ArrayList<HashMap<String, Double>> data = this.model.getWaferPriceListChartData();	
+	    
+	    String[] cat = new String[100];
+	    for( int i=0; i<100; i++) {
+	    	cat[i] = (i+1)+"";
+	    }
+	    loadLineChart("Wafer", event, data, cat, false);
+		
+
+	}
+	
+	@FXML
+	public void onMouseEnteredCase( MouseEvent event) {
+
+		
+	    ArrayList<HashMap<String, Double>> data = this.model.getCasePriceListChartData();	
+	    
+	    String[] cat = new String[100];
+	    for( int i=0; i<100; i++) {
+	    	cat[i] = (i+1)+"";
+	    }
+	    loadLineChart("Wafer", event, data, cat, false);
+	}
+	
+	@FXML
+	public void onMouseEnteredMotivation( MouseEvent event) {
+
+		
+	    ArrayList<HashMap<String, Double>> data = this.model.getMotivationChartData();	
+	    
+	    String[] catMot = new String[this.model.getRound()];
+    	for( int i=0; i<catMot.length; i++) {
+    		catMot[i] = (i+1)+"";
+    	}
+	    loadLineChart("Wafer", event, data, catMot, true);
+		
+
+	}
+
+	@FXML
+	public void onMouseExited( MouseEvent event) {
+		dialogStage.close();
+	}
+	@FXML
+	public void onMouseMoved( MouseEvent event ) {
+		dialogStage.setX(event.getScreenX() + 75);
+		dialogStage.setY(event.getScreenY() + 30 - dialogStage.getHeight());
+	}
+	
 	
     /**
      * Hier werden alle Felder des UIs initialisiert, die initial beim Aufrufen des UIs gefuellt sein sollen.
