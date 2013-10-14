@@ -1,0 +1,157 @@
+@font-face {
+    font-family: Segoe UI;
+    src: url('segoeui.ttf');
+}
+@font-face {
+    font-family: Segoe UI Light;
+    src: url('segoeuil.ttf');
+}
+
+.root {
+
+	-fx-focus-color: transparent;
+
+}
+
+/* ---------------LOGIN------------------ */
+
+#LoginPane {
+
+	-fx-background-color: #262626;
+	-fx-font-family: "Segoe UI";
+
+}
+
+#LoginPane .label {
+
+	-fx-text-fill: #BABABA;
+	-fx-font-size: 25px;
+	-fx-font-family: "Segoe UI Light";
+
+}
+
+#LoginPane .text-field {
+
+	-fx-background-color: #D4D4D4;
+	-fx-font-size: 16px;
+	-fx-padding: 12px;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
+	-fx-background-radius: 7px;
+	-fx-focus-color: #1574B3;
+
+}
+
+#LoginPane .text-field:focused {
+
+	-fx-background-color: white;
+	-fx-text-fill: #1574B3;
+
+}
+
+#LoginPane #LoginButton {
+
+	-fx-background-color: #1574B3;
+	-fx-font-size: 16px;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-background-radius: 7px;
+
+}
+
+/* ----------------MAIN------------------ */
+
+#MainPane {
+
+	-fx-background-color: #242424;
+	-fx-font-family: "Segoe UI";
+
+}
+
+#MainPane #TitleLabel {
+
+	-fx-text-fill: #BABABA;
+	-fx-font-size: 25px;
+	-fx-font-family: "Segoe UI Light";
+
+}
+
+#MainPane .titled-pane .title {
+
+	-fx-alignment: center-left;
+	-fx-background-radius: 0;
+	-fx-background-color: #1574B3;
+
+}
+
+#MainPane .titled-pane:expanded .title .text {
+
+	-fx-font-family: "Segoe UI";
+	-fx-fill: white;
+
+}
+
+
+
+#TabPane .tab:top {
+
+	-fx-background-radius: 0;
+
+}
+
+#TabPane .tab:top .tab-label .text {
+
+	-fx-font-family: "Segoe UI";
+
+}
+
+
+.choice-box {
+
+	-fx-background-radius: 0;
+
+}
+
+#MainPane .button {
+
+	-fx-background-radius: 0;
+
+}
+
+#EndRoundButton {
+
+	-fx-font-size: 16px;
+	-fx-background-color: #FFFFFF;
+
+}
+
+#EndRoundButton:focused {
+    
+    -fx-border-color: black;
+    
+
+}
+
+#MainPane .progress-bar:determinate .bar {
+
+	-fx-background-color: #1574B3;
+
+}
+
+.red-bar {
+
+	-fx-accent: #DA3C19;
+
+}
+
+.yellow-bar {
+
+	-fx-accent: #DAC519;
+
+}
+
+.green-bar {
+
+	-fx-accent: #58BE16;
+
+}

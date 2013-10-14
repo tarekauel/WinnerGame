@@ -1,0 +1,29 @@
+TO-DO List
+-- Rundenlogik 
+-- SupplierMarket (Logik) - Tarek
+-- Tests
+-- Tests kommentieren
+-- Reporting
+-- Eingabe Feedback mit zu hohen Werten (Überprüfen)
+-- Sieg / Niederlage
+-- Fixkostenabrechnung
+-- KOMMENTARE IHR *?!*+!*!#
+-- Umlaute wieder umkommentieren
+-- MarketData - addWage ausimplementieren: Sammelt Löhne für den Durchschnittslohn
+-- Sondermessages
+-- UML-Diagramm neu erstellen (ändern wie auch immer)
+-- Mitarbeiterstunden buchen
+
+
+Done -- Messageobjekt zum Austausch mit dem Client
+Done -- Location-Daten auslagern - Michael
+Done -- Bank Account Dispokredit
+Done -- ProductionOrder-> Zuschlag sinnvoll berechnen (Motivation, Standort,...)
+Done -- Bei store die Kosten neu berechnen (durchschnittskosten) - Felix
+Done -- StorageCostsUpdate (Bei jedem Produkt im Storage muss calculateNewCosts aufgerufen werden) (und vom Bankkonto abgebucht werden) -Felix
+Done -- Bei Product ein setPrice!
+Done --(Logger überall einbinden) 
+Done -- Logger auf SysOut mit HTML-Ausgabe
+Done -- Maschinenausbaukosten
+Done -- Kostanten in Klassen strukturieren
+Done -- Datei mit Konstanten

@@ -1,0 +1,37 @@
+Momentane Worklist:
+Distribution
+	-Geht:	
+		-Konstruktor Test
+	
+	-Invalider Test:
+		-PrepareForNewRound -> Fehler mit Liste(Test korrektur erbeten)
+	-Fehlt:
+		-createNewOffer
+	
+
+Fertige Tests:
+-BankAccount
+	-prüft den Konstruktor
+	-prüft Funktion increase und decrease
+-Machinery
+	-prüft den Konstruktor
+	-prüft Funktion increase (inklusvie Maschinenkosten) und decrease
+-Product
+	-prüft den Konstruktor
+-StorageElement
+	-prüft den Konstruktor
+	-prüft Funktion store und unstore
+-Storage
+	-prüft den Konstruktor
+	-prüft store und unstore
+-TMotivation
+	-prüft den Konstruktor
+-TPercentOfUsage
+	-prüft den Konstruktor
+-TPresentValue
+	-prüft den Konstruktor
+-TResourcePriceTest
+	-prüft den Konstruktor
+-TWage
+	-prüft den Konstruktor
+
