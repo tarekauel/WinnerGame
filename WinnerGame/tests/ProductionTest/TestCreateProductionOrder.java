@@ -60,7 +60,7 @@ public class TestCreateProductionOrder {
 	public void createProductionOrderBancAccountToLow() throws Exception {
 		BankAccount b = c.getBankAccount();
 		b.decreaseBalance(b.getBankBalance());
-		b.decreaseBalance(constant.BankAccount.MAX_CREDIT-1);
+		b.decreaseBalance(Constant.BankAccount.MAX_CREDIT-1);
 		assertEquals(false,c.getProduction().createProductionOrder(wafer, cases, 100));
 	}
 

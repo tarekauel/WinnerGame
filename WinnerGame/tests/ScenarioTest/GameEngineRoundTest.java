@@ -41,17 +41,17 @@ public class GameEngineRoundTest {
 		// Client 1 connect
 		Client c1 = new Client();
 		String ip="localhost";
-		c1.connect(ip, constant.Server.TCP_PORT);
+		c1.connect(ip, Constant.Server.TCP_PORT);
 		
 
 		// Client 2 connect
 		Client c2 = new Client();
-		c2.connect(ip, constant.Server.TCP_PORT);
+		c2.connect(ip, Constant.Server.TCP_PORT);
 		
 
 		// Client 3 connect
 		Client c3 = new Client();
-		c3.connect(ip, constant.Server.TCP_PORT);
+		c3.connect(ip, Constant.Server.TCP_PORT);
 		
 		c1.writeMessage(new LoginMessage("SolarWorld", "passwort1", "Deutschland"));
 		c2.writeMessage(new LoginMessage("SolarPlus", "passwort1", "USA"));
@@ -134,7 +134,7 @@ public class GameEngineRoundTest {
 	
 		//Neuer Client versucht sich einzuloggen, was nicht funktionieren darf
 		Client c4 = new Client();
-		c4.connect(ip, constant.Server.TCP_PORT);
+		c4.connect(ip, Constant.Server.TCP_PORT);
 		c4.writeMessage(new LoginMessage("Neue Firma", "passwort", "China"));
 		LoginConfirmationMessage messageBack4 = (LoginConfirmationMessage) c4.readMessage();
 		assertEquals(false, messageBack4.getSuccess());

@@ -27,7 +27,7 @@ public class ConnectionTest {
 	public static void setUpBeforeClass() throws Exception {
 		Location.initLocations();
 		String ip = "127.0.0.1";
-		int port = constant.Server.TCP_PORT;
+		int port = Constant.Server.TCP_PORT;
 		server = Server.getServer();
 		client1 = new Client();
 		client1.connect(ip, port);
@@ -95,11 +95,11 @@ public class ConnectionTest {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		
-		assertEquals(constant.Server.TCP_PORT,udpClient.getTcpPortOfServer());
+		assertEquals(Constant.Server.TCP_PORT,udpClient.getTcpPortOfServer());
 		
 		
 	}

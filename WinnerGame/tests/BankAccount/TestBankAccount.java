@@ -73,7 +73,7 @@ public class TestBankAccount {
 		assertEquals(
 				false,
 				b.decreaseBalance(b.getBankBalance()
-						+ constant.BankAccount.MAX_CREDIT + 50));
+						+ Constant.BankAccount.MAX_CREDIT + 50));
 	}
 
 	@After

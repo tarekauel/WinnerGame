@@ -1,13 +1,17 @@
 package Distribution;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Server.*;
+import Server.Company;
+import Server.Distribution;
+import Server.FinishedGood;
+import Server.Location;
+import Server.Storage;
 
 public class TestCreateOffer {
 	Company c;
@@ -32,7 +36,7 @@ public class TestCreateOffer {
 	}
 
 	@Test
-	public void createOfferQualityValid() {
+	public void createOfferQualityValid() throws Exception {
 		int sizeBefore = d.getListOfOffers().size();
 		d.createOffer(80,100,10000);
 		int sizeAfter = d.getListOfOffers().size();
@@ -40,22 +44,22 @@ public class TestCreateOffer {
 	}
 	
 	@Test  (expected = java.lang.IllegalArgumentException.class)
-	public void createOfferQualityEQZero() {
+	public void createOfferQualityEQZero() throws Exception {
 		d.createOffer(0,100,10000);
 	}
 	
 	@Test (expected = java.lang.IllegalArgumentException.class)
-	public void createOfferQualityLowerZero() {
+	public void createOfferQualityLowerZero() throws Exception {
 		d.createOffer(-1,100,10000);
 	}
 	
 	@Test (expected = java.lang.IllegalArgumentException.class)
-	public void createOfferQualityGreaterHunderd() {
+	public void createOfferQualityGreaterHunderd() throws Exception {
 		d.createOffer(101,100,10000);
 	}
 	
 	@Test 
-	public void createOfferPriceValid() {
+	public void createOfferPriceValid() throws Exception {
 		int sizeBefore = d.getListOfOffers().size();
 		d.createOffer(80,100,1000);
 		int sizeAfter = d.getListOfOffers().size();
@@ -63,12 +67,12 @@ public class TestCreateOffer {
 	}
 	
 	@Test (expected = java.lang.IllegalArgumentException.class)
-	public void createOfferPriceLowerZero() {
+	public void createOfferPriceLowerZero() throws Exception {
 		d.createOffer(80,100,-1);
 	}
 	
 	@Test (expected = java.lang.IllegalArgumentException.class)
-	public void createOfferPriceEqualsZero() {
+	public void createOfferPriceEqualsZero() throws Exception {
 		d.createOffer(80,100,0);
 	}
 	

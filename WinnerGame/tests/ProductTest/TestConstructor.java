@@ -70,7 +70,7 @@ public class TestConstructor {
 		good.calculateNewCosts();
 		int costAfter = good.getCosts();
 		
-		assertEquals(true,((costBefore+constant.Product.STORAGECOST_PANEL) == costAfter));
+		assertEquals(true,((costBefore+Constant.Product.STORAGECOST_PANEL) == costAfter));
 		
 	}
 
@@ -81,7 +81,7 @@ public class TestConstructor {
 		good.calculateNewCosts();
 		int costAfter = good.getCosts();
 		
-		assertEquals(true,((costBefore+constant.Product.STORAGECOST_CASE) == costAfter));
+		assertEquals(true,((costBefore+Constant.Product.STORAGECOST_CASE) == costAfter));
 		
 	}
 	@Test
@@ -91,7 +91,7 @@ public class TestConstructor {
 		good.calculateNewCosts();
 		int costAfter = good.getCosts();
 		
-		assertEquals(true,((costBefore+constant.Product.STORAGECOST_WAFER) == costAfter));
+		assertEquals(true,((costBefore+Constant.Product.STORAGECOST_WAFER) == costAfter));
 		
 	}
 }
