@@ -7,6 +7,8 @@ import Client.Connection.Client;
 import Message.GameDataMessageToClient;
 import Message.GameDataMessageToClient.Loser;
 import Message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import Message.GameOverMessage;
+import Message.IMessage;
 import Message.LoginConfirmationMessage;
 import Message.LoginMessage;
 
@@ -84,12 +86,15 @@ public class KI extends Thread {
 	@Override
 	public void run() {
 		boolean noLoser = false;
+		IMessage read;
+		
 		GameDataMessageToClient data;
 		// data= (GameDataMessageToClient) c.readMessage();
 		// Bereite Requests und sonstiges für die Erste Runde vor!
 		doFirstRound();
 		// zweite Runde
-		data = (GameDataMessageToClient) c.readMessage();
+		read =  c.readMessage();
+		data = (GameDataMessageToClient) read;
 		if (noLoser(data)) {
 			doSecondRound(data);
 			noLoser = true;
@@ -99,7 +104,8 @@ public class KI extends Thread {
 		try {
 			boolean stopByRound = false;
 			while (noLoser && !stopByRound) {
-				data = (GameDataMessageToClient) c.readMessage();
+				read =  c.readMessage();
+				data = (GameDataMessageToClient) read;
 				if (noLoser(data)) {
 					doJob(data);
 					stopByRound = (data.round > this.round);
@@ -110,7 +116,16 @@ public class KI extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(read == null){
+				System.out.println("KI-" + id + ": Null Nachricht vom Server.");
+			}else{
+				try{
+				GameOverMessage go = (GameOverMessage) read;
+				System.out.println("KI-" + id + ":" + go.toString());
+				}catch(Exception e2){
+					
+				}
+			}
 		}
 
 		System.out.println("KI-" + id + " wurde beendet");

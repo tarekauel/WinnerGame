@@ -24,6 +24,9 @@ public class GameOverMessage implements IMessage, Serializable {
 		return "GameOverMessage";
 
 	}
-
+	@Override
+	public String toString(){
+		return name + " meldet: " + info;
+	}
 	
 }
