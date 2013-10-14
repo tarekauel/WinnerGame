@@ -114,12 +114,7 @@ public class KI extends Thread {
 		}
 
 		System.out.println("KI-" + id + " wurde beendet");
-		for (int i = 0; i < bankAmounts.size(); i++) {
-
-			System.out.println("KI-" + id + " meldet:"
-					+ bankAmounts.get(i).toString());
-		}
-
+		
 	}
 
 	/**
