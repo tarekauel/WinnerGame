@@ -46,12 +46,12 @@ public class Server {
 			}
 
 		} catch (Exception e) {
-			
+
 			System.out
 					.println("Server musste aufgrund eines Fehlers beendet werdenbeendet werden!");
 			e.printStackTrace();
 			System.exit(-1);
-			
+
 		}
 	}
 
@@ -101,7 +101,7 @@ public class Server {
 		}
 
 	}
-	
+
 
 	private void handleRound() throws Exception {
 		// set to 0 for nextRound
