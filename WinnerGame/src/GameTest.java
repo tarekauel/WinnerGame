@@ -70,7 +70,7 @@ public class GameTest {
 		p2.acceptSupplierOffer(listReq2.get(1).getSupplierOffers()[0], 100); // 1000
 																				// Gehäuse
 																				// kaufen
-		SupplierMarket.getMarket().recalculatePrices();
+		//SupplierMarket.getMarket().recalculatePrices();
 		ArrayList<Resource> store2 = s2.getAllResources();
 		pro2.createProductionOrder(store2.get(0), store2.get(1), 100);
 
