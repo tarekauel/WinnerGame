@@ -21,9 +21,9 @@ public class BankAccount implements IRoundSensitive {
 		}
 
 		// CheckAmount wirft Exception falls negative Zahl
-		checkAmount(constant.BankAccount.START_CAPITAL);
+		checkAmount(Constant.BankAccount.START_CAPITAL);
 		this.c = c;
-		this.bankBalance = constant.BankAccount.START_CAPITAL;
+		this.bankBalance = Constant.BankAccount.START_CAPITAL;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class BankAccount implements IRoundSensitive {
 		checkAmount(amount);
 
 		// Kann ich das noch bezahlen? bankBalance kann auch negativ sein
-		if (amount <= (bankBalance + constant.BankAccount.MAX_CREDIT)) {
+		if (amount <= (bankBalance + Constant.BankAccount.MAX_CREDIT)) {
 			long newBankBalance = getBankBalance() - amount;
 			setBankBalance(newBankBalance);
 			return true;
@@ -120,10 +120,10 @@ public class BankAccount implements IRoundSensitive {
 	public void prepareForNewRound(int round) throws Exception {
 		// Berechne die Zinsen falls noetig.
 		if (bankBalance < 0) {
-			bankBalance += bankBalance * constant.BankAccount.RATES;
+			bankBalance += bankBalance * Constant.BankAccount.RATES;
 		}
 		// Pruefe ob wir jetzt endgültig pleite sind
-		if (bankBalance < constant.BankAccount.MAX_CREDIT) {
+		if (bankBalance < Constant.BankAccount.MAX_CREDIT) {
 			GameEngine.getGameEngine().addCompanyLost(c);
 		}
 
