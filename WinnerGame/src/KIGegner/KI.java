@@ -142,11 +142,6 @@ public class KI extends Thread {
 
 		data = readMessage;
 
-		if (data.round == 50) {
-			throw new Exception("Runde!");
-
-		}
-
 		if (readMessage == null) {
 			throw new Exception("Fehler bei der Nachricht");
 
@@ -170,7 +165,7 @@ public class KI extends Thread {
 			newQuality = r.nextInt(99);
 			newQuality ++;
 		}
-		newQuality = qualityTry;
+		qualityTry=newQuality ;
 		System.out.println("KI-"+id+" meldet: " + bankAmounts.get(bankAmounts.size()-1));
 		System.out.println("KI-"+id+" meldet: Frage Qualität " + qualityTry + " an.");
 
