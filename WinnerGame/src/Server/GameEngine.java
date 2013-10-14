@@ -101,9 +101,9 @@ public class GameEngine {
 		parseClientData(gameDataList);
 
 		for (Company company : listOfCompanys) {
-			//Prüfen ob die Company noch beruecksichtigt wird
-			if(listOfLosers.contains(company)){
-				//scheinbar nicht
+			// Prüfen ob die Company noch beruecksichtigt wird
+			if (listOfLosers.contains(company)) {
+				// scheinbar nicht
 				break;
 			}
 			// ---------Storage---------------------
@@ -210,16 +210,16 @@ public class GameEngine {
 	 * 
 	 * @param c
 	 *            die Firma die verloren hat
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void addCompanyLost(Company c) throws Exception {
 		listOfLosers.add(c);
-		
+
 		CustomerMarket.getMarket().removeDistribution(c.getDistribution());
 		SupplierMarket.getMarket().removePurchase(c.getPurchase());
 		MarketData.getMarketData().removeHR(c.getHumanResources());
 
-		if (listOfCompanys.size() < 1) {
+		if (listOfCompanys.size() == listOfLosers.size()) {
 			Server.getServer().sendGameOver();
 		}
 
