@@ -155,7 +155,7 @@ public class GameDataTranslator {
 		// geht alle acceptedSupOf des Clients durch
 		for (AcceptedSupplierOfferFromClient acceptedSupOf : acceptedSupplierOffers) {
 			// Sucht alle aktuellen Requests auf dem Server
-			for (Server.Request request : company.getPurchase()
+			for (server.Request request : company.getPurchase()
 					.getListOfLastRoundRequests()) { // TODO so gehts nicht....
 				// Sucht zum jeweiligen Request die 3 SupplierOffers auf dem
 				// Server

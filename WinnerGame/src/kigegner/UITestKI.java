@@ -3,14 +3,12 @@ package kigegner;
 import java.util.ArrayList;
 
 import message.GameDataMessageToClient;
-import message.LoginConfirmationMessage;
-import message.LoginMessage;
 import message.GameDataMessageToClient.Loser;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import Client.Connection.Client;
-import Client.UI.ClientGameUIStart;
-import Client.UI.ClientUIStart;
-import Server.Connection.Server;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import client.connection.Client;
+import client.ui.ClientGameUIStart;
 
 public class UITestKI extends Thread {
 	private Client c;

@@ -4,16 +4,16 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import message.GameDataMessageToClient;
-import message.LoginConfirmationMessage;
-import message.LoginMessage;
 import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
 import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import client.connection.Client;
+import client.ui.ClientGameUIStart;
 import constant.Constant;
-import Client.Connection.Client;
-import Client.UI.ClientGameUIStart;
 
 public class KITarek extends Thread {
 		

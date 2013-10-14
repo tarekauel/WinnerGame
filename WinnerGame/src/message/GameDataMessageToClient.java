@@ -3,9 +3,9 @@ package message;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import Server.Company;
-import Server.GameEngine;
-import Server.TMotivation;
+import server.Company;
+import server.GameEngine;
+import server.TMotivation;
 
 public class GameDataMessageToClient extends GameDataMessage implements
 		Serializable {

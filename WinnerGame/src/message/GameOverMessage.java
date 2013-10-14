@@ -2,8 +2,6 @@ package message;
 
 import java.io.Serializable;
 
-import Server.Location;
-
 /**
  * 
  * @author D059270 Diese Message wird vom Client an den Server als Loginanfrage

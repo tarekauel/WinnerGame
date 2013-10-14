@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import message.GameDataMessageToClient;
+import message.GameDataMessageToClient.Loser;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import message.GameOverMessage;
 import message.IMessage;
 import message.LoginConfirmationMessage;
 import message.LoginMessage;
-import message.GameDataMessageToClient.Loser;
-import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import Client.Connection.Client;
+import client.connection.Client;
 
 public class KI extends Thread {
 	private Client c;
