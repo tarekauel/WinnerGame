@@ -1,16 +1,16 @@
-package Server;
+package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import message.GameDataMessageFromClient;
-import message.GameDataMessageToClient;
 import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
+import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient;
-import message.GameDataMessageToClient.StorageToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
+import message.GameDataMessageToClient.StorageToClient;
+import server.connection.Server;
 import constant.Constant;
-import Server.Connection.Server;
 
 public class GameEngine {
 

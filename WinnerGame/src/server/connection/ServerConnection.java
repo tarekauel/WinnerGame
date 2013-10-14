@@ -1,12 +1,17 @@
-package Server.Connection;
+package server.connection;
 
 // Server.java
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.io.*;
 
-import message.*;
-import Server.GameEngine;
+import message.GameDataMessageFromClient;
+import message.IMessage;
+import message.LoginConfirmationMessage;
+import message.LoginMessage;
+import server.GameEngine;
 
 /**
  * 

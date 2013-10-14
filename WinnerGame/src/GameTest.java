@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
-import Server.Benefit;
-import Server.Company;
-import Server.CustomerMarket;
-import Server.Distribution;
-import Server.GameEngine;
-import Server.Location;
-import Server.Production;
-import Server.Purchase;
-import Server.Request;
-import Server.Resource;
-import Server.Storage;
-import Server.SupplierMarket;
-import Server.TMarketShare;
+import server.Benefit;
+import server.Company;
+import server.CustomerMarket;
+import server.Distribution;
+import server.GameEngine;
+import server.Location;
+import server.Production;
+import server.Purchase;
+import server.Request;
+import server.Resource;
+import server.Storage;
+import server.SupplierMarket;
+import server.TMarketShare;
 
 public class GameTest {
 

@@ -1,33 +1,32 @@
-package Server;
+package server;
 
 import java.util.ArrayList;
 
 import message.GameDataMessageFromClient;
-import message.GameDataMessageToClient;
 import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
-import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
 import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.DistributionToClient;
-import message.GameDataMessageToClient.HumanResourcesToClient;
-import message.GameDataMessageToClient.MarketingToClient;
-import message.GameDataMessageToClient.ProductionToClient;
-import message.GameDataMessageToClient.PurchaseToClient;
-import message.GameDataMessageToClient.ReportingToClient;
-import message.GameDataMessageToClient.StorageToClient;
 import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
+import message.GameDataMessageToClient.MarketingToClient;
 import message.GameDataMessageToClient.MarketingToClient.MarketShareToClient;
-import message.GameDataMessageToClient.MarketingToClient.MotivationRoundToClient;
 import message.GameDataMessageToClient.MarketingToClient.RessourcePriceToClient;
+import message.GameDataMessageToClient.ProductionToClient;
 import message.GameDataMessageToClient.ProductionToClient.ProductionOrderToClient;
+import message.GameDataMessageToClient.PurchaseToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
+import message.GameDataMessageToClient.ReportingToClient;
 import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
 import message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
+import message.GameDataMessageToClient.StorageToClient;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import server.connection.Server;
 import constant.Constant;
 
 public class GameDataTranslator {

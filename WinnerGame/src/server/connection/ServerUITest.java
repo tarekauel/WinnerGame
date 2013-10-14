@@ -1,4 +1,4 @@
-package Server.Connection;
+package server.connection;
 
 import kigegner.KITarek;
 

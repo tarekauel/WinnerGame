@@ -1,4 +1,4 @@
-package Server;
+package server;
 
 /**
  * Created by: User: Lars Trey Date: 28.09.13 Time: 19:04

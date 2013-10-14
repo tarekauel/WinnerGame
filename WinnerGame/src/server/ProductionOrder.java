@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Server;
+package server;
 
 import constant.Constant;
 

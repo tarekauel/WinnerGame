@@ -1,9 +1,9 @@
-package Server.Connection;
+package server.connection;
 
 import java.util.ArrayList;
 
-import Server.Company;
-import Server.Location;
+import server.Company;
+import server.Location;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package Server;
+package server;
 //Interface fuer Rundensensitive Sachen (Company und BankAccount)
 public interface IRoundSensitive {
 	/**

@@ -1,14 +1,14 @@
-package Server.Connection;
+package server.connection;
 
 import java.util.ArrayList;
 
 import message.GameDataMessageFromClient;
 import message.GameDataMessageToClient;
 import message.GameOverMessage;
+import server.Benefit;
+import server.GameEngine;
+import server.Location;
 import constant.Constant;
-import Server.Benefit;
-import Server.GameEngine;
-import Server.Location;
 
 /**
  * 
