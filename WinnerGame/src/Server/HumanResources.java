@@ -2,8 +2,8 @@ package Server;
 
 import java.util.ArrayList;
 
-import constant.Constant;
 import aspectlogger.NoGet;
+import constant.Constant;
 
 /**
  * Created by: User: Lars Trey Date: 28.09.13 Time: 18:11
@@ -39,7 +39,7 @@ public class HumanResources extends DepartmentRoundSensitive {
 	private ArrayList<TMotivation> historyMotivation = new ArrayList<TMotivation>();
 
 	public HumanResources(Company c) throws Exception {
-		super(c, "Personal", constant.DepartmentFixcost.HUMAN_RESOURCES);
+		super(c, "Personal", Constant.DepartmentFixcost.HUMAN_RESOURCES);
 
 		setWagePerRound(new TWage(c.getLocation().getInitWage(), GameEngine.getGameEngine().getRound(),c.getLocation().getWageLevel() )); 
 		this.wagesSum = calcWagesSum();
@@ -202,10 +202,10 @@ public class HumanResources extends DepartmentRoundSensitive {
 		// Einfluss auf die Motivation durch den Lohn zur Vorrunde
 		// Berechnung je nach Positiv oder Negativ unterscheiden
 		double influenceWageToLastRound = ((diffWageToLastRound < 1.0) ? 1 - Math
-				.pow(((diffWageToLastRound - 1) * (constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
+				.pow(((diffWageToLastRound - 1) * (Constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
 						2)
 				: 1 + Math.sqrt((diffWageToLastRound - 1)
-						* (constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
+						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
 		// Gehaltsunterschied zur Gruppe
 		// ( Eigener Lohn) / Durchschnitt
@@ -217,10 +217,10 @@ public class HumanResources extends DepartmentRoundSensitive {
 		// Einfluss auf die Motivaiton durch den Unterschied zum Markt
 		// Berechnung je nach Positiv oder Negative unterschiedlich
 		double influenceWageToAverage = ((diffWageToAverage < 1.0) ? 1 - Math
-				.pow(((diffWageToAverage - 1) * (constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
+				.pow(((diffWageToAverage - 1) * (Constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
 						2)
 				: 1 + Math.sqrt((diffWageToAverage - 1)
-						* (constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
+						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
 		// Unterschied wird ab der zweiten Runde berechnet
 		double diffBenefitToLastRound = 1.0;
@@ -242,10 +242,10 @@ public class HumanResources extends DepartmentRoundSensitive {
 
 		// Einfluss auf die Motivaiton berechnen
 		double influenceBenefitToLastRound = ((diffBenefitToLastRound < 1.0) ? 1 - Math
-				.pow(((diffBenefitToLastRound - 1) * (constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
+				.pow(((diffBenefitToLastRound - 1) * (Constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
 						2)
 				: 1 + Math.sqrt((diffBenefitToLastRound - 1)
-						* (constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
+						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
 		// Unterschied zur Gruppe berechnen
 		double averageBenefit = MarketData.getMarketData().getAverageBenefit();
@@ -258,20 +258,20 @@ public class HumanResources extends DepartmentRoundSensitive {
 
 		// Einfluss auf die Motivation berechnen
 		double influenceBenefitToAverage = ((diffBenefitToAverage < 1.0) ? 1 - Math
-				.pow(((diffBenefitToAverage - 1) * (constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
+				.pow(((diffBenefitToAverage - 1) * (Constant.HumanResources.IMPACT_DIFF_NEG / 10.0)),
 						2)
 				: 1 + Math.sqrt((diffBenefitToAverage - 1)
-						* (constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
+						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
 		// Motivation gewichtet berechnen TODO: mal checken
 		double motivation = (influenceWageToLastRound
-				* (constant.HumanResources.IMPACT_DIFF_INTERNAL / 100.0) + influenceWageToAverage
-				* (constant.HumanResources.IMPACT_DIFF_MARKET / 100.0))
-				* (constant.HumanResources.HR_FACTOR_WAGE / 100.0)
+				* (Constant.HumanResources.IMPACT_DIFF_INTERNAL / 100.0) + influenceWageToAverage
+				* (Constant.HumanResources.IMPACT_DIFF_MARKET / 100.0))
+				* (Constant.HumanResources.HR_FACTOR_WAGE / 100.0)
 				+ (influenceBenefitToLastRound
-						* (constant.HumanResources.IMPACT_DIFF_INTERNAL / 100.0) + influenceBenefitToAverage
-						* (constant.HumanResources.IMPACT_DIFF_MARKET / 100.0))
-				* (constant.HumanResources.HR_FACTOR_BENEFIT / 100.0);
+						* (Constant.HumanResources.IMPACT_DIFF_INTERNAL / 100.0) + influenceBenefitToAverage
+						* (Constant.HumanResources.IMPACT_DIFF_MARKET / 100.0))
+				* (Constant.HumanResources.HR_FACTOR_BENEFIT / 100.0);
 
 		motivation = ( motivation <= 0.0) ? 0.0 : motivation;
 		

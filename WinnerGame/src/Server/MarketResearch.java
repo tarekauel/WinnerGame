@@ -18,7 +18,7 @@ public class MarketResearch extends Department {
 	private boolean isBooked;
 
     public MarketResearch(Company c) throws Exception {
-        super(c, "Marktforschung",constant.DepartmentFixcost.MARKET_RESEARCH);
+        super(c, "Marktforschung",Constant.DepartmentFixcost.MARKET_RESEARCH);
         
     }
     /**
@@ -31,7 +31,7 @@ public class MarketResearch extends Department {
     	//falls gebucht sollen direkt Kosten abgebucht werden
     	if(this.isBooked){
     		//falls nicht genuegend Geld auf dem Konto vorhanden wird es wieder auf false gesetzt
-    		if(!getCompany().getBankAccount().decreaseBalance(constant.MarketResearch.COSTS_MARKET_RESEARCH)){
+    		if(!getCompany().getBankAccount().decreaseBalance(Constant.MarketResearch.COSTS_MARKET_RESEARCH)){
     			this.isBooked=false;
     		}
     	}

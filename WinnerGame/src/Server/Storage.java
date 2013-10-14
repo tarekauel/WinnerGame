@@ -26,7 +26,7 @@ public class Storage extends DepartmentRoundSensitive {
 	 *             fehlerhaft
 	 */
 	public Storage(Company c) throws Exception {
-		super(c, "Lager", constant.DepartmentFixcost.STORAGE);
+		super(c, "Lager", Constant.DepartmentFixcost.STORAGE);
 
 	}
 

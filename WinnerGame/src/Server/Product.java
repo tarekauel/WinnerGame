@@ -53,11 +53,11 @@ public abstract class Product {
 
 		switch (name) {
 		case "Wafer":
-			return constant.Product.STORAGECOST_WAFER;
+			return Constant.Product.STORAGECOST_WAFER;
 		case "Gehäuse":
-			return constant.Product.STORAGECOST_CASE;
+			return Constant.Product.STORAGECOST_CASE;
 		case "Panel":
-			return constant.Product.STORAGECOST_PANEL;
+			return Constant.Product.STORAGECOST_PANEL;
 		default:
 			throw new Exception("Name des Products fehlerhaft");
 
@@ -73,13 +73,13 @@ public abstract class Product {
 	public void calculateNewCosts() throws Exception {
 		switch (name) {
 		case "Wafer":
-			costs += constant.Product.STORAGECOST_WAFER;
+			costs += Constant.Product.STORAGECOST_WAFER;
 			break;
 		case "Gehäuse":
-			costs += constant.Product.STORAGECOST_CASE;
+			costs += Constant.Product.STORAGECOST_CASE;
 			break;
 		case "Panel":
-			costs += constant.Product.STORAGECOST_PANEL;
+			costs += Constant.Product.STORAGECOST_PANEL;
 			break;
 		default:
 			throw new Exception("Name des Products fehlerhaft");

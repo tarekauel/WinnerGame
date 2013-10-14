@@ -268,7 +268,7 @@ public class GameDataTranslator {
 		StorageToClient storage = createStorage(company);
 		// Hauptdaten erstellen
 		long cash = company.getBankAccount().getBankBalance();
-		long maxCredit = constant.BankAccount.MAX_CREDIT;
+		long maxCredit = Constant.BankAccount.MAX_CREDIT;
 
 		// Message erstellen
 		GameDataMessageToClient message = new GameDataMessageToClient(
@@ -289,9 +289,9 @@ public class GameDataTranslator {
 		}
 
 		StorageToClient storage = new StorageToClient(
-				constant.Product.STORAGECOST_WAFER,
-				constant.Product.STORAGECOST_CASE,
-				constant.Product.STORAGECOST_PANEL, storageElements);
+				Constant.Product.STORAGECOST_WAFER,
+				Constant.Product.STORAGECOST_CASE,
+				Constant.Product.STORAGECOST_PANEL, storageElements);
 		return storage;
 	}
 
@@ -422,7 +422,7 @@ public class GameDataTranslator {
 					.getQuantitySold(), offer.getPrice(), offer.getRound(),
 					offer.getStorageElement().getProduct().getCosts()));
 		}
-		DistributionToClient distribution = new DistributionToClient(offers, constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL);
+		DistributionToClient distribution = new DistributionToClient(offers, Constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL);
 		return distribution;
 	}
 

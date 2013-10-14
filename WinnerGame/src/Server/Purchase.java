@@ -39,7 +39,7 @@ public class Purchase extends DepartmentRoundSensitive {
 	 *             falls keine Korrekte erstellung
 	 */
 	public Purchase(Company c) throws Exception {
-		super(c, "Einkauf", constant.DepartmentFixcost.PURCHASE);
+		super(c, "Einkauf", Constant.DepartmentFixcost.PURCHASE);
 		SupplierMarket.getMarket().addPurchase(this);
 	}
 

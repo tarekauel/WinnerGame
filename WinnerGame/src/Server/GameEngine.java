@@ -68,9 +68,9 @@ public class GameEngine {
 
 	public GameDataMessageToClient getInitialGameDataMessageToClient() {
 		StorageToClient storage = new StorageToClient(
-				constant.Product.STORAGECOST_WAFER,
-				constant.Product.STORAGECOST_CASE,
-				constant.Product.STORAGECOST_PANEL, null);
+				Constant.Product.STORAGECOST_WAFER,
+				Constant.Product.STORAGECOST_CASE,
+				Constant.Product.STORAGECOST_PANEL, null);
 
 		ArrayList<PossibleBenefit> possibleBenefits = new ArrayList<PossibleBenefit>();
 		for (Benefit benefit : Benefit.getBookableBenefits()) {
@@ -82,8 +82,8 @@ public class GameEngine {
 				possibleBenefits, null, averageWage, 0, 40, 0);
 		GameDataMessageToClient initialMessage = new GameDataMessageToClient(
 				"", null, null, storage, null, hr, null, null,
-				constant.BankAccount.START_CAPITAL,
-				constant.BankAccount.MAX_CREDIT);
+				Constant.BankAccount.START_CAPITAL,
+				Constant.BankAccount.MAX_CREDIT);
 		return initialMessage;
 	}
 

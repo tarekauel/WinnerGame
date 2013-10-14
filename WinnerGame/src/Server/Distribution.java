@@ -24,7 +24,7 @@ public class Distribution extends DepartmentRoundSensitive {
 	 *             falls Abteilung nicht erstellt werden konnte
 	 */
 	public Distribution(Company c)throws Exception{
-		super(c,"Verkauf",constant.DepartmentFixcost.DISTRIBUTION);
+		super(c,"Verkauf",Constant.DepartmentFixcost.DISTRIBUTION);
 		
 		CustomerMarket.getMarket().addDistribution(this);
 		
@@ -75,7 +75,7 @@ public class Distribution extends DepartmentRoundSensitive {
 			listOfOffers.add(offer);
 			listOfLatestOffers.add(offer);
 	
-		getCompany().getBankAccount().decreaseBalance(constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL*quantityToSell);
+		getCompany().getBankAccount().decreaseBalance(Constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL*quantityToSell);
 		
 		
 	}// createOffer
