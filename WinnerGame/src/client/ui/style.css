@@ -1,12 +1,3 @@
-@font-face {
-    font-family: Segoe UI;
-    src: url('segoeui.ttf');
-}
-@font-face {
-    font-family: Segoe UI Light;
-    src: url('segoeuil.ttf');
-}
-
 .root {
 
 	-fx-focus-color: transparent;

@@ -100,7 +100,7 @@
                   <children>
                     <Button fx:id="newProductionOrderButton" layoutX="24.0" layoutY="15.0" mnemonicParsing="false" text="Auftrag erstellen" />
                     <Button fx:id="newProductionOrderSaveButton" disable="true" layoutX="151.0" layoutY="15.0" mnemonicParsing="false" text="Auftrag abschicken" />
-                    <TitledPane fx:id="newProductionOrderTitledPane" animated="true" collapsible="false" disable="false" layoutX="24.0" layoutY="49.0" maxHeight="122.0" minHeight="100.0" minWidth="672.0" prefHeight="107.0" prefWidth="727.0" text="Produktionsauftrag erstellen">
+                    <TitledPane fx:id="newProductionOrderTitledPane" animated="true" collapsible="false" disable="true" layoutX="24.0" layoutY="49.0" maxHeight="122.0" minHeight="100.0" minWidth="672.0" prefHeight="107.0" prefWidth="727.0" text="Produktionsauftrag erstellen">
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="84.0" prefWidth="723.0">
                           <children>

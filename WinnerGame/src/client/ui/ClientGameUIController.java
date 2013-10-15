@@ -108,8 +108,6 @@ public class ClientGameUIController implements Initializable{
 	@FXML private Slider newProductionOrderOutputQuantitySlider;
 	@FXML private TextField newProductionOrderOutputQuantityTextField;
 	@FXML private ChoiceBox<StorageElementToClient> newProductionOrderCaseChoiceBox;
-	@FXML private TextField newProductionOrderWaferStorageQuantityTextField;
-	@FXML private TextField newProductionOrderCaseStorageQuantityTextField;
 	@FXML private TextField newProductionOrderCostsTextField;
 	@FXML private TableView<ProductionOrder> productionOrdersTableView;
 	@FXML private TableColumn<ProductionOrder,Integer> productionOrderIdTableColumn;
@@ -650,15 +648,16 @@ public class ClientGameUIController implements Initializable{
 		waferInStorage.clear();
 		casesInStorage.clear();
 		
-		for (int i = 0; i < model.getIn().storage.storageElements.size(); i++) {
-			StorageElementToClient tmp = model.getIn().storage.storageElements.get(i);
+		for (StorageElementToClient elem : model.getIn().storage.storageElements) {
+					
+			System.out.println(elem.type);
 			
-			if (tmp.type.equals("Wafer")) {
-				waferInStorage.add(tmp);
-			} else if (tmp.type.equals("Gehäuse")) {
-				casesInStorage.add(tmp);
+			if (elem.type.equals("Wafer")) {
+				waferInStorage.add(elem);
+			} else if (elem.type.equals("Gehäuse")) {
+				casesInStorage.add(elem);
 			} else {
-				resourcesInStorage.add(tmp);
+				resourcesInStorage.add(elem);
 			}
 			
 		}
@@ -666,8 +665,8 @@ public class ClientGameUIController implements Initializable{
 	
 	private boolean calcMaximumProduction(){
 		
-		int qWaferInStorage = Integer.parseInt(newProductionOrderWaferStorageQuantityTextField.getText());
-		int qCasesInStorage = Integer.parseInt(newProductionOrderCaseStorageQuantityTextField.getText());
+		int qWaferInStorage = newProductionOrderWaferChoiceBox.getValue().quantity;
+		int qCasesInStorage = newProductionOrderCaseChoiceBox.getValue().quantity;
 		int qCasesNeededforMaxPanels = qWaferInStorage/54;
 		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity - Integer.parseInt(machineryPlannedCapacityTextField.getText());
 		System.out.println(remainingMachineCapacity);
@@ -792,7 +791,6 @@ public class ClientGameUIController implements Initializable{
 		
 		final ChangeListener<StorageElementToClient> newProductionOrderWaferChoiceBoxListener = new ChangeListener<StorageElementToClient>() {
 			public void changed(ObservableValue<? extends StorageElementToClient> observable, StorageElementToClient oldValue, StorageElementToClient newValue) {
-				newProductionOrderWaferStorageQuantityTextField.setText(newValue.quantity+""); 
 				
 				if(newProductionOrderCaseChoiceBox.getValue() != null){
 					calcMaximumProduction();    					
@@ -803,9 +801,7 @@ public class ClientGameUIController implements Initializable{
 		
 		final ChangeListener<StorageElementToClient> newProductionOrderCaseChoiceBoxListener = new ChangeListener<StorageElementToClient>() {
 			public void changed(ObservableValue<? extends StorageElementToClient> observable, StorageElementToClient oldValue, StorageElementToClient newValue) {
-				
-				newProductionOrderCaseStorageQuantityTextField.setText(newValue.quantity+"");
-				
+
 				if(newProductionOrderWaferChoiceBox.getValue() != null){
 					calcMaximumProduction();    					
 				}				
@@ -825,8 +821,6 @@ public class ClientGameUIController implements Initializable{
     			newProductionOrderWaferChoiceBox.getItems().clear();
             	newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
             	newProductionOrderCaseChoiceBox.getItems().clear();
-            	newProductionOrderWaferStorageQuantityTextField.clear();           	
-            	newProductionOrderCaseStorageQuantityTextField.clear();
             	newProductionOrderCostsTextField.clear();
             	newProductionOrderOutputQuantitySlider.adjustValue(0.0);
             	newProductionOrderWaferChoiceBox.getItems().setAll(waferInStorage);   
@@ -861,8 +855,6 @@ public class ClientGameUIController implements Initializable{
     			newProductionOrderWaferChoiceBox.getItems().clear();
             	newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
             	newProductionOrderCaseChoiceBox.getItems().clear();
-            	newProductionOrderWaferStorageQuantityTextField.clear();           	
-            	newProductionOrderCaseStorageQuantityTextField.clear();
             	newProductionOrderCostsTextField.clear();
             	newProductionOrderOutputQuantitySlider.adjustValue(0.0);
             	newProductionOrderTitledPane.setDisable(true);     
@@ -876,7 +868,7 @@ public class ClientGameUIController implements Initializable{
 			new ChangeListener<Number>() {					
 				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {   				
     				
-    					
+    				
     				
 				}
 			}				
