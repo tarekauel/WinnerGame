@@ -27,6 +27,9 @@ public class Location {
 	 */
 
 	public static void initLocations() throws Exception {
+		if(listOfLocations.size()>0){
+			return;
+		}
 		FileReader reader = new FileReader("locations.dat");
 		BufferedReader buffReader = new BufferedReader(reader);
 		String line = buffReader.readLine();
