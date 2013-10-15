@@ -6,6 +6,8 @@ import java.util.TreeSet;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
+import constant.Constant;
+
 /**
  * Created by: User: Lars Trey Date: 28.09.13 Time: 17:22
  */
@@ -225,20 +227,30 @@ public class Company {
 		java.util.Iterator<TResourcePrice> priceListWaferIterator = priceListWafer.iterator();
 		for(Resource resource : this.getStorage().getAllResources()){
 			if(resource.getName().equals("Wafer")){
-				int treeQuality = 1;
 				while(priceListWaferIterator.hasNext()){
-					if(treeQuality==resource.getQuality()){
-						resourcesValue = resourcesValue + priceListWaferIterator.next();
-					}
-				}
-				
-				
-				
-			}
+					if(priceListWaferIterator.next().getQuality()==resource.getQuality()){
+						resourcesValue = resourcesValue +  priceListWaferIterator.next().getPrice();
+						break;
+					}//if
+				}//while
+			}//if
 			if(resource.getName().equals("Gehäuse")){
-				
-				
-				
+				while(priceListCasesIterator.hasNext()){
+					if(priceListCasesIterator.next().getQuality()==resource.getQuality()){
+						resourcesValue = resourcesValue +  priceListCasesIterator.next().getPrice();
+						break;
+					}//if
+				}//while
+			}
+		}
+		presentValue += resourcesValue;
+		
+		//Einrechnen des Vorteils durch Marktanteil
+		long marketShareAdvantage = 0;
+		ArrayList<TMarketShare> arrayListMarektShare = CustomerMarket.getMarket().getMarketShares();
+		for(TMarketShare marketShare : arrayListMarektShare){
+			if(marketShare.getCompany()==this){
+				marketShareAdvantage = marketShare.getMarketShare() * marketShare.getMarketSize() * Constant.PresentValue.PRESENTVALUE_ADVANTAGE_MARKETSHARE / 100;
 			}
 		}
 		

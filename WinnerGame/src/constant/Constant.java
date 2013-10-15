@@ -102,6 +102,11 @@ public class Constant {
 		public static final int DISTRIBUTION_OFFER_COSTS_PER_PANEL = Integer
 				.parseInt(getConstant("DISTRIBUTION_OFFER_COSTS_PER_PANEL"));
 	}
+	
+	public static class PresentValue{
+		public static final int PRESENTVALUE_ADVANTAGE_MARKETSHARE = Integer
+				.parseInt(getConstant("PRESENTVALUE_ADVANTAGE_MARKETSHARE"));
+	}
 
 	public static class Server {
 
