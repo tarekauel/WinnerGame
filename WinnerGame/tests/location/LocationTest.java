@@ -9,7 +9,7 @@ import server.Location;
 
 public class LocationTest {
 	@Before
-	public void prepare() throws Exception{
+	public void prepare() throws Exception {
 		Location.initLocations();
 	}
 
