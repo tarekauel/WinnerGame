@@ -1,6 +1,10 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeSet;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 /**
  * Created by: User: Lars Trey Date: 28.09.13 Time: 17:22
@@ -199,8 +203,45 @@ public class Company {
 		if(presentValues.get(presentValues.size()-1).round==GameEngine.getGameEngine().getRound()){
 			return presentValues.get(presentValues.size()-1);
 		}
+		
 		//Einrechnen des Barvermögens
 		long presentValue = this.getBankAccount().getBankBalance();
+		
+		//Einrechnen der Lagerbestaende
+		//fertige Produkte
+		HashMap<Integer,Long> priceList = CustomerMarket.getMarket().getPriceList();
+		long panelValue = 0;
+		for(FinishedGood finishedGood : this.storage.getAllFinishedGoods()){
+			long price = priceList.get(finishedGood.getQuality());
+			panelValue += price;
+		}
+		presentValue+=panelValue;
+		
+		//Rohstoffe
+		long resourcesValue = 0;
+		TreeSet<TResourcePrice> priceListCases = SupplierMarket.getMarket().getCasePricelist();
+		TreeSet<TResourcePrice> priceListWafer = SupplierMarket.getMarket().getWaferPricelist();
+		java.util.Iterator<TResourcePrice> priceListCasesIterator = priceListCases.iterator();
+		java.util.Iterator<TResourcePrice> priceListWaferIterator = priceListWafer.iterator();
+		for(Resource resource : this.getStorage().getAllResources()){
+			if(resource.getName().equals("Wafer")){
+				int treeQuality = 1;
+				while(priceListWaferIterator.hasNext()){
+					if(treeQuality==resource.getQuality()){
+						resourcesValue = resourcesValue + priceListWaferIterator.next();
+					}
+				}
+				
+				
+				
+			}
+			if(resource.getName().equals("Gehäuse")){
+				
+				
+				
+			}
+		}
+		
 		
 		//Berechnen des prozentualen Wertes der PresentValue
 		int percentLocation = 100-GameEngine.getGameEngine().getRound();
@@ -210,6 +251,10 @@ public class Company {
 		TPresentValue tpresentValue = new TPresentValue(presentValue, GameEngine.getGameEngine().getRound());
 		presentValues.add(tpresentValue);
 		return tpresentValue;
+	}
+	
+	public ArrayList<TPresentValue> getPresentValues(){
+		return presentValues;
 	}
 
 	/**
