@@ -250,6 +250,7 @@ public class ClientGameUIModel {
 			benefitBookingTableData.add(new BenefitBooking(b));
 		}
 		for(PossibleBenefit b: in.possibleBenefits) {
+			System.out.println("jo");
 			benfitBoxData.add(new Benefit(b));
 		}
 		for(TMotivation m : in.historyMotivation) {		

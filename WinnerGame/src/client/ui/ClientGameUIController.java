@@ -338,7 +338,9 @@ public class ClientGameUIController implements Initializable{
     	initSales();    	
     	initHumanResources();
     	initMarketing();
-    	initReporting();     	
+    	initReporting();     
+    	
+    	
     	
     	//  START BUILDING SALES CHART
     	String[] cat = new String[5];
@@ -447,8 +449,27 @@ public class ClientGameUIController implements Initializable{
     	
     	endRoundButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {           	
+            public void handle(ActionEvent actionEvent) {    
             	
+            	for (Request req : purchaseRequestsTableView.getItems()) {
+            		
+            		if(req.getStatus().equals("Offen")){
+            			
+            			for (SupplierOffer offer : req.getOffer()) {
+        					if(!offer.getQuantity().isEmpty()){
+        						model.getMessCreator().addAccepted(
+        								offer.getName(), 
+        								Integer.parseInt(offer.getQuality()), 
+        								Integer.parseInt(offer.getQuantity())
+        						);
+        						break;
+        					}
+            			}
+            			
+            		}            		
+        			
+        		}                	
+            	            	
             	if(machineryIncreaseLevelCheckBox.selectedProperty().get() == true){
             		model.getMessCreator().setMachine(true);
             	} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
@@ -473,24 +494,56 @@ public class ClientGameUIController implements Initializable{
 	class EditingCell extends TableCell<Request, String> {
 		
 		  private TextField textField;
+		  boolean alreadyFilledCell;
 	     
 	      public EditingCell() {}
 	     
 	      @Override
 	      public void startEdit() {
 	    	  
-	    	  if(purchaseRequestsTableView.getSelectionModel().getSelectedItem().getStatus().equals("Offen")){
+	    	  for(int i = 0; i<3; i++){	    			  
+    			  if(this.getTableColumn().getCellData(i).isEmpty()){
+    				  alreadyFilledCell = false;	    				  
+    			  } else {
+    				  alreadyFilledCell = true;
+    				  break;
+    			  }
+    		  }	    
+	    	  
+	    	  System.out.println();
+	    	  
+	    	  if(purchaseRequestsTableView.getSelectionModel().getSelectedItem().getStatus().equals("Offen") && alreadyFilledCell == false){
+	    		  
 	    		  super.startEdit();
-	 	         
+	 	 	         
 		          if (textField == null) {
 		              createTextField();
 		          }
 		         
 		          setGraphic(textField);
 		          setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		          textField.selectAll();
-	    	  } else {
-	    		  cancelEdit();
+		          textField.selectAll(); 	    		  		  
+    		  
+	    	  } else if(purchaseRequestsTableView.getSelectionModel().getSelectedItem().getStatus().equals("Offen") && alreadyFilledCell == true){
+	    	  
+	    		  if(!this.getItem().toString().isEmpty()){
+	    			  
+	    			  super.startEdit();
+	  	 	         
+			          if (textField == null) {
+			              createTextField();
+			          }
+			         
+			          setGraphic(textField);
+			          setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			          textField.selectAll(); 
+	    			  
+	    		  }	else {
+	    			  cancelEdit();
+	    		  }
+	    		  
+	      	  } else {    		  
+	    		  cancelEdit();    		  
 	    	  }    	  
 	          
 	      }
@@ -598,11 +651,11 @@ public class ClientGameUIController implements Initializable{
     	 */
     	
     	Callback<TableColumn<SupplierOffer, String>, TableCell<SupplierOffer, String>> cellFactory =
-	        new Callback<TableColumn<SupplierOffer, String>, TableCell<SupplierOffer, String>>() {
-	            public TableCell call(TableColumn p) {
-	                return new EditingCell();
-	            }
-	        };
+		    new Callback<TableColumn<SupplierOffer, String>, TableCell<SupplierOffer, String>>() {
+		        public TableCell call(TableColumn p) {
+		            return new EditingCell();
+		        }
+		    };
 
     	purchaseOffersArticleTableColumn.setCellValueFactory(
     		new PropertyValueFactory<SupplierOffer, String>("name")
@@ -1175,6 +1228,10 @@ public class ClientGameUIController implements Initializable{
 		/**
 		 * Misc
 		 */
+		
+		for (Benefit x : model.getBenefitBoxData()) {
+			System.out.println("ben:"+x.getCosts());
+		}
 		
 //		System.out.println(model.getIn().humanResources.myWage);
 //		System.out.println(model.getIn().humanResources.averageWage);
