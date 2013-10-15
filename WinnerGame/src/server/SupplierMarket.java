@@ -214,18 +214,20 @@ public class SupplierMarket {
 			}
 		}
 
+		int influenceOnNeighbours = 5;
+		
 		// Array mit den neuen Preisspreads (in Prozent)
 		int[] newSpreadsWafer = new int[boughtQualityWafer.length];
 
 		// Durch den Array gehen und alle Qualitaeten auswerten
 		for (int i = 0; i < boughtQualityWafer.length; i++) {
 			// Anteil der Qualitaet am gesamtMarkt berechnen
-			int share = (int) Math.floor(boughtQualityWafer[i] * 100.0 / sumSalesWafer);
+			int share = (int) Math.floor(boughtQualityWafer[i] * 10000.0 / sumSalesWafer);
 
 			// Spread fuer die Qualitaeten, um den Anteil erhoehen
 			// Die fuenf davor bzw. danach werden linear erhoeht (20-40-60-80
 			// 100(gekaufte Qualität) 80-60-40-20
-			for (int j = i - 9; j <= i + 9; j++) {
+			for (int j = i - influenceOnNeighbours; j <= i + influenceOnNeighbours; j++) {
 				// Falls j nicht im Array-Bereich liegt verwerfen
 				if (j < 0 || j >= newSpreadsWafer.length) {
 					continue;
@@ -233,9 +235,9 @@ public class SupplierMarket {
 
 				// Spread berechnen und addieren fuer j < i
 				if (j < i) {
-					newSpreadsWafer[j] += share - share * (i - j) * 0.1;
+					newSpreadsWafer[j] += share - share * (i - j) / influenceOnNeighbours;
 				} else {
-					newSpreadsWafer[j] += share - share * (j - i) * 0.1;
+					newSpreadsWafer[j] += share - share * (j - i) / influenceOnNeighbours;
 				}
 			}
 
@@ -246,10 +248,10 @@ public class SupplierMarket {
 		waferPricelist = new TreeSet<TResourcePrice>();
 
 		for (int i = 0; i < waferPricelistBase.length; i++) {
-			double spread = 1 + spreadsWafer[roundCounter][i] / 100;
+			double spread = 1 + spreadsWafer[roundCounter][i] / 10000;
 			for (int j = 1; j < 5; j++) {
 				if (spreadsWafer[(roundCounter + j) % 5] != null) {
-					spread = spread * (1 + spreadsWafer[(roundCounter + j) % 5][i] / 100);
+					spread = spread * (1 + spreadsWafer[(roundCounter + j) % 5][i] / 10000);
 				}
 			}
 			int price = (int) Math.floor(waferPricelistBase[i] * spread);
@@ -262,12 +264,12 @@ public class SupplierMarket {
 		// Durch den Array gehen und alle Qualitaeten auswerten
 		for (int i = 0; i < boughtQualityCase.length; i++) {
 			// Anteil der Qualitaet am gesamtMarkt berechnen
-			int share = (int) Math.floor(boughtQualityCase[i] * 100.0 / sumSalesCase);
+			int share = (int) Math.floor(boughtQualityCase[i] * 10000.0 / sumSalesCase);
 
 			// Spread fuer die Qualitaeten, um den Anteil erhoehen
 			// Die fuenf davor bzw. danach werden linear erhoeht (20-40-60-80
 			// 100(gekaufte Qualität) 80-60-40-20
-			for (int j = i - 9; j <= i + 9; j++) {
+			for (int j = i - influenceOnNeighbours; j <= i +influenceOnNeighbours; j++) {
 				// Falls j nicht im Array-Bereich liegt verwerfen
 				if (j < 0 || j >= newSpreadsCase.length) {
 					continue;
@@ -276,9 +278,9 @@ public class SupplierMarket {
 				// Spread berechnen und addieren fuer j < i
 				// TODO eventuell Einfluss auf Nachbarn anders berechnen
 				if (j < i) {
-					newSpreadsCase[j] += share - share * (i - j) * 0.1;
+					newSpreadsCase[j] += share - share * (i - j) / influenceOnNeighbours;
 				} else {
-					newSpreadsCase[j] += share - share * (j - i) * 0.1;
+					newSpreadsCase[j] += share - share * (j - i) / influenceOnNeighbours;
 				}
 			}
 
@@ -289,10 +291,10 @@ public class SupplierMarket {
 		casePricelist = new TreeSet<TResourcePrice>();
 
 		for (int i = 0; i < casePricelistBase.length; i++) {
-			double spread = 1 + spreadsCase[roundCounter][i] / 100;
+			double spread = 1 + spreadsCase[roundCounter][i] / 10000;
 			for (int j = 1; j < 5; j++) {
 				if (spreadsCase[(roundCounter + j) % 5] != null) {
-					spread = spread * (1 + spreadsCase[(roundCounter + j) % 5][i] / 100);
+					spread = spread * (1 + spreadsCase[(roundCounter + j) % 5][i] / 10000);
 				}
 			}
 			int price = (int) Math.floor(casePricelistBase[i] * spread);
