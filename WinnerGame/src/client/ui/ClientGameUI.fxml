@@ -279,7 +279,7 @@
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="81.0" prefWidth="353.0">
                           <children>
-                            <LineChart fx:id="hrMotivationLineChart" alternativeColumnFillVisible="true" layoutX="-10.0" layoutY="-2.0" legendVisible="false" prefHeight="251.0" prefWidth="735.0" onMouseEntered="#onMouseEnteredMotivation" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved">
+                            <LineChart fx:id="hrMotivationLineChart" alternativeColumnFillVisible="true" layoutX="-10.0" layoutY="-2.0" legendVisible="false" onMouseEntered="#onMouseEnteredMotivation" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" prefHeight="251.0" prefWidth="735.0">
                               <xAxis>
                                 <CategoryAxis fx:id="hrMotivationLineChartXAxis" side="BOTTOM" />
                               </xAxis>
@@ -358,14 +358,14 @@
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="43.0" prefWidth="419.0">
                           <children>
-                            <CheckBox layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Marktforschung kaufen (5.000 €)" />
+                            <CheckBox id="marketResearchBuyMarketResearchCheckbox" fx:id="marketResearchBuyMarketResearchCheckBox" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Marktforschung kaufen (5.000 €)" />
                           </children>
                         </AnchorPane>
                       </content>
                     </TitledPane>
                     <TitledPane id="GeneralInformationBox" animated="false" collapsible="false" layoutX="335.0" layoutY="99.0" maxHeight="173.0" minHeight="62.9998779296875" minWidth="216.0" prefHeight="173.0" prefWidth="423.0" text="Erwartete Waferpreise nächste Runde">
                       <content>
-                        <LineChart fx:id="marketingWaferPriceChart" alternativeColumnFillVisible="true" legendVisible="false" prefHeight="251.0" prefWidth="735.0" onMouseEntered="#onMouseEnteredWafer" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved">
+                        <LineChart fx:id="marketingWaferPriceChart" alternativeColumnFillVisible="true" legendVisible="false" onMouseEntered="#onMouseEnteredWafer" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" prefHeight="251.0" prefWidth="735.0">
                           <xAxis>
                             <CategoryAxis fx:id="marketingWaferPriceChartXAxis" side="BOTTOM" />
                           </xAxis>
@@ -380,7 +380,7 @@
                     </TitledPane>
                     <TitledPane id="GeneralInformationBox" animated="false" collapsible="false" layoutX="335.0" layoutY="282.0" maxHeight="173.0" minHeight="62.9998779296875" minWidth="216.0" prefHeight="173.0" prefWidth="423.0" text="Erwartete Gehäusepreise nächste Runde">
                       <content>
-                        <LineChart fx:id="marketingCasePriceChart" alternativeColumnFillVisible="true" legendVisible="false" padding="$x1" prefHeight="280.0" prefWidth="419.0" onMouseEntered="#onMouseEnteredCase" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved">
+                        <LineChart fx:id="marketingCasePriceChart" alternativeColumnFillVisible="true" legendVisible="false" onMouseEntered="#onMouseEnteredCase" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" padding="$x1" prefHeight="280.0" prefWidth="419.0">
                           <xAxis>
                             <CategoryAxis fx:id="marketingCasePriceChartXAxis" side="BOTTOM" />
                           </xAxis>
@@ -422,7 +422,7 @@
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="361.0">
                           <children>
-                            <StackedBarChart fx:id="reportingSalesBarChart" cache="false" layoutX="-2.0" layoutY="-13.0" legendSide="TOP" legendVisible="true" prefHeight="289.0" prefWidth="365.0" title=""  onMouseEntered="#onMouseEnteredSales" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved">
+                            <StackedBarChart fx:id="reportingSalesBarChart" cache="false" layoutX="-2.0" layoutY="-13.0" legendSide="TOP" legendVisible="true" onMouseEntered="#onMouseEnteredSales" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMoved" prefHeight="289.0" prefWidth="365.0" title="">
                               <xAxis>
                                 <CategoryAxis fx:id="reportingSalesBarChatXAxis" side="BOTTOM" />
                               </xAxis>

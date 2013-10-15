@@ -55,9 +55,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import client.ui.ClientGameUIModel.Benefit;
 import client.ui.ClientGameUIModel.BenefitBooking;
 import client.ui.ClientGameUIModel.Offer;
 import client.ui.ClientGameUIModel.ProductionOrder;
@@ -104,10 +107,10 @@ public class ClientGameUIController implements Initializable{
 	@FXML private TitledPane newProductionOrderTitledPane;
 	@FXML private Button newProductionOrderButton;
 	@FXML private Button newProductionOrderSaveButton;
-	@FXML private ChoiceBox<StorageElementToClient> newProductionOrderWaferChoiceBox;
+	@FXML private ChoiceBox<StoragePosition> newProductionOrderWaferChoiceBox;
 	@FXML private Slider newProductionOrderOutputQuantitySlider;
 	@FXML private TextField newProductionOrderOutputQuantityTextField;
-	@FXML private ChoiceBox<StorageElementToClient> newProductionOrderCaseChoiceBox;
+	@FXML private ChoiceBox<StoragePosition> newProductionOrderCaseChoiceBox;
 	@FXML private TextField newProductionOrderCostsTextField;
 	@FXML private TableView<ProductionOrder> productionOrdersTableView;
 	@FXML private TableColumn<ProductionOrder,Integer> productionOrderIdTableColumn;
@@ -123,9 +126,9 @@ public class ClientGameUIController implements Initializable{
 	@FXML private ProgressBar machineryWorkloadProgressBar;
 	@FXML private CheckBox machineryIncreaseLevelCheckBox;	
     //Storage
-	private ObservableList<StorageElementToClient> resourcesInStorage = FXCollections.observableArrayList();
-	private ObservableList<StorageElementToClient> waferInStorage = FXCollections.observableArrayList();
-	private ObservableList<StorageElementToClient> casesInStorage = FXCollections.observableArrayList();
+	private ObservableList<StoragePosition> resourcesInStorage = FXCollections.observableArrayList();
+	private ObservableList<StoragePosition> waferInStorage = FXCollections.observableArrayList();
+	private ObservableList<StoragePosition> casesInStorage = FXCollections.observableArrayList();
 	@FXML private TextField storageCostsWaferTextField;
 	@FXML private TextField storageCostsCasesTextField;
 	@FXML private TextField storageCostsPanelsTextField;
@@ -138,7 +141,7 @@ public class ClientGameUIController implements Initializable{
     //Sales
 	@FXML private Button newSaleOfferButton;
 	@FXML private Button newSaleOfferSaveButton;
-	@FXML private ChoiceBox<StorageElementToClient> newSaleOfferArticleChoiceBox;
+	@FXML private ChoiceBox<StoragePosition> newSaleOfferArticleChoiceBox;
 	@FXML private Slider newSaleOfferArticleQuantitySlider;
 	@FXML private TextField newSaleOfferArticleQuantityTextField;
 	@FXML private TextField newSaleOfferArticlePriceTextField;
@@ -160,8 +163,8 @@ public class ClientGameUIController implements Initializable{
 	@FXML private TextField hrAverageWagesTextField;
 	@FXML private TextField hrCountEmployeesTextField;
 	@FXML private TextField hrWageCostsTextField;
-	@FXML private ChoiceBox<BenefitBookingToClient> benefitsChoiceBox;
-	private ObservableList<BenefitBookingToClient> bookableBenefits = FXCollections.observableArrayList();
+	@FXML private ChoiceBox<Benefit> benefitsChoiceBox;
+	private ObservableList<Benefit> possibleBenefits = FXCollections.observableArrayList();
 	@FXML private Button bookBenefitButton;
 	@FXML private TextField bookBenefitDurationTextField;
 	@FXML private TextField bookBenefitCostsPerRoundTextField;
@@ -174,6 +177,7 @@ public class ClientGameUIController implements Initializable{
 	@FXML private TextField marketResearchAverageWagesLastRoundTextField;
 	@FXML private TextField marketResearchPeakAMarketTextField;
 	@FXML private TextField marketResearchPeakCMarketTextField;
+	@FXML private CheckBox marketResearchBuyMarketResearchCheckBox;
 	@FXML private LineChart<String, Double> marketingWaferPriceChart;
 	@FXML private CategoryAxis marketingWaferPriceChartXAxis;
 	@FXML private NumberAxis marketingWaferPriceChartYAxis; 
@@ -333,8 +337,8 @@ public class ClientGameUIController implements Initializable{
     	initHumanResources();
     	initMarketing();
     	initReporting();
-    		
     	model.parseAnswerFromServer();
+    	
     	
     	//  START BUILDING SALES CHART
     	String[] cat = new String[5];
@@ -379,11 +383,36 @@ public class ClientGameUIController implements Initializable{
     	//END WORK
     	
     }
+    
+    private int deformatCurrency(String oldCurrencyString){
+    	
+    	String currencyString = "";            	
+    	currencyString = oldCurrencyString.replace(",", "");
+    	//System.out.println(currencyString);
+    	currencyString = currencyString.replace(".", "");
+    	//System.out.println(currencyString);
+    	currencyString = currencyString.replace(" ", "");    	
+    	//System.out.println(currencyString);
+    	currencyString = currencyString.replace("€", "");
+    	//System.out.println(currencyString);
+    	int currencyValue = Integer.parseInt(currencyString);           	
+    	
+    	return currencyValue;
+    }
+    
+    private int deformatQuantity(String oldQuantityString){
+    	
+    	String quantityString = "";            	
+    	quantityString = oldQuantityString.replace(".", "");
+    	int quantityValue = Integer.parseInt(quantityString);           	
+    	
+    	return quantityValue;
+    }
 
 	private void initGeneral() {
 		
     	this.model = new ClientGameUIModel();
-    	processRoundProgressBar(model.getIn().round);
+    	processRoundProgressBar(model.getRound());
     	
     	/**
     	 * Tabübergreifende Einstellungen
@@ -420,9 +449,30 @@ public class ClientGameUIController implements Initializable{
     	endRoundButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {           	
-            	model.setRound(model.getRound()+1);    
-            	//TEST
-            	processRoundProgressBar(model.getRound());
+            	
+            	if(machineryIncreaseLevelCheckBox.selectedProperty().get() == true){
+            		model.getMessCreator().setMachine(true);
+            	} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
+            		model.getMessCreator().setMachine(false);
+            	}
+            	
+            	if(marketResearchBuyMarketResearchCheckBox.selectedProperty().get() == true){
+            		model.getMessCreator().setMarketResearch(true);
+            	} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
+            		model.getMessCreator().setMarketResearch(false);
+            	}
+            	
+            	String wagesPerHour = "";            	
+            	wagesPerHour += hrWagesPerHourTextField.getText().replace(",", "");
+            	wagesPerHour += hrWagesPerHourTextField.getText().replace(" ", "");
+            	wagesPerHour += hrWagesPerHourTextField.getText().replace("€", "");
+            	int wagesPerHourValue = Integer.parseInt(wagesPerHour);           	
+            	model.getMessCreator().setWage(wagesPerHourValue);
+  
+            	model.setOut(model.getMessCreator().getSendMessage());
+            	
+            	
+            	
             }
         }); 
 		
@@ -623,12 +673,8 @@ public class ClientGameUIController implements Initializable{
         					newPurchaseRequestArticleQualityTextField.getText()
             			)
                 	); 
-        			model.addRequest(
-    					new RequestFromClient(
-    						newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
-    						Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText())
-    					)
-        			);
+        			
+            		model.getMessCreator().addRequest(newPurchaseRequestArticleNameChoiceBox.getValue().toString(), Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText()));
             		
             	}           	
     			
@@ -648,25 +694,41 @@ public class ClientGameUIController implements Initializable{
 		waferInStorage.clear();
 		casesInStorage.clear();
 		
-		for (StorageElementToClient elem : model.getIn().storage.storageElements) {
-					
-			System.out.println(elem.type);
+//		for (StorageElementToClient elem : model.getIn().storage.storageElements) {
+//					
+//			System.out.println(elem.type);
+//			
+//			if (elem.type.equals("Wafer")) {
+//				waferInStorage.add(elem);
+//			} else if (elem.type.equals("Gehäuse")) {
+//				casesInStorage.add(elem);
+//			} else {
+//				resourcesInStorage.add(elem);
+//			}
+//			
+//		}
+		
+		for (StoragePosition elem : model.getStoragePositionsTableData()) {
 			
-			if (elem.type.equals("Wafer")) {
+			//System.out.println(elem.type);
+			
+			if (elem.getRessource().equals("Wafer")) {
 				waferInStorage.add(elem);
-			} else if (elem.type.equals("Gehäuse")) {
+			} else if (elem.getRessource().equals("Gehäuse")) {
 				casesInStorage.add(elem);
 			} else {
 				resourcesInStorage.add(elem);
 			}
 			
 		}
+		
 	}
 	
 	private boolean calcMaximumProduction(){
 		
-		int qWaferInStorage = newProductionOrderWaferChoiceBox.getValue().quantity;
-		int qCasesInStorage = newProductionOrderCaseChoiceBox.getValue().quantity;
+		
+		int qWaferInStorage = deformatQuantity(newProductionOrderWaferChoiceBox.getValue().getQuantity());
+		int qCasesInStorage = deformatQuantity(newProductionOrderCaseChoiceBox.getValue().getQuantity());
 		int qCasesNeededforMaxPanels = qWaferInStorage/54;
 		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity - Integer.parseInt(machineryPlannedCapacityTextField.getText());
 		System.out.println(remainingMachineCapacity);
@@ -685,7 +747,7 @@ public class ClientGameUIController implements Initializable{
 		} else if(qCasesInStorage > model.getIn().reporting.machinery.maxCapacity || qCasesNeededforMaxPanels > model.getIn().reporting.machinery.maxCapacity){
 			return false;
 		}
-		
+
 		return true;
 		
 	}
@@ -700,7 +762,7 @@ public class ClientGameUIController implements Initializable{
 		final Tooltip tooltip = new Tooltip();
 		
 		for (ProductionOrder x : model.getProductionOrdersTableData()) {
-			int targetQuantity = Integer.parseInt(x.getTargetQuantity());
+			int targetQuantity = deformatQuantity(x.getTargetQuantity());
 			
 			if(x.getQualityPanel().equals("")){
 				cumulativeWorkloadBefore += targetQuantity;
@@ -789,8 +851,8 @@ public class ClientGameUIController implements Initializable{
     	 * ActionListener
     	 */
 		
-		final ChangeListener<StorageElementToClient> newProductionOrderWaferChoiceBoxListener = new ChangeListener<StorageElementToClient>() {
-			public void changed(ObservableValue<? extends StorageElementToClient> observable, StorageElementToClient oldValue, StorageElementToClient newValue) {
+		final ChangeListener<StoragePosition> newProductionOrderWaferChoiceBoxListener = new ChangeListener<StoragePosition>() {
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
 				
 				if(newProductionOrderCaseChoiceBox.getValue() != null){
 					calcMaximumProduction();    					
@@ -799,8 +861,8 @@ public class ClientGameUIController implements Initializable{
 			}
 		};  
 		
-		final ChangeListener<StorageElementToClient> newProductionOrderCaseChoiceBoxListener = new ChangeListener<StorageElementToClient>() {
-			public void changed(ObservableValue<? extends StorageElementToClient> observable, StorageElementToClient oldValue, StorageElementToClient newValue) {
+		final ChangeListener<StoragePosition> newProductionOrderCaseChoiceBoxListener = new ChangeListener<StoragePosition>() {
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
 
 				if(newProductionOrderWaferChoiceBox.getValue() != null){
 					calcMaximumProduction();    					
@@ -840,11 +902,18 @@ public class ClientGameUIController implements Initializable{
 					if(isPossibleMachinery == true && !newProductionOrderOutputQuantityTextField.getText().equals("0")){
 						model.getProductionOrdersTableData().add(
 		        			new ProductionOrder(
-		        				newProductionOrderWaferChoiceBox.getValue().quality+"", 
-		        				newProductionOrderCaseChoiceBox.getValue().quality+"", 
+		        				newProductionOrderWaferChoiceBox.getValue().getQuality(), 
+		        				newProductionOrderCaseChoiceBox.getValue().getQuality(), 
 		        				newProductionOrderOutputQuantityTextField.getText()
 		        			)
-			            ); 						
+			            ); 	
+					
+						model.getMessCreator().addProductionOrder(
+								Integer.parseInt(newProductionOrderWaferChoiceBox.getValue().getQuality()), 
+								Integer.parseInt(newProductionOrderCaseChoiceBox.getValue().getQuality()), 
+								Integer.parseInt(newProductionOrderOutputQuantityTextField.getText())
+						);
+						
 					} 
 					
 				}
@@ -986,20 +1055,29 @@ public class ClientGameUIController implements Initializable{
     	 * ActionListener
     	 */
 		
-		final ChangeListener<StorageElementToClient> newSaleOfferArticleChoiceBoxListener = new ChangeListener<StorageElementToClient>() {
-			public void changed(ObservableValue<? extends StorageElementToClient> observable, StorageElementToClient oldValue, StorageElementToClient newValue) {
-				newSaleOfferArticleQuantitySlider.setMax(newSaleOfferArticleChoiceBox.getValue().quantity);
-				newSaleOfferArticleQuantitySlider.setValue(newSaleOfferArticleChoiceBox.getValue().quantity);     				
+		final ChangeListener<StoragePosition> newSaleOfferArticleChoiceBoxListener = new ChangeListener<StoragePosition>() {
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
+				newSaleOfferArticleQuantitySlider.setMax(Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuantity()));
+				newSaleOfferArticleQuantitySlider.setValue(Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuantity()));     				
 			}
 		};
 		
 		final ChangeListener<String> newSaleOfferArticlePriceTextFieldListener = new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
-				newSaleOfferDistributionCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().distribution.costsPerOffer/100));
-				newSaleOfferCostsTextField.setText(model.getnFormatterCurrency().format(newSaleOfferArticleChoiceBox.getValue().costs/100));
-				int cumulCosts = (newSaleOfferArticleChoiceBox.getValue().costs/100 * Integer.parseInt(newSaleOfferArticleQuantityTextField.getText())) + (model.getIn().distribution.costsPerOffer/100);
-				int maxProfit = (Integer.parseInt(newSaleOfferArticlePriceTextField.getText()) * Integer.parseInt(newSaleOfferArticleQuantityTextField.getText())) - cumulCosts;
-				newSaleOfferMaximumProfitTextField.setText(model.getnFormatterCurrency().format(maxProfit));   			
+
+				int distributionCosts = model.getIn().distribution.costsPerOffer/100;
+				//System.out.println(newSaleOfferArticleChoiceBox.getValue().getCosts());
+				int cost = deformatCurrency(newSaleOfferArticleChoiceBox.getValue().getCosts())/100;
+				//System.out.println(cost);
+				int quantity = Integer.parseInt(newSaleOfferArticleQuantityTextField.getText());
+				int price = Integer.parseInt(newSaleOfferArticlePriceTextField.getText());
+				int cumulCosts = (quantity * cost) + distributionCosts;
+				int maxProfit = (quantity * price) - cumulCosts;
+				
+				newSaleOfferDistributionCostsTextField.setText(model.getnFormatterCurrency().format(distributionCosts));
+				newSaleOfferCostsTextField.setText(model.getnFormatterCurrency().format(cost));
+				newSaleOfferMaximumProfitTextField.setText(model.getnFormatterCurrency().format(maxProfit));
+				
 			}			
 		};
 
@@ -1031,9 +1109,17 @@ public class ClientGameUIController implements Initializable{
             	
             	model.getOfferTableData().add(
         			new Offer(
-        				newSaleOfferArticleChoiceBox.getValue().quality+"", newSaleOfferArticleQuantityTextField.getText(), Integer.parseInt(newSaleOfferArticlePriceTextField.getText())*100+"" 
+        				newSaleOfferArticleChoiceBox.getValue().getQuality(), 
+        				newSaleOfferArticleQuantityTextField.getText(), 
+        				Integer.parseInt(newSaleOfferArticlePriceTextField.getText())*100+""
         			)
-                );        	
+                ); 
+            	
+            	model.getMessCreator().addOffer(
+            			Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuality()), 
+            			Integer.parseInt(newSaleOfferArticleQuantityTextField.getText()), 
+            			Integer.parseInt(newSaleOfferArticlePriceTextField.getText())*100
+            	);
             	
             	newSaleOfferArticlePriceTextField.textProperty().removeListener(newSaleOfferArticlePriceTextFieldListener);
             	newSaleOfferArticleChoiceBox.valueProperty().removeListener(newSaleOfferArticleChoiceBoxListener);	
@@ -1045,7 +1131,7 @@ public class ClientGameUIController implements Initializable{
             	newSaleOfferDistributionCostsTextField.clear();
             	newSaleOfferCostsTextField.clear();
             	newSaleOfferMaximumProfitTextField.clear();            	
-            	newProductionOrderTitledPane.setDisable(true); 
+            	newSaleOfferTitledPane.setDisable(true); 
             	
             }
         });
@@ -1064,19 +1150,6 @@ public class ClientGameUIController implements Initializable{
 		reportingMachineryMaxCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity+"");
 		reportingMachineryAvgWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.averageUsage);
 		reportingMachineryLastRoundWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.usageLastRound);
-		
-	}
-	
-	private void getBookableBenefits(){
-		
-		bookableBenefits.clear();
-		
-		for (BenefitBookingToClient benefit : model.getIn().humanResources.benefits) {
-			
-			System.out.println(benefit.name);
-			bookableBenefits.add(benefit);
-			
-		}
 		
 	}
 	
@@ -1102,8 +1175,6 @@ public class ClientGameUIController implements Initializable{
 	
 	private void initHumanResources() {
 		
-		getBookableBenefits();
-		
 		/**
 		 * Misc
 		 */
@@ -1117,7 +1188,7 @@ public class ClientGameUIController implements Initializable{
 		hrCountEmployeesTextField.setText(model.getnFormatter().format(model.getIn().humanResources.countEmployees));
 		hrWageCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.wageCosts));
 		
-		benefitsChoiceBox.setItems(bookableBenefits);
+		benefitsChoiceBox.setItems(model.getBenefitBoxData());
 		
 	}
 	

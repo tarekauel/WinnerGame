@@ -8,8 +8,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import kigegner.ClientToServerMessageCreator;
 import kigegner.KITarek;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageFromClient;
 import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.DistributionToClient;
 import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
@@ -35,6 +37,9 @@ public class ClientGameUIModel {
 	 */
 
 	private GameDataMessageToClient in = KITarek.reply;
+	private GameDataMessageFromClient out;
+
+	private ClientToServerMessageCreator messCreator = new ClientToServerMessageCreator(in.getPlayerName());
 
 	private static int round;
 	private int maxRounds = 20;
@@ -70,6 +75,18 @@ public class ClientGameUIModel {
 
 	public GameDataMessageToClient getIn() {
 		return in;
+	}
+
+	public ClientToServerMessageCreator getMessCreator() {
+		return messCreator;
+	}
+	
+	public GameDataMessageFromClient getOut() {
+		return out;
+	}
+
+	public void setOut(GameDataMessageFromClient out) {
+		this.out = out;
 	}
 
 	public NumberFormat getnFormatterCurrency() {
@@ -160,7 +177,7 @@ public class ClientGameUIModel {
 	 */
 
 	public void parseAnswerFromServer() {
-
+		
 		this.setRound(in.round);
 		parseStorage(in.storage);
 		parsePurchase(in.purchase);
@@ -168,6 +185,7 @@ public class ClientGameUIModel {
 		parseDistribution(in.distribution);
 		parseHumanResources(in.humanResources);
 		parseMarketing(in.marketing);
+		
 	}
 
 	private void parsePurchase(PurchaseToClient in) {
@@ -228,13 +246,12 @@ public class ClientGameUIModel {
 	}
 	
 	private void parseHumanResources(HumanResourcesToClient in) {
-		for( BenefitBookingToClient b : in.benefits) {
-			benefitBookingTableData.add( new BenefitBooking(b));
+		for(BenefitBookingToClient b : in.benefits) {
+			benefitBookingTableData.add(new BenefitBooking(b));
 		}
 		for(PossibleBenefit b: in.possibleBenefits) {
-			benfitBoxData.add( new Benefit(b));
+			benfitBoxData.add(new Benefit(b));
 		}
-		
 		for(TMotivation m : in.historyMotivation) {		
 			HashMap<String, Double> map = new HashMap<String, Double>();		
 			motivationChartData.add(map);
@@ -511,11 +528,7 @@ public class ClientGameUIModel {
 			this.ressource = new SimpleStringProperty(ressource);
 			this.quality = new SimpleStringProperty(quality);
 			this.quantity = new SimpleStringProperty(ClientGameUIModel.nFormatter.format(Integer.parseInt(quantity)));
-
-			// Währungsformatierung
-			long costsTmp = Long.parseLong(costs);
-			String costsFormatted = nFormatterCurrency.format(costsTmp / 100.0);
-			this.costs = new SimpleStringProperty(costsFormatted);
+			this.costs = new SimpleStringProperty(ClientGameUIModel.nFormatterCurrency.format(Integer.parseInt(costs)/100));
 
 		}
 
@@ -523,7 +536,11 @@ public class ClientGameUIModel {
 
 			this(id, stoElement.type, stoElement.quality + "",
 					stoElement.quantity + "", stoElement.costs + "");
-
+			
+		}
+		
+		public String toString(){
+			return "Qualität: "+this.getQuality()+" - Menge: "+this.getQuantity();
 		}
 
 		public Integer getId() {
@@ -695,7 +712,7 @@ public class ClientGameUIModel {
 		public Benefit(String benefit, String costs) {	
 	
 			this.benefit = new SimpleStringProperty(benefit);
-
+			//System.out.println("ben");
 			// Währungsformatierung
 			long costsTmp = Long.parseLong(costs);
 			String costsFormatted = nFormatterCurrency.format(costsTmp / 100.0);
