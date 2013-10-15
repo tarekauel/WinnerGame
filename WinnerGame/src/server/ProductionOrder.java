@@ -13,9 +13,7 @@ import constant.Constant;
  */
 public class ProductionOrder {
 	// Anzahl der insgesamt erzeugten Produktionen
-	private static int counter = 1;
-	// ID des auftrags (Spieler unabhängige ID!)
-	private int id = 0;
+
 	// Speichert die verwendeten Ressourcen
 	private Resource wafer = null;
 	private Resource cases = null;
@@ -26,7 +24,7 @@ public class ProductionOrder {
 	private int quantityToProduce = 0;
 	// tatsächlich hergestellte Menge:
 	private int quantityProduced = 0;
-	//Menge des Ausschuss kann nicht abgeleitet werden
+	// Menge des Ausschuss kann nicht abgeleitet werden
 	private int waste = 0;
 
 	/**
@@ -40,29 +38,30 @@ public class ProductionOrder {
 	 */
 
 	public ProductionOrder(Resource wafer, Resource cases, int quantity) {
-		this.id = counter;
-		if(!checkResource(wafer)){
+
+		if (!checkResource(wafer)) {
 			throw new IllegalArgumentException("Wafer ist null.");
 		}
-		if(!checkResource(cases)){
+		if (!checkResource(cases)) {
 			throw new IllegalArgumentException("Gehaeuse ist null.");
 		}
-		if(!checkQuantity(quantity)){
+		if (!checkQuantity(quantity)) {
 			throw new IllegalArgumentException("Quantity ist nicht größer 0");
 		}
 		this.wafer = wafer;
 		this.cases = cases;
 		this.quantityToProduce = quantity;
-		counter++;
+	
 	}
 
-	private boolean checkQuantity(int quantity){
+	private boolean checkQuantity(int quantity) {
 		return quantity > 0;
 	}
-	
-	private boolean checkResource(Resource wafer){
-		return wafer!=null;
+
+	private boolean checkResource(Resource wafer) {
+		return wafer != null;
 	}
+
 	/**
 	 * abgeleitetes attribut
 	 * 
@@ -72,10 +71,11 @@ public class ProductionOrder {
 		return this.waste;
 
 	}
+
 	/**
 	 * erhoeht den ausschuss um 1
 	 */
-	public void increaseWaste(){
+	public void increaseWaste() {
 		waste++;
 	}
 
@@ -125,23 +125,14 @@ public class ProductionOrder {
 	}
 
 	/**
-	 * Returns the global ID
-	 * 
-	 * @return global ID
-	 */
-	public int getID() {
-		return this.id;
-	}
-
-	/**
 	 * Wird jede Runde aufgerufen und fertigt den Produktionsauftrag
+	 * 
 	 * @param advantage
 	 *            Der Zuschlagssatz aus Motivation, Land und Forschung
 	 * 
 	 */
-	public void produce(double advantage, Machinery m)  throws Exception{
+	public void produce(double advantage, Machinery m) throws Exception {
 		quantityProduced++;
-
 
 		// Prüfe ob bereits produziert wurde:
 		if (panel != null) {
@@ -156,17 +147,17 @@ public class ProductionOrder {
 				* Constant.Production.IMPACT_WAFER + cases.getQuality()
 				* Constant.Production.IMPACT_CASE) / 100.0;
 		// neue Qualität (nicht mehr als double)
-		int newQuality = (int) (midQuality * additionalFactor) ;
+		int newQuality = (int) (midQuality * additionalFactor);
 
 		// Prüfe ob die neue Qualität durch den Zuschlag zu sehr verändert wurde
 		newQuality = (newQuality - midQuality > Constant.Production.MAX_QUALITY_ADDITION) ? (int) (midQuality + Constant.Production.MAX_QUALITY_ADDITION)
 				: newQuality;
 
-		// Qualitaet auf 100 cappen 
+		// Qualitaet auf 100 cappen
 		newQuality = (newQuality > 100) ? 100 : newQuality;
-		//Qualitaet auf 1 flooren
+		// Qualitaet auf 1 flooren
 		newQuality = (newQuality < 1) ? 1 : newQuality;
-		
+
 		// Berechne herstellkosten (ohne Berücksichtigung vom Ausschuss):
 		int costs = wafer.getCosts() * Constant.Production.WAFERS_PER_PANEL
 				+ cases.getCosts() + m.getPieceCosts();
@@ -179,7 +170,8 @@ public class ProductionOrder {
 		// Kosten pro Stück neu berechnen (Ausschuss berücksichtigen)
 		this.panel = FinishedGood
 				.create(panel.getQuality(),
-						(int) (((double) panel.getCosts() * (quantityProduced + waste)
+						(int) (((double) panel.getCosts()
+								* (quantityProduced + waste)
 								+ Constant.Production.WORKING_HOURS_PER_PANEL + Constant.Production.WORKING_HOURS_PER_PANEL
 								* (quantityProduced + waste)
 								* s.getCompany().getHumanResources()
