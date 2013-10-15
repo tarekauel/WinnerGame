@@ -378,14 +378,14 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class CashValueOfRoundToClient implements Serializable {
 
-			public CashValueOfRoundToClient(int round, int costs) {
+			public CashValueOfRoundToClient(int round, long costs) {
 
 				this.round = round;
 				this.costs = costs;
 			}
 
 			public final int round;
-			public final int costs;
+			public final long costs;
 		}
 
 	}

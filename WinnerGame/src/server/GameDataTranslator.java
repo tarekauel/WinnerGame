@@ -22,6 +22,7 @@ import message.GameDataMessageToClient.PurchaseToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
 import message.GameDataMessageToClient.PurchaseToClient.RequestToClient.SupplierOfferToClient;
 import message.GameDataMessageToClient.ReportingToClient;
+import message.GameDataMessageToClient.ReportingToClient.CashValueOfRoundToClient;
 import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
 import message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
 import message.GameDataMessageToClient.StorageToClient;
@@ -317,9 +318,14 @@ public class GameDataTranslator {
 				.getProduction().getMachine().getCurrentUsage()
 				.getPercentOfUsage(), company.getProduction().getMachine()
 				.getLastUsage().getPercentOfUsage());
+		
 		// TODO: gefaked, cashValue und sellings sind 0
-		ReportingToClient reporting = new ReportingToClient(fixCosts,
-				machinery, null, null);
+		
+		ArrayList<CashValueOfRoundToClient> cashValues = new ArrayList<CashValueOfRoundToClient>();
+		for (TPresentValue presentValue : company.getPresentValues()) {
+			cashValues.add(new CashValueOfRoundToClient(presentValue.getRound(), presentValue.getPresentValue()));
+		}
+		ReportingToClient reporting = new ReportingToClient(fixCosts,machinery, null, cashValues);
 
 		return reporting;
 	}
