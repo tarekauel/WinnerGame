@@ -145,7 +145,19 @@ public class KITarek extends Thread {
 		RequestToClient reqB = reply.purchase.requests.get(reply.purchase.requests.size()-2);
 		
 		int toProduce = toBuy;				
-		toBuy *= 1.14;
+		toBuy *= 1.05;
+		switch( reply.round % 5) {
+		case 0:
+			quality = 20; break;
+		case 1:
+			quality = 35; break;
+		case 2:
+			quality = 50; break;
+		case 3:
+			quality = 65; break;
+		case 4:
+			quality = 80; break;
+		}
 		double plA = 0.0;
 		SupplierOfferToClient toAcceptA = null;
 		for( SupplierOfferToClient offer : reqA.supplierOffers ) {
@@ -195,20 +207,16 @@ public class KITarek extends Thread {
 					caseQuality = elem.quality;
 				}
 			}
-		}
-		toProduce--;
+		}		
 		if( waferQuality > 0 && caseQuality > 0 && toProduce > 0)
 			m.addProductionOrder(waferQuality, caseQuality, toProduce);
-		m.setWage((int) Math.floor( Math.random() * 6) + 7); // Lohn zwischen 7 und 13
+		m.setWage((int) Math.floor( Math.random() * 600) + 700); // Lohn zwischen 7 und 13
 	}
 	
 	private void sendSales() {
 		for( StorageElementToClient elem : reply.storage.storageElements) {
-			if(elem.type.equals("Panel")) {
-				int menge =  (elem.quantity-1);
-				menge = (menge > 1) ? menge / 2 : menge;
-				if( menge >= 1)
-					m.addOffer(elem.quality, menge, elem.costs*2);
+			if(elem.type.equals("Panel")) {				
+					m.addOffer(elem.quality, elem.quantity, elem.costs*2);
 			}
 		}
 	}

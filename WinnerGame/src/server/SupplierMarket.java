@@ -158,7 +158,7 @@ public class SupplierMarket {
 			while(true) {
 				int variance = 14;
 				int newQuality = reqQuality + (int) Math.floor( Math.random() * variance+1) - variance/2;
-				if( newQuality > 0) {
+				if( newQuality > 0 && newQuality <= 100) {
 					boolean unique = true;
 					for( int j=0; j<out.length; j++) {
 						if( out[j] == newQuality ) {
