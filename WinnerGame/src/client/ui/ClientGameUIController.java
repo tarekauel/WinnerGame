@@ -55,6 +55,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import kigegner.KITarek;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
@@ -464,10 +465,8 @@ public class ClientGameUIController implements Initializable{
         						);
         						break;
         					}
-            			}
-            			
-            		}            		
-        			
+            			}            			
+            		}          			
         		}                	
             	            	
             	if(machineryIncreaseLevelCheckBox.selectedProperty().get() == true){
@@ -483,8 +482,8 @@ public class ClientGameUIController implements Initializable{
             	}
          	
             	model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText()));
-  
-            	model.setOut(model.getMessCreator().getSendMessage());          	
+
+            	KITarek.getKI().sendData(model.getMessCreator());
             	
             }
         }); 
@@ -509,8 +508,6 @@ public class ClientGameUIController implements Initializable{
     				  break;
     			  }
     		  }	    
-	    	  
-	    	  System.out.println();
 	    	  
 	    	  if(purchaseRequestsTableView.getSelectionModel().getSelectedItem().getStatus().equals("Offen") && alreadyFilledCell == false){
 	    		  
@@ -779,7 +776,7 @@ public class ClientGameUIController implements Initializable{
 		int qCasesInStorage = deformatQuantity(newProductionOrderCaseChoiceBox.getValue().getQuantity());
 		int qCasesNeededforMaxPanels = qWaferInStorage/54;
 		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity - Integer.parseInt(machineryPlannedCapacityTextField.getText());
-		System.out.println(remainingMachineCapacity);
+
 		//System.out.println(qCasesNeededforMaxPanels);
 		
 		if(qCasesNeededforMaxPanels > qCasesInStorage && qCasesInStorage <= remainingMachineCapacity){

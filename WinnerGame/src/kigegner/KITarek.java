@@ -18,6 +18,7 @@ import constant.Constant;
 public class KITarek extends Thread {
 		
 	private Client c;
+	private static KITarek ki;
 	
 	private String playerName;
 	
@@ -39,10 +40,15 @@ public class KITarek extends Thread {
 	
 	public KITarek(int round) {
 		stopRound = round;
+		ki = this;
 		if( login()) {
 			System.out.println("Login-OK");
 			start();
 		}
+	}
+	
+	public static KITarek getKI(){
+		return ki;
 	}
 	
 	private boolean login() {
@@ -207,7 +213,7 @@ public class KITarek extends Thread {
 		}
 	}
 	
-	private void sendData(ClientToServerMessageCreator s) {
+	public void sendData(ClientToServerMessageCreator s) {
 		c.writeMessage(s.getSendMessage());
 	}
 
