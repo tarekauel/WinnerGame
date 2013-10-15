@@ -25,7 +25,7 @@ public class Location {
 	 * @throws IOException
 	 */
 
-	public static void initLocations() throws IOException {
+	public static void initLocations() throws Exception {
 		FileReader reader = new FileReader("locations.dat");
 		BufferedReader buffReader = new BufferedReader(reader);
 		String line = buffReader.readLine();
@@ -60,6 +60,12 @@ public class Location {
 		this.purchasePrice = p;
 		this.wageLevel = w;
 		this.wageInit = initW;
+		for (Location l:listOfLocations){
+			if (this.equals(l)){
+				throw new IllegalArgumentException("Location bereits vorhanden");	
+			}
+		}
+		
 		listOfLocations.add(this);
 
 	}
@@ -82,6 +88,9 @@ public class Location {
 	 */
 	public static Location getLocationByCountry(String c) {
 
+		if (c == null || c == "") {
+			throw new IllegalArgumentException("Ungültiger Ländername");
+		}
 		// Suche in der internen Liste:
 
 		for (Location o : listOfLocations) {
@@ -119,6 +128,21 @@ public class Location {
 	public String toString() {
 
 		return this.country;
+	}
+
+	/**
+	 * Prüft ob 2 Locations identisch sind
+	 * 
+	 * @param l
+	 * @return
+	 */
+	public boolean equals(Location l) {
+		return (l.getAdvantage() == this.getAdvantage()
+				&& l.getCountry() == this.getCountry()
+				&& l.getInitWage() == this.getInitWage()
+				&& l.getPurchasePrice() == this.getPurchasePrice() && l
+					.getWageLevel() == this.getWageLevel());
+
 	}
 
 }
