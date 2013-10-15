@@ -25,7 +25,12 @@ public aspect AspectRandom {
 		if( fakeMarket != null ) {
 			int[] diffs = fakeMarket.differences();
 			int input = (int) thisJoinPoint.getArgs()[0];
-			return new int[] { input + diffs[0], input + diffs[1], input + diffs[2] }; 
+			int[] neu = { input + diffs[0], input + diffs[1], input + diffs[2] };
+			for( int i=0; i<neu.length;i++) {
+				neu[i] = (neu[i] < 1) ? 1 : neu[i];
+				neu[i] = (neu[i] > 100) ? 100 : neu[i];
+			}
+			return neu; 
 		}
 		return proceed();
 	}
