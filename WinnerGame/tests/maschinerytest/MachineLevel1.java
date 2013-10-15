@@ -88,4 +88,12 @@ public class MachineLevel1 {
 	public void decreaseMachine() {
 		assertEquals(false, m.decreaseLevel());
 	}
+
+	@Test
+	public void overLoadMachine() {
+		for (int i = 0; i < m.getMaxCapacity()+1; i++) {
+			m.isJunk();
+		}
+		assertEquals(true, m.isJunk());
+	}
 }

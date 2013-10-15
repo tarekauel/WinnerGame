@@ -101,7 +101,7 @@ public class Machinery {
 	public boolean isJunk() {
 		// Erhoehen der Auslastung
 		if (producedQuantity >= getMaxCapacity()) {
-			return false;
+			return true;
 		}
 		producedQuantity++;
 
