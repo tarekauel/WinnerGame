@@ -320,33 +320,21 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public ReportingToClient(ArrayList<FixCostToClient> fixCosts,
 				MachineryToClient machinery,
-				ArrayList<SellsToClient> sellsOfRounds,
+				
 				ArrayList<CashValueOfRoundToClient> cashValues) {
 
 			this.fixCosts = fixCosts;
 			this.machinery = machinery;
-			this.sellsOfRounds = sellsOfRounds;
+			
 			this.cashValues = cashValues;
 		}
 
 		public final ArrayList<FixCostToClient> fixCosts;
 		public final MachineryToClient machinery;
-		public final ArrayList<SellsToClient> sellsOfRounds;
+		
 		public final ArrayList<CashValueOfRoundToClient> cashValues;
 
-		public static class SellsToClient implements Serializable {
-
-			public SellsToClient(int round, ArrayList<Integer> qualities) {
-
-				this.round = round;
-				this.qualities = qualities;
-			}
-
-			public final int round;
-			public final ArrayList<Integer> qualities;
-
-		}
-
+		
 		public static class FixCostToClient implements Serializable {
 
 			public FixCostToClient(String nameOfDepartment, int costs) {

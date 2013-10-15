@@ -319,13 +319,15 @@ public class GameDataTranslator {
 				.getPercentOfUsage(), company.getProduction().getMachine()
 				.getLastUsage().getPercentOfUsage());
 		
-		// TODO: gefaked, cashValue und sellings sind 0
 		
+		
+		//get CashValues
 		ArrayList<CashValueOfRoundToClient> cashValues = new ArrayList<CashValueOfRoundToClient>();
 		for (TPresentValue presentValue : company.getPresentValues()) {
 			cashValues.add(new CashValueOfRoundToClient(presentValue.getRound(), presentValue.getPresentValue()));
 		}
-		ReportingToClient reporting = new ReportingToClient(fixCosts,machinery, null, cashValues);
+		
+		ReportingToClient reporting = new ReportingToClient(fixCosts,machinery, cashValues);
 
 		return reporting;
 	}
