@@ -196,6 +196,11 @@ public class Constant {
 		public static final int HR_WORK_WEEK = Integer
 				.parseInt(getConstant("HR_WORK_WEEK"));
 	}
+	
+	public static class SupplierMarket {
+		public static final int influenceNeighbours = Integer
+				.parseInt(getConstant("SUP_MARKET_CNT_NEIGHBOURS"));
+	}
 
 	public static class CustomerMarket {
 		public static final int aMarketPeak = Integer

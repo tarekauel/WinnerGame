@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import constant.Constant;
+
 /**
  * Der Beschaffungsmarkt ist für alle Spieler gleich und eins. Die Preise für
  * die Rohstoffe ändern sich nur rundenweise und nicht innerhalb einer Runde.
@@ -214,7 +216,7 @@ public class SupplierMarket {
 			}
 		}
 
-		int influenceOnNeighbours = 5;
+		int influenceOnNeighbours = Constant.SupplierMarket.influenceNeighbours;
 		
 		// Array mit den neuen Preisspreads (in Prozent)
 		int[] newSpreadsWafer = new int[boughtQualityWafer.length];
@@ -248,10 +250,10 @@ public class SupplierMarket {
 		waferPricelist = new TreeSet<TResourcePrice>();
 
 		for (int i = 0; i < waferPricelistBase.length; i++) {
-			double spread = 1 + spreadsWafer[roundCounter][i] / 10000;
+			double spread = 1 + spreadsWafer[roundCounter][i] / 10000.0;
 			for (int j = 1; j < 5; j++) {
 				if (spreadsWafer[(roundCounter + j) % 5] != null) {
-					spread = spread * (1 + spreadsWafer[(roundCounter + j) % 5][i] / 10000);
+					spread = spread * (1 + spreadsWafer[(roundCounter + j) % 5][i] / 10000.0);
 				}
 			}
 			int price = (int) Math.floor(waferPricelistBase[i] * spread);
@@ -291,10 +293,10 @@ public class SupplierMarket {
 		casePricelist = new TreeSet<TResourcePrice>();
 
 		for (int i = 0; i < casePricelistBase.length; i++) {
-			double spread = 1 + spreadsCase[roundCounter][i] / 10000;
+			double spread = 1 + spreadsCase[roundCounter][i] / 10000.0;
 			for (int j = 1; j < 5; j++) {
 				if (spreadsCase[(roundCounter + j) % 5] != null) {
-					spread = spread * (1 + spreadsCase[(roundCounter + j) % 5][i] / 10000);
+					spread = spread * (1 + spreadsCase[(roundCounter + j) % 5][i] / 10000.0);
 				}
 			}
 			int price = (int) Math.floor(casePricelistBase[i] * spread);
