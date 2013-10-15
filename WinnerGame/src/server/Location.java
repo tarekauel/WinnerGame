@@ -16,6 +16,7 @@ public class Location {
 	private int purchasePrice;
 	private int wageLevel;
 	private int wageInit;
+	private int subventions;
 	private static ArrayList<Location> listOfLocations = new ArrayList<Location>();
 
 	/**
@@ -34,7 +35,8 @@ public class Location {
 			new Location(Integer.parseInt(attributes[1]), attributes[0],
 					Integer.parseInt(attributes[2]),
 					Integer.parseInt(attributes[3]),
-					Integer.parseInt(attributes[4]));
+					Integer.parseInt(attributes[4]),
+					Integer.parseInt(attributes[5]));
 			line = buffReader.readLine();
 		}
 		buffReader.close();
@@ -53,7 +55,7 @@ public class Location {
 	 * @param w
 	 *            WageLevel / Lohn niveau
 	 */
-	public Location(int a, String c, int p, int w, int initW) {
+	public Location(int a, String c, int p, int w, int initW, int subventions) {
 		if (Location.getLocationByCountry(c)!=null){
 			throw new IllegalArgumentException("Location wurde bereits angelegt.");
 			
@@ -64,6 +66,7 @@ public class Location {
 		this.purchasePrice = p;
 		this.wageLevel = w;
 		this.wageInit = initW;
+		this.subventions= subventions;
 		
 		
 		listOfLocations.add(this);
@@ -122,6 +125,10 @@ public class Location {
 	public int getWageLevel() {
 
 		return this.wageLevel;
+	}
+	
+	public int getSubventions(){
+		return subventions;
 	}
 
 	@Override

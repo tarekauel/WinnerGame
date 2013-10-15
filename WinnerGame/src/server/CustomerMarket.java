@@ -567,7 +567,7 @@ public class CustomerMarket {
 
 			// Verkaufspreis auf das Konto buchen
 			chosenOffer.getDistribution().getCompany().getBankAccount()
-					.increaseBalance(chosenOffer.getPrice());
+					.increaseBalance(chosenOffer.getPrice()+chosenOffer.getDistribution().getCompany().getLocation().getSubventions());
 
 			return chosenOffer;
 		}
