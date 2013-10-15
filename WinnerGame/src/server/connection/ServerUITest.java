@@ -18,4 +18,5 @@ public class ServerUITest  {
 		Server.getServer();
 		new KITarek(6);
 	}
+	
 }

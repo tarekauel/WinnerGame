@@ -443,8 +443,6 @@ public class ClientGameUIModel {
 		private final SimpleStringProperty qualityPanel;
 		private final SimpleStringProperty actualQuantity;
 		private final SimpleStringProperty costsPerUnit;
-		// private final StorageElementToClient waferRef;
-		// private final StorageElementToClient caseRef;
 		private static int lastId = 0;
 
 		public ProductionOrder(ProductionOrderToClient prodOrder, int id) {
@@ -467,19 +465,9 @@ public class ClientGameUIModel {
 			this.qualityCase = new SimpleStringProperty(qualityCase);
 			this.targetQuantity = new SimpleStringProperty(ClientGameUIModel.nFormatter.format(Integer.parseInt(targetQuantity)));
 			this.qualityPanel = new SimpleStringProperty(qualityPanel);
-			//this.actualQuantity = new SimpleStringProperty(ClientGameUIModel.nFormatter.format(Integer.parseInt(actualQuantity)));
 			this.actualQuantity = new SimpleStringProperty(actualQuantity);
-
-			// Währungsformatierung
-			
-//			long costsPerUnitTmp = Long.parseLong(costsPerUnit);
-//			String costsPerUnitFormatted = nFormatterCurrency
-//					.format(costsPerUnitTmp / 100.0);
-//			if( costsPerUnit.equals("?")) {
 			this.costsPerUnit = new SimpleStringProperty(costsPerUnit);
-//			} else {
-//				this.costsPerUnit = new SimpleStringProperty(costsPerUnitFormatted);
-//			}
+
 
 			lastId = id;
 		}
