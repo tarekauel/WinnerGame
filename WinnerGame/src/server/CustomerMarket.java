@@ -661,6 +661,39 @@ public class CustomerMarket {
 
 		return price;
 	}
+	
+	
+	/**
+	 * Liefert die Preise zurueck von denen die Kunde ihre Preisakzeptanz bestimmen
+	 * @return HashMap<Qualitaet, Preis> Liste zugeordnet Qualitaet -- Preis
+	 */
+	public HashMap<Integer, Long> getPriceList() {
+		HashMap<Integer, Long> priceList = new HashMap<Integer, Long>();
+		
+		for( int i=1; i<= 100; i++) {
+			long price;
+			int requestedQuality = i;
+			// Pruefe in welchen Bereich der Preisermittlung die Qualität fällt; Um
+			// die richtige Steigung zu berechnen
+			if (requestedQuality < marketMiddleQualityLastRound) {
+				// Preis ohne statitische Varianz berechnen bis zur Mitte
+				price = marketMiddlePriceLastRound
+						+ (requestedQuality - marketMiddleQualityLastRound)
+						* (marketMiddlePriceLastRound - cMarketAvgPriceLastRound)
+						/ (marketMiddleQualityLastRound - cMarketAvgQualityLastRound);
+			} else {
+				// Preis ohne statitische Varianz berechnen ab der Mitte
+				price = marketMiddlePriceLastRound
+						+ (requestedQuality - marketMiddleQualityLastRound)
+						* (aMarketAvgPriceLastRound - marketMiddlePriceLastRound)
+						/ (aMarketAvgQualityLastRound - marketMiddleQualityLastRound);
+			}
+			priceList.put(requestedQuality, price);
+		}
+		
+		return priceList;
+	}
+
 
 	/**
 	 * Liefert den Qualitäts-Peak im A-Markt zurück
