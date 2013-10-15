@@ -398,7 +398,7 @@ public class GameDataTranslator {
 					.getName(), benefit.getRemainingRounds(), benefit
 					.getBenefit().getCostsPerRound()));
 		}
-		// TODO: UMRECHUNG pruefen
+		
 		ArrayList<PossibleBenefit> possibleBenefits = new ArrayList<PossibleBenefit>();
 		for (Benefit benefit : Benefit.getBookableBenefits()) {
 			possibleBenefits.add(new PossibleBenefit(benefit.getName(), benefit
