@@ -208,9 +208,10 @@ public class KITarek extends Thread {
 				}
 			}
 		}		
+		--toProduce;
 		if( waferQuality > 0 && caseQuality > 0 && toProduce > 0)
 			m.addProductionOrder(waferQuality, caseQuality, toProduce);
-		m.setWage((int) Math.floor( Math.random() * 600) + 700); // Lohn zwischen 7 und 13
+		m.setWage((int) Math.floor( Math.random() * 200) + 1100); // Lohn zwischen 7 und 13
 	}
 	
 	private void sendSales() {

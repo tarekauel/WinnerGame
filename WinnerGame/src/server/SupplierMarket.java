@@ -194,8 +194,7 @@ public class SupplierMarket {
 		ArrayList<SupplierOffer> acceptedSupplierOffer = new ArrayList<SupplierOffer>();
 		// for(Purchase p : listOfPruchase) {
 		for (int i = 0; i < listOfPurchase.size(); i++) {
-			Purchase p = listOfPurchase.get(i);
-			// TODO: WARUM SIND IN DER LISTE NULL DINGER?!?!?!?!
+			Purchase p = listOfPurchase.get(i);			
 			ArrayList<SupplierOffer> listSupOffers = p.getListOfAcceptedSupplierOffer();
 			for (int j = 0; j < listSupOffers.size(); j++) {
 				SupplierOffer s = listSupOffers.get(j);
