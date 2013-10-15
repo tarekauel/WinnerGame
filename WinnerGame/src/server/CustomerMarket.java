@@ -565,7 +565,8 @@ public class CustomerMarket {
 			// Verkaufte Anzahl um eins erhöhen
 			chosenOffer.setQuantitySold(chosenOffer.getQuantitySold() + 1);
 
-			// Verkaufspreis auf das Konto buchen
+			// Verkaufspreis und evtl. Subventionen abhaengig vom Standort auf das Konto buchen
+			
 			chosenOffer.getDistribution().getCompany().getBankAccount()
 					.increaseBalance(chosenOffer.getPrice()+chosenOffer.getDistribution().getCompany().getLocation().getSubventions());
 
