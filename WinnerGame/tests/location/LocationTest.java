@@ -3,13 +3,14 @@ package location;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import server.Location;
 
 public class LocationTest {
-	@Before
-	public void prepare() throws Exception {
+	@BeforeClass
+	public static void prepare() throws Exception {
 		Location.initLocations();
 	}
 
