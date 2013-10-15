@@ -97,12 +97,12 @@ public class ClientGameUIModel {
 		return nFormatter;
 	}
 
-	public int getRound() {
+	public static int getRound() {
 		return round;
 	}
 
-	public void setRound(int round) {
-		this.round = round;
+	public static void setRound(int round) {
+		ClientGameUIModel.round = round;
 	}
 
 	public int getMaxRounds() {
@@ -178,7 +178,7 @@ public class ClientGameUIModel {
 
 	public void parseAnswerFromServer() {
 		
-		this.setRound(in.round);
+		ClientGameUIModel.setRound(in.round);
 		parseStorage(in.storage);
 		parsePurchase(in.purchase);
 		parseProduction(in.production);		
@@ -232,7 +232,7 @@ public class ClientGameUIModel {
 		for( int i=0; i<5; i++) {
 			HashMap<String, Double> map = new HashMap<String, Double>();
 			salesChartData.add( map );
-			int round = this.round - (5-i);
+			int round = ClientGameUIModel.getRound() - (5-i);
 			if( round <= 0)
 				continue;
 			

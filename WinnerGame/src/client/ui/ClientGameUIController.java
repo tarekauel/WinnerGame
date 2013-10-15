@@ -192,7 +192,6 @@ public class ClientGameUIController implements Initializable{
 	@FXML private TextField reportingPurchaseFixCostsTextField;
 	@FXML private TextField reportingHRFixCostsTextField;
 	@FXML private TextField reportingMarketingFixCostsTextField;
-	@FXML private TextField reportingReportingFixCostsTextField;
 	@FXML private TextField reportingMachineryLevelTextField;
 	@FXML private TextField reportingMachineryMaxCapacityTextField;
 	@FXML private ProgressBar reportingMachineryAvgWorkloadProgressBar;
@@ -252,7 +251,7 @@ public class ClientGameUIController implements Initializable{
 		    String[] cat = new String[5];
 		    
 		    int index=0;
-		    for(int i=this.model.getRound()-5; i < this.model.getRound(); i++) {
+		    for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
 			   cat[index++] = "Runde " + i;
 		    }	
 			
@@ -303,7 +302,7 @@ public class ClientGameUIController implements Initializable{
 		
 	    ArrayList<HashMap<String, Double>> data = this.model.getMotivationChartData();	
 	    
-	    String[] catMot = new String[this.model.getRound()];
+	    String[] catMot = new String[ClientGameUIModel.getRound()];
     	for( int i=0; i<catMot.length; i++) {
     		catMot[i] = (i+1)+"";
     	}
@@ -329,7 +328,8 @@ public class ClientGameUIController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	
+    	this.model = new ClientGameUIModel();
+    	model.parseAnswerFromServer();
     	
     	initGeneral();
     	initStorage();
@@ -338,13 +338,12 @@ public class ClientGameUIController implements Initializable{
     	initSales();    	
     	initHumanResources();
     	initMarketing();
-    	initReporting();  
-    	model.parseAnswerFromServer();
+    	initReporting();     	
     	
     	//  START BUILDING SALES CHART
     	String[] cat = new String[5];
     	int index=0;
-    	for(int i=this.model.getRound()-5; i < this.model.getRound(); i++) {
+    	for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
     		cat[index++] = "Runde " + i;
     	}
     	
@@ -352,7 +351,7 @@ public class ClientGameUIController implements Initializable{
     	
     	// START BULDING MOTIVATION CHART
     	
-    	String[] catMot = new String[this.model.getRound()];
+    	String[] catMot = new String[ClientGameUIModel.getRound()];
     	for( int i=0; i<catMot.length; i++) {
     		catMot[i] = (i+1)+"";
     	}
@@ -411,9 +410,8 @@ public class ClientGameUIController implements Initializable{
     }
 
 	private void initGeneral() {
-		
-    	this.model = new ClientGameUIModel();
-    	processRoundProgressBar(model.getRound());
+	
+    	processRoundProgressBar(ClientGameUIModel.getRound());
     	
     	/**
     	 * Tabübergreifende Einstellungen
@@ -586,7 +584,7 @@ public class ClientGameUIController implements Initializable{
     				model.getPurchaseOffersTableData().clear();
     				for( SupplierOffer o : newValue.getOffer() ) {
     					model.getPurchaseOffersTableData().add(o);
-    					if( o.getRound() == model.getRound()-1 ) {
+    					if( o.getRound() == ClientGameUIModel.getRound()-1 ) {
     						purchaseOffersTableView.setEditable(true);
     					   	purchaseOffersQuantityTableColumn.setEditable(true);
     				    }
@@ -1146,7 +1144,9 @@ public class ClientGameUIController implements Initializable{
 		reportingMachineryLevelTextField.setText(model.getIn().reporting.machinery.level+"");
 		reportingMachineryMaxCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity+"");
 		reportingMachineryAvgWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.averageUsage);
+		//System.out.println(model.getIn().reporting.machinery.averageUsage);
 		reportingMachineryLastRoundWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.usageLastRound);
+		//System.out.println(model.getIn().reporting.machinery.usageLastRound);
 		
 	}
 	
@@ -1159,7 +1159,7 @@ public class ClientGameUIController implements Initializable{
 		//System.out.println(model.getIn().humanResources.averageWage);
 		
 		if (model.getIn().marketing.isBooked == true) {
-			marketResearchAverageWagesLastRoundTextField.setText(model.getIn().humanResources.averageWage+""); //TODO: Ist 0 bei Test
+			marketResearchAverageWagesLastRoundTextField.setText(model.getIn().humanResources.averageWage+"");
 			marketResearchPeakAMarketTextField.setText(model.getIn().marketing.peakAMarket+"");
 			marketResearchPeakCMarketTextField.setText(model.getIn().marketing.peakCMarket+"");
 		} else {
