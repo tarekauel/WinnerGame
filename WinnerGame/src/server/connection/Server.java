@@ -144,7 +144,7 @@ public class Server {
 			player.getServerConnection().writeMessage(new GameOverMessage(player.getName(), "Jetzt haben alle spieler verloren!"));			
 		}
 		close();
-		System.out.println("Spiel vorbei nach " + GameEngine.getGameEngine().getRound());
+		System.out.println("Spiel vorbei nach " + GameEngine.getGameEngine().getRound() + " Runden");
 		System.exit(-1);
 	}
 	public synchronized void addPlayer(Player player) {
