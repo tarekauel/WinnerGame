@@ -71,8 +71,8 @@ public class Machinery {
 		//Sicherstellen, dass die neueste Nutzung eingetrage ist:
 		getCurrentUsage();
 		//Rueckgabe des vorletzten Wertes
-		if (GameEngine.getGameEngine().getRound()>2){
-		return listOfUsages.get(listOfUsages.size()-2);
+		if (listOfUsages.size()>=2){
+			return listOfUsages.get(listOfUsages.size()-2);
 		}else{
 			return getCurrentUsage();
 		}
