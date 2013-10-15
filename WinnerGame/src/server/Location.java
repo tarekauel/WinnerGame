@@ -54,17 +54,17 @@ public class Location {
 	 *            WageLevel / Lohn niveau
 	 */
 	public Location(int a, String c, int p, int w, int initW) {
-
+		if (Location.getLocationByCountry(c)!=null){
+			throw new IllegalArgumentException("Location wurde bereits angelegt.");
+			
+		}
+		
 		this.advantage = a;
 		this.country = c;
 		this.purchasePrice = p;
 		this.wageLevel = w;
 		this.wageInit = initW;
-		for (Location l:listOfLocations){
-			if (this.equals(l)){
-				throw new IllegalArgumentException("Location bereits vorhanden");	
-			}
-		}
+		
 		
 		listOfLocations.add(this);
 
@@ -128,21 +128,6 @@ public class Location {
 	public String toString() {
 
 		return this.country;
-	}
-
-	/**
-	 * Prüft ob 2 Locations identisch sind
-	 * 
-	 * @param l
-	 * @return
-	 */
-	public boolean equals(Location l) {
-		return (l.getAdvantage() == this.getAdvantage()
-				&& l.getCountry() == this.getCountry()
-				&& l.getInitWage() == this.getInitWage()
-				&& l.getPurchasePrice() == this.getPurchasePrice() && l
-					.getWageLevel() == this.getWageLevel());
-
 	}
 
 }
