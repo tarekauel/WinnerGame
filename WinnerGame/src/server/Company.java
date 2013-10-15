@@ -197,7 +197,9 @@ public class Company {
 		return this.marketResearch;
 	}
 	/**
-	 * 
+	 * berechnet den Gesamtwert des Unternehmens indem vorhandene lagerbestaende zu Wiederbeschaffungs
+	 * werten/Verkaufswerten angesetzt werden. darueberhinaus wird der Vorteil durch den Marktanteil
+	 * mit eingerechnet sowie der Wert der Location die zu Beginn gekauft wurde
 	 * @return
 	 * @throws Exception 
 	 */
@@ -253,13 +255,25 @@ public class Company {
 				marketShareAdvantage = marketShare.getMarketShare() * marketShare.getMarketSize() * Constant.PresentValue.PRESENTVALUE_ADVANTAGE_MARKETSHARE / 100;
 			}
 		}
+		presentValue+=marketShareAdvantage;
+		
+		//Einrechenen der Maschinenausbaustufe
+		long sumOfInvestion = 0;
+		int level = this.getProduction().getMachine().getLevel();
+		for(int i = 1; i<=level; i++){
+			sumOfInvestion+= Constant.Machinery.BUILD_COSTS[i];
+		}
+		presentValue += sumOfInvestion;
+		
+		//Einrechnen des Wertes des Grundstuecks
+		long estateValue = 0;
+		
+		//Das Grundstuecks wird pro Runde um 2% abgeschrieben
+		estateValue = (long) (this.getLocation().getPurchasePrice()*Math.pow(2/100, (double) GameEngine.getGameEngine().getRound()));	
+		presentValue+=estateValue;
 		
 		
-		//Berechnen des prozentualen Wertes der PresentValue
-		int percentLocation = 100-GameEngine.getGameEngine().getRound();
-		percentLocation = (percentLocation > 0) ? percentLocation:1;
-		//Einrechnen des Grundstücks
-		presentValue += (long) (percentLocation * this.getLocation().getPurchasePrice()/100.0);
+		//Erzeugen des Typen TPresentValue
 		TPresentValue tpresentValue = new TPresentValue(presentValue, GameEngine.getGameEngine().getRound());
 		presentValues.add(tpresentValue);
 		return tpresentValue;
