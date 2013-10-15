@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public aspect AspectRandom {
-/*	String	fakeRandomName	= FakeRandom.class.getCanonicalName();
+	String	fakeRandomName	= FakeRandom.class.getCanonicalName();
 
 	pointcut manipulateRandom() : 
 		call( public static double java.lang.Math.random() );
@@ -93,5 +93,5 @@ public aspect AspectRandom {
 			}
 		}
 		return null;
-	}*/
+	}
 }
