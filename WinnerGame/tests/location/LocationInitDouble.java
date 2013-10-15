@@ -1,10 +1,5 @@
 package location;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import org.junit.Test;
 
 import server.Location;
