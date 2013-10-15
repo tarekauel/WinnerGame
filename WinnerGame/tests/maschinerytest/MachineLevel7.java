@@ -46,35 +46,35 @@ public class MachineLevel7 {
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 0 }, randomNextIntMethodName = { "Server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 0 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testLow() {
 		// Testet Randbereich unten
 		assertEquals(false, m.isJunk());
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 90 }, randomNextIntMethodName = { "Server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 90 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testUnder() {
 		// Testet unter der Entscheidungsgrenze
 		assertEquals(false, m.isJunk());
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 91 }, randomNextIntMethodName = { "Server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 91 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testExact() {
 		// Testet exakt die Entscheidungsgrenze
 		assertEquals(true, m.isJunk());
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 92 }, randomNextIntMethodName = { "Server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 92 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testAbove() {
 		// Testet oberhalb der Entscheidungsgrenze
 		assertEquals(true, m.isJunk());
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 100 }, randomNextIntMethodName = { "Server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 100 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testHigh() {
 		// Testet Randbereich oben
 		assertEquals(true, m.isJunk());
