@@ -329,6 +329,8 @@ public class ClientGameUIController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
+    	
+    	
     	initGeneral();
     	initStorage();
     	initPurchase();
@@ -336,9 +338,8 @@ public class ClientGameUIController implements Initializable{
     	initSales();    	
     	initHumanResources();
     	initMarketing();
-    	initReporting();
+    	initReporting();  
     	model.parseAnswerFromServer();
-    	
     	
     	//  START BUILDING SALES CHART
     	String[] cat = new String[5];
@@ -461,17 +462,10 @@ public class ClientGameUIController implements Initializable{
             	} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
             		model.getMessCreator().setMarketResearch(false);
             	}
-            	
-            	String wagesPerHour = "";            	
-            	wagesPerHour += hrWagesPerHourTextField.getText().replace(",", "");
-            	wagesPerHour += hrWagesPerHourTextField.getText().replace(" ", "");
-            	wagesPerHour += hrWagesPerHourTextField.getText().replace("€", "");
-            	int wagesPerHourValue = Integer.parseInt(wagesPerHour);           	
-            	model.getMessCreator().setWage(wagesPerHourValue);
+         	
+            	model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText()));
   
-            	model.setOut(model.getMessCreator().getSendMessage());
-            	
-            	
+            	model.setOut(model.getMessCreator().getSendMessage());          	
             	
             }
         }); 
@@ -674,7 +668,10 @@ public class ClientGameUIController implements Initializable{
             			)
                 	); 
         			
-            		model.getMessCreator().addRequest(newPurchaseRequestArticleNameChoiceBox.getValue().toString(), Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText()));
+            		model.getMessCreator().addRequest(
+            				newPurchaseRequestArticleNameChoiceBox.getValue().toString(), 
+            				Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText())
+            		);
             		
             	}           	
     			

@@ -9,7 +9,7 @@
 #LoginPane {
 
 	-fx-background-color: #262626;
-	-fx-font-family: segoeui;
+	-fx-font-family: "Segoe UI";
 
 }
 
@@ -17,7 +17,7 @@
 
 	-fx-text-fill: #BABABA;
 	-fx-font-size: 25px;
-	-fx-font-family: segoeuil;
+	-fx-font-family: "Segoe UI Light";
 
 }
 
@@ -55,7 +55,7 @@
 #MainPane {
 
 	-fx-background-color: #242424;
-	-fx-font-family: segoeui;
+	-fx-font-family: "Segoe UI";
 
 }
 
@@ -63,7 +63,7 @@
 
 	-fx-text-fill: #BABABA;
 	-fx-font-size: 25px;
-	-fx-font-family: segoeuil;
+	-fx-font-family: "Segoe UI Light";
 
 }
 
@@ -77,7 +77,7 @@
 
 #MainPane .titled-pane:expanded .title .text {
 
-	-fx-font-family: segoeui;
+	-fx-font-family: "Segoe UI";
 	-fx-fill: white;
 
 }
@@ -92,7 +92,7 @@
 
 #TabPane .tab:top .tab-label .text {
 
-	-fx-font-family: segoeui;
+	-fx-font-family: "Segoe UI";
 
 }
 
