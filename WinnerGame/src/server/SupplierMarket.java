@@ -326,7 +326,7 @@ public class SupplierMarket {
 	
 	public boolean removePurchase(Purchase p){
 		if (p == null) {
-			throw new NullPointerException("Pruchase-Referenz darf nicht null sein!");
+			throw new NullPointerException("Purchase-Referenz darf nicht null sein!");
 		}
 		
 		return listOfPurchase.remove(p);

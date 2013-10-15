@@ -179,7 +179,9 @@ public class CustomerMarket {
 	}
 
 	public boolean removeDistribution(Distribution d) {
-
+		if (d == null) {
+			throw new NullPointerException("Distribution-Referenz darf nicht null sein!");
+		}
 		return listOfDistributions.remove(d);
 
 	}
