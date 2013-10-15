@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,8 @@ public class ClientUIStart extends Application {
 
     	try {
             // Lade das Login-Layout aus der FXML-Datei
+    		Font.loadFont(ClientUIStart.class.getResource("segoeui.ttf").toExternalForm(), 10);
+    		Font.loadFont(ClientUIStart.class.getResource("segoeuil.ttf").toExternalForm(), 10);
             FXMLLoader loader = new FXMLLoader(ClientUIStart.class.getResource("ClientLoginUI.fxml"));
             Parent root = (Parent) loader.load();
             Scene scene = new Scene(root);
