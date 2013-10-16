@@ -57,7 +57,17 @@ public class ProduceTest {
 		assertEquals(70, prodOrd.getPanel().getQuality());
 	}
 	
-	
+	//ueberprueft ob die Qualitaet auf mehr als 100 Punkte gestiegen ist
+		@Test
+		public void produceNewQuality100DifferenceInvalid() throws Exception{
+			wafer = new Resource(90, "Wafer", 10000);
+			cases = new Resource(90, "Gehäuse", 100000);
+			p.createProductionOrder(wafer, cases, 100);
+			prodOrd = p.getListOfAllProductionOrders().get(p.getListOfAllProductionOrders().size()-1);
+			int advantage = 100000;
+			prodOrd.produce(advantage, c.getProduction().getMachine());
+			assertEquals(100, prodOrd.getPanel().getQuality());
+		}
 	@Test
 	public void produceNewQualityInvalid() throws Exception{
 		prodOrd = p.getListOfAllProductionOrders().get(0);
