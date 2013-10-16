@@ -24,10 +24,12 @@ public class ConnectionTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Location.initLocations();
+		//TODO:GameEngine muss per AspectJ null gesetzt werden!
 		String ip = "127.0.0.1";
 		int port = Constant.Server.TCP_PORT;
+		
 		server = Server.getServer();
+		
 		client1 = new Client();
 		client1.connect(ip, port);
 		client2 = new Client();
@@ -48,7 +50,7 @@ public class ConnectionTest {
 	@Test
 	public void loginTest1() {
 		
-		String name="Michael";
+		String name="Max";
 		String password="123456";
 		String chosenLocation="Deutschland";
 		LoginMessage loginMessage = new LoginMessage(name, password, chosenLocation);

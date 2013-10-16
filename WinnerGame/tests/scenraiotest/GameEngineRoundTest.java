@@ -140,7 +140,7 @@ public class GameEngineRoundTest {
 		Server.getServer().close();
 		}else{
 			System.out.println("Für den Test ist es erforderlich, dass in der Ini MaxUsers=3 steht!");
-			fail("MaxUsersin Ini !=3");
+			fail("MaxUsers in Ini !=3");
 			
 		}
 
