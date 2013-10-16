@@ -20,9 +20,9 @@ import message.LoginConfirmationMessage;
 import message.LoginMessage;
 
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 
 import server.connection.Server;
+import annotation.Reset;
 import client.connection.Client;
 import constant.Constant;
 
@@ -31,6 +31,7 @@ public class GameEngineRoundTest {
 	
 
 	@Test
+	@Reset
 	public void roundTestWithConnection() throws Exception {
 		if(Constant.Server.MAX_PLAYER==3){ //Test erwartet 3 Spieler
 		// Server starten

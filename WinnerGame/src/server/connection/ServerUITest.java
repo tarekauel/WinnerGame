@@ -19,7 +19,7 @@ public class ServerUITest  {
 		Server.getServer();
 		int round = 10;
 		new KITarek(round);
-		for( int i=0; i<4; i++)
+		for( int i=0; i<0; i++)
 			new KI(round);
 	}
 	

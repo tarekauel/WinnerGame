@@ -356,7 +356,9 @@ public class CustomerMarket {
 
 		// Durchschnittspreis berechnen, wenn Angebote gekauft wurden
 		if (boughtOffersAMarket.size() > 0) {
+			int oldValue = aMarketAvgPriceLastRound;
 			aMarketAvgPriceLastRound = sumPriceA / boughtOffersAMarket.size();
+			aMarketAvgPriceLastRound = ( aMarketAvgPriceLastRound < (int) (oldValue * 0.9) ) ? (int) (oldValue * 0.9) : aMarketAvgPriceLastRound;
 
 			// Durchschnittsqualität berechnen, wenn Angebote gekauft wurden
 			aMarketAvgQualityLastRound = sumQualityA
