@@ -1,6 +1,7 @@
 package scenraiotest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import message.LoginConfirmationMessage;
 import message.LoginMessage;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 
 import server.connection.Server;
 import client.connection.Client;
@@ -29,7 +31,8 @@ public class GameEngineRoundTest {
 	
 
 	@Test
-	public void roundTestWithConnection() {
+	public void roundTestWithConnection() throws Exception {
+		if(Constant.Server.MAX_PLAYER==3){ //Test erwartet 3 Spieler
 		// Server starten
 		Server.main(null);
 
@@ -134,7 +137,12 @@ public class GameEngineRoundTest {
 		LoginConfirmationMessage messageBack4 = (LoginConfirmationMessage) c4.readMessage();
 		assertEquals(false, messageBack4.getSuccess());
 		
-		
+		Server.getServer().close();
+		}else{
+			System.out.println("Für den Test ist es erforderlich, dass in der Ini MaxUsers=3 steht!");
+			fail("MaxUsersin Ini !=3");
+			
+		}
 
 	}
 
