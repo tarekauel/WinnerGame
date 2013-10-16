@@ -217,9 +217,10 @@ public class Company {
 		long panelValue = 0;
 		for(FinishedGood finishedGood : this.storage.getAllFinishedGoods()){
 			long price = priceList.get(finishedGood.getQuality());
-			panelValue += price;
+			int quantity = storage.getFinishedGoodByQuality(finishedGood.getQuality()).getQuantity();
+			panelValue += quantity*price;
 		}
-		presentValue+=panelValue;
+		presentValue+= panelValue;
 		
 		//Rohstoffe
 		long resourcesValue = 0;
@@ -269,7 +270,7 @@ public class Company {
 		long estateValue = 0;
 		
 		//Das Grundstuecks wird pro Runde um 2% abgeschrieben
-		estateValue = (long) (this.getLocation().getPurchasePrice()*Math.pow(2/100, (double) GameEngine.getGameEngine().getRound()));	
+		estateValue = (long) (this.getLocation().getPurchasePrice()*(1.0-Math.pow(2/100, (double) GameEngine.getGameEngine().getRound())));	
 		presentValue+=estateValue;
 		
 		

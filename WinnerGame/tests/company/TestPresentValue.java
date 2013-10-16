@@ -1,5 +1,6 @@
 package company;
 
+import java.util.HashMap;
 import java.util.TreeSet;
 
 import org.junit.After;
@@ -58,8 +59,11 @@ public class TestPresentValue {
 	@Test
 	public void makeTests() throws Exception {
 		
+		HashMap<Integer,Long> priceList = CustomerMarket.getMarket().getPriceList();	
 
-		
+		for(int i = 1;i <=100; i++){
+			System.out.println("Qualitaet: "+i+" Preis: "+ priceList.get(i));
+		}
 		
 		System.out.println("FinishedGoods: "+ c.getStorage().getFinishedGoodByQuality(80).getQuantity());
 		TPresentValue value = c.getPresentValue();
