@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 public class Constant {
 	// Pfad der zu nutzenden INI.
-	public static final String PATH = "scale.ini";
+	private static String PATH = "scale.ini";
 
 	/**
 	 * Gibt ein int Array zurück
