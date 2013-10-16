@@ -204,7 +204,9 @@ public class HumanResources extends DepartmentRoundSensitive {
 						2)
 				: 1 + Math.sqrt((diffWageToLastRound - 1)
 						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
-
+		
+		influenceWageToLastRound = ( influenceWageToLastRound > 1.45 ) ? 1.45 : influenceWageToLastRound;
+		
 		// Gehaltsunterschied zur Gruppe
 		// ( Eigener Lohn) / Durchschnitt
 		double averageWageAmount = MarketData.getMarketData().getAvereageWage()
@@ -220,6 +222,8 @@ public class HumanResources extends DepartmentRoundSensitive {
 				: 1 + Math.sqrt((diffWageToAverage - 1)
 						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
+		influenceWageToAverage = ( influenceWageToAverage > 1.45 ) ? 1.45 : influenceWageToAverage;
+		
 		// Unterschied wird ab der zweiten Runde berechnet
 		double diffBenefitToLastRound = 1.0;
 
@@ -245,6 +249,8 @@ public class HumanResources extends DepartmentRoundSensitive {
 				: 1 + Math.sqrt((diffBenefitToLastRound - 1)
 						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
 
+		influenceBenefitToLastRound = ( influenceBenefitToLastRound > 1.45 ) ? 1.45 : influenceBenefitToLastRound;
+		
 		// Unterschied zur Gruppe berechnen
 		double averageBenefit = MarketData.getMarketData().getAverageBenefit();
 		double diffBenefitToAverage = 1.0;
@@ -260,6 +266,8 @@ public class HumanResources extends DepartmentRoundSensitive {
 						2)
 				: 1 + Math.sqrt((diffBenefitToAverage - 1)
 						* (Constant.HumanResources.IMPACT_DIFF_POS / 10.0)));
+		
+		influenceBenefitToAverage = ( influenceBenefitToAverage > 1.45 ) ? 1.45 : influenceBenefitToAverage;
 
 		// Motivation gewichtet berechnen TODO: mal checken
 		double motivation = (influenceWageToLastRound

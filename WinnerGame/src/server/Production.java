@@ -109,8 +109,8 @@ public class Production extends DepartmentRoundSensitive {
 		// Den Zuschlag auf die Qualität berechnen
 		int wageMotivation= getCompany().getHumanResources().getMotivation();
 		int locationAdvantage = getCompany().getLocation().getAdvantage();
-		double advantage= wageMotivation*Constant.Production.MOTIVATION_IMPACT/10000.0+
-				locationAdvantage*Constant.Production.LOCATION_IMPACT/10000.0;
+		double advantage= wageMotivation*Constant.Production.MOTIVATION_IMPACT/1000000.0+
+				locationAdvantage*Constant.Production.LOCATION_IMPACT/1000000.0;
 
 		// Es muss sicher gestellt werden, dass nicht mehr Werkstuecke auf der
 		// Maschine lagen, als diese kann.
