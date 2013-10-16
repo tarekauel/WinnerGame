@@ -55,7 +55,7 @@ public class ClientLoginUIController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 Boolean isLoggedIn = login();
                 if(isLoggedIn){
-                	System.out.println("logged in");
+                	
                 	changeScene(actionEvent);
                 }
             }
@@ -72,12 +72,10 @@ public class ClientLoginUIController implements Initializable {
 		// Search for Server 
 		while (loginModel.getUdpClient().getTcpPortOfServer() == 0) {
 			//TODO:show Progress
-			System.out.println("Progress");
+			System.out.println("progress");
 		}
 		if (loginModel.getUdpClient().getTcpPortOfServer() == -1) {
 			//Konnte Server nicht finden!
-			//TODO: Manuell Setzen
-			System.out.println("Konnte Server nicht finden!");
 			return false;
 		}
 		
@@ -96,7 +94,7 @@ public class ClientLoginUIController implements Initializable {
 		if(message.getSuccess()){
 			//Erfolgreich angemeldet
 			// TODOAusgabe: message.getInfo();
-			System.out.println("Erfolgreich angemeldet");
+
 			return true;
 		}		
 		

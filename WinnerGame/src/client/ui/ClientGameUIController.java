@@ -351,48 +351,48 @@ public class ClientGameUIController implements Initializable {
     	initHumanResources();
     	initMarketing();
     	initReporting(); 	
-    	
+//    	
     	//  START BUILDING SALES CHART
-    	String[] cat = new String[5];
-    	int index=0;
-    	for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
-    		cat[index++] = "Runde " + i;
-    	}
-    	
-    	buildXYChart(this.model.getSalesChartData(), cat, reportingSalesBarChatXAxis, reportingSalesBarChatYAxis, reportingSalesBarChart);
-    	
-    	// START BULDING MOTIVATION CHART
-    	
-    	String[] catMot = new String[ClientGameUIModel.getRound()];
-    	for( int i=0; i<catMot.length; i++) {
-    		catMot[i] = (i+1)+"";
-    	}
-    	
-    	buildXYChart(this.model.getMotivationChartData(), catMot, hrMotivationLineChartXAxis, hrMotivationLineChartYAxis, hrMotivationLineChart);
-    	
-    	// START BUILDING WAFER PRICE CHART
-    	String[] catWafer = new String[100];
-    	for( int i=0; i<catWafer.length; i++) {
-    		catWafer[i] = (i+1) + "";
-    	}
-    	
-    	buildXYChart(this.model.getWaferPriceListChartData(), catWafer, marketingWaferPriceChartXAxis, marketingWaferPriceChartYAxis,marketingWaferPriceChart );
-    	marketingWaferPriceChart.setCreateSymbols(false);
-    	
-    	// START BUILDING Case PRICE CHART
-    	String[] catCase = new String[100];
-    	for( int i=0; i<catCase.length; i++) {
-    		catCase[i] = (i+1) + "";
-    	}
-    	
-    	buildXYChart(this.model.getCasePriceListChartData(), catCase, marketingCasePriceChartXAxis, marketingCasePriceChartYAxis,marketingCasePriceChart );
-    	marketingCasePriceChart.setCreateSymbols(false);
-    	
-    	// START BUILDING Market Shares
-    	
-    	buildPieChart(this.model.getMarketShareChartData(), marketingMarketSharePieChart);
-    	
-    	//END WORK
+//    	String[] cat = new String[5];
+//    	int index=0;
+//    	for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
+//    		cat[index++] = "Runde " + i;
+//    	}
+//    	
+//    	buildXYChart(this.model.getSalesChartData(), cat, reportingSalesBarChatXAxis, reportingSalesBarChatYAxis, reportingSalesBarChart);
+//    	
+//    	// START BULDING MOTIVATION CHART
+//    	
+//    	String[] catMot = new String[ClientGameUIModel.getRound()];
+//    	for( int i=0; i<catMot.length; i++) {
+//    		catMot[i] = (i+1)+"";
+//    	}
+//    	
+//    	buildXYChart(this.model.getMotivationChartData(), catMot, hrMotivationLineChartXAxis, hrMotivationLineChartYAxis, hrMotivationLineChart);
+//    	
+//    	// START BUILDING WAFER PRICE CHART
+//    	String[] catWafer = new String[100];
+//    	for( int i=0; i<catWafer.length; i++) {
+//    		catWafer[i] = (i+1) + "";
+//    	}
+//    	
+//    	buildXYChart(this.model.getWaferPriceListChartData(), catWafer, marketingWaferPriceChartXAxis, marketingWaferPriceChartYAxis,marketingWaferPriceChart );
+//    	marketingWaferPriceChart.setCreateSymbols(false);
+//    	
+//    	// START BUILDING Case PRICE CHART
+//    	String[] catCase = new String[100];
+//    	for( int i=0; i<catCase.length; i++) {
+//    		catCase[i] = (i+1) + "";
+//    	}
+//    	
+//    	buildXYChart(this.model.getCasePriceListChartData(), catCase, marketingCasePriceChartXAxis, marketingCasePriceChartYAxis,marketingCasePriceChart );
+//    	marketingCasePriceChart.setCreateSymbols(false);
+//    	
+//    	// START BUILDING Market Shares
+//    	
+//    	buildPieChart(this.model.getMarketShareChartData(), marketingMarketSharePieChart);
+//    	
+//    	//END WORK
     	
     }
     
@@ -901,7 +901,7 @@ public class ClientGameUIController implements Initializable {
 		/**
     	 * Misc
     	 */		
-		
+
 		machineryLevelTextField.setText(model.getIn().reporting.machinery.level+"");
 		machineryMaximumCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity+"");
 		machineryPlannedCapacityTextField.setText("0");
@@ -1019,14 +1019,18 @@ public class ClientGameUIController implements Initializable {
 		int storageCostsCases = model.getIn().storage.storageCostsCase;
 		int storageCostsPanels = model.getIn().storage.storageCostsPanel;
 		
-		for (StorageElementToClient elem : model.getIn().storage.storageElements) {
-
-			if(elem.type.equals("Wafer")){				
-				costsWafer += elem.quantity * storageCostsWafer;
-			} else if(elem.type.equals("Gehäuse")){				
-				costsCases += elem.quantity * storageCostsCases;
-			} else if(elem.type.equals("Panel")){				
-				costsPanels += elem.quantity * storageCostsPanels;
+		if(model.getIn().storage.storageElements != null){
+		
+			for (StorageElementToClient elem : model.getIn().storage.storageElements) {
+	
+				if(elem.type.equals("Wafer")){				
+					costsWafer += elem.quantity * storageCostsWafer;
+				} else if(elem.type.equals("Gehäuse")){				
+					costsCases += elem.quantity * storageCostsCases;
+				} else if(elem.type.equals("Panel")){				
+					costsPanels += elem.quantity * storageCostsPanels;
+				}
+				
 			}
 			
 		}

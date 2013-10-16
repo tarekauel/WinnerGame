@@ -3,13 +3,31 @@ package server;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import kigegner.ClientToServerMessageCreator;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.HumanResourcesFromClient.BenefitBookingFromClient;
 import message.GameDataMessageToClient;
+import message.GameDataMessageToClient.DistributionToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient;
+import message.GameDataMessageToClient.PurchaseToClient;
+import message.GameDataMessageToClient.PurchaseToClient.RequestToClient;
+import message.GameDataMessageToClient.ReportingToClient;
+import message.GameDataMessageToClient.DistributionToClient.OfferToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
+import message.GameDataMessageToClient.MarketingToClient.MarketShareToClient;
+import message.GameDataMessageToClient.MarketingToClient.RessourcePriceToClient;
+import message.GameDataMessageToClient.MarketingToClient;
+import message.GameDataMessageToClient.ProductionToClient;
+import message.GameDataMessageToClient.ProductionToClient.ProductionOrderToClient;
+import message.GameDataMessageToClient.ReportingToClient.CashValueOfRoundToClient;
+import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
+import message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
 import message.GameDataMessageToClient.StorageToClient;
+import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import server.connection.Player;
 import server.connection.Server;
+import server.connection.ServerConnection;
 import constant.Constant;
 
 public class GameEngine {
@@ -67,24 +85,53 @@ public class GameEngine {
 	}
 
 	public GameDataMessageToClient getInitialGameDataMessageToClient() {
-		StorageToClient storage = new StorageToClient(
-				Constant.Product.STORAGECOST_WAFER,
-				Constant.Product.STORAGECOST_CASE,
-				Constant.Product.STORAGECOST_PANEL, null);
-
+		
+		ArrayList<MarketShareToClient> marketShares = new ArrayList<MarketShareToClient>();		
+		ArrayList<RessourcePriceToClient> waferPrice = new ArrayList<RessourcePriceToClient>();		
+		ArrayList<RessourcePriceToClient> casePrice = new ArrayList<RessourcePriceToClient>();		
+		message.GameDataMessageToClient.MarketingToClient marketing = new MarketingToClient(false, 0, 0, marketShares, waferPrice, casePrice);
+		
+		ArrayList<ProductionOrderToClient> productionOrders = new ArrayList<ProductionOrderToClient>();			
+		message.GameDataMessageToClient.ProductionToClient production = new ProductionToClient(productionOrders);
+		
+		ArrayList<FixCostToClient> fixCosts = new ArrayList<FixCostToClient>();
+//		fixCosts.add(new FixCostToClient("Verkauf", Constant.Company);
+//		fixCosts.add(new FixCostToClient("Personal", company
+//				.getHumanResources().getFixCosts()));
+//		fixCosts.add(new FixCostToClient("Marktforschung", company
+//				.getMarketResearch().getFixCosts()));
+//		fixCosts.add(new FixCostToClient("Produktion", company.getProduction()
+//				.getFixCosts()));
+//		fixCosts.add(new FixCostToClient("Einkauf", company.getPurchase()
+//				.getFixCosts()));
+//		fixCosts.add(new FixCostToClient("Lager", company.getStorage()
+//				.getFixCosts()));
+	
+		ArrayList<CashValueOfRoundToClient> cashValues = new ArrayList<CashValueOfRoundToClient>();	
+		MachineryToClient machinery = new MachineryToClient(1, Constant.Machinery.CAPACITY[0], 0, 0);
+		message.GameDataMessageToClient.ReportingToClient reporting = new ReportingToClient(fixCosts, machinery, cashValues);
+		
+		ArrayList<RequestToClient> requests = new ArrayList<RequestToClient>();
+		message.GameDataMessageToClient.PurchaseToClient purchase = new PurchaseToClient(requests);		
+		
+		ArrayList<StorageElementToClient> storageElements = new ArrayList<StorageElementToClient>();
+		message.GameDataMessageToClient.StorageToClient storage = new StorageToClient(Constant.Product.STORAGECOST_WAFER, Constant.Product.STORAGECOST_CASE, Constant.Product.STORAGECOST_PANEL, storageElements);
+		
+		ArrayList<OfferToClient> offers = new ArrayList<OfferToClient>();		
+		message.GameDataMessageToClient.DistributionToClient distribution = new DistributionToClient(offers, Constant.Distribution.DISTRIBUTION_OFFER_COSTS_PER_PANEL);
+		
+		ArrayList<BenefitBookingToClient> benefits = new ArrayList<BenefitBookingToClient>();
 		ArrayList<PossibleBenefit> possibleBenefits = new ArrayList<PossibleBenefit>();
 		for (Benefit benefit : Benefit.getBookableBenefits()) {
-			possibleBenefits.add(new PossibleBenefit(benefit.getName(), benefit
-					.getCostsPerRound()));
+			possibleBenefits.add(new PossibleBenefit(benefit.getName(), benefit.getCostsPerRound()));
 		}
-		int averageWage = 0;
-		HumanResourcesToClient hr = new HumanResourcesToClient(null,
-				possibleBenefits, null, averageWage, 0, 40, 0);
-		GameDataMessageToClient initialMessage = new GameDataMessageToClient(
-				"", null, null, storage, null, hr, null, null,
-				Constant.BankAccount.START_CAPITAL,
-				Constant.BankAccount.MAX_CREDIT);
+		ArrayList<TMotivation> motivation = new ArrayList<TMotivation>();
+		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, 0, 0, 40, 0);
+				
+		GameDataMessageToClient initialMessage = new GameDataMessageToClient("", purchase, production, storage, distribution, humanResources, marketing, reporting, Constant.BankAccount.START_CAPITAL, Constant.BankAccount.MAX_CREDIT);
+		
 		return initialMessage;
+		
 	}
 
 	/**

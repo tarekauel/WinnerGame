@@ -196,103 +196,154 @@ public class ClientGameUIModel {
 	public void parseAnswerFromServer() {
 		
 		ClientGameUIModel.setRound(in.round);
-		parseStorage(in.storage);
-		parsePurchase(in.purchase);
-		parseProduction(in.production);		
-		parseDistribution(in.distribution);
-		parseHumanResources(in.humanResources);
-		parseMarketing(in.marketing);
+		
+		
+		if(in.storage != null){			
+			parseStorage(in.storage);
+		} else if(in.purchase != null){			
+			parsePurchase(in.purchase);
+		} else if(in.production != null){			
+			parseProduction(in.production);	
+		} else if(in.distribution != null){			
+			parseDistribution(in.distribution);
+		} else if(in.humanResources != null){			
+			parseHumanResources(in.humanResources);
+		} else if(in.marketing != null){			
+			parseMarketing(in.marketing);
+		}  
+		
 		
 	}
 
 	private void parsePurchase(PurchaseToClient in) {
 
-		for (int i = 0; i < in.requests.size(); i++) {
-
-			RequestToClient req = in.requests.get(i);
-			Request request = new Request(req, i);
-			purchaseRequestTableData.add(request);
-
-		}
+		if(in.requests != null){
+		
+			for (int i = 0; i < in.requests.size(); i++) {
+	
+				RequestToClient req = in.requests.get(i);
+				Request request = new Request(req, i);
+				purchaseRequestTableData.add(request);
+	
+			}
+			
+		}	
 
 	}
 
 	private void parseProduction(ProductionToClient in) {
 
-		for (int i = 0; i < in.orders.size(); i++) {
-
-			ProductionOrderToClient pOrder = in.orders.get(i);
-			ProductionOrder prodOrder = new ProductionOrder(pOrder, i);
-			productionOrdersTableData.add(prodOrder);
-
+		if(in.orders != null){
+		
+			for (int i = 0; i < in.orders.size(); i++) {
+	
+				ProductionOrderToClient pOrder = in.orders.get(i);
+				ProductionOrder prodOrder = new ProductionOrder(pOrder, i);
+				productionOrdersTableData.add(prodOrder);
+	
+			}
+			
 		}
 
 	}
 
 	private void parseStorage(StorageToClient in) {
+		
+		if(in.storageElements != null){
+			
+			for (int i = 0; i < in.storageElements.size(); i++) {
 
-		for (int i = 0; i < in.storageElements.size(); i++) {
+		    	System.out.println(in.storageElements.size());
+				StorageElementToClient stoElement = in.storageElements.get(i);
+				StoragePosition stoPos = new StoragePosition(stoElement, i);
+				storagePositionsTableData.add(stoPos);
 
-	    	System.out.println(in.storageElements.size());
-			StorageElementToClient stoElement = in.storageElements.get(i);
-			StoragePosition stoPos = new StoragePosition(stoElement, i);
-			storagePositionsTableData.add(stoPos);
-
+			}
+			
 		}
-
+		
 	}
 
 	private void parseDistribution(DistributionToClient in) {
-		for (OfferToClient offer : in.offers) {
-			offerTableData.add(new Offer(offer));			
-		}
-				
-		for( int i=0; i<5; i++) {
-			HashMap<String, Double> map = new HashMap<String, Double>();
-			salesChartData.add( map );
-			int round = ClientGameUIModel.getRound() - (5-i);
-			if( round <= 0)
-				continue;
+		
+		if(in.offers != null){
+		
+			for (OfferToClient offer : in.offers) {
+				offerTableData.add(new Offer(offer));			
+			}
 			
-			for(OfferToClient offer : in.offers) {
-				if( offer.round == round) {
-					Double oldvalue = (map.get(offer.quality) == null ) ? 0L : map.get(offer.quality);
-					map.put(offer.quality+"", oldvalue+(offer.price*offer.quantitySold/100.0));					
-				}
-			}					
+			for( int i=0; i<5; i++) {
+				HashMap<String, Double> map = new HashMap<String, Double>();
+				salesChartData.add( map );
+				int round = ClientGameUIModel.getRound() - (5-i);
+				if( round <= 0)
+					continue;
+				
+				for(OfferToClient offer : in.offers) {
+					if( offer.round == round) {
+						Double oldvalue = (map.get(offer.quality) == null ) ? 0L : map.get(offer.quality);
+						map.put(offer.quality+"", oldvalue+(offer.price*offer.quantitySold/100.0));					
+					}
+				}					
+			}
+			
 		}
+			
+			
 	}
 	
 	private void parseHumanResources(HumanResourcesToClient in) {
-		for(BenefitBookingToClient b : in.benefits) {
-			benefitBookingTableData.add(new BenefitBooking(b));
+		
+		if(in.benefits != null){
+		
+			for(BenefitBookingToClient b : in.benefits) {
+				benefitBookingTableData.add(new BenefitBooking(b));
+			}
+			
+		}		
+		
+		if(in.possibleBenefits != null){
+			
+			for(PossibleBenefit b: in.possibleBenefits) {
+				benfitBoxData.add(new Benefit(b));
+			}
+			
 		}
-		for(PossibleBenefit b: in.possibleBenefits) {
-			benfitBoxData.add(new Benefit(b));
-		}
-		for(TMotivation m : in.historyMotivation) {		
-			HashMap<String, Double> map = new HashMap<String, Double>();		
-			motivationChartData.add(map);
-			map.put("Motivation", m.getMotivation() / 10000.0);	
-		}
+		
+		if(in.historyMotivation != null){
+			
+			for(TMotivation m : in.historyMotivation) {		
+				HashMap<String, Double> map = new HashMap<String, Double>();		
+				motivationChartData.add(map);
+				map.put("Motivation", m.getMotivation() / 10000.0);	
+			}
+			
+		}	
+		
 	}
 	
 	private void parseMarketing(MarketingToClient in) {
-		for( RessourcePriceToClient p : in.waferPrice ) {
-			HashMap<String, Double> map = new HashMap<String, Double>();		
-			waferPriceListChartData.add(map);
-			map.put("Wafer", p.price / 100.0);	
+		
+		if(in.waferPrice != null){
+			for( RessourcePriceToClient p : in.waferPrice ) {
+				HashMap<String, Double> map = new HashMap<String, Double>();		
+				waferPriceListChartData.add(map);
+				map.put("Wafer", p.price / 100.0);	
+			}
+		}
+		if(in.casePrice != null){
+			for( RessourcePriceToClient p : in.casePrice ) {
+				HashMap<String, Double> map = new HashMap<String, Double>();		
+				casePriceListChartData.add(map);
+				map.put("Case", p.price / 100.0);	
+			}
+		}
+		if(in.marketShares != null){
+			for( MarketShareToClient m :  in.marketShares ) {
+				marketShareChartData.put( m.name, m.share / 10000.0);
+			}
 		}
 		
-		for( RessourcePriceToClient p : in.casePrice ) {
-			HashMap<String, Double> map = new HashMap<String, Double>();		
-			casePriceListChartData.add(map);
-			map.put("Case", p.price / 100.0);	
-		}
-		
-		for( MarketShareToClient m :  in.marketShares ) {
-			marketShareChartData.put( m.name, m.share / 10000.0);
-		}
 	}
 
 	/**
