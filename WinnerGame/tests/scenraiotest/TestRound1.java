@@ -286,7 +286,7 @@ public class TestRound1 {
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
-	@Test(expected = java.lang.IllegalArgumentException.class)
+	@Test(expected = java.lang.NullPointerException.class)
 	public void benefitBookingNullName() throws Exception {
 		// set wage
 		msg.addBenefit(null, 15);;
@@ -295,6 +295,7 @@ public class TestRound1 {
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
+	
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingEmptyName() throws Exception {
 		// set wage

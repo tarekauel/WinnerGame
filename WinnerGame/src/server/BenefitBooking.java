@@ -46,6 +46,9 @@ public class BenefitBooking {
 	 * @return true, falls das Benefit gefunden wurde
 	 */
 	private boolean checkBenefit(Benefit b) {
+		if(b == null){
+			throw new NullPointerException("Benefit darf nicht null sein!");
+		}
 		return Benefit.getBenefitByName(b.getName()) != null;
 	}
 
