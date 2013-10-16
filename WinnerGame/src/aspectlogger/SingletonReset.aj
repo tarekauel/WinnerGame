@@ -2,12 +2,12 @@ package aspectlogger;
 
 import java.util.ArrayList;
 
-import annotation.Reset;
+import org.junit.BeforeClass;
 
 public privileged aspect SingletonReset {
 	
 	pointcut resetSingleton() :
-		execution( @Reset * *.*(..));
+		execution( @BeforeClass * *.*(..));
 	
 	before() : resetSingleton() {
 		server.SupplierMarket.market = null;
