@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import message.GameDataMessageToClient;
 import message.LoginConfirmationMessage;
 import message.LoginMessage;
 import client.connection.Client;
@@ -34,7 +35,7 @@ import client.connection.UDPClient;
  */
 public class ClientLoginUIController implements Initializable {
 	
-	private ClientLoginUIModel model;
+	private ClientLoginUIModel loginModel;
 	
 	@FXML private TextField loginNameField;
 	@FXML private Button loginButton;
@@ -47,14 +48,15 @@ public class ClientLoginUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	model = new ClientLoginUIModel();
+    	loginModel = new ClientLoginUIModel();    	
 
     	loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Boolean isLoggedIn =login();
+                Boolean isLoggedIn = login();
                 if(isLoggedIn){
-            	changeScene(actionEvent);
+                	System.out.println("logged in");
+                	changeScene(actionEvent);
                 }
             }
 
@@ -63,45 +65,54 @@ public class ClientLoginUIController implements Initializable {
 
     }
     private Boolean login() {
-		Client client = new Client();
+		//Client client = new Client();
 		
-		UDPClient udpClient = new UDPClient();
-		udpClient.start();
+		//UDPClient udpClient = new UDPClient();
+    	loginModel.getUdpClient().start();
 		// Search for Server 
-		while (udpClient.getTcpPortOfServer() == 0) {
+		while (loginModel.getUdpClient().getTcpPortOfServer() == 0) {
 			//TODO:show Progress
-			
+			System.out.println("Progress");
 		}
-		if (udpClient.getTcpPortOfServer() == -1) {
+		if (loginModel.getUdpClient().getTcpPortOfServer() == -1) {
 			//Konnte Server nicht finden!
 			//TODO: Manuell Setzen
+			System.out.println("Konnte Server nicht finden!");
 			return false;
 		}
 		
 		//Connect to Server
-		client.connect(udpClient.getIPOfServer(), udpClient.getTcpPortOfServer());
+		loginModel.getClient().connect(loginModel.getUdpClient().getIPOfServer(), loginModel.getUdpClient().getTcpPortOfServer());
 		//Send Login Message
 		String name = loginNameField.getText();
 		String password = passwordField.getText();
 		//TODO: Get Location
 		String chosenLocation = "USA";
-		client.writeMessage(new LoginMessage(name, password, chosenLocation));
-		LoginConfirmationMessage message = (LoginConfirmationMessage) client.readMessage();
+		loginModel.getClient().writeMessage(new LoginMessage(name, password, chosenLocation));
+		LoginConfirmationMessage message = (LoginConfirmationMessage) loginModel.getClient().readMessage();
+		
+		ClientUIStart.setLoginModel(loginModel);
+		
 		if(message.getSuccess()){
 			//Erfolgreich angemeldet
 			// TODOAusgabe: message.getInfo();
+			System.out.println("Erfolgreich angemeldet");
 			return true;
-		}
+		}		
 		
 		return false;
+		
 	}
+    
     private void changeScene(ActionEvent actionEvent){
     	
     	Node source = (Node) actionEvent.getSource();
     	Stage primaryStage = (Stage) source.getScene().getWindow();
     	primaryStage.close();
     	try {
-			Parent root = FXMLLoader.load(getClass().getResource("ClientGameUI.fxml"));
+
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientGameUI.fxml")); 
+			Parent root = (Parent)fxmlLoader.load();  
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);

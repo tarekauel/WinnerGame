@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import server.connection.Server;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -58,6 +59,7 @@ import javafx.util.StringConverter;
 import kigegner.KITarek;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
+import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.BenefitBookingToClient;
 import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
@@ -74,9 +76,11 @@ import client.ui.ClientGameUIModel.SupplierOffer;
  * Dies ist die Controller-Klasse der Game-Stage. Hier wird alles implementiert, was das Game-UI manipulieren soll.
  * @author Lars Trey
  */
-public class ClientGameUIController implements Initializable{
+public class ClientGameUIController implements Initializable {
 	
 	private ClientGameUIModel model;
+	private static ClientGameUIController clientGameUIController;
+	private Stage dialogStage;
 
 	/**
 	 * Hier werden alle Felder des UIs mit Variablen verknüpft.
@@ -201,10 +205,15 @@ public class ClientGameUIController implements Initializable{
 	@FXML private CategoryAxis reportingSalesBarChatXAxis;
 	@FXML private NumberAxis reportingSalesBarChatYAxis; 
 	@FXML private LineChart reportingCompanyValueLineChart;
+
+	public static ClientGameUIController getClientGameUIController() {
+		return clientGameUIController;
+	}
 	
-	// Variablen fuer'n Zoom
-	private Stage dialogStage;
-	
+	public void setModel(ClientGameUIModel model) {
+		this.model = model;
+	}
+
 	private void loadLineChart(String title, MouseEvent event, ArrayList<HashMap<String, Double>> data, String[] cat, boolean symbols) {
 		try {
 		    // Load the fxml file and create a new stage for the popup
@@ -329,19 +338,19 @@ public class ClientGameUIController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
+    	//ClientGameUIController.setClientGameUIController(this);
+    	GameDataMessageToClient tmpin = (GameDataMessageToClient) ClientUIStart.getLoginModel().getClient().readMessage();
     	this.model = new ClientGameUIModel();
-    	model.parseAnswerFromServer();
-    	
-    	initGeneral();
+    	this.model.setIn(tmpin);
+		this.model.parseAnswerFromServer();
+		initGeneral();
     	initStorage();
     	initPurchase();
     	initProduction();    	
     	initSales();    	
     	initHumanResources();
     	initMarketing();
-    	initReporting();     
-    	
-    	
+    	initReporting(); 	
     	
     	//  START BUILDING SALES CHART
     	String[] cat = new String[5];
@@ -413,7 +422,7 @@ public class ClientGameUIController implements Initializable{
     }
     
     private void updateEventListView(String text){
-    	events.add("Runde "+model.getRound()+":   "+text);
+    	events.add("Runde "+ClientGameUIModel.getRound()+":   "+text);
     }
 
 	private void initGeneral() {
@@ -457,6 +466,8 @@ public class ClientGameUIController implements Initializable{
     	endRoundButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {    
+            	
+            	model.setupMessageCreator();
             	
             	for (Request req : purchaseRequestsTableView.getItems()) {
             		
@@ -1303,4 +1314,5 @@ public class ClientGameUIController implements Initializable{
 		}
 	}
 
+	
 }

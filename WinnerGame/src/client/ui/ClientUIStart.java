@@ -17,8 +17,26 @@ import javafx.stage.Stage;
 public class ClientUIStart extends Application {
 	
 	private Stage primaryStage;
+	private static ClientLoginUIModel loginModel;	
+	private static ClientGameUIModel gameModel;	
 
-    @Override
+	public static ClientLoginUIModel getLoginModel() {
+		return loginModel;
+	}
+
+	public static void setLoginModel(ClientLoginUIModel loginModel) {
+		ClientUIStart.loginModel = loginModel;
+	}
+
+	public static ClientGameUIModel getGameModel() {
+		return gameModel;
+	}
+
+	public static void setGameModel(ClientGameUIModel gameModel) {
+		ClientUIStart.gameModel = gameModel;
+	}
+
+	@Override
     public void start(Stage primaryStage) throws Exception {
     	
     	this.primaryStage = primaryStage;

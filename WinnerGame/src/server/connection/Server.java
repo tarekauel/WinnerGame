@@ -34,13 +34,13 @@ public class Server {
 					Constant.Server.UDP_PORT);
 			udpServer.start();
 			getServer();
-			int round = 10;
-			for (int i = 0; i < Constant.Server.PLAYER_KI_TAREK; i++) {
-				new kigegner.KITarek(round);
-			}
-			for (int i = 0; i < Constant.Server.PLAYER_KI_LARS; i++) {
-				new kigegner.KI(round);
-			}
+//			int round = 10;
+//			for (int i = 0; i < Constant.Server.PLAYER_KI_TAREK; i++) {
+//				new kigegner.KITarek(round);
+//			}
+//			for (int i = 0; i < Constant.Server.PLAYER_KI_LARS; i++) {
+//				new kigegner.KI(round);
+//			}
 
 		} catch (Exception e) {
 

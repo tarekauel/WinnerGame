@@ -36,10 +36,11 @@ public class ClientGameUIModel {
 	 * General
 	 */
 
-	private GameDataMessageToClient in = KITarek.reply;
+	//private GameDataMessageToClient in = KITarek.reply;
+	private GameDataMessageToClient in;
 	private GameDataMessageFromClient out;
-
-	private ClientToServerMessageCreator messCreator = new ClientToServerMessageCreator(in.getPlayerName());
+	private ClientToServerMessageCreator messCreator;
+	private ClientGameUIModel clientGameUiModel;
 
 	private static int round;
 	private int maxRounds = 20;
@@ -72,9 +73,21 @@ public class ClientGameUIModel {
 	private final ArrayList<HashMap<String, Double>> casePriceListChartData = new ArrayList<HashMap<String, Double>>();
 	
 	private final HashMap<String, Double> marketShareChartData = new HashMap<String, Double>();
+	
+	public ClientGameUIModel() {
+		this.clientGameUiModel = this;
+	}
+
+	public ClientGameUIModel getClientGameUiModel() {
+		return clientGameUiModel;
+	}
 
 	public GameDataMessageToClient getIn() {
 		return in;
+	}
+	
+	public void setIn(GameDataMessageToClient in) {
+		this.in = in;
 	}
 
 	public ClientToServerMessageCreator getMessCreator() {
@@ -175,6 +188,10 @@ public class ClientGameUIModel {
 	 * @param in
 	 *            Message, die geparsed werden soll
 	 */
+	
+	public void setupMessageCreator() {
+		messCreator = new ClientToServerMessageCreator(in.getPlayerName());
+	}
 
 	public void parseAnswerFromServer() {
 		
@@ -216,6 +233,7 @@ public class ClientGameUIModel {
 
 		for (int i = 0; i < in.storageElements.size(); i++) {
 
+	    	System.out.println(in.storageElements.size());
 			StorageElementToClient stoElement = in.storageElements.get(i);
 			StoragePosition stoPos = new StoragePosition(stoElement, i);
 			storagePositionsTableData.add(stoPos);
@@ -250,7 +268,6 @@ public class ClientGameUIModel {
 			benefitBookingTableData.add(new BenefitBooking(b));
 		}
 		for(PossibleBenefit b: in.possibleBenefits) {
-			System.out.println("jo");
 			benfitBoxData.add(new Benefit(b));
 		}
 		for(TMotivation m : in.historyMotivation) {		
@@ -701,7 +718,6 @@ public class ClientGameUIModel {
 		public Benefit(String benefit, String costs) {	
 	
 			this.benefit = new SimpleStringProperty(benefit);
-			//System.out.println("ben");
 			// Währungsformatierung
 			long costsTmp = Long.parseLong(costs);
 			String costsFormatted = nFormatterCurrency.format(costsTmp / 100.0);

@@ -52,7 +52,7 @@ public class ServerConnection extends Thread {
 				if(success){
 					System.out.println("Login erfolgreich-> Client Nr." + clientId);
 					//Sende Initialnachricht
-					//writeMessage(GameEngine.getGameEngine().getInitialGameDataMessageToClient());
+					writeMessage(GameEngine.getGameEngine().getInitialGameDataMessageToClient());
 				}else{
 					System.out.println("Login fehlgeschlagen-> Client Nr." + clientId);
 				}
