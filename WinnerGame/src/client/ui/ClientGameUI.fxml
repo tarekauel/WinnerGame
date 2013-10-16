@@ -109,7 +109,7 @@
                             <ChoiceBox fx:id="newProductionOrderWaferChoiceBox" layoutX="76.0" layoutY="12.0" prefWidth="224.0" />
                             <Slider fx:id="newProductionOrderOutputQuantitySlider" layoutX="397.0" layoutY="16.0" prefWidth="247.0" />
                             <ChoiceBox fx:id="newProductionOrderCaseChoiceBox" layoutX="76.0" layoutY="46.0" prefWidth="224.0" />
-                            <TextField fx:id="newProductionOrderCostsTextField" disable="true" editable="false" layoutX="438.0" layoutY="44.0" opacity="0.75" prefHeight="25.0" prefWidth="82.0" />
+                            <TextField fx:id="newProductionOrderCostsTextField" disable="true" editable="false" layoutX="438.0" layoutY="44.0" opacity="0.75" prefHeight="25.0" prefWidth="108.0" />
                             <TextField id="newProductionOrderOutputQuantityTextBox" fx:id="newProductionOrderOutputQuantityTextField" layoutX="658.0" layoutY="10.0" prefHeight="25.0" prefWidth="51.0" />
                             <Label layoutX="342.0" layoutY="48.0" text="Materialkosten:" />
                             <Label layoutX="342.0" layoutY="14.0" text="Menge:" />
@@ -166,11 +166,11 @@
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="54.0" prefWidth="723.0">
                           <children>
                             <Label layoutX="14.0" layoutY="13.0" text="Wafer:" />
-                            <Label layoutX="539.0" layoutY="14.0" text="Gehäuse:" />
-                            <TextField fx:id="storageCostsWaferTextField" disable="true" editable="false" layoutX="63.0" layoutY="10.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
-                            <TextField fx:id="storageCostsCasesTextField" disable="true" editable="false" layoutX="602.0" layoutY="10.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
-                            <Label layoutX="274.0" layoutY="13.0" prefWidth="34.9998779296875" text="Panel:" />
-                            <TextField fx:id="storageCostsPanelsTextField" disable="true" editable="false" layoutX="324.0" layoutY="10.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
+                            <Label layoutX="521.0" layoutY="14.0" text="Gehäuse:" />
+                            <TextField fx:id="storageCostsWaferTextField" disable="true" editable="false" layoutX="63.0" layoutY="10.0" opacity="0.75" prefHeight="25.0" prefWidth="125.0" />
+                            <TextField fx:id="storageCostsCasesTextField" disable="true" editable="false" layoutX="584.0" layoutY="10.0" opacity="0.75" prefHeight="25.0" prefWidth="125.0" />
+                            <Label layoutX="257.0" layoutY="14.0" prefWidth="34.9998779296875" text="Panel:" />
+                            <TextField fx:id="storageCostsPanelsTextField" disable="true" editable="false" layoutX="307.0" layoutY="11.0" opacity="0.75" prefHeight="25.0" prefWidth="125.0" />
                           </children>
                         </AnchorPane>
                       </content>
@@ -202,9 +202,9 @@
                   <children>
                     <Button fx:id="newSaleOfferButton" layoutX="24.0" layoutY="15.0" mnemonicParsing="false" text="Neues Angebot erstellen" />
                     <Button fx:id="newSaleOfferSaveButton" disable="true" layoutX="197.0" layoutY="15.0" mnemonicParsing="false" text="Angebot speichern" />
-                    <TitledPane id="GeneralInformationBox" fx:id="newSaleOfferTitledPane" animated="false" collapsible="false" disable="true" layoutX="24.0" layoutY="51.0" maxHeight="140.0" minHeight="100.0" minWidth="672.0" prefHeight="140.0" prefWidth="727.0" text="Verkaufsangebot">
+                    <TitledPane id="GeneralInformationBox" fx:id="newSaleOfferTitledPane" animated="false" collapsible="false" disable="false" layoutX="24.0" layoutY="51.0" maxHeight="140.0" minHeight="100.0" minWidth="672.0" prefHeight="140.0" prefWidth="727.0" text="Verkaufsangebot">
                       <content>
-                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="115.0" prefWidth="723.0">
+                        <AnchorPane id="Content" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="115.0" prefWidth="723.0">
                           <children>
                             <Label layoutX="14.0" layoutY="14.0" text="Artikel:" />
                             <Label layoutX="14.0" layoutY="49.0" text="Menge:" />
@@ -219,12 +219,12 @@
                             </ChoiceBox>
                             <Slider fx:id="newSaleOfferArticleQuantitySlider" layoutX="76.0" layoutY="51.0" prefWidth="329.0" />
                             <TextField fx:id="newSaleOfferArticleQuantityTextField" layoutX="417.0" layoutY="45.0" prefHeight="25.0" prefWidth="51.0" />
-                            <Label layoutX="494.0" layoutY="14.0" text="Selbstkosten/ME:" />
-                            <TextField fx:id="newSaleOfferCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="609.0" layoutY="9.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
-                            <Label layoutX="494.0" layoutY="49.0" text="Vertriebskosten:" />
-                            <TextField fx:id="newSaleOfferDistributionCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="609.0" layoutY="43.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
-                            <Label layoutX="494.0" layoutY="82.0" text="Max. Gewinn:" />
-                            <TextField fx:id="newSaleOfferMaximumProfitTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="609.0" layoutY="77.0" opacity="0.75" prefHeight="25.0" prefWidth="100.0" />
+                            <Label layoutX="484.0" layoutY="14.0" text="Selbstkosten/ME:" />
+                            <TextField fx:id="newSaleOfferCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="589.0" layoutY="9.0" opacity="0.75" prefHeight="25.0" prefWidth="120.0" />
+                            <Label layoutX="484.0" layoutY="49.0" text="Vertriebskosten:" />
+                            <TextField fx:id="newSaleOfferDistributionCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="589.0" layoutY="43.0" opacity="0.75" prefHeight="25.0" prefWidth="120.0" />
+                            <Label layoutX="484.0" layoutY="82.0" text="Max. Gewinn:" />
+                            <TextField fx:id="newSaleOfferMaximumProfitTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="589.0" layoutY="77.0" opacity="0.75" prefHeight="25.0" prefWidth="120.0" />
                             <Label layoutX="14.0" layoutY="83.0" text="VP/ME:" />
                             <TextField fx:id="newSaleOfferArticlePriceTextField" disable="false" layoutX="76.0" layoutY="79.0" prefHeight="25.0" prefWidth="100.0" />
                           </children>
@@ -263,14 +263,14 @@
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="132.0" prefWidth="212.0">
                           <children>
-                            <Label layoutX="14.0" layoutY="13.0" text="Stundenlohn:" />
-                            <TextField fx:id="hrWagesPerHourTextField" alignment="CENTER_RIGHT" disable="false" layoutX="136.0" layoutY="9.0" opacity="1.0" prefHeight="25.0" prefWidth="60.0" />
-                            <Label layoutX="14.0" layoutY="43.0" text="Durchschnittslohn:" />
-                            <TextField fx:id="hrAverageWagesTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="136.0" layoutY="38.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
-                            <Label layoutX="14.0" layoutY="72.0" text="Mitarbeiter:" />
-                            <TextField fx:id="hrCountEmployeesTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="136.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
-                            <Label layoutX="14.0" layoutY="102.0" text="Lohnkosten:" />
-                            <TextField fx:id="hrWageCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="136.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
+                            <Label layoutX="11.0" layoutY="13.0" text="Stundenlohn:" />
+                            <TextField fx:id="hrWagesPerHourTextField" alignment="CENTER_RIGHT" disable="false" layoutX="125.0" layoutY="9.0" opacity="1.0" prefHeight="25.0" prefWidth="80.0" />
+                            <Label layoutX="11.0" layoutY="43.0" text="Durchschnittslohn:" />
+                            <TextField fx:id="hrAverageWagesTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="125.0" layoutY="38.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <Label layoutX="11.0" layoutY="72.0" text="Mitarbeiter:" />
+                            <TextField fx:id="hrCountEmployeesTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="125.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <Label layoutX="11.0" layoutY="102.0" text="Lohnkosten:" />
+                            <TextField fx:id="hrWageCostsTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="125.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                           </children>
                         </AnchorPane>
                       </content>
@@ -296,11 +296,11 @@
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="492.0">
                           <children>
                             <Label layoutX="14.0" layoutY="43.0" text="Dauer (Runden):" />
-                            <TextField id="bookBenefitDuration" fx:id="bookBenefitDurationTextField" layoutX="143.0" layoutY="38.0" prefHeight="25.0" prefWidth="60.0" />
+                            <TextField id="bookBenefitDuration" fx:id="bookBenefitDurationTextField" disable="false" layoutX="123.0" layoutY="38.0" prefHeight="25.0" prefWidth="80.0" />
                             <Label layoutX="14.0" layoutY="72.0" text="Kosten/Runde:" />
-                            <TextField fx:id="bookBenefitCostsPerRoundTextField" disable="true" editable="false" layoutX="143.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
+                            <TextField fx:id="bookBenefitCostsPerRoundTextField" disable="false" editable="false" layoutX="123.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                             <Label layoutX="14.0" layoutY="102.0" text="Gesamtkosten:" />
-                            <TextField id="bookBenefitDurationTextField" fx:id="benefitsTotalCostsTextField" disable="true" editable="false" layoutX="143.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
+                            <TextField id="bookBenefitDurationTextField" fx:id="benefitsTotalCostsTextField" disable="false" editable="false" layoutX="123.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                             <ChoiceBox fx:id="benefitsChoiceBox" layoutX="14.0" layoutY="10.0" prefWidth="116.0">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -335,12 +335,12 @@
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="304.0">
                           <children>
-                            <Label layoutX="14.0" layoutY="13.0" text="Durchschnittslohn (letzte Runde):" />
-                            <TextField fx:id="marketResearchAverageWagesLastRoundTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="230.0" layoutY="9.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
-                            <Label id="marketResearchPeakAMarketTextField" layoutX="14.0" layoutY="43.0" text="Ws. meistgefragte Qualität A-Markt:" />
-                            <Label layoutX="14.0" layoutY="72.0" text="Ws. meistgefragte Qualität C-Markt:" />
-                            <TextField fx:id="marketResearchPeakAMarketTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="230.0" layoutY="39.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
-                            <TextField fx:id="marketResearchPeakCMarketTextField" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="230.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="60.0" />
+                            <Label layoutX="11.0" layoutY="13.0" text="Durchschnittslohn (letzte Runde):" />
+                            <TextField fx:id="marketResearchAverageWagesLastRoundTextField" alignment="CENTER_RIGHT" disable="false" editable="false" layoutX="217.0" layoutY="9.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <Label id="marketResearchPeakAMarketTextField" layoutX="11.0" layoutY="43.0" text="Ws. meistgefragte Qualität A-Markt:" />
+                            <Label layoutX="11.0" layoutY="72.0" text="Ws. meistgefragte Qualität C-Markt:" />
+                            <TextField fx:id="marketResearchPeakAMarketTextField" alignment="CENTER_RIGHT" disable="false" editable="false" layoutX="217.0" layoutY="39.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <TextField fx:id="marketResearchPeakCMarketTextField" alignment="CENTER_RIGHT" disable="false" editable="false" layoutX="217.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                           </children>
                         </AnchorPane>
                       </content>

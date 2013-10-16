@@ -82,7 +82,7 @@ public class ClientGameUIController implements Initializable{
 	 * Hier werden alle Felder des UIs mit Variablen verknüpft.
 	 */
 	@FXML private ListView<String> eventListView;
-	private ObservableList<String> cashHistory = FXCollections.observableArrayList();
+	private ObservableList<String> events = FXCollections.observableArrayList();
 	@FXML private Button endRoundButton;
 	@FXML private Label roundLabel;
 	@FXML private ProgressBar roundProgressBar;
@@ -411,10 +411,16 @@ public class ClientGameUIController implements Initializable{
     	
     	return quantityValue;
     }
+    
+    private void updateEventListView(String text){
+    	events.add("Runde "+model.getRound()+":   "+text);
+    }
 
 	private void initGeneral() {
 	
     	processRoundProgressBar(ClientGameUIModel.getRound());
+    	updateEventListView(model.getnFormatterCurrency().format(model.getIn().cash)+" Barvermögen");
+    	eventListView.setItems(events);
     	
     	/**
     	 * Tabübergreifende Einstellungen
@@ -914,8 +920,19 @@ public class ClientGameUIController implements Initializable{
 				}				
 				
 			}
-		};    	
-    	
+		};    
+		
+		final ChangeListener<Number> newProductionOrderOutputQuantitySliderListener = new ChangeListener<Number>() {					
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {   				
+				
+				int costsWafer = (deformatCurrency(newProductionOrderWaferChoiceBox.getValue().getCosts()) * Integer.parseInt(newProductionOrderOutputQuantityTextField.getText()) * 54) / 100;
+				int costsCases = (deformatCurrency(newProductionOrderCaseChoiceBox.getValue().getCosts()) * Integer.parseInt(newProductionOrderOutputQuantityTextField.getText())) / 100;
+				int costsProductionOrder = costsWafer + costsCases;
+				newProductionOrderCostsTextField.setText(model.getnFormatterCurrency().format(costsProductionOrder));
+				
+			}
+		};
+		
     	newProductionOrderButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {  
@@ -923,7 +940,8 @@ public class ClientGameUIController implements Initializable{
             	newProductionOrderTitledPane.setDisable(false);  
             	newProductionOrderSaveButton.setDisable(false);
             	newProductionOrderWaferChoiceBox.valueProperty().removeListener(newProductionOrderWaferChoiceBoxListener);		
-        		newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);    			
+        		newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);   
+        		newProductionOrderOutputQuantitySlider.valueProperty().removeListener(newProductionOrderOutputQuantitySliderListener);
     			newProductionOrderWaferChoiceBox.getSelectionModel().clearSelection();
     			newProductionOrderWaferChoiceBox.getItems().clear();
             	newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
@@ -934,6 +952,7 @@ public class ClientGameUIController implements Initializable{
             	newProductionOrderCaseChoiceBox.getItems().setAll(casesInStorage);             	
             	newProductionOrderWaferChoiceBox.valueProperty().addListener(newProductionOrderWaferChoiceBoxListener);		
         		newProductionOrderCaseChoiceBox.valueProperty().addListener(newProductionOrderCaseChoiceBoxListener);
+        		newProductionOrderOutputQuantitySlider.valueProperty().addListener(newProductionOrderOutputQuantitySliderListener);
             }
         }); 
     	
@@ -964,7 +983,8 @@ public class ClientGameUIController implements Initializable{
 				}
     			
     			newProductionOrderWaferChoiceBox.valueProperty().removeListener(newProductionOrderWaferChoiceBoxListener);		
-        		newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);    			
+        		newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);    
+        		newProductionOrderOutputQuantitySlider.valueProperty().removeListener(newProductionOrderOutputQuantitySliderListener);
     			newProductionOrderWaferChoiceBox.getSelectionModel().clearSelection();
     			newProductionOrderWaferChoiceBox.getItems().clear();
             	newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
@@ -976,18 +996,6 @@ public class ClientGameUIController implements Initializable{
             }
         }); 
     	
-    	
-		
-		newProductionOrderOutputQuantitySlider.valueProperty().addListener(
-			new ChangeListener<Number>() {					
-				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {   				
-    				
-    				
-    				
-				}
-			}				
-		);
-		
 	}
 	
 	private void calcStorageCosts(){
