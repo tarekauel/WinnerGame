@@ -22,6 +22,9 @@ public privileged aspect Reset {
 		server.Location.listOfLocations = new ArrayList<server.Location>();
 		
 		/** Reset Server **/
+		if( server.connection.Server.server != null) {
+			server.connection.Server.server.close();
+		}
 		server.connection.Server.server = null;				
 	}
 	
