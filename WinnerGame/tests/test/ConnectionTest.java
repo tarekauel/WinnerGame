@@ -41,7 +41,7 @@ public class ConnectionTest {
 
 	@After
 	public void afterLoginTest()  {
-		//server.close();
+		
 		server.getPlayerList().clear();
 	}
 
