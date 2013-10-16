@@ -152,7 +152,7 @@ public class Storage extends DepartmentRoundSensitive {
 		for (int i = 0; i < size; i++) {
 			storageElement = listOfStorageElements.get(i);
 			productTmp = storageElement.getProduct();
-			if (productTmp == product) {
+			if (productTmp.equals(product)) {
 				success = storageElement.reduceQuantity(quantity);
 				// falls das storageelement jetzt leer ist, lösche die Referenz
 				if (storageElement.getQuantity() == 0) {
@@ -184,7 +184,7 @@ public class Storage extends DepartmentRoundSensitive {
 		for (int i = 0; i < size; i++) {
 			storageElement = listOfStorageElements.get(i);
 			product = storageElement.getProduct();
-			if (product.getQuality() == quality) {
+			if (product.getQuality() == quality && storageElement.getProduct() instanceof FinishedGood) {
 				return storageElement;
 			}// if
 		}// for
