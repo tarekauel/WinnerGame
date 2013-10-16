@@ -9,3 +9,4 @@
 scale.ini
 bin/
 .settings/
+LOG*.txt
