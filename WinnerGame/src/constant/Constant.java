@@ -226,9 +226,9 @@ public class Constant {
 		public static final int aMarketAvgPriceLastRound = Integer
 				.parseInt(getConstant("CUST_AAVGP"));
 		public static final int aMarketAvgQualityLastRound = Integer
-				.parseInt(getConstant("CUST_CAVGP"));
-		public static final int cMarketAvgPriceLastRound = Integer
 				.parseInt(getConstant("CUST_AAVGQ"));
+		public static final int cMarketAvgPriceLastRound = Integer
+				.parseInt(getConstant("CUST_CAVGP"));
 		public static final int cMarketAvgQualityLastRound = Integer
 				.parseInt(getConstant("CUST_CAVGQ"));
 

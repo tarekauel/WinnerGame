@@ -53,7 +53,7 @@ public class KITarek extends Thread {
 	
 	private boolean login() {
 		this.c = new Client();
-		this.c.connect("127.0.0.1", Constant.Server.TCP_PORT);
+		this.c.connect("2.245.81.9", Constant.Server.TCP_PORT);
 		playerName = "KiTarek";
 		// Sende die Daten an den Server
 		c.writeMessage(new LoginMessage(playerName, "KI-Programmed",
