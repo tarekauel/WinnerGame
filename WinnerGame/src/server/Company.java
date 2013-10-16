@@ -230,7 +230,7 @@ public class Company {
 		for(Resource resource : this.getStorage().getAllResources()){
 			if(resource.getName().equals("Wafer")){
 				while(priceListWaferIterator.hasNext()){
-					if(priceListWaferIterator.next().getQuality()==resource.getQuality()){
+					if(priceListWaferIterator.next().getQuality()==resource.getQuality()-1){
 						resourcesValue = resourcesValue +  priceListWaferIterator.next().getPrice();
 						break;
 					}//if
@@ -238,7 +238,7 @@ public class Company {
 			}//if
 			if(resource.getName().equals("Gehäuse")){
 				while(priceListCasesIterator.hasNext()){
-					if(priceListCasesIterator.next().getQuality()==resource.getQuality()){
+					if(priceListCasesIterator.next().getQuality()==resource.getQuality()-1){
 						resourcesValue = resourcesValue +  priceListCasesIterator.next().getPrice();
 						break;
 					}//if
