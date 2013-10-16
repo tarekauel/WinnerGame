@@ -26,7 +26,7 @@ public aspect AspectRandom {
 
 	
 	int[] around() : fakeOffersFromSupplierMarket() {
-		FakeSupplierMarketOfferQualities fakeMarket = findMarketRef();
+		FakeSupplierMarketOfferQualities fakeMarket = findAnnotation( FakeSupplierMarketOfferQualities.class);
 		if( fakeMarket != null ) {
 			int[] diffs = fakeMarket.differences();
 			int input = (int) thisJoinPoint.getArgs()[0];
@@ -41,86 +41,61 @@ public aspect AspectRandom {
 	}
 	
 	double around() : manipulateRandom() {
-		FakeRandom fakeRandom = findFakeRandom();
+		FakeRandom fakeRandom = findAnnotation( FakeRandom.class);
 		if (fakeRandom != null) {
-			String[] methodNames = fakeRandom.mathRandomMethodName();
-			for (int l = 0; l < methodNames.length; l++) {
-				String callerMethodName = Thread.currentThread().getStackTrace()[2].getClassName() + "."
-						+ Thread.currentThread().getStackTrace()[2].getMethodName();
-				System.out.println(callerMethodName);
-				if (callerMethodName.equals(methodNames[l])) {
-					return fakeRandom.mathRandomNewRandom()[l];
-				}
-			}
+			try {
+				return getReturnValue( fakeRandom.mathRandomMethodName(), fakeRandom.mathRandomNewRandom());
+			} catch( IllegalArgumentException e) {}
 		}
-
 		return proceed();
 	}
 
 	int around() : manipulateNextInt() {
-		FakeRandom fakeRandom = findFakeRandom();
+		FakeRandom fakeRandom = findAnnotation( FakeRandom.class);
 		if (fakeRandom != null) {
-			String[] methodNames = fakeRandom.randomNextIntMethodName();
-			for (int l = 0; l < methodNames.length; l++) {
-				String callerMethodName = Thread.currentThread().getStackTrace()[2].getClassName() + "."
-						+ Thread.currentThread().getStackTrace()[2].getMethodName();
-				System.out.println(callerMethodName);
-				if (callerMethodName.equals(methodNames[l])) {
-					return fakeRandom.randomNextIntNewRandom()[l];
-				}
-			}
+			try {
+				return getReturnValue( fakeRandom.randomNextIntMethodName(), fakeRandom.randomNextIntNewRandom());
+			} catch( IllegalArgumentException e) {}
 		}
-
 		return proceed();
 	}
 
 	double around() : manipulateNextGaussian() {
-
-		FakeRandom fakeRandom = findFakeRandom();
+		FakeRandom fakeRandom = findAnnotation( FakeRandom.class);
 		if (fakeRandom != null) {
-			String[] methodNames = fakeRandom.randomNextGaussianMethodName();
-			for (int l = 0; l < methodNames.length; l++) {
-				String callerMethodName = Thread.currentThread().getStackTrace()[2].getClassName() + "."
-						+ Thread.currentThread().getStackTrace()[2].getMethodName();
-				System.out.println(callerMethodName);
-				if (callerMethodName.equals(methodNames[l])) {
-					return fakeRandom.randomNextGaussianNewRandom()[l];
-				}
-			}
+			try {
+				return getReturnValue( fakeRandom.randomNextGaussianMethodName(), fakeRandom.randomNextGaussianNewRandom());
+			} catch( IllegalArgumentException e) {}
 		}
-
 		return proceed();
 	}
-
-	private FakeRandom findFakeRandom() {
-		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		for (int i = 0; i < stack.length; i++) {
-			String classname = stack[i].getClassName();
-			String methodName = stack[i].getMethodName();
-			try {
-				Class<?> c = Class.forName(classname);
-				Method[] methodArray = c.getMethods();
-				for (int j = 0; j < methodArray.length; j++) {
-					Method m = methodArray[j];
-					if (m.getName().equals(methodName)) {
-						Annotation[] annArray = m.getAnnotations();
-						for (int k = 0; k < annArray.length; k++) {
-							Annotation a = annArray[k];
-							Class<?> ac = a.annotationType();
-							if (ac.getName().equals(fakeRandomName)) {
-								return m.getAnnotation(FakeRandom.class);
-							}
-						}
-					}
-				}
-			} catch (ClassNotFoundException e) {
-
+	
+	public double getReturnValue( String[] methodNames, double[] newValues) {
+		for (int l = 0; l < methodNames.length; l++) {
+			String callerMethodName = Thread.currentThread().getStackTrace()[3].getClassName() + "."
+					+ Thread.currentThread().getStackTrace()[3].getMethodName();
+			System.out.println(callerMethodName);
+			if (callerMethodName.equals(methodNames[l])) {
+				return newValues[l];
 			}
-		}
-		return null;
+		}		
+		throw new IllegalArgumentException( "caller method name not found");
 	}
 	
-	private FakeSupplierMarketOfferQualities findMarketRef() {
+	public int getReturnValue( String[] methodNames, int[] newValues) {
+		for (int l = 0; l < methodNames.length; l++) {
+			String callerMethodName = Thread.currentThread().getStackTrace()[3].getClassName() + "."
+					+ Thread.currentThread().getStackTrace()[3].getMethodName();
+			System.out.println(callerMethodName);
+			if (callerMethodName.equals(methodNames[l])) {
+				return newValues[l];
+			}
+		}		
+		throw new IllegalArgumentException( "caller method name not found");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T findAnnotation (Class<? extends Annotation> searched) {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 		for (int i = 0; i < stack.length; i++) {
 			String classname = stack[i].getClassName();
@@ -132,11 +107,21 @@ public aspect AspectRandom {
 					Method m = methodArray[j];
 					if (m.getName().equals(methodName)) {
 						Annotation[] annArray = m.getAnnotations();
+						T annotation = null;
+						boolean foundTest = false;
 						for (int k = 0; k < annArray.length; k++) {
 							Annotation a = annArray[k];
 							Class<?> ac = a.annotationType();
-							if (ac.getName().equals(fakeOfferName)) {
-								return m.getAnnotation(FakeSupplierMarketOfferQualities.class);
+							if (ac.getName().equals(searched.getCanonicalName())) {	
+								if( foundTest) {
+									return (T) m.getAnnotation(searched);
+								} else {
+									annotation = (T) m.getAnnotation(searched);
+								}
+							} else if ( ac.getName().equals(org.junit.Test.class.getCanonicalName())) {
+								foundTest = true;
+								if( annotation != null )
+									return annotation;
 							}
 						}
 					}
@@ -146,5 +131,5 @@ public aspect AspectRandom {
 			}
 		}
 		return null;
-	}
+	}	
 }
