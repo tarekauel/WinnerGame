@@ -115,7 +115,7 @@ public class Benefit {
 	 */
 
 	public static void initBenefits() throws Exception {
-		if(Benefit.getBookableBenefits().size()!=0){
+		if(Benefit.getBookableBenefits().size()==0){
 		BufferedReader r = new BufferedReader(new FileReader("benefit.dat"));
 		String line = null;
 		while ((line = r.readLine()) != null) {
