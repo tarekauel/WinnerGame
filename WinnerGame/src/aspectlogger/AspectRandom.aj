@@ -9,8 +9,6 @@ import annotation.FakeSupplierMarketOfferQualities;
 
 @DontLog
 public aspect AspectRandom {
-	String fakeRandomName	= FakeRandom.class.getCanonicalName();
-	String fakeOfferName = FakeSupplierMarketOfferQualities.class.getCanonicalName();
 
 	pointcut manipulateRandom() : 
 		call( public static double java.lang.Math.random() );
@@ -70,7 +68,7 @@ public aspect AspectRandom {
 		return proceed();
 	}
 	
-	public double getReturnValue( String[] methodNames, double[] newValues) {
+	public static double getReturnValue( String[] methodNames, double[] newValues) {
 		for (int l = 0; l < methodNames.length; l++) {
 			String callerMethodName = Thread.currentThread().getStackTrace()[3].getClassName() + "."
 					+ Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -82,7 +80,7 @@ public aspect AspectRandom {
 		throw new IllegalArgumentException( "caller method name not found");
 	}
 	
-	public int getReturnValue( String[] methodNames, int[] newValues) {
+	public static int getReturnValue( String[] methodNames, int[] newValues) {
 		for (int l = 0; l < methodNames.length; l++) {
 			String callerMethodName = Thread.currentThread().getStackTrace()[3].getClassName() + "."
 					+ Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -95,7 +93,7 @@ public aspect AspectRandom {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T findAnnotation (Class<? extends Annotation> searched) {
+	public static <T> T findAnnotation (Class<? extends Annotation> searched) {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 		for (int i = 0; i < stack.length; i++) {
 			String classname = stack[i].getClassName();
@@ -112,10 +110,10 @@ public aspect AspectRandom {
 						for (int k = 0; k < annArray.length; k++) {
 							Annotation a = annArray[k];
 							Class<?> ac = a.annotationType();
-							if (ac.getName().equals(searched.getCanonicalName())) {	
+							if (ac.getName().equals(searched.getCanonicalName())) {
 								if( foundTest) {
 									return (T) m.getAnnotation(searched);
-								} else {
+								} else {									
 									annotation = (T) m.getAnnotation(searched);
 								}
 							} else if ( ac.getName().equals(org.junit.Test.class.getCanonicalName())) {

@@ -140,14 +140,12 @@ public class ProductionOrder {
 			return;
 		}
 
-		// Es wird in doubles gerechnet:
-		double additionalFactor = advantage / 100;
 		// durchschnittsqualität der Produkte mit Gewichtung:
 		double midQuality = (wafer.getQuality()
 				* Constant.Production.IMPACT_WAFER + cases.getQuality()
 				* Constant.Production.IMPACT_CASE) / 100.0;
 		// neue Qualität (nicht mehr als double)
-		int newQuality = (int) (midQuality * additionalFactor);
+		int newQuality = (int) (midQuality * advantage);
 
 		// Prüfe ob die neue Qualität durch den Zuschlag zu sehr verändert wurde
 		newQuality = (newQuality - midQuality > Constant.Production.MAX_QUALITY_ADDITION) ? (int) (midQuality + Constant.Production.MAX_QUALITY_ADDITION)
