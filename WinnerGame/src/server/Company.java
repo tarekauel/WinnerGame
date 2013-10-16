@@ -200,11 +200,11 @@ public class Company {
 	 * berechnet den Gesamtwert des Unternehmens indem vorhandene lagerbestaende zu Wiederbeschaffungs
 	 * werten/Verkaufswerten angesetzt werden. darueberhinaus wird der Vorteil durch den Marktanteil
 	 * mit eingerechnet sowie der Wert der Location die zu Beginn gekauft wurde
-	 * @return
+	 * @return TPresentValue mit Runde und dem Wert
 	 * @throws Exception 
 	 */
 	public TPresentValue getPresentValue() throws Exception{
-		if(presentValues.get(presentValues.size()-1).round==GameEngine.getGameEngine().getRound()){
+		if(presentValues.size() != 0 && presentValues.get(presentValues.size()-1).round==GameEngine.getGameEngine().getRound()){
 			return presentValues.get(presentValues.size()-1);
 		}
 		
