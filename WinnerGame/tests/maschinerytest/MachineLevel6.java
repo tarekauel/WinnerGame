@@ -10,7 +10,7 @@ import server.BankAccount;
 import server.Company;
 import server.Location;
 import server.Machinery;
-import aspectlogger.FakeRandom;
+import annotation.FakeRandom;
 
 public class MachineLevel6 {
 	Machinery m;

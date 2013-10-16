@@ -10,7 +10,7 @@ import server.Location;
 import server.Purchase;
 import server.Resource;
 import server.SupplierMarket;
-import aspectlogger.FakeSupplierMarketOfferQualities;
+import annotation.FakeSupplierMarketOfferQualities;
 
 public class FakeMarketTest {
 

@@ -34,7 +34,7 @@ public class Server {
 					Constant.Server.UDP_PORT);
 			udpServer.start();
 			getServer();
-			int round = 100;
+			int round = 10;
 			for (int i = 0; i < Constant.Server.PLAYER_KI_TAREK; i++) {
 				new kigegner.KITarek(round);
 			}

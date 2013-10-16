@@ -3,8 +3,13 @@ package aspectlogger;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
+import annotation.DontLog;
+import annotation.FakeRandom;
+import annotation.FakeSupplierMarketOfferQualities;
+
+@DontLog
 public aspect AspectRandom {
-	String	fakeRandomName	= FakeRandom.class.getCanonicalName();
+	String fakeRandomName	= FakeRandom.class.getCanonicalName();
 	String fakeOfferName = FakeSupplierMarketOfferQualities.class.getCanonicalName();
 
 	pointcut manipulateRandom() : 

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import aspectlogger.FakeRandom;
+import annotation.FakeRandom;
 
 public class RandomTest {
 
