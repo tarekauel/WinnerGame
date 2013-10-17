@@ -18,7 +18,7 @@ public class ClientUIStart extends Application {
 	
 	private Stage primaryStage;
 	private static ClientLoginUIModel loginModel;	
-	private static ClientGameUIModel gameModel;	
+	private static ClientGameUIModel gameModel;
 
 	public static ClientLoginUIModel getLoginModel() {
 		return loginModel;

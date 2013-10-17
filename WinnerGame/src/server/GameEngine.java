@@ -95,17 +95,12 @@ public class GameEngine {
 		message.GameDataMessageToClient.ProductionToClient production = new ProductionToClient(productionOrders);
 		
 		ArrayList<FixCostToClient> fixCosts = new ArrayList<FixCostToClient>();
-//		fixCosts.add(new FixCostToClient("Verkauf", Constant.Company);
-//		fixCosts.add(new FixCostToClient("Personal", company
-//				.getHumanResources().getFixCosts()));
-//		fixCosts.add(new FixCostToClient("Marktforschung", company
-//				.getMarketResearch().getFixCosts()));
-//		fixCosts.add(new FixCostToClient("Produktion", company.getProduction()
-//				.getFixCosts()));
-//		fixCosts.add(new FixCostToClient("Einkauf", company.getPurchase()
-//				.getFixCosts()));
-//		fixCosts.add(new FixCostToClient("Lager", company.getStorage()
-//				.getFixCosts()));
+		fixCosts.add(new FixCostToClient("Verkauf", 100000));
+		fixCosts.add(new FixCostToClient("Personal", 100000));
+		fixCosts.add(new FixCostToClient("Marktforschung", 100000));
+		fixCosts.add(new FixCostToClient("Produktion", 100000));
+		fixCosts.add(new FixCostToClient("Einkauf", 100000));
+		fixCosts.add(new FixCostToClient("Lager", 100000));
 	
 		ArrayList<CashValueOfRoundToClient> cashValues = new ArrayList<CashValueOfRoundToClient>();	
 		MachineryToClient machinery = new MachineryToClient(1, Constant.Machinery.CAPACITY[0], 0, 0);
@@ -126,7 +121,7 @@ public class GameEngine {
 			possibleBenefits.add(new PossibleBenefit(benefit.getName(), benefit.getCostsPerRound()));
 		}
 		ArrayList<TMotivation> motivation = new ArrayList<TMotivation>();
-		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, 0, 0, 40, 0);
+		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, 0, 1000, 40, 0);
 				
 		GameDataMessageToClient initialMessage = new GameDataMessageToClient("", purchase, production, storage, distribution, humanResources, marketing, reporting, Constant.BankAccount.START_CAPITAL, Constant.BankAccount.MAX_CREDIT);
 		

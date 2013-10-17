@@ -190,28 +190,37 @@ public class ClientGameUIModel {
 	 */
 	
 	public void setupMessageCreator() {
-		messCreator = new ClientToServerMessageCreator(in.getPlayerName());
+		//messCreator = new ClientToServerMessageCreator(in.getPlayerName());
+		messCreator = new ClientToServerMessageCreator("Lars");
 	}
 
 	public void parseAnswerFromServer() {
 		
-		ClientGameUIModel.setRound(in.round);
-		
+		ClientGameUIModel.setRound(in.round);	
 		
 		if(in.storage != null){			
 			parseStorage(in.storage);
-		} else if(in.purchase != null){			
-			parsePurchase(in.purchase);
-		} else if(in.production != null){			
-			parseProduction(in.production);	
-		} else if(in.distribution != null){			
-			parseDistribution(in.distribution);
-		} else if(in.humanResources != null){			
-			parseHumanResources(in.humanResources);
-		} else if(in.marketing != null){			
-			parseMarketing(in.marketing);
-		}  
+		} 
 		
+		if(in.purchase != null){			
+			parsePurchase(in.purchase);
+		} 
+		
+		if(in.production != null){			
+			parseProduction(in.production);	
+		} 
+		
+		if(in.distribution != null){			
+			parseDistribution(in.distribution);
+		} 
+		
+		if(in.humanResources != null){			
+			parseHumanResources(in.humanResources);
+		} 
+		
+		if(in.marketing != null){			
+			parseMarketing(in.marketing);
+		}  		
 		
 	}
 
