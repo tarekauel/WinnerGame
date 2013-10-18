@@ -272,7 +272,7 @@ public class Company {
 		//Einrechenen der Maschinenausbaustufe
 		long sumOfInvestion = 0;
 		int level = this.getProduction().getMachine().getLevel();
-		for(int i = 1; i<=level; i++){
+		for(int i = 1; i<level; i++){
 			sumOfInvestion+= Constant.Machinery.BUILD_COSTS[i];
 		}
 		presentValue += sumOfInvestion;
@@ -281,7 +281,7 @@ public class Company {
 		long estateValue = 0;
 		
 		//Das Grundstuecks wird pro Runde um 2% abgeschrieben
-		estateValue = (long) (this.getLocation().getPurchasePrice()*(1.0-Math.pow(2/100, (double) GameEngine.getGameEngine().getRound())));	
+		estateValue = (long) (this.getLocation().getPurchasePrice()*(1.0-Math.pow(2.0/100, (double) GameEngine.getGameEngine().getRound())));	
 		presentValue+=estateValue;
 		
 		
