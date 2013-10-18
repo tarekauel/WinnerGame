@@ -36,7 +36,7 @@ public class Benefit {
 			throw new IllegalArgumentException("Kosten muesen >0 sein");
 		this.costsPerRound = costsPerRound;
 
-		if (getBenefitByName(name) == null) {
+		if (!existBenefit(name)) {
 			bookableBenefits.add(this);
 		} else {
 			throw new IllegalArgumentException("Benefit existiert bereits: "
@@ -50,7 +50,9 @@ public class Benefit {
 	 * 
 	 * @param name
 	 *            des Benefits, nach dem gesucht wird
-	 * @return Benefit, welches gesucht wurde. null, falls nicht gefunden
+	 * @return Benefit, welches gesucht wurde.
+	 * 
+	 * @exception IllegalArgumentException, wenn das Benefit nicht gefunden worden ist
 	 */
 	public static Benefit getBenefitByName(String name) {
 		for (Benefit benefit : bookableBenefits) {
@@ -58,7 +60,21 @@ public class Benefit {
 				return benefit;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("Benefit existiert nicht " + name);
+	}
+	
+	/**
+	 * Prüft ob ein Benefit exitiert
+	 * @param name Name des Benefits
+	 * @return Boolean, ob das Benefit existiert
+	 */
+	public static boolean existBenefit(String name) {
+		for (Benefit benefit : bookableBenefits) {
+			if (benefit.name.equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
