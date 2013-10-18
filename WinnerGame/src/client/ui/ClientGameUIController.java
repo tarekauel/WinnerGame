@@ -555,7 +555,7 @@ public class ClientGameUIController implements Initializable {
 
 		processRoundProgressBar(ClientGameUIModel.getRound());
 		updateEventListView(model.getnFormatterCurrency().format(
-				model.getIn().cash)
+				model.getIn().cash/100)
 				+ " Barvermögen");
 		eventListView.setItems(events);
 
@@ -655,6 +655,57 @@ public class ClientGameUIController implements Initializable {
 				initHumanResources();
 				initMarketing();
 				initReporting();
+				
+				//START BUILDING SALES CHART
+				 String[] cat = new String[5];
+				 int index=0;
+				 for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
+					 cat[index++] = "Runde " + i;
+				 }
+				
+				 buildXYChart(model.getSalesChartData(), cat,
+				 reportingSalesBarChatXAxis, reportingSalesBarChatYAxis,
+				 reportingSalesBarChart);
+				
+				 // START BULDING MOTIVATION CHART
+				
+				 String[] catMot = new String[ClientGameUIModel.getRound()];
+				 for( int i=0; i<catMot.length; i++) {
+					 catMot[i] = (i+1)+"";
+				 }
+				
+				 buildXYChart(model.getMotivationChartData(), catMot,
+				 hrMotivationLineChartXAxis, hrMotivationLineChartYAxis,
+				 hrMotivationLineChart);
+				
+				 // START BUILDING WAFER PRICE CHART
+				 String[] catWafer = new String[100];
+				 for( int i=0; i<catWafer.length; i++) {
+					 catWafer[i] = (i+1) + "";
+				 }
+				
+				 buildXYChart(model.getWaferPriceListChartData(), catWafer,
+				 marketingWaferPriceChartXAxis,
+				 marketingWaferPriceChartYAxis,marketingWaferPriceChart );
+				 marketingWaferPriceChart.setCreateSymbols(false);
+				
+				 // START BUILDING Case PRICE CHART
+				 String[] catCase = new String[100];
+				 for( int i=0; i<catCase.length; i++) {
+					 catCase[i] = (i+1) + "";
+				 }
+				
+				 buildXYChart(model.getCasePriceListChartData(), catCase,
+				 marketingCasePriceChartXAxis,
+				 marketingCasePriceChartYAxis,marketingCasePriceChart );
+				 marketingCasePriceChart.setCreateSymbols(false);
+				
+				 // START BUILDING Market Shares
+				
+				 buildPieChart(model.getMarketShareChartData(),
+				 marketingMarketSharePieChart);
+				
+				 //END WORK
 
 			}
 		});
@@ -667,9 +718,7 @@ public class ClientGameUIController implements Initializable {
 		boolean alreadyFilledCell;
 
 		public EditingCell() {
-		}
-		
-		
+		}		
 
 		@Override
 		public void startEdit() {
@@ -972,7 +1021,7 @@ public class ClientGameUIController implements Initializable {
 		for (StoragePosition elem : model.getStoragePositionsTableData()) {
 
 			// System.out.println(elem.type);
-
+			System.out.println(elem);
 			if (elem.getRessource().equals("Wafer")) {
 				waferInStorage.add(elem);
 			} else if (elem.getRessource().equals("Gehäuse")) {
@@ -1445,6 +1494,7 @@ public class ClientGameUIController implements Initializable {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 				getResourcesInStorage();
+
 				newSaleOfferArticlePriceTextField.textProperty()
 						.removeListener(
 								newSaleOfferArticlePriceTextFieldListener);
@@ -1505,6 +1555,7 @@ public class ClientGameUIController implements Initializable {
 				newSaleOfferDistributionCostsTextField.clear();
 				newSaleOfferCostsTextField.clear();
 				newSaleOfferMaximumProfitTextField.clear();
+				newSaleOfferSaveButton.setDisable(true);
 				newSaleOfferTitledPane.setDisable(true);
 
 			}
