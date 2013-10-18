@@ -829,11 +829,13 @@ public class ClientGameUIController implements Initializable {
 		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Request>() {
 			public void changed(ObservableValue<? extends Request> observable, Request oldValue, Request newValue) {
 				model.getPurchaseOffersTableData().clear();
-				for (SupplierOffer o : newValue.getOffer()) {
-					model.getPurchaseOffersTableData().add(o);
-					if (o.getRound() == ClientGameUIModel.getRound() - 1) {
-						purchaseOffersTableView.setEditable(true);
-						purchaseOffersQuantityTableColumn.setEditable(true);
+				if( newValue != null) {
+					for (SupplierOffer o : newValue.getOffer()) {
+						model.getPurchaseOffersTableData().add(o);
+						if (o.getRound() == ClientGameUIModel.getRound() - 1) {
+							purchaseOffersTableView.setEditable(true);
+							purchaseOffersQuantityTableColumn.setEditable(true);
+						}
 					}
 				}
 			}
@@ -871,8 +873,8 @@ public class ClientGameUIController implements Initializable {
 								((SupplierOffer) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuantity(t.getNewValue());
 								model.getMessCreator().addAccepted(
 									purchaseOffersTableView.getSelectionModel().getSelectedItem().getName(),
-									Integer.parseInt(t.getNewValue()),
-									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality())						
+									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()),
+									Integer.parseInt(t.getNewValue())						
 								);
 								System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
 									Integer.parseInt(t.getNewValue())+""+
