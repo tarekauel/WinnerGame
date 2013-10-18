@@ -223,37 +223,48 @@ public class Company {
 		presentValue+= panelValue;
 		
 		//Rohstoffe
-		long resourcesValue = 0;
+		long resourcesWafer = 0;
+		long resourcesCases = 0;
 		TreeSet<TResourcePrice> priceListCases = SupplierMarket.getMarket().getCasePricelist();
 		TreeSet<TResourcePrice> priceListWafer = SupplierMarket.getMarket().getWaferPricelist();
 		java.util.Iterator<TResourcePrice> priceListCasesIterator = priceListCases.iterator();
 		java.util.Iterator<TResourcePrice> priceListWaferIterator = priceListWafer.iterator();
-		for(Resource resource : this.getStorage().getAllResources()){
-			if(resource.getName().equals("Wafer")){
-				while(priceListWaferIterator.hasNext()){
-					if(priceListWaferIterator.next().getQuality()==resource.getQuality()-1){
-						resourcesValue = resourcesValue +  priceListWaferIterator.next().getPrice();
-						break;
-					}//if
-				}//while
+		for(StorageElement storageElement : this.getStorage().getAllStorageElements()){
+			if(storageElement.getProduct() instanceof Resource){
+				int quantity = storageElement.getQuantity();
+				Resource resource = (Resource) storageElement.getProduct();
+				if(resource.getName().equals("Wafer")){
+					while(priceListWaferIterator.hasNext()){
+						TResourcePrice resourceprice = priceListWaferIterator.next();
+						int quality = resourceprice.getQuality();
+						int price = resourceprice.getPrice();
+						if(quality==resource.getQuality()){
+							resourcesWafer += quantity*price;
+							break;
+						}//if
+					}//while
+				}//if
+				if(resource.getName().equals("Gehäuse")){
+					while(priceListCasesIterator.hasNext()){
+						TResourcePrice resourceprice = priceListCasesIterator.next();
+						int quality = resourceprice.getQuality();
+						int price = resourceprice.getPrice();
+						if(quality==resource.getQuality()){
+							resourcesCases += quantity*price;
+							break;
+						}//if
+					}//while
+				}//if
 			}//if
-			if(resource.getName().equals("Gehäuse")){
-				while(priceListCasesIterator.hasNext()){
-					if(priceListCasesIterator.next().getQuality()==resource.getQuality()-1){
-						resourcesValue = resourcesValue +  priceListCasesIterator.next().getPrice();
-						break;
-					}//if
-				}//while
-			}
 		}
-		presentValue += resourcesValue;
+		presentValue += resourcesCases+resourcesWafer;
 		
 		//Einrechnen des Vorteils durch Marktanteil
 		long marketShareAdvantage = 0;
 		ArrayList<TMarketShare> arrayListMarektShare = CustomerMarket.getMarket().getMarketShares();
 		for(TMarketShare marketShare : arrayListMarektShare){
 			if(marketShare.getCompany()==this){
-				marketShareAdvantage = marketShare.getMarketShare() * marketShare.getMarketSize() * Constant.PresentValue.PRESENTVALUE_ADVANTAGE_MARKETSHARE / 100;
+				marketShareAdvantage = (long) ((marketShare.getMarketShare()/10000.0) * marketShare.getMarketSize() * (Constant.PresentValue.PRESENTVALUE_ADVANTAGE_MARKETSHARE / 100.0));
 			}
 		}
 		presentValue+=marketShareAdvantage;

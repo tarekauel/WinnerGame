@@ -13,6 +13,7 @@ import server.CustomerMarket;
 import server.FinishedGood;
 import server.Location;
 import server.Resource;
+import server.StorageElement;
 import server.SupplierMarket;
 import server.TMarketShare;
 import server.TPresentValue;
@@ -65,6 +66,44 @@ public class TestPresentValue {
 			System.out.println("Qualitaet: "+i+" Preis: "+ priceList.get(i));
 		}
 		
+		long resourcesWafer = 0;
+		long resourcesCases = 0;
+		TreeSet<TResourcePrice> priceListCases = SupplierMarket.getMarket().getCasePricelist();
+		TreeSet<TResourcePrice> priceListWafer = SupplierMarket.getMarket().getWaferPricelist();
+		java.util.Iterator<TResourcePrice> priceListCasesIterator = priceListCases.iterator();
+		java.util.Iterator<TResourcePrice> priceListWaferIterator = priceListWafer.iterator();
+		for(StorageElement storageElement : c.getStorage().getAllStorageElements()){
+			if(storageElement.getProduct() instanceof Resource){
+				int quantity = storageElement.getQuantity();
+				Resource resource = (Resource) storageElement.getProduct();
+				if(resource.getName().equals("Wafer")){
+					while(priceListWaferIterator.hasNext()){
+						TResourcePrice resourceprice = priceListWaferIterator.next();
+						int quality = resourceprice.getQuality();
+						int price = resourceprice.getPrice();
+						if(quality==resource.getQuality()){
+							System.out.println("Wafer Q:"+quality+" Preis: "+price);
+							System.out.println("gesamt: "+ (quantity*price));
+							break;
+						}//if
+					}//while
+				}//if
+				if(resource.getName().equals("Gehäuse")){
+					while(priceListCasesIterator.hasNext()){
+						TResourcePrice resourceprice = priceListCasesIterator.next();
+						int quality = resourceprice.getQuality();
+						int price = resourceprice.getPrice();
+						if(quality==resource.getQuality()){
+							resourcesCases = resourcesCases +  price;
+							System.out.println("Case Q: "+quality+" Preis: "+price);
+							System.out.println("gesamt: "+ (quantity*price));
+							break;
+						}//if
+					}//while
+				}//if
+			}//if
+		}
+
 		System.out.println("FinishedGoods: "+ c.getStorage().getFinishedGoodByQuality(80).getQuantity());
 		TPresentValue value = c.getPresentValue();
 		System.out.println(value.getRound() +"\n"+
