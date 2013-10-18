@@ -107,7 +107,7 @@ public class GameEngine {
 		
 		ArrayList<FixCostToClient> fixCosts = new ArrayList<FixCostToClient>();
 		fixCosts.add(new FixCostToClient("Verkauf", Constant.DepartmentFixcost.DISTRIBUTION));
-		fixCosts.add(new FixCostToClient("Personal", company.getDistribution().getFixCosts()));
+		fixCosts.add(new FixCostToClient("Personal", company.getHumanResources().getFixCosts()));
 		fixCosts.add(new FixCostToClient("Marktforschung", Constant.DepartmentFixcost.MARKET_RESEARCH));
 		fixCosts.add(new FixCostToClient("Produktion", Constant.DepartmentFixcost.PRODUCTION));
 		fixCosts.add(new FixCostToClient("Einkauf", Constant.DepartmentFixcost.PURCHASE));
