@@ -84,7 +84,7 @@ public class GameEngine {
 		return this.listOfCompanys;
 	}
 
-	public GameDataMessageToClient getInitialGameDataMessageToClient() {
+	public GameDataMessageToClient getInitialGameDataMessageToClient(String player) {
 		
 		ArrayList<MarketShareToClient> marketShares = new ArrayList<MarketShareToClient>();		
 		ArrayList<RessourcePriceToClient> waferPrice = new ArrayList<RessourcePriceToClient>();		
@@ -123,7 +123,7 @@ public class GameEngine {
 		ArrayList<TMotivation> motivation = new ArrayList<TMotivation>();
 		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, 0, 1000, 40, 0);
 				
-		GameDataMessageToClient initialMessage = new GameDataMessageToClient("", purchase, production, storage, distribution, humanResources, marketing, reporting, Constant.BankAccount.START_CAPITAL, Constant.BankAccount.MAX_CREDIT);
+		GameDataMessageToClient initialMessage = new GameDataMessageToClient(player, purchase, production, storage, distribution, humanResources, marketing, reporting, Constant.BankAccount.START_CAPITAL, Constant.BankAccount.MAX_CREDIT);
 		
 		return initialMessage;
 		
