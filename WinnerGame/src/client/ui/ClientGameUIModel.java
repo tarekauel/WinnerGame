@@ -191,12 +191,26 @@ public class ClientGameUIModel {
 	
 	public void setupMessageCreator() {
 		//messCreator = new ClientToServerMessageCreator(in.getPlayerName());
-		messCreator = new ClientToServerMessageCreator("Lars");
+		messCreator = new ClientToServerMessageCreator(in.getPlayerName());
 	}
 
 	public void parseAnswerFromServer() {
 		
 		ClientGameUIModel.setRound(in.round);	
+		
+		purchaseRequestTableData.clear();
+		//purchaseOffersTableData.clear();
+		productionOrdersTableData.clear();
+		storagePositionsTableData.clear();
+		//offerTableData.clear();
+		benefitBookingTableData.clear();
+		benfitBoxData.clear();
+		requests.clear();
+		salesChartData.clear();
+		motivationChartData.clear();
+		waferPriceListChartData.clear();
+		casePriceListChartData.clear();
+		marketShareChartData.clear();	
 		
 		if(in.storage != null){			
 			parseStorage(in.storage);

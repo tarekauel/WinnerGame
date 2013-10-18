@@ -406,7 +406,7 @@ public class ClientGameUIController implements Initializable {
 			cat[i] = (i + 1) + "";
 		}
 		loadLineChart("Wafer", event, data, cat, false);
-
+		
 	}
 
 	@FXML
@@ -453,10 +453,7 @@ public class ClientGameUIController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
-		// ClientGameUIController.setClientGameUIController(this);
-		// GameDataMessageToClient tmpin = (GameDataMessageToClient)
-		// ClientUIStart.getLoginModel().getClient().readMessage();
+		
 		model = new ClientGameUIModel();
 		model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client
 				.readMessage());
@@ -471,59 +468,58 @@ public class ClientGameUIController implements Initializable {
 		initHumanResources();
 		initMarketing();
 		initReporting();
-		//
-		// START BUILDING SALES CHART
-		// String[] cat = new String[5];
-		// int index=0;
-		// for(int i=ClientGameUIModel.getRound()-5; i <
-		// ClientGameUIModel.getRound(); i++) {
-		// cat[index++] = "Runde " + i;
-		// }
-		//
-		// buildXYChart(this.model.getSalesChartData(), cat,
-		// reportingSalesBarChatXAxis, reportingSalesBarChatYAxis,
-		// reportingSalesBarChart);
-		//
-		// // START BULDING MOTIVATION CHART
-		//
-		// String[] catMot = new String[ClientGameUIModel.getRound()];
-		// for( int i=0; i<catMot.length; i++) {
-		// catMot[i] = (i+1)+"";
-		// }
-		//
-		// buildXYChart(this.model.getMotivationChartData(), catMot,
-		// hrMotivationLineChartXAxis, hrMotivationLineChartYAxis,
-		// hrMotivationLineChart);
-		//
-		// // START BUILDING WAFER PRICE CHART
-		// String[] catWafer = new String[100];
-		// for( int i=0; i<catWafer.length; i++) {
-		// catWafer[i] = (i+1) + "";
-		// }
-		//
-		// buildXYChart(this.model.getWaferPriceListChartData(), catWafer,
-		// marketingWaferPriceChartXAxis,
-		// marketingWaferPriceChartYAxis,marketingWaferPriceChart );
-		// marketingWaferPriceChart.setCreateSymbols(false);
-		//
-		// // START BUILDING Case PRICE CHART
-		// String[] catCase = new String[100];
-		// for( int i=0; i<catCase.length; i++) {
-		// catCase[i] = (i+1) + "";
-		// }
-		//
-		// buildXYChart(this.model.getCasePriceListChartData(), catCase,
-		// marketingCasePriceChartXAxis,
-		// marketingCasePriceChartYAxis,marketingCasePriceChart );
-		// marketingCasePriceChart.setCreateSymbols(false);
-		//
-		// // START BUILDING Market Shares
-		//
-		// buildPieChart(this.model.getMarketShareChartData(),
-		// marketingMarketSharePieChart);
-		//
-		// //END WORK
-
+		
+		//START BUILDING SALES CHART
+		 String[] cat = new String[5];
+		 int index=0;
+		 for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
+			 cat[index++] = "Runde " + i;
+		 }
+		
+		 buildXYChart(this.model.getSalesChartData(), cat,
+		 reportingSalesBarChatXAxis, reportingSalesBarChatYAxis,
+		 reportingSalesBarChart);
+		
+		 // START BULDING MOTIVATION CHART
+		
+		 String[] catMot = new String[ClientGameUIModel.getRound()];
+		 for( int i=0; i<catMot.length; i++) {
+			 catMot[i] = (i+1)+"";
+		 }
+		
+		 buildXYChart(this.model.getMotivationChartData(), catMot,
+		 hrMotivationLineChartXAxis, hrMotivationLineChartYAxis,
+		 hrMotivationLineChart);
+		
+		 // START BUILDING WAFER PRICE CHART
+		 String[] catWafer = new String[100];
+		 for( int i=0; i<catWafer.length; i++) {
+			 catWafer[i] = (i+1) + "";
+		 }
+		
+		 buildXYChart(this.model.getWaferPriceListChartData(), catWafer,
+		 marketingWaferPriceChartXAxis,
+		 marketingWaferPriceChartYAxis,marketingWaferPriceChart );
+		 marketingWaferPriceChart.setCreateSymbols(false);
+		
+		 // START BUILDING Case PRICE CHART
+		 String[] catCase = new String[100];
+		 for( int i=0; i<catCase.length; i++) {
+			 catCase[i] = (i+1) + "";
+		 }
+		
+		 buildXYChart(this.model.getCasePriceListChartData(), catCase,
+		 marketingCasePriceChartXAxis,
+		 marketingCasePriceChartYAxis,marketingCasePriceChart );
+		 marketingCasePriceChart.setCreateSymbols(false);
+		
+		 // START BUILDING Market Shares
+		
+		 buildPieChart(this.model.getMarketShareChartData(),
+		 marketingMarketSharePieChart);
+		
+		 //END WORK
+		 
 	}
 
 	private int deformatCurrency(String oldCurrencyString) {
@@ -608,21 +604,21 @@ public class ClientGameUIController implements Initializable {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 
-				for (Request req : purchaseRequestsTableView.getItems()) {
-
-					if (req.getStatus().equals("Offen")) {
-
-						for (SupplierOffer offer : req.getOffer()) {
-							if (!offer.getQuantity().isEmpty()) {
-								model.getMessCreator().addAccepted(
-										offer.getName(),
-										Integer.parseInt(offer.getQuality()),
-										Integer.parseInt(offer.getQuantity()));
-								break;
-							}
-						}
-					}
-				}
+//				for (Request req : purchaseRequestsTableView.getItems()) {
+//
+//					if (req.getStatus().equals("Offen")) {
+//
+//						for (SupplierOffer offer : req.getOffer()) {
+//							if (!offer.getQuantity().isEmpty()) {
+//								model.getMessCreator().addAccepted(
+//										offer.getName(),
+//										Integer.parseInt(offer.getQuality()),
+//										Integer.parseInt(offer.getQuantity()));
+//								break;
+//							}
+//						}
+//					}
+//				}
 
 				if (machineryIncreaseLevelCheckBox.selectedProperty().get() == true) {
 					model.getMessCreator().setMachine(true);
@@ -639,10 +635,8 @@ public class ClientGameUIController implements Initializable {
 					model.getMessCreator().setMarketResearch(false);
 				}
 				
-				//System.out.println(hrWagesPerHourTextField.getText());
-
-				model.getMessCreator().setWage(
-						deformatCurrency(hrWagesPerHourTextField.getText())*100);
+				//model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText())*100);
+				model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText()));
 
 				ClientUIStart.getLoginModel().client
 						.writeMessage((GameDataMessageFromClient) model
@@ -674,6 +668,8 @@ public class ClientGameUIController implements Initializable {
 
 		public EditingCell() {
 		}
+		
+		
 
 		@Override
 		public void startEdit() {
@@ -700,26 +696,26 @@ public class ClientGameUIController implements Initializable {
 				setGraphic(textField);
 				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 				textField.selectAll();
-
-			} else if (purchaseRequestsTableView.getSelectionModel()
-					.getSelectedItem().getStatus().equals("Offen")
-					&& alreadyFilledCell == true) {
-
-				if (!this.getItem().toString().isEmpty()) {
-
-					super.startEdit();
-
-					if (textField == null) {
-						createTextField();
-					}
-
-					setGraphic(textField);
-					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-					textField.selectAll();
-
-				} else {
-					cancelEdit();
-				}
+			
+//			} else if (purchaseRequestsTableView.getSelectionModel()
+//					.getSelectedItem().getStatus().equals("Offen")
+//					&& alreadyFilledCell == true) {
+//
+//				if (!this.getItem().toString().isEmpty()) {
+//
+//					super.startEdit();
+//
+//					if (textField == null) {
+//						createTextField();
+//					}
+//
+//					setGraphic(textField);
+//					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+//					textField.selectAll();
+//
+//				} else {
+//					cancelEdit();
+//				}
 
 			} else {
 				cancelEdit();
@@ -806,6 +802,22 @@ public class ClientGameUIController implements Initializable {
 		/**
 		 * purchaseRequestTable: Misc
 		 */
+		
+		final ChangeListener<Request> purchaseRequestsTableViewListener = new ChangeListener<Request>() {
+			public void changed(ObservableValue<? extends Request> observable, Request oldValue, Request newValue) {
+				model.getPurchaseOffersTableData().clear();
+				for (SupplierOffer o : newValue.getOffer()) {
+					model.getPurchaseOffersTableData().add(o);
+					if (o.getRound() == ClientGameUIModel.getRound() - 1) {
+						purchaseOffersTableView.setEditable(true);
+						purchaseOffersQuantityTableColumn.setEditable(true);
+					}
+				}
+			}
+		};
+		
+//		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(purchaseRequestsTableViewListener);
+//		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().removeListener(purchaseRequestsTableViewListener);
 
 		// Verhindert, dass man eine neue Spalte durch schieben hinzufügen kann
 		purchaseRequestsTableView
@@ -813,22 +825,20 @@ public class ClientGameUIController implements Initializable {
 		// purchaseRequestIdTableColumn.setSortType(TableColumn.SortType.DESCENDING);
 		purchaseRequestsTableView.getSelectionModel().setSelectionMode(
 				SelectionMode.SINGLE);
-		purchaseRequestsTableView.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<Request>() {
-					public void changed(
-							ObservableValue<? extends Request> observable,
-							Request oldValue, Request newValue) {
-						model.getPurchaseOffersTableData().clear();
-						for (SupplierOffer o : newValue.getOffer()) {
-							model.getPurchaseOffersTableData().add(o);
-							if (o.getRound() == ClientGameUIModel.getRound() - 1) {
-								purchaseOffersTableView.setEditable(true);
-								purchaseOffersQuantityTableColumn
-										.setEditable(true);
-							}
-						}
+
+		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Request>() {
+			public void changed(ObservableValue<? extends Request> observable, Request oldValue, Request newValue) {
+				model.getPurchaseOffersTableData().clear();
+				for (SupplierOffer o : newValue.getOffer()) {
+					model.getPurchaseOffersTableData().add(o);
+					if (o.getRound() == ClientGameUIModel.getRound() - 1) {
+						purchaseOffersTableView.setEditable(true);
+						purchaseOffersQuantityTableColumn.setEditable(true);
 					}
-				});
+				}
+			}
+		});
+		
 
 		/**
 		 * purchaseOffersTable: CellFactory
@@ -858,11 +868,17 @@ public class ClientGameUIController implements Initializable {
 					@Override
 					public void handle(
 							TableColumn.CellEditEvent<SupplierOffer, String> t) {
-						((SupplierOffer) t.getTableView().getItems()
-								.get(t.getTablePosition().getRow()))
-								.setQuantity(t.getNewValue());
-					}
-				});
+								((SupplierOffer) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuantity(t.getNewValue());
+								model.getMessCreator().addAccepted(
+									purchaseOffersTableView.getSelectionModel().getSelectedItem().getName(),
+									Integer.parseInt(t.getNewValue()),
+									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality())						
+								);
+								System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
+									Integer.parseInt(t.getNewValue())+""+
+									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()));
+							}
+						});
 		purchaseOffersPriceTableColumn
 				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>(
 						"price"));
@@ -891,6 +907,7 @@ public class ClientGameUIController implements Initializable {
 				newPurchaseRequestArticleNameChoiceBox.getSelectionModel()
 						.clearSelection();
 				newPurchaseRequestArticleQualitySlider.adjustValue(1.0);
+				
 			}
 		});
 
@@ -1552,10 +1569,6 @@ public class ClientGameUIController implements Initializable {
 		 * Misc
 		 */
 
-		for (Benefit x : model.getBenefitBoxData()) {
-			System.out.println("ben:" + x.getCosts());
-		}
-
 		// System.out.println(model.getIn().humanResources.myWage);
 		// System.out.println(model.getIn().humanResources.averageWage);
 		// System.out.println(model.getIn().humanResources.wageCosts);
@@ -1570,6 +1583,7 @@ public class ClientGameUIController implements Initializable {
 				model.getIn().humanResources.wageCosts/100));
 
 		benefitsChoiceBox.setItems(model.getBenefitBoxData());
+		bookedBeneftisTableView.setItems(model.getBenefitBookingTableData());
 
 	}
 
