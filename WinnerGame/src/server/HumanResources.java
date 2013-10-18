@@ -105,8 +105,8 @@ public class HumanResources extends DepartmentRoundSensitive {
 	}
 
 	public int getCountEmployees() {
-		// eine Arbeitswoche
-		return (int) (workingHoursPerRound / 40);
+		// gibt die mindestanzahl der Arbeiter zurück
+		return ((int) (workingHoursPerRound / Constant.HumanResources.HR_WORK_WEEK) < (Constant.HumanResources.HR_EMPLOYEES)?Constant.HumanResources.HR_EMPLOYEES : (int) (workingHoursPerRound / Constant.HumanResources.HR_WORK_WEEK));
 	}
 
 	public int getWagesSum() {
@@ -126,7 +126,7 @@ public class HumanResources extends DepartmentRoundSensitive {
 
 	public int getWorkingHours() {
 
-		return workingHoursPerRound;
+		return (workingHoursPerRound<Constant.HumanResources.HR_WORK_WEEK*Constant.HumanResources.HR_EMPLOYEES)?Constant.HumanResources.HR_WORK_WEEK*Constant.HumanResources.HR_EMPLOYEES:workingHoursPerRound;
 	}
 
 	@Override
@@ -297,11 +297,7 @@ public class HumanResources extends DepartmentRoundSensitive {
 	@Override
 	public int getFixCosts(){
 		//Standardmäßig: 40 Leute Stammbelegschaft: (40 Stunden woche)
-		int minCosts = this.wagePerRound.getAmount() * 1600;
-		
-		return (this.wagePerRound.getAmount() * this.workingHoursPerRound > minCosts) ?this.wagePerRound.getAmount() * this.workingHoursPerRound:minCosts ;
-		
-			
+		return this.getWagesPerHour().getAmount() * this.getWorkingHours() * this.getCountEmployees();
 		 
 	}
 }
