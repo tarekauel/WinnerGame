@@ -83,9 +83,20 @@ public class GameEngine {
 	public ArrayList<Company> getListOfCompanys() {
 		return this.listOfCompanys;
 	}
+	
+	private Company findCompanyOfPlayer(String playerName) {
 
-	public GameDataMessageToClient getInitialGameDataMessageToClient(String player) {
+		for (Company company : GameEngine.getGameEngine().getListOfCompanys()) {
+			if (company.getName().equals(playerName)) {
+				return company;
+			}
+		}
+		throw new IllegalArgumentException("Der Playername ist invalid!");
+
+	}
+	public GameDataMessageToClient getInitialGameDataMessageToClient(String player) throws Exception {
 		
+		Company company =findCompanyOfPlayer(player);
 		ArrayList<MarketShareToClient> marketShares = new ArrayList<MarketShareToClient>();		
 		ArrayList<RessourcePriceToClient> waferPrice = new ArrayList<RessourcePriceToClient>();		
 		ArrayList<RessourcePriceToClient> casePrice = new ArrayList<RessourcePriceToClient>();		
@@ -95,12 +106,12 @@ public class GameEngine {
 		message.GameDataMessageToClient.ProductionToClient production = new ProductionToClient(productionOrders);
 		
 		ArrayList<FixCostToClient> fixCosts = new ArrayList<FixCostToClient>();
-		fixCosts.add(new FixCostToClient("Verkauf", 100000));
-		fixCosts.add(new FixCostToClient("Personal", 100000));
-		fixCosts.add(new FixCostToClient("Marktforschung", 100000));
-		fixCosts.add(new FixCostToClient("Produktion", 100000));
-		fixCosts.add(new FixCostToClient("Einkauf", 100000));
-		fixCosts.add(new FixCostToClient("Lager", 100000));
+		fixCosts.add(new FixCostToClient("Verkauf", Constant.DepartmentFixcost.DISTRIBUTION));
+		fixCosts.add(new FixCostToClient("Personal", company.getDistribution().getFixCosts()));
+		fixCosts.add(new FixCostToClient("Marktforschung", Constant.DepartmentFixcost.MARKET_RESEARCH));
+		fixCosts.add(new FixCostToClient("Produktion", Constant.DepartmentFixcost.PRODUCTION));
+		fixCosts.add(new FixCostToClient("Einkauf", Constant.DepartmentFixcost.PURCHASE));
+		fixCosts.add(new FixCostToClient("Lager", Constant.DepartmentFixcost.STORAGE));
 	
 		ArrayList<CashValueOfRoundToClient> cashValues = new ArrayList<CashValueOfRoundToClient>();	
 		MachineryToClient machinery = new MachineryToClient(1, Constant.Machinery.CAPACITY[0], 0, 0);
@@ -121,9 +132,9 @@ public class GameEngine {
 			possibleBenefits.add(new PossibleBenefit(benefit.getName(), benefit.getCostsPerRound()));
 		}
 		ArrayList<TMotivation> motivation = new ArrayList<TMotivation>();
-		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, 0, 1000, 40, 0);
+		message.GameDataMessageToClient.HumanResourcesToClient humanResources = new HumanResourcesToClient(benefits, possibleBenefits, motivation, MarketData.getMarketData().getAvereageWage().getAmount(), company.getHumanResources().getWagesPerHour().getAmount(), company.getHumanResources().getCountEmployees(),company.getHumanResources().getWagesSum());
 				
-		GameDataMessageToClient initialMessage = new GameDataMessageToClient(player, purchase, production, storage, distribution, humanResources, marketing, reporting, Constant.BankAccount.START_CAPITAL, Constant.BankAccount.MAX_CREDIT);
+		GameDataMessageToClient initialMessage = new GameDataMessageToClient(player, purchase, production, storage, distribution, humanResources, marketing, reporting, company.getBankAccount().getBankBalance(), Constant.BankAccount.MAX_CREDIT);
 		
 		return initialMessage;
 		
