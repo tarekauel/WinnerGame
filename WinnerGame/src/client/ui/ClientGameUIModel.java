@@ -788,11 +788,9 @@ public class ClientGameUIModel {
 
 			this.benefit = new SimpleStringProperty(benefit);
 			// Währungsformatierung
-			// long costsTmp = Long.parseLong(costs);
-			// String costsFormatted = nFormatterCurrency.format(costsTmp /
-			// 100.0);
-			// this.costs = new SimpleStringProperty(costsFormatted);
-			this.costs = new SimpleStringProperty(costs);
+			long costsTmp = Long.parseLong(costs);
+			String costsFormatted = nFormatterCurrency.format(costsTmp / 100.0);
+			this.costs = new SimpleStringProperty(costsFormatted);
 
 		}
 

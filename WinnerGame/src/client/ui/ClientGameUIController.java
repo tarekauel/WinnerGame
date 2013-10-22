@@ -1450,7 +1450,7 @@ public class ClientGameUIController implements Initializable {
 			public void handle(ActionEvent actionEvent) {
 
 				model.getBenefitBookingTableData().add(
-					new BenefitBooking(benefitsChoiceBox.getValue().getBenefit(), benefitsChoiceBox.getValue().getCosts(), bookBenefitDurationTextField.getText())
+					new BenefitBooking(benefitsChoiceBox.getValue().getBenefit(), deformatCurrency(benefitsChoiceBox.getValue().getCosts())+"", bookBenefitDurationTextField.getText())
 				);
 				
 				model.getMessCreator().addBenefit(
