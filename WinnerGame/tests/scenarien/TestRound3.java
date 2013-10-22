@@ -44,8 +44,7 @@ public class TestRound3 {
 		// initialisiere die Listen, damit der Test beginnen kann.
 		toReceive = new ArrayList<GameDataMessageToClient>();
 		toSend = new ArrayList<GameDataMessageFromClient>();
-		
-		
+
 		// erstelle die Firmenobjekte
 		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
@@ -53,9 +52,6 @@ public class TestRound3 {
 		// Sorge für quasi unendlich Geld(Fehler Quelle vermeiden)
 		// 10 Millionen GE mehr auf Konto:
 		c1.getBankAccount().increaseBalance(999999999);
-
-		// Anmelden an der GameEngine:
-		GameEngine.getGameEngine().addCompany(c1);
 
 		// Anmelden im CustomerMarket
 		CustomerMarket.getMarket().addDistribution(c1.getDistribution());
