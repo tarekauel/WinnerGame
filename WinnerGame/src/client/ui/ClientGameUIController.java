@@ -550,7 +550,7 @@ public class ClientGameUIController implements Initializable {
 	private void initGeneral() {
 
 		processRoundProgressBar(ClientGameUIModel.getRound());
-		updateEventListView(model.getnFormatterCurrency().format(model.getIn().cash / 100) + " Barvermögen");
+		updateEventListView(model.getnFormatterCurrency().format((double) model.getIn().cash / 100) + " Barvermögen");
 		eventListView.setItems(events);
 
 		/**
@@ -1363,12 +1363,12 @@ public class ClientGameUIController implements Initializable {
 
 	private void initReporting() {
 
-		reportingSalesFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(0).costs / 100));
-		reportingHRFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(1).costs / 100));
-		reportingMarketingFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(2).costs / 100));
-		reportingProductionFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(3).costs / 100));
-		reportingPurchaseFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(4).costs / 100));
-		reportingStorageFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(5).costs / 100));
+		reportingSalesFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(0).costs / 100.0));
+		reportingHRFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(1).costs / 100.0));
+		reportingMarketingFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(2).costs / 100.0));
+		reportingProductionFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(3).costs / 100.0));
+		reportingPurchaseFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(4).costs / 100.0));
+		reportingStorageFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(5).costs / 100.0));
 		reportingMachineryLevelTextField.setText(model.getIn().reporting.machinery.level + "");
 		reportingMachineryMaxCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity + "");
 		reportingMachineryAvgWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.averageUsage);
@@ -1423,7 +1423,7 @@ public class ClientGameUIController implements Initializable {
 
 				if (!newValue.trim().equals("")) {
 					bookBenefitButton.setDisable(false);
-					int costsTotal = (deformatCurrency(benefitsChoiceBox.getValue().getCosts()) / 100) * Integer.parseInt(newValue);
+					double costsTotal = (deformatCurrency(benefitsChoiceBox.getValue().getCosts()) / 100.0) * Double.parseDouble(newValue);
 					benefitsTotalCostsTextField.setText(model.getnFormatterCurrency().format(costsTotal));
 				}
 
@@ -1434,10 +1434,10 @@ public class ClientGameUIController implements Initializable {
 		 * Misc
 		 */
 
-		hrWagesPerHourTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.myWage / 100));
-		hrAverageWagesTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.averageWage / 100));
+		hrWagesPerHourTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.myWage / 100.0));
+		hrAverageWagesTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.averageWage / 100.0));
 		hrCountEmployeesTextField.setText(model.getnFormatter().format(model.getIn().humanResources.countEmployees));
-		hrWageCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.wageCosts / 100));
+		hrWageCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.wageCosts / 100.0));
 
 		benefitsChoiceBox.setItems(model.getBenefitBoxData());
 		bookedBenefitsTableView.setItems(model.getBenefitBookingTableData());
