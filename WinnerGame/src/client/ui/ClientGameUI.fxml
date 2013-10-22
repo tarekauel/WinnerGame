@@ -296,11 +296,11 @@
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="492.0">
                           <children>
                             <Label layoutX="14.0" layoutY="43.0" text="Dauer (Runden):" />
-                            <TextField id="bookBenefitDuration" fx:id="bookBenefitDurationTextField" disable="false" layoutX="123.0" layoutY="38.0" prefHeight="25.0" prefWidth="80.0" />
+                            <TextField fx:id="bookBenefitDurationTextField" disable="true" layoutX="123.0" layoutY="38.0" prefHeight="25.0" prefWidth="80.0" />
                             <Label layoutX="14.0" layoutY="72.0" text="Kosten/Runde:" />
-                            <TextField fx:id="bookBenefitCostsPerRoundTextField" disable="false" editable="false" layoutX="123.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <TextField fx:id="bookBenefitCostsPerRoundTextField" disable="true" editable="false" layoutX="123.0" layoutY="68.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                             <Label layoutX="14.0" layoutY="102.0" text="Gesamtkosten:" />
-                            <TextField id="bookBenefitDurationTextField" fx:id="benefitsTotalCostsTextField" disable="false" editable="false" layoutX="123.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
+                            <TextField fx:id="benefitsTotalCostsTextField" disable="true" editable="false" layoutX="123.0" layoutY="98.0" opacity="0.75" prefHeight="25.0" prefWidth="80.0" />
                             <ChoiceBox fx:id="benefitsChoiceBox" layoutX="14.0" layoutY="10.0" prefWidth="116.0">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -311,12 +311,12 @@
                               </items>
                             </ChoiceBox>
                             <Button fx:id="bookBenefitButton" disable="true" layoutX="143.0" layoutY="10.0" mnemonicParsing="false" text="Buchen" />
-                            <TableView fx:id="bookedBeneftisTableView" layoutX="214.0" layoutY="10.0" prefHeight="113.0" prefWidth="267.0">
+                            <TableView fx:id="bookedBenefitsTableView" layoutX="214.0" layoutY="10.0" prefHeight="113.0" prefWidth="267.0">
                               <columns>
-                                <TableColumn maxWidth="30.0" minWidth="30.0" prefWidth="30.0" resizable="false" text="#" />
-                                <TableColumn prefWidth="83.0" text="Benefit" />
-                                <TableColumn prefWidth="75.0" text="mtl. Kosten" />
-                                <TableColumn prefWidth="75.0" text="Restlaufzeit" />
+                                <TableColumn fx:id="bookedBenefitsIdTableColumn" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" resizable="false" text="#" />
+                                <TableColumn fx:id="bookedBenefitsNameTableColumn" prefWidth="83.0" text="Benefit" />
+                                <TableColumn fx:id="bookedBenefitsCostsTableColumn" prefWidth="75.0" text="Kosten/Runde" />
+                                <TableColumn fx:id="bookedBenefitsRemainingRoundsTableColumn" prefWidth="75.0" text="Restlaufzeit" />
                               </columns>
                             </TableView>
                           </children>

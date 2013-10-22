@@ -172,12 +172,9 @@ public class ClientGameUIController implements Initializable {
 	@FXML
 	private CheckBox machineryIncreaseLevelCheckBox;
 	// Storage
-	private ObservableList<StoragePosition> resourcesInStorage = FXCollections
-			.observableArrayList();
-	private ObservableList<StoragePosition> waferInStorage = FXCollections
-			.observableArrayList();
-	private ObservableList<StoragePosition> casesInStorage = FXCollections
-			.observableArrayList();
+	private ObservableList<StoragePosition> resourcesInStorage = FXCollections.observableArrayList();
+	private ObservableList<StoragePosition> waferInStorage = FXCollections.observableArrayList();
+	private ObservableList<StoragePosition> casesInStorage = FXCollections.observableArrayList();
 	@FXML
 	private TextField storageCostsWaferTextField;
 	@FXML
@@ -246,8 +243,6 @@ public class ClientGameUIController implements Initializable {
 	private TextField hrWageCostsTextField;
 	@FXML
 	private ChoiceBox<Benefit> benefitsChoiceBox;
-	private ObservableList<Benefit> possibleBenefits = FXCollections
-			.observableArrayList();
 	@FXML
 	private Button bookBenefitButton;
 	@FXML
@@ -257,7 +252,15 @@ public class ClientGameUIController implements Initializable {
 	@FXML
 	private TextField benefitsTotalCostsTextField;
 	@FXML
-	private TableView<BenefitBooking> bookedBeneftisTableView;
+	private TableView<BenefitBooking> bookedBenefitsTableView;
+	@FXML
+	private TableColumn<BenefitBooking, Integer> bookedBenefitsIdTableColumn;
+	@FXML
+	private TableColumn<BenefitBooking, String> bookedBenefitsNameTableColumn;
+	@FXML
+	private TableColumn<BenefitBooking, String> bookedBenefitsCostsTableColumn;
+	@FXML
+	private TableColumn<BenefitBooking, String> bookedBenefitsRemainingRoundsTableColumn;
 	@FXML
 	private LineChart<String, Double> hrMotivationLineChart;
 	@FXML
@@ -325,13 +328,10 @@ public class ClientGameUIController implements Initializable {
 		this.model = model;
 	}
 
-	private void loadLineChart(String title, MouseEvent event,
-			ArrayList<HashMap<String, Double>> data, String[] cat,
-			boolean symbols) {
+	private void loadLineChart(String title, MouseEvent event, ArrayList<HashMap<String, Double>> data, String[] cat, boolean symbols) {
 		try {
 			// Load the fxml file and create a new stage for the popup
-			FXMLLoader loader = new FXMLLoader(
-					ClientUIStart.class.getResource("PopupLineChart.fxml"));
+			FXMLLoader loader = new FXMLLoader(ClientUIStart.class.getResource("PopupLineChart.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage(StageStyle.TRANSPARENT);
 			dialogStage.setTitle(title);
@@ -341,8 +341,7 @@ public class ClientGameUIController implements Initializable {
 			dialogStage.setX(event.getScreenX() + 75);
 			dialogStage.setY(event.getScreenY() + 30 - dialogStage.getHeight());
 
-			PopupLineChartController controller = (PopupLineChartController) loader
-					.getController();
+			PopupLineChartController controller = (PopupLineChartController) loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setGraphData(data, cat, symbols);
 			this.dialogStage = dialogStage;
@@ -358,9 +357,7 @@ public class ClientGameUIController implements Initializable {
 	public void onMouseEnteredSales(MouseEvent event) {
 		try {
 			// Load the fxml file and create a new stage for the popup
-			FXMLLoader loader = new FXMLLoader(
-					ClientUIStart.class
-							.getResource("PopUpStackedBarChart.fxml"));
+			FXMLLoader loader = new FXMLLoader(ClientUIStart.class.getResource("PopUpStackedBarChart.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage(StageStyle.TRANSPARENT);
 			dialogStage.setTitle("Sales");
@@ -370,18 +367,15 @@ public class ClientGameUIController implements Initializable {
 			dialogStage.setX(event.getScreenX() + 75);
 			dialogStage.setY(event.getScreenY() + 30 - dialogStage.getHeight());
 
-			PopupStackedBarChartController controller = (PopupStackedBarChartController) loader
-					.getController();
+			PopupStackedBarChartController controller = (PopupStackedBarChartController) loader.getController();
 			controller.setDialogStage(dialogStage);
 
-			ArrayList<HashMap<String, Double>> data = this.model
-					.getSalesChartData();
+			ArrayList<HashMap<String, Double>> data = this.model.getSalesChartData();
 
 			String[] cat = new String[5];
 
 			int index = 0;
-			for (int i = ClientGameUIModel.getRound() - 5; i < ClientGameUIModel
-					.getRound(); i++) {
+			for (int i = ClientGameUIModel.getRound() - 5; i < ClientGameUIModel.getRound(); i++) {
 				cat[index++] = "Runde " + i;
 			}
 
@@ -401,22 +395,20 @@ public class ClientGameUIController implements Initializable {
 	@FXML
 	public void onMouseEnteredWafer(MouseEvent event) {
 
-		ArrayList<HashMap<String, Double>> data = this.model
-				.getWaferPriceListChartData();
+		ArrayList<HashMap<String, Double>> data = this.model.getWaferPriceListChartData();
 
 		String[] cat = new String[100];
 		for (int i = 0; i < 100; i++) {
 			cat[i] = (i + 1) + "";
 		}
 		loadLineChart("Wafer", event, data, cat, false);
-		
+
 	}
 
 	@FXML
 	public void onMouseEnteredCase(MouseEvent event) {
 
-		ArrayList<HashMap<String, Double>> data = this.model
-				.getCasePriceListChartData();
+		ArrayList<HashMap<String, Double>> data = this.model.getCasePriceListChartData();
 
 		String[] cat = new String[100];
 		for (int i = 0; i < 100; i++) {
@@ -428,8 +420,7 @@ public class ClientGameUIController implements Initializable {
 	@FXML
 	public void onMouseEnteredMotivation(MouseEvent event) {
 
-		ArrayList<HashMap<String, Double>> data = this.model
-				.getMotivationChartData();
+		ArrayList<HashMap<String, Double>> data = this.model.getMotivationChartData();
 
 		String[] catMot = new String[ClientGameUIModel.getRound()];
 		for (int i = 0; i < catMot.length; i++) {
@@ -456,18 +447,19 @@ public class ClientGameUIController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
+
 		model = new ClientGameUIModel();
-//		IMessage message = ClientUIStart.getLoginModel().client.readMessage();
+		// IMessage message =
+		// ClientUIStart.getLoginModel().client.readMessage();
 		model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client.readMessage());
-//		System.out.println(message.getType());
-		
-//		if(message instanceof GameDataMessageToClient){
-//			model.setIn((GameDataMessageToClient) message);
-//		} else if (message instanceof message.GameOverMessage){
-//			System.out.println("Game Over");
-//		}
-		
+		// System.out.println(message.getType());
+
+		// if(message instanceof GameDataMessageToClient){
+		// model.setIn((GameDataMessageToClient) message);
+		// } else if (message instanceof message.GameOverMessage){
+		// System.out.println("Game Over");
+		// }
+
 		model.parseAnswerFromServer();
 		model.setupMessageCreator();
 
@@ -479,58 +471,51 @@ public class ClientGameUIController implements Initializable {
 		initHumanResources();
 		initMarketing();
 		initReporting();
-		
-		//START BUILDING SALES CHART
-		 String[] cat = new String[5];
-		 int index=0;
-		 for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
-			 cat[index++] = "Runde " + i;
-		 }
-		
-		 buildXYChart(this.model.getSalesChartData(), cat,
-		 reportingSalesBarChatXAxis, reportingSalesBarChatYAxis,
-		 reportingSalesBarChart);
-		
-		 // START BULDING MOTIVATION CHART
-		
-		 String[] catMot = new String[ClientGameUIModel.getRound()];
-		 for( int i=0; i<catMot.length; i++) {
-			 catMot[i] = (i+1)+"";
-		 }
-		
-		 buildXYChart(this.model.getMotivationChartData(), catMot,
-		 hrMotivationLineChartXAxis, hrMotivationLineChartYAxis,
-		 hrMotivationLineChart);
-		
-		 // START BUILDING WAFER PRICE CHART
-		 String[] catWafer = new String[100];
-		 for( int i=0; i<catWafer.length; i++) {
-			 catWafer[i] = (i+1) + "";
-		 }
-		
-		 buildXYChart(this.model.getWaferPriceListChartData(), catWafer,
-		 marketingWaferPriceChartXAxis,
-		 marketingWaferPriceChartYAxis,marketingWaferPriceChart );
-		 marketingWaferPriceChart.setCreateSymbols(false);
-		
-		 // START BUILDING Case PRICE CHART
-		 String[] catCase = new String[100];
-		 for( int i=0; i<catCase.length; i++) {
-			 catCase[i] = (i+1) + "";
-		 }
-		
-		 buildXYChart(this.model.getCasePriceListChartData(), catCase,
-		 marketingCasePriceChartXAxis,
-		 marketingCasePriceChartYAxis,marketingCasePriceChart );
-		 marketingCasePriceChart.setCreateSymbols(false);
-		
-		 // START BUILDING Market Shares
-		
-		 buildPieChart(this.model.getMarketShareChartData(),
-		 marketingMarketSharePieChart);
-		
-		 //END WORK
-		 
+
+		// START BUILDING SALES CHART
+		String[] cat = new String[5];
+		int index = 0;
+		for (int i = ClientGameUIModel.getRound() - 5; i < ClientGameUIModel.getRound(); i++) {
+			cat[index++] = "Runde " + i;
+		}
+
+		buildXYChart(this.model.getSalesChartData(), cat, reportingSalesBarChatXAxis, reportingSalesBarChatYAxis, reportingSalesBarChart);
+
+		// START BULDING MOTIVATION CHART
+
+		String[] catMot = new String[ClientGameUIModel.getRound()];
+		for (int i = 0; i < catMot.length; i++) {
+			catMot[i] = (i + 1) + "";
+		}
+
+		buildXYChart(this.model.getMotivationChartData(), catMot, hrMotivationLineChartXAxis, hrMotivationLineChartYAxis, hrMotivationLineChart);
+
+		// START BUILDING WAFER PRICE CHART
+		String[] catWafer = new String[100];
+		for (int i = 0; i < catWafer.length; i++) {
+			catWafer[i] = (i + 1) + "";
+		}
+
+		buildXYChart(this.model.getWaferPriceListChartData(), catWafer, marketingWaferPriceChartXAxis, marketingWaferPriceChartYAxis,
+				marketingWaferPriceChart);
+		marketingWaferPriceChart.setCreateSymbols(false);
+
+		// START BUILDING Case PRICE CHART
+		String[] catCase = new String[100];
+		for (int i = 0; i < catCase.length; i++) {
+			catCase[i] = (i + 1) + "";
+		}
+
+		buildXYChart(this.model.getCasePriceListChartData(), catCase, marketingCasePriceChartXAxis, marketingCasePriceChartYAxis,
+				marketingCasePriceChart);
+		marketingCasePriceChart.setCreateSymbols(false);
+
+		// START BUILDING Market Shares
+
+		buildPieChart(this.model.getMarketShareChartData(), marketingMarketSharePieChart);
+
+		// END WORK
+
 	}
 
 	private int deformatCurrency(String oldCurrencyString) {
@@ -565,9 +550,7 @@ public class ClientGameUIController implements Initializable {
 	private void initGeneral() {
 
 		processRoundProgressBar(ClientGameUIModel.getRound());
-		updateEventListView(model.getnFormatterCurrency().format(
-				model.getIn().cash/100)
-				+ " Barvermögen");
+		updateEventListView(model.getnFormatterCurrency().format(model.getIn().cash / 100) + " Barvermögen");
 		eventListView.setItems(events);
 
 		/**
@@ -595,16 +578,11 @@ public class ClientGameUIController implements Initializable {
 
 		};
 
-		newPurchaseRequestArticleQualityTextField.textProperty()
-				.bindBidirectional(
-						newPurchaseRequestArticleQualitySlider.valueProperty(),
-						stringConverterForSliders);
-		newProductionOrderOutputQuantityTextField.textProperty()
-				.bindBidirectional(
-						newProductionOrderOutputQuantitySlider.valueProperty(),
-						stringConverterForSliders);
-		newSaleOfferArticleQuantityTextField.textProperty().bindBidirectional(
-				newSaleOfferArticleQuantitySlider.valueProperty(),
+		newPurchaseRequestArticleQualityTextField.textProperty().bindBidirectional(newPurchaseRequestArticleQualitySlider.valueProperty(),
+				stringConverterForSliders);
+		newProductionOrderOutputQuantityTextField.textProperty().bindBidirectional(newProductionOrderOutputQuantitySlider.valueProperty(),
+				stringConverterForSliders);
+		newSaleOfferArticleQuantityTextField.textProperty().bindBidirectional(newSaleOfferArticleQuantitySlider.valueProperty(),
 				stringConverterForSliders);
 
 		/**
@@ -615,50 +593,48 @@ public class ClientGameUIController implements Initializable {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 
-//				for (Request req : purchaseRequestsTableView.getItems()) {
-//
-//					if (req.getStatus().equals("Offen")) {
-//
-//						for (SupplierOffer offer : req.getOffer()) {
-//							if (!offer.getQuantity().isEmpty()) {
-//								model.getMessCreator().addAccepted(
-//										offer.getName(),
-//										Integer.parseInt(offer.getQuality()),
-//										Integer.parseInt(offer.getQuantity()));
-//								break;
-//							}
-//						}
-//					}
-//				}
+				// for (Request req : purchaseRequestsTableView.getItems()) {
+				//
+				// if (req.getStatus().equals("Offen")) {
+				//
+				// for (SupplierOffer offer : req.getOffer()) {
+				// if (!offer.getQuantity().isEmpty()) {
+				// model.getMessCreator().addAccepted(
+				// offer.getName(),
+				// Integer.parseInt(offer.getQuality()),
+				// Integer.parseInt(offer.getQuantity()));
+				// break;
+				// }
+				// }
+				// }
+				// }
 
 				if (machineryIncreaseLevelCheckBox.selectedProperty().get() == true) {
 					model.getMessCreator().setMachine(true);
-				} else if (machineryIncreaseLevelCheckBox.selectedProperty()
-						.get() == false) {
+				} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
 					model.getMessCreator().setMachine(false);
 				}
 
-				if (marketResearchBuyMarketResearchCheckBox.selectedProperty()
-						.get() == true) {
+				if (marketResearchBuyMarketResearchCheckBox.selectedProperty().get() == true) {
 					model.getMessCreator().setMarketResearch(true);
-				} else if (machineryIncreaseLevelCheckBox.selectedProperty()
-						.get() == false) {
+				} else if (machineryIncreaseLevelCheckBox.selectedProperty().get() == false) {
 					model.getMessCreator().setMarketResearch(false);
 				}
-				
-				//model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText())*100);
+
+				// model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText())*100);
 				model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText()));
-				
+
 				ClientUIStart.getLoginModel().client.writeMessage((GameDataMessageFromClient) model.getMessCreator().getSendMessage());
 				model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client.readMessage());
-		
-//				IMessage message = ClientUIStart.getLoginModel().client.readMessage();
-//				System.out.println(message.getType());
-//				if(message instanceof GameDataMessageToClient){
-//					model.setIn((GameDataMessageToClient) message);
-//				} else if (message instanceof message.GameOverMessage){
-//					System.out.println("Game Over");
-//				}
+
+				// IMessage message =
+				// ClientUIStart.getLoginModel().client.readMessage();
+				// System.out.println(message.getType());
+				// if(message instanceof GameDataMessageToClient){
+				// model.setIn((GameDataMessageToClient) message);
+				// } else if (message instanceof message.GameOverMessage){
+				// System.out.println("Game Over");
+				// }
 
 				model.parseAnswerFromServer();
 				model.setupMessageCreator();
@@ -671,63 +647,56 @@ public class ClientGameUIController implements Initializable {
 				initHumanResources();
 				initMarketing();
 				initReporting();
-				
+
 				hrMotivationLineChart.getData().clear();
 				marketingWaferPriceChart.getData().clear();
 				marketingCasePriceChart.getData().clear();
 				marketingMarketSharePieChart.getData().clear();
 				reportingSalesBarChart.getData().clear();
-				
-				//START BUILDING SALES CHART
-				 String[] cat = new String[5];
-				 int index=0;
-				 for(int i=ClientGameUIModel.getRound()-5; i < ClientGameUIModel.getRound(); i++) {
-					 cat[index++] = "Runde " + i;
-				 }
-				
-				 buildXYChart(model.getSalesChartData(), cat,
-				 reportingSalesBarChatXAxis, reportingSalesBarChatYAxis,
-				 reportingSalesBarChart);
-				
-				 // START BULDING MOTIVATION CHART
-				
-				 String[] catMot = new String[ClientGameUIModel.getRound()];
-				 for( int i=0; i<catMot.length; i++) {
-					 catMot[i] = (i+1)+"";
-				 }
-				
-				 buildXYChart(model.getMotivationChartData(), catMot,
-				 hrMotivationLineChartXAxis, hrMotivationLineChartYAxis,
-				 hrMotivationLineChart);
-				
-				 // START BUILDING WAFER PRICE CHART
-				 String[] catWafer = new String[100];
-				 for( int i=0; i<catWafer.length; i++) {
-					 catWafer[i] = (i+1) + "";
-				 }
-				
-				 buildXYChart(model.getWaferPriceListChartData(), catWafer,
-				 marketingWaferPriceChartXAxis,
-				 marketingWaferPriceChartYAxis,marketingWaferPriceChart );
-				 marketingWaferPriceChart.setCreateSymbols(false);
-				
-				 // START BUILDING Case PRICE CHART
-				 String[] catCase = new String[100];
-				 for( int i=0; i<catCase.length; i++) {
-					 catCase[i] = (i+1) + "";
-				 }
-				
-				 buildXYChart(model.getCasePriceListChartData(), catCase,
-				 marketingCasePriceChartXAxis,
-				 marketingCasePriceChartYAxis,marketingCasePriceChart );
-				 marketingCasePriceChart.setCreateSymbols(false);
-				
-				 // START BUILDING Market Shares
-				
-				 buildPieChart(model.getMarketShareChartData(),
-				 marketingMarketSharePieChart);
-				
-				 //END WORK
+
+				// START BUILDING SALES CHART
+				String[] cat = new String[5];
+				int index = 0;
+				for (int i = ClientGameUIModel.getRound() - 5; i < ClientGameUIModel.getRound(); i++) {
+					cat[index++] = "Runde " + i;
+				}
+
+				buildXYChart(model.getSalesChartData(), cat, reportingSalesBarChatXAxis, reportingSalesBarChatYAxis, reportingSalesBarChart);
+
+				// START BULDING MOTIVATION CHART
+
+				String[] catMot = new String[ClientGameUIModel.getRound()];
+				for (int i = 0; i < catMot.length; i++) {
+					catMot[i] = (i + 1) + "";
+				}
+
+				buildXYChart(model.getMotivationChartData(), catMot, hrMotivationLineChartXAxis, hrMotivationLineChartYAxis, hrMotivationLineChart);
+
+				// START BUILDING WAFER PRICE CHART
+				String[] catWafer = new String[100];
+				for (int i = 0; i < catWafer.length; i++) {
+					catWafer[i] = (i + 1) + "";
+				}
+
+				buildXYChart(model.getWaferPriceListChartData(), catWafer, marketingWaferPriceChartXAxis, marketingWaferPriceChartYAxis,
+						marketingWaferPriceChart);
+				marketingWaferPriceChart.setCreateSymbols(false);
+
+				// START BUILDING Case PRICE CHART
+				String[] catCase = new String[100];
+				for (int i = 0; i < catCase.length; i++) {
+					catCase[i] = (i + 1) + "";
+				}
+
+				buildXYChart(model.getCasePriceListChartData(), catCase, marketingCasePriceChartXAxis, marketingCasePriceChartYAxis,
+						marketingCasePriceChart);
+				marketingCasePriceChart.setCreateSymbols(false);
+
+				// START BUILDING Market Shares
+
+				buildPieChart(model.getMarketShareChartData(), marketingMarketSharePieChart);
+
+				// END WORK
 
 			}
 		});
@@ -740,7 +709,7 @@ public class ClientGameUIController implements Initializable {
 		boolean alreadyFilledCell;
 
 		public EditingCell() {
-		}		
+		}
 
 		@Override
 		public void startEdit() {
@@ -754,9 +723,7 @@ public class ClientGameUIController implements Initializable {
 				}
 			}
 
-			if (purchaseRequestsTableView.getSelectionModel().getSelectedItem()
-					.getStatus().equals("Offen")
-					&& alreadyFilledCell == false) {
+			if (purchaseRequestsTableView.getSelectionModel().getSelectedItem().getStatus().equals("Offen") && alreadyFilledCell == false) {
 
 				super.startEdit();
 
@@ -767,26 +734,26 @@ public class ClientGameUIController implements Initializable {
 				setGraphic(textField);
 				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 				textField.selectAll();
-			
-//			} else if (purchaseRequestsTableView.getSelectionModel()
-//					.getSelectedItem().getStatus().equals("Offen")
-//					&& alreadyFilledCell == true) {
-//
-//				if (!this.getItem().toString().isEmpty()) {
-//
-//					super.startEdit();
-//
-//					if (textField == null) {
-//						createTextField();
-//					}
-//
-//					setGraphic(textField);
-//					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-//					textField.selectAll();
-//
-//				} else {
-//					cancelEdit();
-//				}
+
+				// } else if (purchaseRequestsTableView.getSelectionModel()
+				// .getSelectedItem().getStatus().equals("Offen")
+				// && alreadyFilledCell == true) {
+				//
+				// if (!this.getItem().toString().isEmpty()) {
+				//
+				// super.startEdit();
+				//
+				// if (textField == null) {
+				// createTextField();
+				// }
+				//
+				// setGraphic(textField);
+				// setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+				// textField.selectAll();
+				//
+				// } else {
+				// cancelEdit();
+				// }
 
 			} else {
 				cancelEdit();
@@ -825,8 +792,7 @@ public class ClientGameUIController implements Initializable {
 
 		private void createTextField() {
 			textField = new TextField(getString());
-			textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()
-					* 2);
+			textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
 			textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 				@Override
@@ -852,28 +818,20 @@ public class ClientGameUIController implements Initializable {
 		 * purchaseRequestTable: CellFactory
 		 */
 
-		purchaseRequestArticleTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Request, String>(
-						"name"));
+		purchaseRequestArticleTableColumn.setCellValueFactory(new PropertyValueFactory<Request, String>("name"));
 
-		purchaseRequestIdTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Request, Integer>(
-						"id"));
+		purchaseRequestIdTableColumn.setCellValueFactory(new PropertyValueFactory<Request, Integer>("id"));
 
-		purchaseRequestStatusTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Request, String>(
-						"status"));
+		purchaseRequestStatusTableColumn.setCellValueFactory(new PropertyValueFactory<Request, String>("status"));
 
-		purchaseRequestQualityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Request, String>(
-						"quality"));
+		purchaseRequestQualityTableColumn.setCellValueFactory(new PropertyValueFactory<Request, String>("quality"));
 
 		purchaseRequestsTableView.setItems(model.getPurchaseRequestTableData());
 
 		/**
 		 * purchaseRequestTable: Misc
 		 */
-		
+
 		final ChangeListener<Request> purchaseRequestsTableViewListener = new ChangeListener<Request>() {
 			public void changed(ObservableValue<? extends Request> observable, Request oldValue, Request newValue) {
 				model.getPurchaseOffersTableData().clear();
@@ -886,21 +844,19 @@ public class ClientGameUIController implements Initializable {
 				}
 			}
 		};
-		
-//		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(purchaseRequestsTableViewListener);
-//		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().removeListener(purchaseRequestsTableViewListener);
+
+		// purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(purchaseRequestsTableViewListener);
+		// purchaseRequestsTableView.getSelectionModel().selectedItemProperty().removeListener(purchaseRequestsTableViewListener);
 
 		// Verhindert, dass man eine neue Spalte durch schieben hinzufügen kann
-		purchaseRequestsTableView
-				.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		purchaseRequestsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// purchaseRequestIdTableColumn.setSortType(TableColumn.SortType.DESCENDING);
-		purchaseRequestsTableView.getSelectionModel().setSelectionMode(
-				SelectionMode.SINGLE);
+		purchaseRequestsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		purchaseRequestsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Request>() {
 			public void changed(ObservableValue<? extends Request> observable, Request oldValue, Request newValue) {
 				model.getPurchaseOffersTableData().clear();
-				if( newValue != null) {
+				if (newValue != null) {
 					for (SupplierOffer o : newValue.getOffer()) {
 						model.getPurchaseOffersTableData().add(o);
 						if (o.getRound() == ClientGameUIModel.getRound() - 1) {
@@ -911,7 +867,6 @@ public class ClientGameUIController implements Initializable {
 				}
 			}
 		});
-		
 
 		/**
 		 * purchaseOffersTable: CellFactory
@@ -923,38 +878,24 @@ public class ClientGameUIController implements Initializable {
 			}
 		};
 
-		purchaseOffersArticleTableColumn
-				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>(
-						"name"));
-		purchaseOffersIdTableColumn
-				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, Integer>(
-						"id"));
-		purchaseOffersQualityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>(
-						"quality"));
-		purchaseOffersQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>(
-						"quantity"));
+		purchaseOffersArticleTableColumn.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>("name"));
+		purchaseOffersIdTableColumn.setCellValueFactory(new PropertyValueFactory<SupplierOffer, Integer>("id"));
+		purchaseOffersQualityTableColumn.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>("quality"));
+		purchaseOffersQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>("quantity"));
 		purchaseOffersQuantityTableColumn.setCellFactory(cellFactory);
-		purchaseOffersQuantityTableColumn
-				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SupplierOffer, String>>() {
-					@Override
-					public void handle(
-							TableColumn.CellEditEvent<SupplierOffer, String> t) {
-								((SupplierOffer) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuantity(t.getNewValue());
-								model.getMessCreator().addAccepted(
-									purchaseOffersTableView.getSelectionModel().getSelectedItem().getName(),
-									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()),
-									Integer.parseInt(t.getNewValue())						
-								);
-//								System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
-//									Integer.parseInt(t.getNewValue())+""+
-//									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()));
-							}
-						});
-		purchaseOffersPriceTableColumn
-				.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>(
-						"price"));
+		purchaseOffersQuantityTableColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SupplierOffer, String>>() {
+			@Override
+			public void handle(TableColumn.CellEditEvent<SupplierOffer, String> t) {
+				((SupplierOffer) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuantity(t.getNewValue());
+				model.getMessCreator().addAccepted(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName(),
+						Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()),
+						Integer.parseInt(t.getNewValue()));
+				// System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
+				// Integer.parseInt(t.getNewValue())+""+
+				// Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()));
+			}
+		});
+		purchaseOffersPriceTableColumn.setCellValueFactory(new PropertyValueFactory<SupplierOffer, String>("price"));
 
 		purchaseOffersTableView.setItems(model.getPurchaseOffersTableData());
 
@@ -962,10 +903,8 @@ public class ClientGameUIController implements Initializable {
 		 * purchaseOffersTable: Misc
 		 */
 
-		purchaseOffersTableView
-				.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		purchaseOffersTableView.getSelectionModel().setSelectionMode(
-				SelectionMode.SINGLE);
+		purchaseOffersTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		purchaseOffersTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		/**
 		 * ActionListener
@@ -977,45 +916,34 @@ public class ClientGameUIController implements Initializable {
 				// Felder resetten
 				newPurchaseRequestTitledPane.setDisable(false);
 				newPurchaseRequestSaveButton.setDisable(false);
-				newPurchaseRequestArticleNameChoiceBox.getSelectionModel()
-						.clearSelection();
+				newPurchaseRequestArticleNameChoiceBox.getSelectionModel().clearSelection();
 				newPurchaseRequestArticleQualitySlider.adjustValue(1.0);
-				
+
 			}
 		});
 
-		newPurchaseRequestSaveButton
-				.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent actionEvent) {
+		newPurchaseRequestSaveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
 
-						if (!newPurchaseRequestArticleNameChoiceBox.getValue()
-								.equals("")) {
+				if (!newPurchaseRequestArticleNameChoiceBox.getValue().equals("")) {
 
-							model.getPurchaseRequestTableData().add(
-									new Request(
-											newPurchaseRequestArticleNameChoiceBox
-													.getValue().toString(),
-											newPurchaseRequestArticleQualityTextField
-													.getText()));
+					model.getPurchaseRequestTableData().add(
+							new Request(newPurchaseRequestArticleNameChoiceBox.getValue().toString(), newPurchaseRequestArticleQualityTextField
+									.getText()));
 
-							model.getMessCreator()
-									.addRequest(
-											newPurchaseRequestArticleNameChoiceBox
-													.getValue().toString(),
-											Integer.parseInt(newPurchaseRequestArticleQualityTextField
-													.getText()));
+					model.getMessCreator().addRequest(newPurchaseRequestArticleNameChoiceBox.getValue().toString(),
+							Integer.parseInt(newPurchaseRequestArticleQualityTextField.getText()));
 
-						}
+				}
 
-						newPurchaseRequestArticleNameChoiceBox
-								.getSelectionModel().clearSelection();
-						newPurchaseRequestArticleQualitySlider.adjustValue(1.0);
-						newPurchaseRequestTitledPane.setDisable(true);
-						newPurchaseRequestSaveButton.setDisable(true);
+				newPurchaseRequestArticleNameChoiceBox.getSelectionModel().clearSelection();
+				newPurchaseRequestArticleQualitySlider.adjustValue(1.0);
+				newPurchaseRequestTitledPane.setDisable(true);
+				newPurchaseRequestSaveButton.setDisable(true);
 
-					}
-				});
+			}
+		});
 
 	}
 
@@ -1058,33 +986,23 @@ public class ClientGameUIController implements Initializable {
 
 	private boolean calcMaximumProduction() {
 
-		int qWaferInStorage = deformatQuantity(newProductionOrderWaferChoiceBox
-				.getValue().getQuantity());
-		int qCasesInStorage = deformatQuantity(newProductionOrderCaseChoiceBox
-				.getValue().getQuantity());
+		int qWaferInStorage = deformatQuantity(newProductionOrderWaferChoiceBox.getValue().getQuantity());
+		int qCasesInStorage = deformatQuantity(newProductionOrderCaseChoiceBox.getValue().getQuantity());
 		int qCasesNeededforMaxPanels = qWaferInStorage / 54;
-		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity
-				- Integer.parseInt(machineryPlannedCapacityTextField.getText());
+		int remainingMachineCapacity = model.getIn().reporting.machinery.maxCapacity - Integer.parseInt(machineryPlannedCapacityTextField.getText());
 
 		// System.out.println(qCasesNeededforMaxPanels);
 
-		if (qCasesNeededforMaxPanels > qCasesInStorage
-				&& qCasesInStorage <= remainingMachineCapacity) {
+		if (qCasesNeededforMaxPanels > qCasesInStorage && qCasesInStorage <= remainingMachineCapacity) {
 			newProductionOrderOutputQuantitySlider.setMax(qCasesInStorage);
 			newProductionOrderOutputQuantitySlider.setValue(qCasesInStorage);
-		} else if (qCasesNeededforMaxPanels <= qCasesInStorage
-				&& qCasesNeededforMaxPanels <= remainingMachineCapacity) {
-			newProductionOrderOutputQuantitySlider
-					.setMax(qCasesNeededforMaxPanels);
-			newProductionOrderOutputQuantitySlider
-					.setValue(qCasesNeededforMaxPanels);
-		} else if (qCasesInStorage > remainingMachineCapacity
-				|| qCasesNeededforMaxPanels > remainingMachineCapacity) {
+		} else if (qCasesNeededforMaxPanels <= qCasesInStorage && qCasesNeededforMaxPanels <= remainingMachineCapacity) {
+			newProductionOrderOutputQuantitySlider.setMax(qCasesNeededforMaxPanels);
+			newProductionOrderOutputQuantitySlider.setValue(qCasesNeededforMaxPanels);
+		} else if (qCasesInStorage > remainingMachineCapacity || qCasesNeededforMaxPanels > remainingMachineCapacity) {
 			System.out.println(remainingMachineCapacity);
-			newProductionOrderOutputQuantitySlider
-					.setMax(remainingMachineCapacity);
-			newProductionOrderOutputQuantitySlider
-					.setValue(remainingMachineCapacity);
+			newProductionOrderOutputQuantitySlider.setMax(remainingMachineCapacity);
+			newProductionOrderOutputQuantitySlider.setValue(remainingMachineCapacity);
 		} else if (qCasesInStorage > model.getIn().reporting.machinery.maxCapacity
 				|| qCasesNeededforMaxPanels > model.getIn().reporting.machinery.maxCapacity) {
 			return false;
@@ -1112,31 +1030,25 @@ public class ClientGameUIController implements Initializable {
 		}
 
 		cumulativeWorkloadAfter = cumulativeWorkloadBefore + productionOrder;
-		percentWorkloadAfter = (double) cumulativeWorkloadAfter
-				/ (double) maxCapacity;
+		percentWorkloadAfter = (double) cumulativeWorkloadAfter / (double) maxCapacity;
 
-		tooltip.setText((percentWorkloadAfter * 100) + " %" + " - "
-				+ cumulativeWorkloadAfter + " Panels");
+		tooltip.setText((percentWorkloadAfter * 100) + " %" + " - " + cumulativeWorkloadAfter + " Panels");
 
 		if (cumulativeWorkloadAfter > maxCapacity) {
 			// machineryWorkloadProgressBar.setProgress(percentWorkloadAfter);
 			machineryWorkloadProgressBar.getStyleClass().add("red-bar");
 			machineryWorkloadProgressBar.setTooltip(tooltip);
 			return false;
-		} else if (cumulativeWorkloadAfter <= maxCapacity
-				&& percentWorkloadAfter >= 70.0) {
+		} else if (cumulativeWorkloadAfter <= maxCapacity && percentWorkloadAfter >= 70.0) {
 			machineryWorkloadProgressBar.setProgress(percentWorkloadAfter);
 			machineryWorkloadProgressBar.getStyleClass().add("yellow-bar");
 			machineryWorkloadProgressBar.setTooltip(tooltip);
-			machineryPlannedCapacityTextField.setText(cumulativeWorkloadAfter
-					+ "");
-		} else if (cumulativeWorkloadAfter <= maxCapacity
-				&& percentWorkloadAfter < 70.0) {
+			machineryPlannedCapacityTextField.setText(cumulativeWorkloadAfter + "");
+		} else if (cumulativeWorkloadAfter <= maxCapacity && percentWorkloadAfter < 70.0) {
 			machineryWorkloadProgressBar.setProgress(percentWorkloadAfter);
 			machineryWorkloadProgressBar.getStyleClass().add("yellow-bar");
 			machineryWorkloadProgressBar.setTooltip(tooltip);
-			machineryPlannedCapacityTextField.setText(cumulativeWorkloadAfter
-					+ "");
+			machineryPlannedCapacityTextField.setText(cumulativeWorkloadAfter + "");
 		}
 
 		return true;
@@ -1149,52 +1061,33 @@ public class ClientGameUIController implements Initializable {
 		 * productionOrdersTable: CellFactory
 		 */
 
-		productionOrderIdTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, Integer>(
-						"id"));
+		productionOrderIdTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, Integer>("id"));
 
-		productionOrderQualityWaferTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"qualityWafer"));
+		productionOrderQualityWaferTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("qualityWafer"));
 
-		productionOrderQualityCaseTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"qualityCase"));
+		productionOrderQualityCaseTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("qualityCase"));
 
-		productionOrderTargetQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"targetQuantity"));
+		productionOrderTargetQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("targetQuantity"));
 
-		productionOrderQualityPanelTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"qualityPanel"));
+		productionOrderQualityPanelTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("qualityPanel"));
 
-		productionOrderActualQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"actualQuantity"));
+		productionOrderActualQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("actualQuantity"));
 
-		productionOrderCostsPerUnitTableColumn
-				.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>(
-						"costsPerUnit"));
+		productionOrderCostsPerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<ProductionOrder, String>("costsPerUnit"));
 
 		// productionOrderCostsPerUnitTableColumn.setStyle("-fx-alignment: CENTER-RIGHT;");
-		productionOrdersTableView
-				.setItems(model.getProductionOrdersTableData());
+		productionOrdersTableView.setItems(model.getProductionOrdersTableData());
 
-		productionOrdersTableView
-				.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		productionOrdersTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// productionOrderIdTableColumn.setSortType(TableColumn.SortType.DESCENDING);
-		productionOrdersTableView.getSelectionModel().setSelectionMode(
-				SelectionMode.SINGLE);
+		productionOrdersTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		/**
 		 * Misc
 		 */
 
-		machineryLevelTextField.setText(model.getIn().reporting.machinery.level
-				+ "");
-		machineryMaximumCapacityTextField
-				.setText(model.getIn().reporting.machinery.maxCapacity + "");
+		machineryLevelTextField.setText(model.getIn().reporting.machinery.level + "");
+		machineryMaximumCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity + "");
 		machineryPlannedCapacityTextField.setText("0");
 		// boolean isPossibleMachinery;
 		// boolean isPossibleProduction;
@@ -1204,9 +1097,7 @@ public class ClientGameUIController implements Initializable {
 		 */
 
 		final ChangeListener<StoragePosition> newProductionOrderWaferChoiceBoxListener = new ChangeListener<StoragePosition>() {
-			public void changed(
-					ObservableValue<? extends StoragePosition> observable,
-					StoragePosition oldValue, StoragePosition newValue) {
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
 
 				if (newProductionOrderCaseChoiceBox.getValue() != null) {
 					calcMaximumProduction();
@@ -1216,9 +1107,7 @@ public class ClientGameUIController implements Initializable {
 		};
 
 		final ChangeListener<StoragePosition> newProductionOrderCaseChoiceBoxListener = new ChangeListener<StoragePosition>() {
-			public void changed(
-					ObservableValue<? extends StoragePosition> observable,
-					StoragePosition oldValue, StoragePosition newValue) {
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
 
 				if (newProductionOrderWaferChoiceBox.getValue() != null) {
 					calcMaximumProduction();
@@ -1228,21 +1117,14 @@ public class ClientGameUIController implements Initializable {
 		};
 
 		final ChangeListener<Number> newProductionOrderOutputQuantitySliderListener = new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-				int costsWafer = (deformatCurrency(newProductionOrderWaferChoiceBox
-						.getValue().getCosts())
-						* Integer
-								.parseInt(newProductionOrderOutputQuantityTextField
-										.getText()) * 54) / 100;
-				int costsCases = (deformatCurrency(newProductionOrderCaseChoiceBox
-						.getValue().getCosts()) * Integer
-						.parseInt(newProductionOrderOutputQuantityTextField
-								.getText())) / 100;
+				int costsWafer = (deformatCurrency(newProductionOrderWaferChoiceBox.getValue().getCosts())
+						* Integer.parseInt(newProductionOrderOutputQuantityTextField.getText()) * 54) / 100;
+				int costsCases = (deformatCurrency(newProductionOrderCaseChoiceBox.getValue().getCosts()) * Integer
+						.parseInt(newProductionOrderOutputQuantityTextField.getText())) / 100;
 				int costsProductionOrder = costsWafer + costsCases;
-				newProductionOrderCostsTextField.setText(model
-						.getnFormatterCurrency().format(costsProductionOrder));
+				newProductionOrderCostsTextField.setText(model.getnFormatterCurrency().format(costsProductionOrder));
 
 			}
 		};
@@ -1253,104 +1135,56 @@ public class ClientGameUIController implements Initializable {
 				getResourcesInStorage();
 				newProductionOrderTitledPane.setDisable(false);
 				newProductionOrderSaveButton.setDisable(false);
-				newProductionOrderWaferChoiceBox.valueProperty()
-						.removeListener(
-								newProductionOrderWaferChoiceBoxListener);
-				newProductionOrderCaseChoiceBox.valueProperty().removeListener(
-						newProductionOrderCaseChoiceBoxListener);
-				newProductionOrderOutputQuantitySlider.valueProperty()
-						.removeListener(
-								newProductionOrderOutputQuantitySliderListener);
-				newProductionOrderWaferChoiceBox.getSelectionModel()
-						.clearSelection();
+				newProductionOrderWaferChoiceBox.valueProperty().removeListener(newProductionOrderWaferChoiceBoxListener);
+				newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);
+				newProductionOrderOutputQuantitySlider.valueProperty().removeListener(newProductionOrderOutputQuantitySliderListener);
+				newProductionOrderWaferChoiceBox.getSelectionModel().clearSelection();
 				newProductionOrderWaferChoiceBox.getItems().clear();
-				newProductionOrderCaseChoiceBox.getSelectionModel()
-						.clearSelection();
+				newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
 				newProductionOrderCaseChoiceBox.getItems().clear();
 				newProductionOrderCostsTextField.clear();
 				newProductionOrderOutputQuantitySlider.adjustValue(0.0);
-				newProductionOrderWaferChoiceBox.getItems().setAll(
-						waferInStorage);
-				newProductionOrderCaseChoiceBox.getItems().setAll(
-						casesInStorage);
-				newProductionOrderWaferChoiceBox.valueProperty().addListener(
-						newProductionOrderWaferChoiceBoxListener);
-				newProductionOrderCaseChoiceBox.valueProperty().addListener(
-						newProductionOrderCaseChoiceBoxListener);
-				newProductionOrderOutputQuantitySlider.valueProperty()
-						.addListener(
-								newProductionOrderOutputQuantitySliderListener);
+				newProductionOrderWaferChoiceBox.getItems().setAll(waferInStorage);
+				newProductionOrderCaseChoiceBox.getItems().setAll(casesInStorage);
+				newProductionOrderWaferChoiceBox.valueProperty().addListener(newProductionOrderWaferChoiceBoxListener);
+				newProductionOrderCaseChoiceBox.valueProperty().addListener(newProductionOrderCaseChoiceBoxListener);
+				newProductionOrderOutputQuantitySlider.valueProperty().addListener(newProductionOrderOutputQuantitySliderListener);
 			}
 		});
 
-		newProductionOrderSaveButton
-				.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent actionEvent) {
+		newProductionOrderSaveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
 
-						if (newProductionOrderCaseChoiceBox.getValue() != null
-								&& newProductionOrderWaferChoiceBox.getValue() != null) {
-							boolean isPossibleMachinery = calcAndSetMachinery(Integer
-									.parseInt(newProductionOrderOutputQuantityTextField
-											.getText()));
+				if (newProductionOrderCaseChoiceBox.getValue() != null && newProductionOrderWaferChoiceBox.getValue() != null) {
+					boolean isPossibleMachinery = calcAndSetMachinery(Integer.parseInt(newProductionOrderOutputQuantityTextField.getText()));
 
-							if (isPossibleMachinery == true
-									&& !newProductionOrderOutputQuantityTextField
-											.getText().equals("0")) {
-								model.getProductionOrdersTableData().add(
-										new ProductionOrder(
-												newProductionOrderWaferChoiceBox
-														.getValue()
-														.getQuality(),
-												newProductionOrderCaseChoiceBox
-														.getValue()
-														.getQuality(),
-												newProductionOrderOutputQuantityTextField
-														.getText()));
-								
-								model.getMessCreator()
-										.addProductionOrder(
-												Integer.parseInt(newProductionOrderWaferChoiceBox
-														.getValue()
-														.getQuality()),
-												Integer.parseInt(newProductionOrderCaseChoiceBox
-														.getValue()
-														.getQuality()),
-												Integer.parseInt(newProductionOrderOutputQuantityTextField
-														.getText()));
-								
-								for(ProductionOrderFromClient order : model.getMessCreator().getSendMessage().production.orders)
-								{
-									System.out.println("QualC"+order.qualityCase+" QualW "+order.qualityWafer+" Quan "+order.quantity);
-								}
-							}
+					if (isPossibleMachinery == true && !newProductionOrderOutputQuantityTextField.getText().equals("0")) {
+						model.getProductionOrdersTableData().add(
+								new ProductionOrder(newProductionOrderWaferChoiceBox.getValue().getQuality(), newProductionOrderCaseChoiceBox
+										.getValue().getQuality(), newProductionOrderOutputQuantityTextField.getText()));
 
-						}
-
-						newProductionOrderWaferChoiceBox
-								.valueProperty()
-								.removeListener(
-										newProductionOrderWaferChoiceBoxListener);
-						newProductionOrderCaseChoiceBox
-								.valueProperty()
-								.removeListener(
-										newProductionOrderCaseChoiceBoxListener);
-						newProductionOrderOutputQuantitySlider
-								.valueProperty()
-								.removeListener(
-										newProductionOrderOutputQuantitySliderListener);
-						newProductionOrderWaferChoiceBox.getSelectionModel()
-								.clearSelection();
-						newProductionOrderWaferChoiceBox.getItems().clear();
-						newProductionOrderCaseChoiceBox.getSelectionModel()
-								.clearSelection();
-						newProductionOrderCaseChoiceBox.getItems().clear();
-						newProductionOrderCostsTextField.clear();
-						newProductionOrderOutputQuantitySlider.adjustValue(0.0);
-						newProductionOrderTitledPane.setDisable(true);
+						model.getMessCreator().addProductionOrder(Integer.parseInt(newProductionOrderWaferChoiceBox.getValue().getQuality()),
+								Integer.parseInt(newProductionOrderCaseChoiceBox.getValue().getQuality()),
+								Integer.parseInt(newProductionOrderOutputQuantityTextField.getText()));
 
 					}
-				});
+
+				}
+
+				newProductionOrderWaferChoiceBox.valueProperty().removeListener(newProductionOrderWaferChoiceBoxListener);
+				newProductionOrderCaseChoiceBox.valueProperty().removeListener(newProductionOrderCaseChoiceBoxListener);
+				newProductionOrderOutputQuantitySlider.valueProperty().removeListener(newProductionOrderOutputQuantitySliderListener);
+				newProductionOrderWaferChoiceBox.getSelectionModel().clearSelection();
+				newProductionOrderWaferChoiceBox.getItems().clear();
+				newProductionOrderCaseChoiceBox.getSelectionModel().clearSelection();
+				newProductionOrderCaseChoiceBox.getItems().clear();
+				newProductionOrderCostsTextField.clear();
+				newProductionOrderOutputQuantitySlider.adjustValue(0.0);
+				newProductionOrderTitledPane.setDisable(true);
+
+			}
+		});
 
 	}
 
@@ -1380,12 +1214,9 @@ public class ClientGameUIController implements Initializable {
 
 		}
 
-		storageCostsWaferTextField.setText(model.getnFormatterCurrency()
-				.format(costsWafer / 100.0));
-		storageCostsCasesTextField.setText(model.getnFormatterCurrency()
-				.format(costsCases / 100.0));
-		storageCostsPanelsTextField.setText(model.getnFormatterCurrency()
-				.format(costsPanels / 100.0));
+		storageCostsWaferTextField.setText(model.getnFormatterCurrency().format(costsWafer / 100.0));
+		storageCostsCasesTextField.setText(model.getnFormatterCurrency().format(costsCases / 100.0));
+		storageCostsPanelsTextField.setText(model.getnFormatterCurrency().format(costsPanels / 100.0));
 
 	}
 
@@ -1395,35 +1226,22 @@ public class ClientGameUIController implements Initializable {
 		 * storagePositionsTable: CellFactory
 		 */
 
-		storagePositionIdTableColumn
-				.setCellValueFactory(new PropertyValueFactory<StoragePosition, Integer>(
-						"id"));
+		storagePositionIdTableColumn.setCellValueFactory(new PropertyValueFactory<StoragePosition, Integer>("id"));
 
-		storagePositionRessourceTableColumn
-				.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>(
-						"ressource"));
+		storagePositionRessourceTableColumn.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>("ressource"));
 
-		storagePositionQualityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>(
-						"quality"));
+		storagePositionQualityTableColumn.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>("quality"));
 
-		storagePositionQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>(
-						"quantity"));
+		storagePositionQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>("quantity"));
 
-		storagePositionCostsTableColumn
-				.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>(
-						"costs"));
+		storagePositionCostsTableColumn.setCellValueFactory(new PropertyValueFactory<StoragePosition, String>("costs"));
 
 		// storagePositionCostsTableColumn.setStyle("-fx-alignment: CENTER-RIGHT;");
-		storagePositionsTableView
-				.setItems(model.getStoragePositionsTableData());
+		storagePositionsTableView.setItems(model.getStoragePositionsTableData());
 
-		storagePositionsTableView
-				.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		storagePositionsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// storagePositionIdTableColumn.setSortType(TableColumn.SortType.DESCENDING);
-		storagePositionsTableView.getSelectionModel().setSelectionMode(
-				SelectionMode.SINGLE);
+		storagePositionsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		/**
 		 * Misc
@@ -1439,79 +1257,47 @@ public class ClientGameUIController implements Initializable {
 		 * salesTableView: CellFactory
 		 */
 
-		salesIdTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, Integer>(
-						"id"));
-		salesProductTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"product"));
-		salesQualityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"quality"));
-		salesPriceTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"price"));
-		salesQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"quantity"));
-		salesSoldQuantityTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"soldQuantity"));
-		salesProfitTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"profit"));
-		salesCostsTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Offer, String>(
-						"costs"));
+		salesIdTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, Integer>("id"));
+		salesProductTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("product"));
+		salesQualityTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("quality"));
+		salesPriceTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("price"));
+		salesQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("quantity"));
+		salesSoldQuantityTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("soldQuantity"));
+		salesProfitTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("profit"));
+		salesCostsTableColumn.setCellValueFactory(new PropertyValueFactory<Offer, String>("costs"));
 
 		salesTableView.setItems(model.getOfferTableData());
 
-		salesTableView
-				.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		salesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// salesIdTableColumn.setSortType(TableColumn.SortType.DESCENDING);
-		salesTableView.getSelectionModel().setSelectionMode(
-				SelectionMode.SINGLE);
+		salesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		/**
 		 * ActionListener
 		 */
 
 		final ChangeListener<StoragePosition> newSaleOfferArticleChoiceBoxListener = new ChangeListener<StoragePosition>() {
-			public void changed(
-					ObservableValue<? extends StoragePosition> observable,
-					StoragePosition oldValue, StoragePosition newValue) {
-				newSaleOfferArticleQuantitySlider.setMax(Integer
-						.parseInt(newSaleOfferArticleChoiceBox.getValue()
-								.getQuantity()));
-				newSaleOfferArticleQuantitySlider.setValue(Integer
-						.parseInt(newSaleOfferArticleChoiceBox.getValue()
-								.getQuantity()));
+			public void changed(ObservableValue<? extends StoragePosition> observable, StoragePosition oldValue, StoragePosition newValue) {
+				newSaleOfferArticleQuantitySlider.setMax(Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuantity()));
+				newSaleOfferArticleQuantitySlider.setValue(Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuantity()));
 			}
 		};
 
 		final ChangeListener<String> newSaleOfferArticlePriceTextFieldListener = new ChangeListener<String>() {
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
 				int distributionCosts = model.getIn().distribution.costsPerOffer / 100;
 				// System.out.println(newSaleOfferArticleChoiceBox.getValue().getCosts());
-				int cost = deformatCurrency(newSaleOfferArticleChoiceBox
-						.getValue().getCosts()) / 100;
+				int cost = deformatCurrency(newSaleOfferArticleChoiceBox.getValue().getCosts()) / 100;
 				// System.out.println(cost);
-				int quantity = Integer
-						.parseInt(newSaleOfferArticleQuantityTextField
-								.getText());
-				int price = Integer.parseInt(newSaleOfferArticlePriceTextField
-						.getText());
+				int quantity = Integer.parseInt(newSaleOfferArticleQuantityTextField.getText());
+				int price = Integer.parseInt(newSaleOfferArticlePriceTextField.getText());
 				int cumulCosts = (quantity * cost) + distributionCosts;
 				int maxProfit = (quantity * price) - cumulCosts;
 
-				newSaleOfferDistributionCostsTextField.setText(model
-						.getnFormatterCurrency().format(distributionCosts));
-				newSaleOfferCostsTextField.setText(model
-						.getnFormatterCurrency().format(cost));
-				newSaleOfferMaximumProfitTextField.setText(model
-						.getnFormatterCurrency().format(maxProfit));
+				newSaleOfferDistributionCostsTextField.setText(model.getnFormatterCurrency().format(distributionCosts));
+				newSaleOfferCostsTextField.setText(model.getnFormatterCurrency().format(cost));
+				newSaleOfferMaximumProfitTextField.setText(model.getnFormatterCurrency().format(maxProfit));
 
 			}
 		};
@@ -1521,13 +1307,9 @@ public class ClientGameUIController implements Initializable {
 			public void handle(ActionEvent actionEvent) {
 				getResourcesInStorage();
 
-				newSaleOfferArticlePriceTextField.textProperty()
-						.removeListener(
-								newSaleOfferArticlePriceTextFieldListener);
-				newSaleOfferArticleChoiceBox.valueProperty().removeListener(
-						newSaleOfferArticleChoiceBoxListener);
-				newSaleOfferArticleChoiceBox.getSelectionModel()
-						.clearSelection();
+				newSaleOfferArticlePriceTextField.textProperty().removeListener(newSaleOfferArticlePriceTextFieldListener);
+				newSaleOfferArticleChoiceBox.valueProperty().removeListener(newSaleOfferArticleChoiceBoxListener);
+				newSaleOfferArticleChoiceBox.getSelectionModel().clearSelection();
 				newSaleOfferArticlePriceTextField.clear();
 				newSaleOfferArticleQuantitySlider.adjustValue(0.0);
 				newSaleOfferArticleQuantityTextField.clear();
@@ -1535,12 +1317,9 @@ public class ClientGameUIController implements Initializable {
 				newSaleOfferDistributionCostsTextField.clear();
 				newSaleOfferCostsTextField.clear();
 				newSaleOfferMaximumProfitTextField.clear();
-				newSaleOfferArticleChoiceBox.getItems().setAll(
-						resourcesInStorage);
-				newSaleOfferArticleChoiceBox.valueProperty().addListener(
-						newSaleOfferArticleChoiceBoxListener);
-				newSaleOfferArticlePriceTextField.textProperty().addListener(
-						newSaleOfferArticlePriceTextFieldListener);
+				newSaleOfferArticleChoiceBox.getItems().setAll(resourcesInStorage);
+				newSaleOfferArticleChoiceBox.valueProperty().addListener(newSaleOfferArticleChoiceBoxListener);
+				newSaleOfferArticlePriceTextField.textProperty().addListener(newSaleOfferArticlePriceTextFieldListener);
 				newSaleOfferTitledPane.setDisable(false);
 				newSaleOfferSaveButton.setDisable(false);
 			}
@@ -1550,30 +1329,23 @@ public class ClientGameUIController implements Initializable {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 
-				model.getOfferTableData()
-						.add(new Offer(
-								newSaleOfferArticleChoiceBox.getValue()
-										.getQuality(),
-								newSaleOfferArticleQuantityTextField.getText(),
-								Integer.parseInt(newSaleOfferArticlePriceTextField
-										.getText())
-										* 100 + ""));
+				model.getOfferTableData().add(
+						new Offer(
+								newSaleOfferArticleChoiceBox.getValue().getQuality(), 
+								newSaleOfferArticleQuantityTextField.getText(), 
+								Integer.parseInt(newSaleOfferArticlePriceTextField.getText()) * 100 + ""
+						)
+				);
 
 				model.getMessCreator().addOffer(
-						Integer.parseInt(newSaleOfferArticleChoiceBox
-								.getValue().getQuality()),
-						Integer.parseInt(newSaleOfferArticleQuantityTextField
-								.getText()),
-						Integer.parseInt(newSaleOfferArticlePriceTextField
-								.getText()) * 100);
+						Integer.parseInt(newSaleOfferArticleChoiceBox.getValue().getQuality()),
+						Integer.parseInt(newSaleOfferArticleQuantityTextField.getText()),
+						Integer.parseInt(newSaleOfferArticlePriceTextField.getText()) * 100
+				);
 
-				newSaleOfferArticlePriceTextField.textProperty()
-						.removeListener(
-								newSaleOfferArticlePriceTextFieldListener);
-				newSaleOfferArticleChoiceBox.valueProperty().removeListener(
-						newSaleOfferArticleChoiceBoxListener);
-				newSaleOfferArticleChoiceBox.getSelectionModel()
-						.clearSelection();
+				newSaleOfferArticlePriceTextField.textProperty().removeListener(newSaleOfferArticlePriceTextFieldListener);
+				newSaleOfferArticleChoiceBox.valueProperty().removeListener(newSaleOfferArticleChoiceBoxListener);
+				newSaleOfferArticleChoiceBox.getSelectionModel().clearSelection();
 				newSaleOfferArticlePriceTextField.clear();
 				newSaleOfferArticleQuantitySlider.adjustValue(0.0);
 				newSaleOfferArticleQuantityTextField.clear();
@@ -1591,30 +1363,17 @@ public class ClientGameUIController implements Initializable {
 
 	private void initReporting() {
 
-		reportingSalesFixCostsTextField.setText(model.getnFormatterCurrency()
-				.format(model.getIn().reporting.fixCosts.get(0).costs / 100));
-		reportingHRFixCostsTextField.setText(model.getnFormatterCurrency()
-				.format(model.getIn().reporting.fixCosts.get(1).costs / 100));
-		reportingMarketingFixCostsTextField.setText(model
-				.getnFormatterCurrency().format(
-						model.getIn().reporting.fixCosts.get(2).costs / 100));
-		reportingProductionFixCostsTextField.setText(model
-				.getnFormatterCurrency().format(
-						model.getIn().reporting.fixCosts.get(3).costs / 100));
-		reportingPurchaseFixCostsTextField.setText(model
-				.getnFormatterCurrency().format(
-						model.getIn().reporting.fixCosts.get(4).costs / 100));
-		reportingStorageFixCostsTextField.setText(model.getnFormatterCurrency()
-				.format(model.getIn().reporting.fixCosts.get(5).costs / 100));
-		reportingMachineryLevelTextField
-				.setText(model.getIn().reporting.machinery.level + "");
-		reportingMachineryMaxCapacityTextField
-				.setText(model.getIn().reporting.machinery.maxCapacity + "");
-		reportingMachineryAvgWorkloadProgressBar
-				.setProgress(model.getIn().reporting.machinery.averageUsage);
+		reportingSalesFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(0).costs / 100));
+		reportingHRFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(1).costs / 100));
+		reportingMarketingFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(2).costs / 100));
+		reportingProductionFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(3).costs / 100));
+		reportingPurchaseFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(4).costs / 100));
+		reportingStorageFixCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().reporting.fixCosts.get(5).costs / 100));
+		reportingMachineryLevelTextField.setText(model.getIn().reporting.machinery.level + "");
+		reportingMachineryMaxCapacityTextField.setText(model.getIn().reporting.machinery.maxCapacity + "");
+		reportingMachineryAvgWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.averageUsage);
 		// System.out.println(model.getIn().reporting.machinery.averageUsage);
-		reportingMachineryLastRoundWorkloadProgressBar.setProgress(model
-				.getIn().reporting.machinery.usageLastRound);
+		reportingMachineryLastRoundWorkloadProgressBar.setProgress(model.getIn().reporting.machinery.usageLastRound);
 		// System.out.println(model.getIn().reporting.machinery.usageLastRound);
 
 	}
@@ -1628,12 +1387,9 @@ public class ClientGameUIController implements Initializable {
 		// System.out.println(model.getIn().humanResources.averageWage);
 
 		if (model.getIn().marketing.isBooked == true) {
-			marketResearchAverageWagesLastRoundTextField
-					.setText(model.getIn().humanResources.averageWage + "");
-			marketResearchPeakAMarketTextField
-					.setText(model.getIn().marketing.peakAMarket + "");
-			marketResearchPeakCMarketTextField
-					.setText(model.getIn().marketing.peakCMarket + "");
+			marketResearchAverageWagesLastRoundTextField.setText(model.getIn().humanResources.averageWage + "");
+			marketResearchPeakAMarketTextField.setText(model.getIn().marketing.peakAMarket + "");
+			marketResearchPeakCMarketTextField.setText(model.getIn().marketing.peakCMarket + "");
 		} else {
 			marketResearchAverageWagesLastRoundTextField.setText("n.A.");
 			marketResearchPeakAMarketTextField.setText("n.A.");
@@ -1643,28 +1399,34 @@ public class ClientGameUIController implements Initializable {
 	}
 
 	private void initHumanResources() {
-		
+
+		bookedBenefitsIdTableColumn.setCellValueFactory(new PropertyValueFactory<BenefitBooking, Integer>("id"));
+		bookedBenefitsNameTableColumn.setCellValueFactory(new PropertyValueFactory<BenefitBooking, String>("benefit"));
+		bookedBenefitsCostsTableColumn.setCellValueFactory(new PropertyValueFactory<BenefitBooking, String>("costs"));
+		bookedBenefitsRemainingRoundsTableColumn.setCellValueFactory(new PropertyValueFactory<BenefitBooking, String>("remainingRounds"));
+
 		final ChangeListener<Benefit> benefitsChoiceBoxListener = new ChangeListener<Benefit>() {
 			public void changed(ObservableValue<? extends Benefit> observable, Benefit oldValue, Benefit newValue) {
-
+				
 				if (benefitsChoiceBox.getValue() != null) {
+					
 					bookBenefitDurationTextField.setDisable(false);
+					bookBenefitDurationTextField.clear();
 					bookBenefitCostsPerRoundTextField.setText(newValue.getCosts());
 				}
 
 			}
-		};		
-		
+		};
+
 		final ChangeListener<String> bookBenefitDurationTextFieldListener = new ChangeListener<String>() {
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {			
-				
-				if(!newValue.trim().equals("")){
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+				if (!newValue.trim().equals("")) {
 					bookBenefitButton.setDisable(false);
-					int costsTotal = (deformatCurrency(benefitsChoiceBox.getValue().getCosts())/100) * Integer.parseInt(newValue);
+					int costsTotal = (deformatCurrency(benefitsChoiceBox.getValue().getCosts()) / 100) * Integer.parseInt(newValue);
 					benefitsTotalCostsTextField.setText(model.getnFormatterCurrency().format(costsTotal));
-				}			
-				
+				}
+
 			}
 		};
 
@@ -1672,35 +1434,40 @@ public class ClientGameUIController implements Initializable {
 		 * Misc
 		 */
 
-		// System.out.println(model.getIn().humanResources.myWage);
-		// System.out.println(model.getIn().humanResources.averageWage);
-		// System.out.println(model.getIn().humanResources.wageCosts);
-
-		hrWagesPerHourTextField.setText(model.getnFormatterCurrency().format(
-				model.getIn().humanResources.myWage/100));
-		hrAverageWagesTextField.setText(model.getnFormatterCurrency().format(
-				model.getIn().humanResources.averageWage/100));
-		hrCountEmployeesTextField.setText(model.getnFormatter().format(
-				model.getIn().humanResources.countEmployees));
-		hrWageCostsTextField.setText(model.getnFormatterCurrency().format(
-				model.getIn().humanResources.wageCosts/100));
+		hrWagesPerHourTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.myWage / 100));
+		hrAverageWagesTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.averageWage / 100));
+		hrCountEmployeesTextField.setText(model.getnFormatter().format(model.getIn().humanResources.countEmployees));
+		hrWageCostsTextField.setText(model.getnFormatterCurrency().format(model.getIn().humanResources.wageCosts / 100));
 
 		benefitsChoiceBox.setItems(model.getBenefitBoxData());
-		bookedBeneftisTableView.setItems(model.getBenefitBookingTableData());
+		bookedBenefitsTableView.setItems(model.getBenefitBookingTableData());
+		
 		benefitsChoiceBox.valueProperty().addListener(benefitsChoiceBoxListener);
 		bookBenefitDurationTextField.textProperty().addListener(bookBenefitDurationTextFieldListener);
 
 		bookBenefitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent actionEvent) {
-							
-//				model.getBenefitBookingTableData().add(
-//						new Bene
-//				)
+
+				model.getBenefitBookingTableData().add(
+					new BenefitBooking(benefitsChoiceBox.getValue().getBenefit(), benefitsChoiceBox.getValue().getCosts(), bookBenefitDurationTextField.getText())
+				);
 				
+				model.getMessCreator().addBenefit(
+					benefitsChoiceBox.getValue().getBenefit(), Integer.parseInt(bookBenefitDurationTextField.getText())
+				);
 				
+				for (BenefitBooking b : model.getBenefitBookingTableData()) {
+					System.out.println(b.getBenefit());
+				}
+				
+				bookBenefitCostsPerRoundTextField.clear();
+				bookBenefitDurationTextField.clear();
+				benefitsTotalCostsTextField.clear();
+				benefitsChoiceBox.getSelectionModel().clearSelection();
 				bookBenefitButton.setDisable(true);
-								
+				bookBenefitDurationTextField.setDisable(true);			
+
 			}
 		});
 
@@ -1717,8 +1484,7 @@ public class ClientGameUIController implements Initializable {
 
 		Integer roundInt = new Integer(round);
 		Integer maxRoundsInt = new Integer(model.getMaxRounds());
-		double newProgress = (roundInt.doubleValue() / maxRoundsInt
-				.doubleValue());
+		double newProgress = (roundInt.doubleValue() / maxRoundsInt.doubleValue());
 		roundProgressBar.setProgress(newProgress);
 		roundLabel.setText("Runde: " + roundInt.toString());
 
@@ -1738,8 +1504,7 @@ public class ClientGameUIController implements Initializable {
 	 * @param barChart
 	 *            Das Diagramm in dem die Daten erscheinen sollen
 	 */
-	public static <T> void buildXYChart(ArrayList<HashMap<String, T>> data,
-			String[] categories, CategoryAxis xAxisBar, NumberAxis yAxisBar,
+	public static <T> void buildXYChart(ArrayList<HashMap<String, T>> data, String[] categories, CategoryAxis xAxisBar, NumberAxis yAxisBar,
 			XYChart<String, T> barChart) {
 
 		HashMap<String, XYChart.Series<String, T>> seriesMaps = new HashMap<String, XYChart.Series<String, T>>();
@@ -1747,20 +1512,15 @@ public class ClientGameUIController implements Initializable {
 		for (int i = 0; i < data.size(); i++) {
 			HashMap<String, T> roundMap = data.get(i);
 			for (Map.Entry<String, T> entry : roundMap.entrySet()) {
-				XYChart.Series<String, T> roundSeries = seriesMaps.get(entry
-						.getKey());
+				XYChart.Series<String, T> roundSeries = seriesMaps.get(entry.getKey());
 				if (roundSeries == null) {
 					XYChart.Series<String, T> newSerie = new XYChart.Series<>();
 					newSerie.setName(entry.getKey());
-					newSerie.getData().add(
-							new XYChart.Data<String, T>(categories[i], entry
-									.getValue()));
+					newSerie.getData().add(new XYChart.Data<String, T>(categories[i], entry.getValue()));
 					seriesMaps.put(entry.getKey(), newSerie);
 					barChart.getData().add(newSerie);
 				} else {
-					roundSeries.getData().add(
-							new XYChart.Data<String, T>(categories[i], entry
-									.getValue()));
+					roundSeries.getData().add(new XYChart.Data<String, T>(categories[i], entry.getValue()));
 				}
 			}
 		}
@@ -1768,11 +1528,9 @@ public class ClientGameUIController implements Initializable {
 		xAxisBar.setCategories(FXCollections.observableArrayList(categories));
 	}
 
-	public static void buildPieChart(HashMap<String, Double> data,
-			PieChart chart) {
+	public static void buildPieChart(HashMap<String, Double> data, PieChart chart) {
 		for (Map.Entry<String, Double> entry : data.entrySet()) {
-			chart.getData().add(
-					new PieChart.Data(entry.getKey(), entry.getValue()));
+			chart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
 		}
 	}
 
