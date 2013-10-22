@@ -45,6 +45,9 @@ public class TestRound2 {
 		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
 
+		// Anmelden an der GameEngine:
+		GameEngine.getGameEngine().addCompany(c1);
+
 		// Anmelden im CustomerMarket
 		CustomerMarket.getMarket().addDistribution(c1.getDistribution());
 

@@ -46,6 +46,9 @@ public class TestRound1 {
 		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
 
+		// Anmelden an der GameEngine:
+		GameEngine.getGameEngine().addCompany(c1);
+
 		// Anmelden im CustomerMarket
 		CustomerMarket.getMarket().addDistribution(c1.getDistribution());
 
@@ -267,62 +270,71 @@ public class TestRound1 {
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
-	
+
 	@Test
 	public void benefitBooking() throws Exception {
 		// set wage
-		msg.addBenefit("Sport", 15);;
+		msg.addBenefit("Sport", 15);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingWrongName() throws Exception {
 		// set wage
-		msg.addBenefit("Sporsdet", 15);;
+		msg.addBenefit("Sporsdet", 15);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingNullName() throws Exception {
 		// set wage
-		msg.addBenefit(null, 15);;
+		msg.addBenefit(null, 15);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
-	
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingEmptyName() throws Exception {
 		// set wage
-		msg.addBenefit("", 15);;
+		msg.addBenefit("", 15);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingNegativeRound() throws Exception {
 		// set wage
-		msg.addBenefit("Sport", -1);;
+		msg.addBenefit("Sport", -1);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void benefitBookingRound0() throws Exception {
 		// set wage
-		msg.addBenefit("Sport", 0);;
+		msg.addBenefit("Sport", 0);
+		;
 		// hinzufügen zum Array
 		toSend.add(msg.getSendMessage());
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
-	
 
 }
