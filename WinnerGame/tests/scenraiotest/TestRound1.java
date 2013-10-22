@@ -323,16 +323,6 @@ public class TestRound1 {
 		// senden an GameEngine
 		GameEngine.getGameEngine().startNextRound(toSend);
 	}
-	@Test(expected = java.lang.IllegalArgumentException.class)
-	public void benefitBookingRoundOver() throws Exception {
-		GameEngine.getGameEngine().startNextRound(toSend);
-		GameEngine.getGameEngine().startNextRound(toSend);
-		// set wage
-		msg.addBenefit("Sport", 1);;
-		// hinzufügen zum Array
-		toSend.add(msg.getSendMessage());
-		// senden an GameEngine
-		GameEngine.getGameEngine().startNextRound(toSend);
-	}
+	
 
 }
