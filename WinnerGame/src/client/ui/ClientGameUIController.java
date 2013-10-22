@@ -58,6 +58,7 @@ import javafx.util.StringConverter;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
 import message.GameDataMessageToClient;
+import message.GameDataMessageToClient.HumanResourcesToClient.PossibleBenefit;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import message.IMessage;
 import client.ui.ClientGameUIModel.Benefit;
@@ -1642,6 +1643,30 @@ public class ClientGameUIController implements Initializable {
 	}
 
 	private void initHumanResources() {
+		
+		final ChangeListener<Benefit> benefitsChoiceBoxListener = new ChangeListener<Benefit>() {
+			public void changed(ObservableValue<? extends Benefit> observable, Benefit oldValue, Benefit newValue) {
+
+				if (benefitsChoiceBox.getValue() != null) {
+					bookBenefitDurationTextField.setDisable(false);
+					bookBenefitCostsPerRoundTextField.setText(newValue.getCosts());
+				}
+
+			}
+		};		
+		
+		final ChangeListener<String> bookBenefitDurationTextFieldListener = new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {			
+				
+				if(!newValue.trim().equals("")){
+					bookBenefitButton.setDisable(false);
+					int costsTotal = (deformatCurrency(benefitsChoiceBox.getValue().getCosts())/100) * Integer.parseInt(newValue);
+					benefitsTotalCostsTextField.setText(model.getnFormatterCurrency().format(costsTotal));
+				}			
+				
+			}
+		};
 
 		/**
 		 * Misc
@@ -1662,6 +1687,22 @@ public class ClientGameUIController implements Initializable {
 
 		benefitsChoiceBox.setItems(model.getBenefitBoxData());
 		bookedBeneftisTableView.setItems(model.getBenefitBookingTableData());
+		benefitsChoiceBox.valueProperty().addListener(benefitsChoiceBoxListener);
+		bookBenefitDurationTextField.textProperty().addListener(bookBenefitDurationTextFieldListener);
+
+		bookBenefitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
+							
+//				model.getBenefitBookingTableData().add(
+//						new Bene
+//				)
+				
+				
+				bookBenefitButton.setDisable(true);
+								
+			}
+		});
 
 	}
 

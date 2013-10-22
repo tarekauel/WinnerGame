@@ -764,6 +764,10 @@ public class ClientGameUIModel {
 			this.costs = new SimpleStringProperty(costsFormatted);
 
 		}
+		
+//		public BenefitBooking(BenefitBookingToClient benefit, int duration){
+//			this()
+//		}
 
 		public BenefitBooking(BenefitBookingToClient benefit) {
 			this(benefit.name, benefit.remainingRounds + "", benefit.costsPerRound+"");
