@@ -49,10 +49,7 @@ public class TestRound3 {
 		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
 
-		// Sorge für quasi unendlich Geld(Fehler Quelle vermeiden)
-		// 10 Millionen GE mehr auf Konto:
-		c1.getBankAccount().increaseBalance(999999999);
-
+	
 		// Anmelden im CustomerMarket
 		CustomerMarket.getMarket().addDistribution(c1.getDistribution());
 
@@ -77,7 +74,7 @@ public class TestRound3 {
 		 * genug vorhanden (+10 Millionen zum eigentlichen Kapital reichen)
 		 */
 		msg.addAccepted("Wafer", 50, 5400);
-		msg.addAccepted("Gehäuse", 50, 1000);
+		msg.addAccepted("Gehäuse", 50, 100);
 		toSend.add(msg.getSendMessage());
 		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
 
@@ -99,9 +96,9 @@ public class TestRound3 {
 		}
 		for (StorageElement se : c1.getStorage().getAllStorageElements()) {
 			if (se.getProduct().getName().equals("Wafer")) {
-				assertEquals(54000, se.getQuantity());
+				assertEquals(5400, se.getQuantity());
 			} else if (se.getProduct().getName().equals("Gehäuse")) {
-				assertEquals(1000, se.getQuantity());
+				assertEquals(100, se.getQuantity());
 			}
 		}
 	}
