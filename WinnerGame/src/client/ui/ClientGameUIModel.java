@@ -202,7 +202,7 @@ public class ClientGameUIModel {
 		//purchaseOffersTableData.clear();
 		productionOrdersTableData.clear();
 		storagePositionsTableData.clear();
-		//offerTableData.clear();
+		offerTableData.clear();
 		benefitBookingTableData.clear();
 		benfitBoxData.clear();
 		requests.clear();
@@ -245,7 +245,7 @@ public class ClientGameUIModel {
 			for (int i = 0; i < in.requests.size(); i++) {
 	
 				RequestToClient req = in.requests.get(i);
-				Request request = new Request(req, i);
+				Request request = new Request(req, i+1);
 				purchaseRequestTableData.add(request);
 	
 			}
@@ -261,7 +261,7 @@ public class ClientGameUIModel {
 			for (int i = 0; i < in.orders.size(); i++) {
 	
 				ProductionOrderToClient pOrder = in.orders.get(i);
-				ProductionOrder prodOrder = new ProductionOrder(pOrder, i);
+				ProductionOrder prodOrder = new ProductionOrder(pOrder, i+1);
 				productionOrdersTableData.add(prodOrder);
 	
 			}
@@ -276,9 +276,9 @@ public class ClientGameUIModel {
 			
 			for (int i = 0; i < in.storageElements.size(); i++) {
 
-		    	System.out.println(in.storageElements.size());
+		    	//System.out.println(in.storageElements.size());
 				StorageElementToClient stoElement = in.storageElements.get(i);
-				StoragePosition stoPos = new StoragePosition(stoElement, i);
+				StoragePosition stoPos = new StoragePosition(stoElement, i+1);
 				storagePositionsTableData.add(stoPos);
 
 			}
@@ -290,11 +290,16 @@ public class ClientGameUIModel {
 	private void parseDistribution(DistributionToClient in) {
 		
 		if(in.offers != null){
-		
-			for (OfferToClient offer : in.offers) {
-				offerTableData.add(new Offer(offer));			
-			}
 			
+			for (int i = 0; i < in.offers.size(); i++) {
+
+		    	//System.out.println(in.storageElements.size());
+				OfferToClient o = in.offers.get(i);
+				Offer offer = new Offer(o, i+1);
+				offerTableData.add(offer);
+
+			}
+
 			for( int i=0; i<5; i++) {
 				HashMap<String, Double> map = new HashMap<String, Double>();
 				salesChartData.add( map );
@@ -559,8 +564,6 @@ public class ClientGameUIModel {
 			this.qualityPanel = new SimpleStringProperty(qualityPanel);
 			this.actualQuantity = new SimpleStringProperty(actualQuantity);
 			this.costsPerUnit = new SimpleStringProperty(costsPerUnit);
-
-
 			lastId = id;
 		}
 
@@ -660,12 +663,11 @@ public class ClientGameUIModel {
 		private final SimpleStringProperty profit;
 		private final SimpleStringProperty costs;
 
-		private static int nextId = 1;
+		private static int lastId = 0;
 
-		public Offer(String quality, String quantity, String soldQuantity,
+		public Offer(int id, String quality, String quantity, String soldQuantity,
 				String costs, String price) {
-			this.id = new SimpleIntegerProperty(nextId);
-			nextId++;
+			this.id = new SimpleIntegerProperty(id);
 			this.product = new SimpleStringProperty("Panel");
 			this.price = new SimpleStringProperty(ClientGameUIModel.nFormatter.format(Integer.parseInt(price) / 100.0) );
 			this.quality = new SimpleStringProperty(quality + "");
@@ -690,15 +692,16 @@ public class ClientGameUIModel {
 				this.profit = new SimpleStringProperty("");
 			}
 			
+			lastId = id;
 
 		}
 		
 		public Offer(String quality, String quantity, String price) {
-			this(quality, quantity, null, null , price);
+			this(lastId+1, quality, quantity, null, null , price);
 		}
 
-		public Offer(OfferToClient offer) {
-			this(offer.quality + "", offer.quantityToSell + "",
+		public Offer(OfferToClient offer, int id) {
+			this(id, offer.quality + "", offer.quantityToSell + "",
 					offer.quantitySold + "", offer.costs + "", offer.price + "");
 		}
 

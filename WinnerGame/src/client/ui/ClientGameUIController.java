@@ -56,8 +56,10 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import message.GameDataMessageFromClient;
+import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFromClient;
 import message.GameDataMessageToClient;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
+import message.IMessage;
 import client.ui.ClientGameUIModel.Benefit;
 import client.ui.ClientGameUIModel.BenefitBooking;
 import client.ui.ClientGameUIModel.Offer;
@@ -455,8 +457,16 @@ public class ClientGameUIController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		
 		model = new ClientGameUIModel();
-		model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client
-				.readMessage());
+//		IMessage message = ClientUIStart.getLoginModel().client.readMessage();
+		model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client.readMessage());
+//		System.out.println(message.getType());
+		
+//		if(message instanceof GameDataMessageToClient){
+//			model.setIn((GameDataMessageToClient) message);
+//		} else if (message instanceof message.GameOverMessage){
+//			System.out.println("Game Over");
+//		}
+		
 		model.parseAnswerFromServer();
 		model.setupMessageCreator();
 
@@ -637,13 +647,18 @@ public class ClientGameUIController implements Initializable {
 				
 				//model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText())*100);
 				model.getMessCreator().setWage(deformatCurrency(hrWagesPerHourTextField.getText()));
+				
+				ClientUIStart.getLoginModel().client.writeMessage((GameDataMessageFromClient) model.getMessCreator().getSendMessage());
+				model.setIn((GameDataMessageToClient) ClientUIStart.getLoginModel().client.readMessage());
+		
+//				IMessage message = ClientUIStart.getLoginModel().client.readMessage();
+//				System.out.println(message.getType());
+//				if(message instanceof GameDataMessageToClient){
+//					model.setIn((GameDataMessageToClient) message);
+//				} else if (message instanceof message.GameOverMessage){
+//					System.out.println("Game Over");
+//				}
 
-				ClientUIStart.getLoginModel().client
-						.writeMessage((GameDataMessageFromClient) model
-								.getMessCreator().getSendMessage());
-
-				model.setIn((GameDataMessageToClient) ClientUIStart
-						.getLoginModel().client.readMessage());
 				model.parseAnswerFromServer();
 				model.setupMessageCreator();
 
@@ -655,6 +670,12 @@ public class ClientGameUIController implements Initializable {
 				initHumanResources();
 				initMarketing();
 				initReporting();
+				
+				hrMotivationLineChart.getData().clear();
+				marketingWaferPriceChart.getData().clear();
+				marketingCasePriceChart.getData().clear();
+				marketingMarketSharePieChart.getData().clear();
+				reportingSalesBarChart.getData().clear();
 				
 				//START BUILDING SALES CHART
 				 String[] cat = new String[5];
@@ -925,9 +946,9 @@ public class ClientGameUIController implements Initializable {
 									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()),
 									Integer.parseInt(t.getNewValue())						
 								);
-								System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
-									Integer.parseInt(t.getNewValue())+""+
-									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()));
+//								System.out.println(purchaseOffersTableView.getSelectionModel().getSelectedItem().getName()+""+
+//									Integer.parseInt(t.getNewValue())+""+
+//									Integer.parseInt(purchaseOffersTableView.getSelectionModel().getSelectedItem().getQuality()));
 							}
 						});
 		purchaseOffersPriceTableColumn
@@ -1285,7 +1306,7 @@ public class ClientGameUIController implements Initializable {
 														.getQuality(),
 												newProductionOrderOutputQuantityTextField
 														.getText()));
-
+								
 								model.getMessCreator()
 										.addProductionOrder(
 												Integer.parseInt(newProductionOrderWaferChoiceBox
@@ -1296,7 +1317,11 @@ public class ClientGameUIController implements Initializable {
 														.getQuality()),
 												Integer.parseInt(newProductionOrderOutputQuantityTextField
 														.getText()));
-
+								
+								for(ProductionOrderFromClient order : model.getMessCreator().getSendMessage().production.orders)
+								{
+									System.out.println("QualC"+order.qualityCase+" QualW "+order.qualityWafer+" Quan "+order.quantity);
+								}
 							}
 
 						}
