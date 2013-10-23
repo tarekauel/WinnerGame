@@ -99,8 +99,9 @@ public class ConnectionListener extends Thread {
 		}
 
 		try {
-
+			if(serverSocket!=null){
 			serverSocket.close();
+			}
 
 		} catch (IOException e) {
 			System.out.println("Server kann nicht beendet werden!");

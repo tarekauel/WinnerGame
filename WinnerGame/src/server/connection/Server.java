@@ -146,7 +146,7 @@ public class Server {
 		}
 		close();
 		System.out.println("Spiel vorbei nach " + GameEngine.getGameEngine().getRound() + " Runden");
-		System.exit(-1);
+		//System.exit(-1);
 	}
 	public synchronized void addPlayer(Player player) {
 		playerList.add(player);
