@@ -20,6 +20,7 @@ public class ConnectionListener extends Thread {
 	private Server server = null;
 	private ServerSocket serverSocket = null;
 	private Vector<ServerConnection> connections = new Vector<ServerConnection>();
+	private Boolean serverClosed=false;
 
 	/**
 	 * @param port
@@ -52,10 +53,14 @@ public class ConnectionListener extends Thread {
 		}
 
 		int count = 1;
-		while (true) { // wartet auf neue Clients
+		while (!serverClosed) { // wartet auf neue Clients
 
-			ServerConnection serverConnection = new ServerConnection(
-					waitForClient(serverSocket), count, server);
+			
+			Socket socket=waitForClient(serverSocket);
+			if(socket==null || socket.isClosed() || serverSocket.isClosed()){
+				continue;
+			}
+			ServerConnection serverConnection = new ServerConnection(socket, count ,server);
 			serverConnection.start();
 			connections.add(serverConnection);
 			count++;
@@ -76,9 +81,8 @@ public class ConnectionListener extends Thread {
 		try {
 			socket = serverSocket.accept();
 		} catch (IOException e) {
-			System.out
-					.println("Verbindung mit Client kann nicht aufgebaut werden!");
-			e.printStackTrace();
+			System.out.println("Verbindung mit Client kann nicht aufgebaut werden!");
+			
 		}
 		return socket;
 	}
@@ -88,7 +92,7 @@ public class ConnectionListener extends Thread {
 	 * sich selbst.
 	 */
 	public void close() {
-
+		serverClosed=true;
 		for (ServerConnection connection : connections) {
 			connection.close();
 			// connection.interrupt();
