@@ -38,7 +38,7 @@ public class ClientGameUIModel {
 	 * Es kann aufgrund des statischen Attributs "round" das UI nur einmal auf einem System verwendet werden.
 	 * 
 	 * Warum ist die Problemlösung "schwierig"?:
-	 * Bei ändern von "round" auf Objektattribut ist wäre ein Zugriff aus den inneren Klassen nur via "ClientGameUIModel.this.getRound()" möglich,
+	 * Bei ändern von "round" in Objektattribut wäre ein Zugriff aus den inneren Klassen nur via "ClientGameUIModel.this.getRound()" möglich,
 	 * dies funktioniert allerdings nicht, da die inneren Klassen static sind, was für die Verwendung im Controller wiederum notwendig ist.
 	 * 
 	 * Wann wird das zu einem Problem?:
