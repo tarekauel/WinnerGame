@@ -184,9 +184,6 @@ public class Machinery {
 	 * @return true, falls erfolgreiche Minderung false, falls Maschinenlvl 1
 	 */
 	public boolean decreaseLevel() {
-		// TODO: vielleicht gibt man dem Spieler einen Teil der Ausbaukosten
-		// wieder..
-
 		if (level == 1) {
 
 			return false;

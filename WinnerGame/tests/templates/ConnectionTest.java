@@ -24,7 +24,7 @@ public class ConnectionTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		//TODO:GameEngine muss per AspectJ null gesetzt werden!
+		
 		String ip = "127.0.0.1";
 		int port = Constant.Server.TCP_PORT;
 		

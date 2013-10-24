@@ -145,7 +145,7 @@ public class UDPClient extends Thread {
 			socket.send(packet);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
