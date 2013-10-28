@@ -51,6 +51,9 @@ public class ServerConnection extends Thread {
 				
 				if(success){
 					System.out.println("Login erfolgreich-> Client Nr." + clientId);
+					LoginMessage m = (LoginMessage) message;
+					System.out.println(m.getName() + " hat die ID:" + clientId);
+					
 					//Sende Initialnachricht
 					try {
 						writeMessage(GameEngine.getGameEngine().getInitialGameDataMessageToClient(player.getName()));
