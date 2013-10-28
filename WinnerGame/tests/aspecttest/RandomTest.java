@@ -19,6 +19,14 @@ public class RandomTest {
 		assertEquals((int) 2.0, (int) b() );
 	}
 	
+	public double a() {
+		return Math.random();
+	}
+	
+	public double b() {
+		return Math.random();
+	}
+	
 	@Test
 	@FakeRandom( mathRandomNewRandom = { 7.0, 5.0 }, mathRandomMethodName = { "aspecttest.RandomTest.b", "aspecttest.RandomTest.a" } )
 	public void meinTestB() {
@@ -46,14 +54,6 @@ public class RandomTest {
 	@Test	
 	public void meinTestE() {
 		assertEquals(0.5, d(), 0.5);
-	}
-	
-	public double a() {
-		return Math.random();
-	}
-	
-	public double b() {
-		return Math.random();
 	}
 		
 	public double c() {
