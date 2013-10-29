@@ -208,7 +208,8 @@ public class ClientGameUIModel {
 
 	public void parseAnswerFromServer() {
 
-		ClientGameUIModel.setRound(in.round);
+		//ClientGameUIModel.setRound(in.round);
+		round = in.round;
 
 		purchaseRequestTableData.clear();
 		// purchaseOffersTableData.clear();

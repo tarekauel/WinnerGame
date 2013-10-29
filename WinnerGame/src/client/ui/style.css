@@ -50,6 +50,16 @@
 
 }
 
+#LoginPane #LoginButton:focused {
+
+	-fx-background-color: #3EA5E8;
+
+}
+
+#LoginPane .radio-button .radio {
+
+}
+
 /* ----------------MAIN------------------ */
 
 #MainPane {

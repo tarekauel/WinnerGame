@@ -21,7 +21,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 import message.GameDataMessageToClient;
 import message.LoginConfirmationMessage;
@@ -40,7 +43,12 @@ public class ClientLoginUIController implements Initializable {
 	@FXML private TextField loginNameField;
 	@FXML private Button loginButton;
 	@FXML private PasswordField passwordField;
-
+	@FXML private ToggleGroup locations;
+	@FXML private RadioButton germanyRadioButton;
+	@FXML private RadioButton usaRadioButton;
+	@FXML private RadioButton chinaRadioButton;
+	@FXML private RadioButton indiaRadioButton;
+	
 	/**
 	 * Initialisiert den Controller.
      * Hier werden z.B. alle Felder des UIs initialisiert, die initial beim Aufrufen des UIs gefüllt sein sollen.
@@ -62,8 +70,39 @@ public class ClientLoginUIController implements Initializable {
 
 			
         }); 
-
+    	
+    	final Tooltip germanyLocationInfo = new Tooltip();
+    	final Tooltip usaLocationInfo = new Tooltip();
+    	final Tooltip chinaLocationInfo = new Tooltip();
+    	final Tooltip indiaLocationInfo = new Tooltip();
+    	
+    	germanyLocationInfo.setText("Deutschland");
+    	usaLocationInfo.setText("USA");
+    	chinaLocationInfo.setText("China");
+    	indiaLocationInfo.setText("Indien");
+    	
+    	final ToggleGroup locations = new ToggleGroup();    	
+    	germanyRadioButton.setTooltip(germanyLocationInfo);
+    	usaRadioButton.setTooltip(usaLocationInfo);
+    	chinaRadioButton.setTooltip(chinaLocationInfo);
+    	indiaRadioButton.setTooltip(indiaLocationInfo);
+    	germanyRadioButton.setUserData("Deutschland");
+    	usaRadioButton.setUserData("USA");
+    	chinaRadioButton.setUserData("China");
+    	indiaRadioButton.setUserData("Indien");
+    	
     }
+    
+    private String getChosenLocation(){
+    	
+    	if(locations.getSelectedToggle() != null){
+    		return locations.getSelectedToggle().getUserData().toString();
+    	} else {
+    		return null;
+    	}
+    	
+    }
+    
     private Boolean login() {
 		//Client client = new Client();
 		
@@ -85,7 +124,7 @@ public class ClientLoginUIController implements Initializable {
 		String name = loginNameField.getText();
 		String password = passwordField.getText();
 		//TODO: Get Location
-		String chosenLocation = "USA";
+		String chosenLocation = getChosenLocation();
 		loginModel.getClient().writeMessage(new LoginMessage(name, password, chosenLocation));
 		LoginConfirmationMessage message = (LoginConfirmationMessage) loginModel.getClient().readMessage();
 		
