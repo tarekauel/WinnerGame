@@ -58,7 +58,7 @@ public class Location {
 	 * @param w
 	 *            WageLevel / Lohn niveau
 	 */
-	public Location(int a, String c, int p, int w, int initW, int subventions) {
+	private Location(int a, String c, int p, int w, int initW, int subventions) {
 		if (Location.getLocationByCountry(c)!=null){
 			throw new IllegalArgumentException("Location wurde bereits angelegt.");
 			
