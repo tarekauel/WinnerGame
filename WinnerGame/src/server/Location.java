@@ -27,7 +27,7 @@ public class Location {
 	 */
 
 	public static void initLocations() throws Exception {
-		if(listOfLocations.size()>0){
+		if (listOfLocations.size() > 0) {
 			return;
 		}
 		FileReader reader = new FileReader("locations.dat");
@@ -57,21 +57,25 @@ public class Location {
 	 *            Price /Anschaffungskosten des Standorts
 	 * @param w
 	 *            WageLevel / Lohn niveau
+	 * @param initW
+	 *            Initialer Lohn
+	 * @param subventions
+	 *            Subventionen
 	 */
 	private Location(int a, String c, int p, int w, int initW, int subventions) {
-		if (Location.getLocationByCountry(c)!=null){
-			throw new IllegalArgumentException("Location wurde bereits angelegt.");
-			
+		if (Location.getLocationByCountry(c) != null) {
+			throw new IllegalArgumentException(
+					"Location wurde bereits angelegt.");
+
 		}
-		
+
 		this.advantage = a;
 		this.country = c;
 		this.purchasePrice = p;
 		this.wageLevel = w;
 		this.wageInit = initW;
-		this.subventions= subventions;
-		
-		
+		this.subventions = subventions;
+
 		listOfLocations.add(this);
 
 	}
@@ -129,8 +133,8 @@ public class Location {
 
 		return this.wageLevel;
 	}
-	
-	public int getSubventions(){
+
+	public int getSubventions() {
 		return subventions;
 	}
 
