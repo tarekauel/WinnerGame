@@ -48,7 +48,7 @@ public class GameEngine {
 	// Rundennummer
 	private int round = 1;
 
-	public GameEngine() {
+	private GameEngine() {
 
 		engine = this;
 
