@@ -226,6 +226,8 @@ public class HumanResources extends DepartmentRoundSensitive {
 		
 		// Unterschied wird ab der zweiten Runde berechnet
 		double diffBenefitToLastRound = 1.0;
+		
+		sumBenfit = getSumBenefits();
 
 		if (GameEngine.getGameEngine().getRound() > 1) {
 			// Wenn weder Benfits in dieser Runde noch in der letzten
@@ -291,13 +293,19 @@ public class HumanResources extends DepartmentRoundSensitive {
 	 * @return Lohnniveauinvestionen auf Niveau 100
 	 */
 	public long getSumBenefits() {
+		sumBenfit = 0;
+		for(BenefitBooking b : benefitBooking) {
+			if( b.getRemainingRounds() > 0 ) {
+				sumBenfit += b.getBenefit().getCostsPerRound();
+			}
+		}
 		return (long) Math.floor(sumBenfit
 				/ (getCompany().getLocation().getWageLevel() / 10000.0));
 	}
 	@Override
 	public int getFixCosts(){
 		//Standardm‰ﬂig: 40 Leute Stammbelegschaft: (40 Stunden woche)
-		return this.getWagesPerHour().getAmount() * this.getWorkingHours() * this.getCountEmployees();
+		return this.getWagesPerHour().getAmount() * this.getWorkingHours();
 		 
 	}
 }
