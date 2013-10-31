@@ -35,7 +35,7 @@ public class Machinery implements IRoundSensitive {
 	public Machinery() {
 
 		level = 1;
-
+		GameEngine.getGameEngine().addRoundSensitive(this);
 	}
 
 	/**

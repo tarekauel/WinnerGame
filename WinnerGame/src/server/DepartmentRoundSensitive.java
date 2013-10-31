@@ -5,7 +5,7 @@ package server;
  * @author Tarek
  *
  */
-public abstract class DepartmentRoundSensitive extends Department {
+public abstract class DepartmentRoundSensitive extends Department implements IRoundSensitive {
 
 	/**
 	 * Konstruktor, der die Abteilung automatisch bei der GameEngine anmeldet
@@ -17,7 +17,7 @@ public abstract class DepartmentRoundSensitive extends Department {
 	public DepartmentRoundSensitive(Company c, String n, int f) throws Exception {
 		super(c, n, f);
 		
-		GameEngine.getGameEngine().addSensitiveDepartment(this);
+		GameEngine.getGameEngine().addRoundSensitive(this);
 		
 	}
 

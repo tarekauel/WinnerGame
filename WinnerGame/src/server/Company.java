@@ -25,6 +25,7 @@ public class Company {
 	private Distribution distribution;
 	private HumanResources humanResources;
 	private MarketResearch marketResearch;
+	private boolean hasLost=false;
 	
 	private ArrayList<TPresentValue> presentValues = new ArrayList<TPresentValue>();
 
@@ -307,5 +308,13 @@ public class Company {
 	public String toString() {
 		return "Unternehmen in:" + this.location;
 
+	}
+
+	public boolean hasLost() {
+		return hasLost;
+	}
+
+	public void setHasLost(boolean hasLost) {
+		this.hasLost = hasLost;
 	}
 }

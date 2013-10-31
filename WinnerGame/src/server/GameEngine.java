@@ -37,7 +37,7 @@ public class GameEngine {
 
 	// Liste der Abteilungen, die zu Beginn jeder Runde für
 	// Initialisierungszwecke aufgerufen werden müssen
-	private ArrayList<DepartmentRoundSensitive> listSensitiveDepartments = new ArrayList<DepartmentRoundSensitive>();
+	private ArrayList<IRoundSensitive> listSensitiveDepartments = new ArrayList<IRoundSensitive>();
 
 	// Liste aller Unternehmen, die am Spiel teilnehmen
 	private ArrayList<Company> listOfCompanys = new ArrayList<Company>();
@@ -228,7 +228,7 @@ public class GameEngine {
 	}
 
 	private void prepareAllDepartmentsForNewRound() throws Exception {
-		for (DepartmentRoundSensitive d : listSensitiveDepartments) {
+		for (IRoundSensitive d : listSensitiveDepartments) {
 			d.prepareForNewRound(round);
 		}
 	}
@@ -240,7 +240,7 @@ public class GameEngine {
 	 * @param d
 	 *            Abteilung, die der Aufrufliste hinzugefügt werden soll
 	 */
-	public void addSensitiveDepartment(DepartmentRoundSensitive d) {
+	public void addRoundSensitive(IRoundSensitive d) {
 
 		listSensitiveDepartments.add(d);
 
@@ -266,13 +266,15 @@ public class GameEngine {
 	 * @throws IOException
 	 */
 	public void addCompanyLost(Company c) throws Exception {
+		c.setHasLost(true);
 		listOfLosers.add(c);
+		
 
 		CustomerMarket.getMarket().removeDistribution(c.getDistribution());
 		SupplierMarket.getMarket().removePurchase(c.getPurchase());
 		MarketData.getMarketData().removeHR(c.getHumanResources());
-
-		if (listOfCompanys.size() == listOfLosers.size()) {
+		
+		if (listOfCompanys.size() == listOfLosers.size()-1) {
 			Server.getServer().sendGameOver();
 		}
 

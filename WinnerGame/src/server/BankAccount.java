@@ -24,6 +24,7 @@ public class BankAccount implements IRoundSensitive {
 		checkAmount(Constant.BankAccount.START_CAPITAL);
 		this.c = c;
 		this.bankBalance = Constant.BankAccount.START_CAPITAL;
+		GameEngine.getGameEngine().addRoundSensitive(this);
 	}
 
 	/**

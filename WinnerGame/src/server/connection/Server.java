@@ -6,6 +6,7 @@ import message.GameDataMessageFromClient;
 import message.GameDataMessageToClient;
 import message.GameOverMessage;
 import server.Benefit;
+import server.Company;
 import server.GameEngine;
 import server.Location;
 import constant.Constant;
@@ -140,12 +141,29 @@ public class Server {
 		}
 	}
 
+private Company getCompanyOfPlayer(Player player){
+	for (Company c : GameEngine.getGameEngine().getListOfCompanys()) {
+		if(c.getName().equals(player.getName())){
+			return c;
+		}
+	}
+	return null;
+	
+}
 	public void sendGameOver(){
+		
 		for (Player player : playerList) {
-			player.getServerConnection().writeMessage(new GameOverMessage(player.getName(), "Jetzt haben alle spieler verloren!"));			
+			Company c= getCompanyOfPlayer(player);
+			if(c.hasLost()){
+			player.getServerConnection().writeMessage(new GameOverMessage(player.getName(), "Sie haben verloren!"));
+			}else{
+				player.getServerConnection().writeMessage(new GameOverMessage(player.getName(), "Sie haben gewonnen!"));
+			}
+		
 		}
 		close();
 		System.out.println("Spiel vorbei nach " + GameEngine.getGameEngine().getRound() + " Runden");
+		
 		//System.exit(-1);
 	}
 	public synchronized void addPlayer(Player player) {
