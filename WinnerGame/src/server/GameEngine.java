@@ -172,6 +172,11 @@ public class GameEngine {
 			costs += company.getStorage().getFixCosts();
 			company.getBankAccount().decreaseBalance(costs);
 			company.getHumanResources().refreshMotivationHistory();
+			
+			if(this.round>= Constant.Server.MAX_ROUNDS){ 
+				//Maximale Rundezahl erreicht!
+				Server.getServer().sendGameOver();
+			}
 
 		}
 
@@ -275,6 +280,7 @@ public class GameEngine {
 		MarketData.getMarketData().removeHR(c.getHumanResources());
 		
 		if (listOfCompanys.size() == listOfLosers.size()-1) {
+			//Ein Spieler bleibt uebrig!
 			Server.getServer().sendGameOver();
 		}
 

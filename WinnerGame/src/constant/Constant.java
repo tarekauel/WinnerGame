@@ -121,6 +121,8 @@ public class Constant {
 				.parseInt(getConstant("PLAYER_KI_TAREK"));
 		public static final int PLAYER_KI_LARS = Integer
 				.parseInt(getConstant("PLAYER_KI_LARS"));
+		public static final int MAX_ROUNDS = Integer
+				.parseInt(getConstant("MAX_ROUNDS"));
 	}
 
 	public static class DepartmentFixcost {
