@@ -108,7 +108,7 @@ public abstract class Product {
 	 * @param quality
 	 * @return
 	 */
-	private static Boolean checkQualityIsValid(int quality) {
+	private static boolean checkQualityIsValid(int quality) {
 		if (quality > 0 && quality <= 100) {
 			return true;
 		}
