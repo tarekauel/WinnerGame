@@ -15,7 +15,7 @@ import constant.Constant;
  *         abgeleitet bietet die Klasse an, wieviel eine Maschine produzieren
  *         kann und wie groﬂ die Auslastung ist
  */
-public class Machinery {
+public class Machinery implements IRoundSensitive {
 	// Maschinen ausbaustufe
 	private int level;
 
@@ -212,6 +212,13 @@ public class Machinery {
 	public int getPieceCosts() {
 
 		return Constant.Machinery.PIECE_COST_BASIC * (11 - level);
+	}
+	
+	@Override
+	public void prepareForNewRound(int round) throws Exception {
+		//Loesche die produzierte Menge:
+		producedQuantity=0;
+
 	}
 
 }
