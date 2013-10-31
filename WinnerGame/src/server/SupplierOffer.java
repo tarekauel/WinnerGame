@@ -52,7 +52,7 @@ public class SupplierOffer {
 	 * @param orderedQuantity
 	 * @return
 	 */
-	public Boolean setOrderedQuantity(int orderedQuantity) {
+	public boolean setOrderedQuantity(int orderedQuantity) {
 		
 		if (checkOrderedQuantityIsValid(orderedQuantity)) {
 			this.orderedQuantity = orderedQuantity;
@@ -73,7 +73,7 @@ public class SupplierOffer {
 	 * @param orderedQuantity
 	 * @return
 	 */
-	private static Boolean checkOrderedQuantityIsValid(int orderedQuantity) {
+	private static boolean checkOrderedQuantityIsValid(int orderedQuantity) {
 		if (orderedQuantity >= 0) {
 		
 			return true;
