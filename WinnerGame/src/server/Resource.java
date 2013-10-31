@@ -30,7 +30,7 @@ public class Resource extends Product {
 	 * @param name
 	 * @return
 	 */
-	private static Boolean checkNameIsValid(String name) {
+	private static boolean checkNameIsValid(String name) {
 		if (name.equals("Wafer") || name.equals("Gehäuse")) {
 			return true;
 		}
