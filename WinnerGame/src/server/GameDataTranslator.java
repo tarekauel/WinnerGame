@@ -155,11 +155,12 @@ public class GameDataTranslator {
 			Company company) throws Exception {
 		// geht alle acceptedSupOf des Clients durch
 		for (AcceptedSupplierOfferFromClient acceptedSupOf : acceptedSupplierOffers) {
+			boolean foundMatching = false;
 			// Sucht alle aktuellen Requests auf dem Server
 			for (server.Request request : company.getPurchase()
 					.getListOfLastRoundRequests()) { 
 				// Sucht zum jeweiligen Request die 3 SupplierOffers auf dem
-				// Server
+				// Server				
 				for (SupplierOffer supOf : request.getSupplierOffers()) {
 					// sucht den Offer der client- und serverseitig
 					// übereinstimmt
@@ -167,12 +168,14 @@ public class GameDataTranslator {
 						// akzeptiert den serverseitigen
 						company.getPurchase().acceptSupplierOffer(supOf,
 								acceptedSupOf.quantity);
+						foundMatching = true;
 						break;
 					}
-				}
+				}				
 			}
-		}
-
+			if( !foundMatching )
+				throw new IllegalArgumentException( "Das Angebot, das angenommen werden soll, existiert nicht!: " + acceptedSupOf.name + " Q: " + acceptedSupOf.quality);
+		}		
 	}
 
 	/**

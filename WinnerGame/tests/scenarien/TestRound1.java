@@ -170,9 +170,9 @@ public class TestRound1 {
 		// Speichern in simpler Message.
 		received = toReceive.remove(0);
 		// Analyse der Antwort:
-		assertEquals(100, received.purchase.requests.get(0).quality);
-		assertEquals("Wafer", received.purchase.requests.get(0).name);
-		for (SupplierOfferToClient so : received.purchase.requests.get(0).supplierOffers) {
+		assertEquals(100, received.purchase.requests.get(received.purchase.requests.size()-1).quality);
+		assertEquals("Wafer", received.purchase.requests.get(received.purchase.requests.size()-1).name);
+		for (SupplierOfferToClient so : received.purchase.requests.get(received.purchase.requests.size()-1).supplierOffers) {
 			// Die Angebote dürfen nicht um mehr als 10 Punkte abweichen.
 			assertEquals(true, so.quality > 90);
 			assertEquals(true, so.quality < 101);
@@ -194,9 +194,9 @@ public class TestRound1 {
 		// TODO:
 		// FIXME: Warum zur hölle kriege ich 4 Antworten?!
 		// Analyse der Antwort:
-		assertEquals(100, received.purchase.requests.get(0).quality);
-		assertEquals("Gehäuse", received.purchase.requests.get(0).name);
-		for (SupplierOfferToClient so : received.purchase.requests.get(0).supplierOffers) {
+		assertEquals(100, received.purchase.requests.get(received.purchase.requests.size()-1).quality);
+		assertEquals("Gehäuse", received.purchase.requests.get(received.purchase.requests.size()-1).name);
+		for (SupplierOfferToClient so : received.purchase.requests.get(received.purchase.requests.size()-1).supplierOffers) {
 			// Die Angebote dürfen nicht um mehr als 10 Punkte abweichen.
 			assertEquals(true, so.quality > 90);
 			assertEquals(true, so.quality < 101);
@@ -216,9 +216,9 @@ public class TestRound1 {
 		// Speichern in simpler Message.
 		received = toReceive.remove(0);
 		// Analyse der Antwort:
-		assertEquals(100, received.purchase.requests.get(0).quality);
-		assertEquals("Wafer", received.purchase.requests.get(0).name);
-		for (SupplierOfferToClient so : received.purchase.requests.get(0).supplierOffers) {
+		assertEquals(50, received.purchase.requests.get(received.purchase.requests.size()-1).quality);
+		assertEquals("Wafer", received.purchase.requests.get(received.purchase.requests.size()-1).name);
+		for (SupplierOfferToClient so : received.purchase.requests.get(received.purchase.requests.size()-1).supplierOffers) {
 			// Die Angebote dürfen nicht um mehr als 10 Punkte abweichen.
 			assertEquals(true, so.quality > 40);
 			assertEquals(true, so.quality < 60);
@@ -238,9 +238,9 @@ public class TestRound1 {
 		// Speichern in simpler Message.
 		received = toReceive.remove(0);
 		// Analyse der Antwort:
-		assertEquals(100, received.purchase.requests.get(0).quality);
-		assertEquals("Gehäuse", received.purchase.requests.get(0).name);
-		for (SupplierOfferToClient so : received.purchase.requests.get(0).supplierOffers) {
+		assertEquals(50, received.purchase.requests.get(received.purchase.requests.size()-1).quality);
+		assertEquals("Gehäuse", received.purchase.requests.get(received.purchase.requests.size()-1).name);
+		for (SupplierOfferToClient so : received.purchase.requests.get(received.purchase.requests.size()-1).supplierOffers) {
 			// Die Angebote dürfen nicht um mehr als 10 Punkte abweichen.
 			assertEquals(true, so.quality > 40);
 			assertEquals(true, so.quality < 60);

@@ -50,7 +50,7 @@ public abstract class Helper {
 									// Die gesuchte Annotation wurde gefunden, aber die Test fehlt noch
 									annotation = (T) m.getAnnotation(searched);
 								}
-							} else if ( ac.getName().equals(org.junit.Test.class.getCanonicalName())) {
+							} else if ( ac.getName().equals(org.junit.Test.class.getCanonicalName()) || ac.getName().equals(org.junit.Before.class.getCanonicalName())) {
 								// Die Test Annotation wurde gefunden
 								foundTest = true;
 								// Wenn die gesuchte Annotation bereits gefunden wurde, wird diese zurueckgegeben

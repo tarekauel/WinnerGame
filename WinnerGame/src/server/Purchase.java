@@ -101,7 +101,7 @@ public class Purchase extends DepartmentRoundSensitive {
 		}
 
 		if (quantity <= 0) {
-			throw new IOException(
+			throw new IllegalArgumentException(
 					"Quantity is 0 or lower! Class Purchase Method acceptSupplierOffer");
 		}
 
