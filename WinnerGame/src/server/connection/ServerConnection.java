@@ -240,7 +240,7 @@ public class ServerConnection extends Thread {
 		} catch (IOException e) {
 			//e.printStackTrace();
 			System.out.println("Could not send Message! ");
-			System.exit(-1);
+			//System.exit(-1);
 		}
 
 	}
