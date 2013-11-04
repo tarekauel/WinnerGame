@@ -209,7 +209,7 @@ public class KI extends Thread {
 		int casePrice = 0;
 		int caseQuality = 0;
 
-		for (int i = 0; i < readMessage.purchase.requests.size(); i++) {
+		for (int i = readMessage.purchase.requests.size()-2; i < readMessage.purchase.requests.size(); i++) {
 			// index des bisher besten angebots zur anfrage:
 			int index = 0;
 			// PreisLeistung des besten:
