@@ -18,12 +18,21 @@ import constant.Constant;
  * 
  */
 public class UDPClient extends Thread {
-	DatagramSocket socket = null;
-	int tcpServerPort = 0;
-	String serverIP = "";
-	int sentMessages=0;
-	Timer timerWaitForAnswer = new Timer();
+	private static String preSetIp=""; 
+	private DatagramSocket socket = null;
+	private int tcpServerPort = 0;
+	private String serverIP = "";
+	private int sentMessages=0;
+	private Timer timerWaitForAnswer = new Timer();
 
+	/**
+	 * IP um die Serverip hart zu setzen und den Broadcast zu umgehen.
+	 * @param ip
+	 */
+	public static void setIpForDirectConnect(String ip){
+		preSetIp=ip;
+	}
+	
 	/**
 	 * Liefert den Port des Servers zurueck. Falls 0 wurde der Server noch nicht
 	 * gefunden.
@@ -50,6 +59,13 @@ public class UDPClient extends Thread {
 	 * Started den Thread und das Suchen
 	 */
 	public void run() {
+		
+		if(!preSetIp.equals("")){
+			//Feste IP und Port gesetzt
+			serverIP = preSetIp;
+			tcpServerPort = Constant.Server.TCP_PORT;
+			return;
+		}
 		byte[] buffer = new byte[1024];
 
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);

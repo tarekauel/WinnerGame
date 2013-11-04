@@ -2,6 +2,8 @@ package client.ui;
 
 import java.io.IOException;
 
+import client.connection.UDPClient;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -68,6 +70,11 @@ public class ClientUIStart extends Application {
      */
     
     public static void main(String[] args) {
+    	
+    	if(args!=null && !args[0].equals("")){
+    		//Feste IP wird gesetzt um Broadcast zu umgehen.
+    		UDPClient.setIpForDirectConnect(args[0]);
+    	}
         launch(args);
     }
 
