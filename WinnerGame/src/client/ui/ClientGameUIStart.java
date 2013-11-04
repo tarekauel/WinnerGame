@@ -38,7 +38,7 @@ public class ClientGameUIStart extends Application {
             e.printStackTrace();
         }
     
-    }
+    }       
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
