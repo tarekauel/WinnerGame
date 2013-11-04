@@ -25,7 +25,7 @@ public class KITarek extends Thread {
 	private int quality = 60;
 	
 	private int stopRound = 0;
-	private int toBuy = 200;
+	private int toBuy = 500;
 	
 	public ArrayList<String> historie = new ArrayList<String>();
 	
@@ -75,6 +75,9 @@ public class KITarek extends Thread {
 		doSecondRound();
 		while(true) {
 			System.out.println( String.format("Runde: %d  Guthaben: "+formatter.format(reply.cash / 100.0), reply.round   ) );
+			for(StorageElementToClient elem : reply.storage.storageElements) {
+				System.out.println("Storage-Element: " + elem.type + " " + elem.quality + " " + elem.quantity);
+			}
 			double sumFixCosts = 0.0;
 			for(FixCostToClient fix : reply.reporting.fixCosts) {
 				sumFixCosts += fix.costs;
@@ -209,7 +212,6 @@ public class KITarek extends Thread {
 				}
 			}
 		}		
-		--toProduce;
 		if( waferQuality > 0 && caseQuality > 0 && toProduce > 0)
 			m.addProductionOrder(waferQuality, caseQuality, toProduce);
 		m.setWage((int) Math.floor( Math.random() * 200) + 1100); // Lohn zwischen 7 und 13
@@ -218,7 +220,7 @@ public class KITarek extends Thread {
 	private void sendSales() {
 		for( StorageElementToClient elem : reply.storage.storageElements) {
 			if(elem.type.equals("Panel")) {				
-					m.addOffer(elem.quality, elem.quantity, elem.costs*2);
+					m.addOffer(elem.quality, elem.quantity, (int) (elem.costs*1.5));
 			}
 		}
 	}
