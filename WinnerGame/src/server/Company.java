@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import constant.Constant;
 
 /**
