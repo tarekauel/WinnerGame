@@ -94,7 +94,7 @@ public class GameEngine {
 		throw new IllegalArgumentException("Der Playername ist invalid!");
 
 	}
-	public GameDataMessageToClient getInitialGameDataMessageToClient(String player) throws Exception {
+	public synchronized GameDataMessageToClient getInitialGameDataMessageToClient(String player) throws Exception {
 		
 		Company company =findCompanyOfPlayer(player);
 		ArrayList<MarketShareToClient> marketShares = new ArrayList<MarketShareToClient>();		
@@ -147,9 +147,9 @@ public class GameEngine {
 	 *            Übergebene Eingabedaten der Spieler
 	 * @throws Exception
 	 */
-	public ArrayList<GameDataMessageToClient> startNextRound(
+	public synchronized ArrayList<GameDataMessageToClient> startNextRound(
 			ArrayList<GameDataMessageFromClient> gameDataList) throws Exception {
-
+		round++; // Runde hochzaehlen
 		prepareAllDepartmentsForNewRound();
 		parseClientData(gameDataList);
 
@@ -202,7 +202,7 @@ public class GameEngine {
 			}
 		}
 
-		round++; // Runde hochzaehlen
+		
 
 		return createDataForClient();
 
@@ -234,7 +234,9 @@ public class GameEngine {
 
 	private void prepareAllDepartmentsForNewRound() throws Exception {
 		for (IRoundSensitive d : listSensitiveDepartments) {
+			if(d!=null){
 			d.prepareForNewRound(round);
+			}
 		}
 	}
 
@@ -245,7 +247,7 @@ public class GameEngine {
 	 * @param d
 	 *            Abteilung, die der Aufrufliste hinzugefügt werden soll
 	 */
-	public void addRoundSensitive(IRoundSensitive d) {
+	public synchronized void addRoundSensitive(IRoundSensitive d) {
 
 		listSensitiveDepartments.add(d);
 
@@ -257,7 +259,7 @@ public class GameEngine {
 	 * @param c
 	 *            Company, die hinzugefügt werden soll
 	 */
-	public void addCompany(Company c) {
+	public synchronized void addCompany(Company c) {
 
 		listOfCompanys.add(c);
 
@@ -270,7 +272,7 @@ public class GameEngine {
 	 *            die Firma die verloren hat
 	 * @throws IOException
 	 */
-	public void addCompanyLost(Company c) throws Exception {
+	public synchronized void addCompanyLost(Company c) throws Exception {
 		c.setHasLost(true);
 		listOfLosers.add(c);
 		
