@@ -34,7 +34,7 @@ public class MachineLevel1 {
 	}
 
 	@Test
-	@FakeRandom(randomNextIntNewRandom = { 0 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
+	@FakeRandom(randomNextIntNewRandom = { 0 }, randomNextIntMethodName = { "server.Machinery.isJunk" })
 	public void testLow() {
 		// Testet Randbereich unten
 		assertEquals(false, m.isJunk());
