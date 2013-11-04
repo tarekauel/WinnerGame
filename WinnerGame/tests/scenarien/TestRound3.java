@@ -68,7 +68,7 @@ public class TestRound3 {
 		toSend.add(msg.getSendMessage());
 		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
 		received = toReceive.remove(toReceive.size() - 1);
-		//TODO: Hier passiert irgendein Fehler
+		
 		toSend = new ArrayList<GameDataMessageFromClient>();
 		/**
 		 * Akzeptiere die Angebote (Qualitäten durch FakeOffers bekannt): Geld
@@ -102,5 +102,14 @@ public class TestRound3 {
 				assertEquals(100, se.getQuantity());
 			}
 		}
+	}
+	
+	@Test
+	public void produce() throws Exception{
+		//Zahlen sind aus der init Test bekannt
+		msg.addProductionOrder(50, 50, 100);
+		toSend.add(msg.getSendMessage());
+		GameEngine.getGameEngine().startNextRound(toSend);
+		assertEquals(50,c1.getStorage().getAllFinishedGoods().get(0).getQuality());
 	}
 }
