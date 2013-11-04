@@ -92,53 +92,53 @@ public class TestRound4 {
 	}
 
 	
-	
-	@Test
-	public void sellToHigh() throws Exception{
-		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
-		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
-		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
-		StorageElement sePanel = null;
-		for(StorageElement e: se){
-			if (e.getProduct().getName()=="Panel"){
-				sePanel = e;
-				break;
-			}
-		}
-		if (sePanel == null){
-			fail();
-			return;
-		}
-		
-		int before = sePanel.getQuantity();
-		
-		toSend.add(msg.getSendMessage());
-		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(before,sePanel.getQuantity());
-		
-	}
-	@Test
-	public void sell() throws Exception{
-		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
-		msg.addOffer(g.getQuality(), 10, 1);
-		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
-		StorageElement sePanel = null;
-		for(StorageElement e: se){
-			if (e.getProduct().getName()=="Panel"){
-				sePanel = e;
-				break;
-			}
-		}
-		if (sePanel == null){
-			fail();
-			return;
-		}
-		
-		int before = sePanel.getQuantity();
-		
-		toSend.add(msg.getSendMessage());
-		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(true,sePanel.getQuantity()<before);
-		
-	}
+//	
+//	@Test
+//	public void sellToHigh() throws Exception{
+//		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
+//		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
+//		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
+//		StorageElement sePanel = null;
+//		for(StorageElement e: se){
+//			if (e.getProduct().getName()=="Panel"){
+//				sePanel = e;
+//				break;
+//			}
+//		}
+//		if (sePanel == null){
+//			fail();
+//			return;
+//		}
+//		
+//		int before = sePanel.getQuantity();
+//		
+//		toSend.add(msg.getSendMessage());
+//		GameEngine.getGameEngine().startNextRound(toSend);
+//		assertEquals(before,sePanel.getQuantity());
+//		
+//	}
+//	@Test
+//	public void sell() throws Exception{
+//		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
+//		msg.addOffer(g.getQuality(), 10, 1);
+//		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
+//		StorageElement sePanel = null;
+//		for(StorageElement e: se){
+//			if (e.getProduct().getName()=="Panel"){
+//				sePanel = e;
+//				break;
+//			}
+//		}
+//		if (sePanel == null){
+//			fail();
+//			return;
+//		}
+//		
+//		int before = sePanel.getQuantity();
+//		
+//		toSend.add(msg.getSendMessage());
+//		GameEngine.getGameEngine().startNextRound(toSend);
+//		assertEquals(true,sePanel.getQuantity()<before);
+//		
+//	}
 }
