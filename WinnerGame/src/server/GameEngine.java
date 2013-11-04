@@ -149,7 +149,7 @@ public class GameEngine {
 	 */
 	public synchronized ArrayList<GameDataMessageToClient> startNextRound(
 			ArrayList<GameDataMessageFromClient> gameDataList) throws Exception {
-		round++; // Runde hochzaehlen
+
 		prepareAllDepartmentsForNewRound();
 		parseClientData(gameDataList);
 
@@ -202,7 +202,7 @@ public class GameEngine {
 			}
 		}
 
-		
+		round++; // Runde hochzaehlen
 
 		return createDataForClient();
 

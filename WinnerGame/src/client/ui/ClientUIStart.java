@@ -72,6 +72,7 @@ public class ClientUIStart extends Application {
     public static void main(String[] args) {
     	
     	if(args!=null && args.length!=0 && !args[0].equals("")){
+    		System.out.println("IP gesetzt auf: " + args[0]);
     		//Feste IP wird gesetzt um Broadcast zu umgehen.
     		UDPClient.setIpForDirectConnect(args[0]);
     	}
