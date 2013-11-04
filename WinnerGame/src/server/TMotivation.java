@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 
 public class TMotivation implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	final int round;
 	final int motivation;
 

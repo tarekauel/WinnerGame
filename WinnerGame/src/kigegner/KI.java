@@ -210,6 +210,9 @@ public class KI extends Thread {
 		int caseQuality = 0;
 
 		for (int i = readMessage.purchase.requests.size()-2; i < readMessage.purchase.requests.size(); i++) {
+			if(i<0 && i<readMessage.purchase.requests.size()){
+				break;
+			}
 			// index des bisher besten angebots zur anfrage:
 			int index = 0;
 			// PreisLeistung des besten:
@@ -217,6 +220,10 @@ public class KI extends Thread {
 			// Schleife über alle Angebote des Marktes zu den Anfragen:
 			for (int j = 0; j < readMessage.purchase.requests.get(i).supplierOffers
 					.size(); j++) {
+				System.out.println("SupplierOffer:" +  readMessage.purchase.requests.get(i).supplierOffers
+						.get(j).name + " - " +  readMessage.purchase.requests.get(i).supplierOffers
+						.get(j).quality + " - " +  readMessage.purchase.requests.get(i).supplierOffers
+						.get(j).price );
 				double tmp = readMessage.purchase.requests.get(i).supplierOffers
 						.get(j).quality
 						/ (readMessage.purchase.requests.get(i).supplierOffers
@@ -277,7 +284,8 @@ public class KI extends Thread {
 		m.addAccepted("Wafer", waferQuality,
 				(toBuy * constant.Constant.Production.WAFERS_PER_PANEL));
 		m.addAccepted("Gehäuse", caseQuality, (toBuy));
-
+		System.out.println("Bestelle:Wafer - " + waferQuality);
+		System.out.println("Bestelle:Gehäuse - " + caseQuality);
 		/*************************************
 		 * SECTION : PRODUCE + SELLING
 		 */

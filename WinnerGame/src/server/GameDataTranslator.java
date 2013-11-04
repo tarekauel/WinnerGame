@@ -27,7 +27,6 @@ import message.GameDataMessageToClient.ReportingToClient.FixCostToClient;
 import message.GameDataMessageToClient.ReportingToClient.MachineryToClient;
 import message.GameDataMessageToClient.StorageToClient;
 import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
-import server.connection.Server;
 import constant.Constant;
 
 public class GameDataTranslator {
