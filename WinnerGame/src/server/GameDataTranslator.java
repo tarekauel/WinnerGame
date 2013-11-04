@@ -174,7 +174,8 @@ public class GameDataTranslator {
 				}				
 			}
 		    if( !foundMatching )		    	
-				throw new IllegalArgumentException( "Das Angebot, das angenommen werden soll, existiert nicht!: " + acceptedSupOf.name + " Q: " + acceptedSupOf.quality);
+		    	 System.out.println("Das Angebot, das angenommen werden soll, existiert nicht!: " + acceptedSupOf.name + " Q: " + acceptedSupOf.quality);
+		    	//	throw new IllegalArgumentException( "Das Angebot, das angenommen werden soll, existiert nicht!: " + acceptedSupOf.name + " Q: " + acceptedSupOf.quality);
 		}		
 	}
 
