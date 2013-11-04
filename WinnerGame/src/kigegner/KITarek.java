@@ -125,7 +125,7 @@ public class KITarek extends Thread {
 
 		// Setze den Lohn:
 		// Erste Runde brauchen wir ja kaum Lohn
-		m.setWage(1);
+		m.setWage(1000);
 
 		// Erweitere die Maschine
 		m.setMachine(true);
@@ -140,6 +140,8 @@ public class KITarek extends Thread {
 	private void doSecondRound() {
 		acceptOffer();
 		m.setWage((int) Math.floor( Math.random() * 200) + 1100); // Lohn zwischen 7 und 13
+		m.addRequest("Wafer", quality);
+		m.addRequest("Gehäuse", quality);
 		sendData(m);
 	}
 	
