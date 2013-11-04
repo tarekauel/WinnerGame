@@ -19,6 +19,7 @@ import message.GameDataMessageToClient;
 import message.LoginConfirmationMessage;
 import message.LoginMessage;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import server.connection.Server;
@@ -27,7 +28,10 @@ import constant.Constant;
 
 public class GameEngineRoundTest {
 
-	
+	@BeforeClass 
+	public static void beforeTests(){
+		//SingletonObjecte = null
+	}
 
 	@Test
 	public void roundTestWithConnection() throws Exception {
