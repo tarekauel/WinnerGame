@@ -2,6 +2,7 @@ package gamedatatranslatorfromclient;
 
 import java.util.ArrayList;
 
+import kigegner.ClientToServerMessageCreator;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.DistributionFromClient;
 import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
@@ -36,10 +37,7 @@ public class GeneralTest {
 
 	@Before
 	public void initializeTests() throws Exception {
-		c = new Company(Location.getLocationByCountry("USA"),"OTTO");
-
-
-		
+		c = new Company(Location.getLocationByCountry("USA"),"OTTO");	
 	}
 
 	@Test (expected = java.lang.NullPointerException.class)
@@ -239,8 +237,6 @@ public class GeneralTest {
 		
 		GameDataTranslator.getGameDataTranslator().convertGameDataMessage2Objects(gameDataMessages);
 	}
-		
-
 
 	@After
 	public void resetTests() {
