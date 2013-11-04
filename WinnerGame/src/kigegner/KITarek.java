@@ -54,7 +54,7 @@ public class KITarek extends Thread {
 	private boolean login() {
 		this.c = new Client();
 		this.c.connect("127.0.0.1", Constant.Server.TCP_PORT);
-		playerName = "KiTarek";
+		playerName = "KiTarek" + Math.random();
 		// Sende die Daten an den Server
 		c.writeMessage(new LoginMessage(playerName, "KI-Programmed",
 				"usa"));
@@ -102,7 +102,6 @@ public class KITarek extends Thread {
 					playerName);
 			play();
 			if ( reply.round == stopRound) {
-				ClientGameUIStart.main(null);
 				break;
 			}
 			sendData(m);
