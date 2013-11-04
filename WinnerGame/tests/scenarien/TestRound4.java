@@ -1,6 +1,6 @@
 package scenarien;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -15,15 +15,15 @@ import org.junit.Test;
 import server.Benefit;
 import server.Company;
 import server.CustomerMarket;
+import server.FinishedGood;
 import server.GameEngine;
 import server.Location;
 import server.MarketData;
-import server.Resource;
 import server.StorageElement;
 import server.SupplierMarket;
 import annotation.FakeSupplierMarketOfferQualities;
 
-public class TestRound3 {
+public class TestRound4 {
 	Company c1;
 	ClientToServerMessageCreator msg;
 	ArrayList<GameDataMessageFromClient> toSend;
@@ -46,7 +46,7 @@ public class TestRound3 {
 		toSend = new ArrayList<GameDataMessageFromClient>();
 
 		// erstelle die Firmenobjekte
-		c1 = new Company(Location.getLocationByCountry("Test"),
+		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
 
 	
@@ -82,34 +82,63 @@ public class TestRound3 {
 		// initialisiere die gebrauchten Listen, damit der Test beginnen kann.
 		toReceive = new ArrayList<GameDataMessageToClient>();
 		toSend = new ArrayList<GameDataMessageFromClient>();
-
-	}
-
-	@Test
-	public void checkIfInStorage() {
-		// Check if correct Quality in Storage
-		for (Resource r : c1.getStorage().getAllResources()) {
-			if (r.getName().equals("Wafer")) {
-				assertEquals(50, r.getQuality());
-			} else if (r.getName().equals("Gehäuse")) {
-				assertEquals(50, r.getQuality());
-			}
-		}
-		for (StorageElement se : c1.getStorage().getAllStorageElements()) {
-			if (se.getProduct().getName().equals("Wafer")) {
-				assertEquals(5400, se.getQuantity());
-			} else if (se.getProduct().getName().equals("Gehäuse")) {
-				assertEquals(100, se.getQuantity());
-			}
-		}
-	}
-	
-	@Test
-	public void produce() throws Exception{
 		//Zahlen sind aus der init Test bekannt
 		msg.addProductionOrder(50, 50, 100);
 		toSend.add(msg.getSendMessage());
+		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
+		
+
+
+	}
+
+	
+	
+	@Test
+	public void sellToHigh() throws Exception{
+		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
+		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
+		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
+		StorageElement sePanel = null;
+		for(StorageElement e: se){
+			if (e.getProduct().getName()=="Panel"){
+				sePanel = e;
+				break;
+			}
+		}
+		if (sePanel == null){
+			fail();
+			return;
+		}
+		
+		int before = sePanel.getQuantity();
+		
+		toSend.add(msg.getSendMessage());
 		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(50,c1.getStorage().getAllFinishedGoods().get(0).getQuality());
+		assertEquals(before,sePanel.getQuantity());
+		
+	}
+	@Test
+	public void sell() throws Exception{
+		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
+		msg.addOffer(g.getQuality(), 10, 1);
+		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
+		StorageElement sePanel = null;
+		for(StorageElement e: se){
+			if (e.getProduct().getName()=="Panel"){
+				sePanel = e;
+				break;
+			}
+		}
+		if (sePanel == null){
+			fail();
+			return;
+		}
+		
+		int before = sePanel.getQuantity();
+		
+		toSend.add(msg.getSendMessage());
+		GameEngine.getGameEngine().startNextRound(toSend);
+		assertEquals(true,sePanel.getQuantity()<before);
+		
 	}
 }
