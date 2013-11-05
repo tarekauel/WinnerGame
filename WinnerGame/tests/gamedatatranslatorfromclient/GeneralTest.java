@@ -2,7 +2,6 @@ package gamedatatranslatorfromclient;
 
 import java.util.ArrayList;
 
-import kigegner.ClientToServerMessageCreator;
 import message.GameDataMessageFromClient;
 import message.GameDataMessageFromClient.DistributionFromClient;
 import message.GameDataMessageFromClient.DistributionFromClient.OfferFromClient;
@@ -14,7 +13,6 @@ import message.GameDataMessageFromClient.PurchaseFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -134,27 +132,6 @@ public class GeneralTest {
 	}
 	
 	@Test (expected = java.lang.NullPointerException.class)
-	public void benefitsNull() throws Exception {
-		//erstellen der Listen
-		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
-		ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers = new ArrayList<AcceptedSupplierOfferFromClient>();
-		ArrayList<ProductionOrderFromClient> orders = new ArrayList<ProductionOrderFromClient>();;
-		ArrayList<OfferFromClient> offers = new ArrayList<OfferFromClient>();
-		ArrayList<BenefitBookingFromClient> benefits = null;
-		
-		//erstellen der Objekte mit den Listen gefuellt
-		PurchaseFromClient purchase = new PurchaseFromClient(requests, acceptedSupplierOffers);
-		ProductionFromClient production = new ProductionFromClient(orders);
-		DistributionFromClient distribution = new DistributionFromClient(offers);
-		HumanResourcesFromClient  hr = new HumanResourcesFromClient(benefits);
-		//erstellen der Message
-		GameDataMessageFromClient gameDataMessage = new GameDataMessageFromClient(c.getName(), purchase, production, distribution, false, hr, 7, false);
-		gameDataMessages.add(gameDataMessage);
-		
-		GameDataTranslator.getGameDataTranslator().convertGameDataMessage2Objects(gameDataMessages);
-	}
-	
-	@Test (expected = java.lang.NullPointerException.class)
 	public void purchaseNull() throws Exception {
 		//erstellen der Listen
 		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
@@ -217,30 +194,5 @@ public class GeneralTest {
 		GameDataTranslator.getGameDataTranslator().convertGameDataMessage2Objects(gameDataMessages);
 	}
 	
-	@Test (expected = java.lang.NullPointerException.class)
-	public void humanresourcesNull() throws Exception {
-		//erstellen der Listen
-		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
-		ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers = new ArrayList<AcceptedSupplierOfferFromClient>();
-		ArrayList<ProductionOrderFromClient> orders = new ArrayList<ProductionOrderFromClient>();
-		ArrayList<OfferFromClient> offers = new ArrayList<OfferFromClient>();
-		ArrayList<BenefitBookingFromClient> benefits =  new ArrayList<BenefitBookingFromClient>();
-		
-		//erstellen der Objekte mit den Listen gefuellt
-		PurchaseFromClient purchase = new PurchaseFromClient(requests, acceptedSupplierOffers);
-		ProductionFromClient production = new ProductionFromClient(orders);
-		DistributionFromClient distribution = new DistributionFromClient(offers);
-		HumanResourcesFromClient  hr = null;
-		//erstellen der Message
-		GameDataMessageFromClient gameDataMessage = new GameDataMessageFromClient(c.getName(), purchase, production, distribution, false, hr, 7, false);
-		gameDataMessages.add(gameDataMessage);
-		
-		GameDataTranslator.getGameDataTranslator().convertGameDataMessage2Objects(gameDataMessages);
-	}
-
-	@After
-	public void resetTests() {
-
-	}
-
+	
 }
