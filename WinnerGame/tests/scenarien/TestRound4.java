@@ -1,6 +1,7 @@
 package scenarien;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -11,8 +12,6 @@ import message.GameDataMessageToClient;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.sun.javafx.scene.layout.region.Margins.Converter;
 
 import server.Benefit;
 import server.Company;
@@ -26,21 +25,17 @@ import server.SupplierMarket;
 import annotation.FakeSupplierMarketOfferQualities;
 
 public class TestRound4 {
-	Company c1;
-	ClientToServerMessageCreator msg;
-	ArrayList<GameDataMessageFromClient> toSend;
-	ArrayList<GameDataMessageToClient> toReceive;
-	GameDataMessageToClient received;
+	static Company c1;
+	static ClientToServerMessageCreator msg;
+	static ArrayList<GameDataMessageFromClient> toSend;
+	static ArrayList<GameDataMessageToClient> toReceive;
+	static GameDataMessageToClient received;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Location.initLocations();
 		Benefit.initBenefits();
-	}
-
-	@Before
-	@FakeSupplierMarketOfferQualities(differences = { -10, 0, 10 })
-	public void initializeTests() throws Exception {
+		
 		// erstelle die messageobjekte
 		msg = new ClientToServerMessageCreator("Tester-1");
 		// initialisiere die Listen, damit der Test beginnen kann.
@@ -64,6 +59,12 @@ public class TestRound4 {
 		// Hole Angebote vom Markt mit bestimmten Parametern.
 		// erstelle dazu ein MessageObject, sende es an den Server und lade die
 		// Antwort in Received
+	}
+
+	@Before
+	@FakeSupplierMarketOfferQualities(differences = { -10, 0, 10 })
+	public void initializeTests() throws Exception {
+		
 
 		msg.addRequest("Wafer", 50);
 		msg.addRequest("Gehäuse", 50);
@@ -125,8 +126,12 @@ public class TestRound4 {
 		assertEquals(0,received.distribution.offers.get(received.distribution.offers.size()-1).quantitySold);
 		
 	}
+	
 	@Test
 	public void sell() throws Exception{
+		msg = new ClientToServerMessageCreator("Tester-1");
+		toSend = new ArrayList<GameDataMessageFromClient>();
+		
 		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
 		msg.addOffer(g.getQuality(), 10, 1);
 		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
