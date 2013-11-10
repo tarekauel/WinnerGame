@@ -101,6 +101,7 @@ public class TestRound4 {
 	@Test
 	public void sellToHigh() throws Exception{
 		msg = new ClientToServerMessageCreator("Tester-1");
+		toSend = new ArrayList<GameDataMessageFromClient>();
 		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
 		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
 		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
@@ -117,11 +118,11 @@ public class TestRound4 {
 			return;
 		}
 		
-		int before = sePanel.getQuantity();
-		
+				
 		toSend.add(msg.getSendMessage());
-		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(before,sePanel.getQuantity());
+		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
+		received = toReceive.remove(toReceive.size()-1);
+		assertEquals(0,received.distribution.offers.get(received.distribution.offers.size()-1).quantitySold);
 		
 	}
 	@Test
