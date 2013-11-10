@@ -191,8 +191,6 @@ public class TestRound1 {
 		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
 		// Speichern in simpler Message.
 		received = toReceive.remove(0);
-		// TODO:
-		// FIXME: Warum zur hölle kriege ich 4 Antworten?!
 		// Analyse der Antwort:
 		assertEquals(100, received.purchase.requests.get(received.purchase.requests.size()-1).quality);
 		assertEquals("Gehäuse", received.purchase.requests.get(received.purchase.requests.size()-1).name);

@@ -23,7 +23,7 @@ import server.StorageElement;
 import server.SupplierMarket;
 import annotation.FakeSupplierMarketOfferQualities;
 
-public class TestRound4 {
+public class RoundScenario {
 	Company c1;
 	ClientToServerMessageCreator msg;
 	ArrayList<GameDataMessageFromClient> toSend;
@@ -37,19 +37,14 @@ public class TestRound4 {
 	}
 
 	@Before
-	@FakeSupplierMarketOfferQualities(differences = { -10, 0, 10 })
 	public void initializeTests() throws Exception {
 		// erstelle die messageobjekte
 		msg = new ClientToServerMessageCreator("Tester-1");
-		// initialisiere die Listen, damit der Test beginnen kann.
-		toReceive = new ArrayList<GameDataMessageToClient>();
-		toSend = new ArrayList<GameDataMessageFromClient>();
 
 		// erstelle die Firmenobjekte
 		c1 = new Company(Location.getLocationByCountry("Deutschland"),
 				"Tester-1");
 
-	
 		// Anmelden im CustomerMarket
 		CustomerMarket.getMarket().addDistribution(c1.getDistribution());
 
@@ -59,86 +54,86 @@ public class TestRound4 {
 		// Anmelden an den Marktdaten
 		MarketData.getMarketData().addHR(c1.getHumanResources());
 
-		// Hole Angebote vom Markt mit bestimmten Parametern.
-		// erstelle dazu ein MessageObject, sende es an den Server und lade die
-		// Antwort in Received
-
-		msg.addRequest("Wafer", 50);
-		msg.addRequest("Gehäuse", 50);
-		toSend.add(msg.getSendMessage());
-		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
-		received = toReceive.remove(toReceive.size() - 1);
-		
-		toSend = new ArrayList<GameDataMessageFromClient>();
-		/**
-		 * Akzeptiere die Angebote (Qualitäten durch FakeOffers bekannt): Geld
-		 * genug vorhanden (+10 Millionen zum eigentlichen Kapital reichen)
-		 */
-		msg.addAccepted("Wafer", 50, 5400);
-		msg.addAccepted("Gehäuse", 50, 100);
-		toSend.add(msg.getSendMessage());
-		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
-
-		// initialisiere die gebrauchten Listen, damit der Test beginnen kann.
+		// Initialisiere die Listen
 		toReceive = new ArrayList<GameDataMessageToClient>();
 		toSend = new ArrayList<GameDataMessageFromClient>();
-		//Zahlen sind aus der init Test bekannt
-		msg.addProductionOrder(50, 50, 100);
+		received = null;
+
+	}
+
+	@Test
+	@FakeSupplierMarketOfferQualities(differences = { -10, 0, 10 })
+	public void completeTest() throws Exception {
+		// Stelle Anfragen an den Markt (Qualität 50)
+		doFirstRound();
+		// Kauf Wafer und Gehäuse der Qualität 50 für 100 Panels
+		doSecondRound();
+		// Produziere 100 Panels 
+		doThirdRound();
+		//Verkaufe 10 Panels für je 400€
+		doFourthRound();
+	}
+
+	private void doFirstRound() throws Exception {
+		// Senden vorbereiten
+		msg.addRequest("Wafer", 50);
+		msg.addRequest("Gehäuse", 50);
+		// Hinzufügen zu einem Array
 		toSend.add(msg.getSendMessage());
+		// Senden an GameEngine und entgegennehmen der Antwort
 		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
-		
-
 
 	}
 
-	
-	
-	@Test
-	public void sellToHigh() throws Exception{
+	private void doSecondRound() throws Exception {
+		// Senden vorbereiten
+		msg.addAccepted("Wafer", 50, 5400);
+		msg.addAccepted("Gehäuse", 50, 100);
+		// Hinzufügen zu einem Array
+		toSend.add(msg.getSendMessage());
+		// Senden an GameEngine und entgegennehmen der Antwort
+		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
+
+	}
+
+	private void doThirdRound() throws Exception {
+		//Senden vorbereiten
+		msg.addProductionOrder(50, 50, 100);
+		//Hinzufügen zu einem Array
+		toSend.add(msg.getSendMessage());
+		//Senden an GameEngine und entgegennehmen der Antwort
+		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
+
+	}
+
+	private void doFourthRound() throws Exception {
+		
 		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
-		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
+		//Verkaufe 10 Panels für 400€
+		msg.addOffer(g.getQuality(), 10, 40000);
 		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
 		StorageElement sePanel = null;
-		for(StorageElement e: se){
-			if (e.getProduct().getName()=="Panel"){
+		for (StorageElement e : se) {
+			if (e.getProduct().getName().equals("Panel")) {
 				sePanel = e;
 				break;
 			}
 		}
-		if (sePanel == null){
+		if (sePanel == null) {
 			fail();
 			return;
 		}
-		
+		//wieviele panels hatten wir vorher?
 		int before = sePanel.getQuantity();
-		
+		//senden an Gameengine
 		toSend.add(msg.getSendMessage());
 		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(before,sePanel.getQuantity());
-		
-	}
-	@Test
-	public void sell() throws Exception{
-		FinishedGood g = c1.getStorage().getAllFinishedGoods().get(0);
-		msg.addOffer(g.getQuality(), 10, 1);
-		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
-		StorageElement sePanel = null;
-		for(StorageElement e: se){
-			if (e.getProduct().getName()=="Panel"){
-				sePanel = e;
-				break;
-			}
+		//finaler Test:
+		//vergleich der anzahl der panels
+		if(sePanel.getQuantity() >= before){
+			fail("Es wurde nichts verkauft!");
 		}
-		if (sePanel == null){
-			fail();
-			return;
-		}
-		
-		int before = sePanel.getQuantity();
-		
-		toSend.add(msg.getSendMessage());
-		GameEngine.getGameEngine().startNextRound(toSend);
-		assertEquals(true,sePanel.getQuantity()<before);
-		
+
 	}
+
 }
