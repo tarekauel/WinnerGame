@@ -12,12 +12,12 @@ import constant.Constant;
  * Angebote der Spieler ab und entscheidet für jeden Käufer welches Angebot er
  * auswählt
  * 
- * @author Tarek TODO Maximale Peak-Verschiebung
+ * @author Tarek 
  */
 public class CustomerMarket {
 
 	// Singleton Instanz
-	private static CustomerMarket market = null; // TODO
+	private static CustomerMarket market = null; 
 
 	// --------------------------------------- A-Markt
 	// --------------------------------------------------------------
@@ -27,18 +27,18 @@ public class CustomerMarket {
 
 	// aktuelle Nachfragemenge im A-Markt
 	// Standardwert: 100 ME;
-	private int aMarketQuantity; // TODO
+	private int aMarketQuantity; 
 
 	// Standardabweichung zur Berechnung im A-Markt
-	private final double aMarketVariance; // TODO
+	private final double aMarketVariance; 
 
 	// Faktor zum Wachstum vom A-Markt
 	// Für X bediente Kunden kommt einer hinzug
-	private final double aMarketIncreaseFactor; // TODO
+	private final double aMarketIncreaseFactor; 
 
 	// Faktor zur Abnahme vom A-Markt
 	// Für X nicht bediente Kunden geht einer
-	private final double aMarketDecreaseFactor; // TODO
+	private final double aMarketDecreaseFactor; 
 
 	// --------------------------------------- C-Markt
 	// --------------------------------------------------------------
@@ -48,69 +48,68 @@ public class CustomerMarket {
 
 	// aktuelle Nachfragemenge im C-Markt
 	// Standardwert: 200 ME;
-	private int cMarketQuantity; // TODO
+	private int cMarketQuantity; 
 
 	// Standardabweichung zur Berechnung im C-Markt
-	private final double cMarketVariance; // TODO
+	private final double cMarketVariance; 
 
 	// Faktor zum Wachstum vom C-Markt
 	// Für X bediente Kunden kommt einer hinzug
-	private final double cMarketIncreaseFactor; // TODO
+	private final double cMarketIncreaseFactor;
 
 	// Faktor zur Abnahme vom C-Markt
 	// Für X nicht bediente Kunden geht einer
-	private final double cMarketDecreaseFactor; // TODO
+	private final double cMarketDecreaseFactor; 
 
 	// --------------------------------------- Preisberechnung
 	// --------------------------------------------------------------
 	// Durchschnittlicher Preis der gekauften Artikel in der letzten Runde im
 	// A-Markt
-	private int aMarketAvgPriceLastRound; // TODO
+	private int aMarketAvgPriceLastRound; 
 
 	// Durchschnittliche Qualität der gekauften Artikel in der letzten Runde im
 	// A-Markt
-	private int aMarketAvgQualityLastRound; // TODO
+	private int aMarketAvgQualityLastRound; 
 
 	// Durchschnittlicher Preis der gekauften Artikel in der letzten Runde im
 	// C-Markt
-	private int cMarketAvgPriceLastRound; // TODO
+	private int cMarketAvgPriceLastRound; 
 
 	// Durchschnittliche Qualität der gekauften Artikel in der letzten Runde im
 	// C-Markt
-	private int cMarketAvgQualityLastRound; // TODO
+	private int cMarketAvgQualityLastRound; 
 
 	// Mittelpunkt zwischen den Durchschnittsqualitäten der letzten Runde
-	private int marketMiddleQualityLastRound; // TODO
+	private int marketMiddleQualityLastRound; 
 
 	// Mittelpunkt zwischen den Durchschnittspreisen der letzten Runde (um 50
 	// der Lücke angehoben)
-	private int marketMiddlePriceLastRound; // TODO
+	private int marketMiddlePriceLastRound; 
 
 	// --------------------------------------- Verbindung zu
 	// Abteilungen------------------------------------------------------
 	// Liste aller Verkaufsabteilung
-	private ArrayList<Distribution> listOfDistributions = new ArrayList<Distribution>(); // TODO
+	private ArrayList<Distribution> listOfDistributions = new ArrayList<Distribution>(); 
 
 	// Liste aller Angebote, die für diese Runde gemacht worden sind
 	private ArrayList<Offer> listOfAllOffers = null;
 
 	// ------------------------------------------ Market Shares
-	private HashMap<Company, Long> listOfSales = new HashMap<Company, Long>(); // TODO
+	private HashMap<Company, Long> listOfSales = new HashMap<Company, Long>(); 
 
 	// --------------------------------------- Logging zur Überprüfung
 	// --------------------------------------------------------------
 	// HashMap zum Speichern der Nachgefragten Qualitäten
-	private HashMap<Integer, Integer> logRequestedQualities = new HashMap<Integer, Integer>(); // TODO
+	private HashMap<Integer, Integer> logRequestedQualities = new HashMap<Integer, Integer>();
 
 	// HashMap zum Speichern der Akzeptierten Preise
-	private HashMap<Integer, String> logAcceptedPrices = new HashMap<Integer, String>(); // TODO
+	private HashMap<Integer, String> logAcceptedPrices = new HashMap<Integer, String>(); 
 
 	/**
 	 * Liefert die Instanz auf den Markt zurück. (Singleton)
 	 * 
 	 * @return CusomterMarket: Marktinstanz
 	 */
-	// TODO
 	public static CustomerMarket getMarket() {
 
 		// Pruefe, ob der Markt bereits erstellt worden ist und geben es zurück
@@ -121,7 +120,6 @@ public class CustomerMarket {
 	/**
 	 * Private Konstruktor zur Umsetzung von Singleton
 	 */
-	// TODO
 	private CustomerMarket() {
 		// Initialisierungsvariablen setzen
 		this.aMarketPeak = Constant.CustomerMarket.aMarketPeak;
@@ -146,7 +144,6 @@ public class CustomerMarket {
 
 	}
 
-	// TODO
 	/**
 	 * Registriert eine Verkaufsabteilung beim Markt
 	 * 
@@ -163,9 +160,7 @@ public class CustomerMarket {
 
 		// Pruefe, ob die Abteilung bereits in der List steht
 		// -1: Abteilung ist neu
-		if (listOfDistributions.indexOf(d) == -1) { // TODO: indexOf geht auf
-													// equals (muss ggf. noch
-													// implementiert werden)
+		if (listOfDistributions.indexOf(d) == -1) { 
 
 			// Abteilung muss hinzugefügt werden
 			listOfDistributions.add(d);
@@ -197,7 +192,7 @@ public class CustomerMarket {
 		listOfAllOffers = getAllOffers();
 
 		// Die Liste nach Preis/Qualität sortieren
-		Collections.sort(listOfAllOffers); // TODO
+		Collections.sort(listOfAllOffers); 
 
 		// Anzahl der bedienten Kunden
 		int servedCustomersAMarket = 0;
@@ -326,7 +321,6 @@ public class CustomerMarket {
 	 * @param boughtOffersCMarket
 	 *            iste der angenommen angebote im C-Markt
 	 */
-	// TODO
 	private void calculateNewMarketParams(int servedCustomersAMarket,
 			int notServedCustomersAMarket,
 			ArrayList<int[]> boughtOffersAMarket, int servedCustomersCMarket,
@@ -478,7 +472,6 @@ public class CustomerMarket {
 	 *            Die Qualität, die der Kunde nachfragen soll
 	 * @return Referenz auf das Angebot, dass er am Ende ausgewählt hat
 	 */
-	// TODO
 	private Offer simulateCustomer(ArrayList<Offer> listOfAllOffers,
 			int requestedQuality) {
 
@@ -559,7 +552,7 @@ public class CustomerMarket {
 			// Im Lager um eins veringern
 			if (!chosenOffer.getDistribution().getCompany().getStorage()
 					.unstore(chosenOffer.getStorageElement().getProduct(), 1)) {
-				// TODO: Aus irgendeinem Grund ist das Offer im Lager nicht
+				// Aus irgendeinem Grund ist das Offer im Lager nicht
 				// gedeckt. In diesem Fall ist der Kunde enttäuscht, dass nicht
 				// geliefert wird und sucht auch kein anderes Angbote mehr.
 				// Sollte eigentlich nicht passieren:
@@ -591,7 +584,6 @@ public class CustomerMarket {
 	 *            Standardabweichung der Normalverteilung
 	 * @return Normalverteilte Integerzahl
 	 */
-	// TODO
 	private int getGaussianNumber(int min, int max, int average, double variance) {
 		int number = min - 1;
 
@@ -610,8 +602,7 @@ public class CustomerMarket {
 	 * gemeinsame Liste zurück
 	 * 
 	 * @return
-	 */
-	// TODO
+	*/
 	private ArrayList<Offer> getAllOffers() {
 		ArrayList<Offer> list = new ArrayList<Offer>();
 
@@ -635,7 +626,6 @@ public class CustomerMarket {
 	 *            : Qualität, die der Kunde nachfragt
 	 * @return Preis, den der Kunde akzeptiert (maximal)
 	 */
-	// TODO
 	private int calculateAcceptedPrice(int requestedQuality) {
 		int price;
 
@@ -704,7 +694,6 @@ public class CustomerMarket {
 	 * 
 	 * @return A-Markt Peak
 	 */
-	// TODO
 	public int getAMarketPeak() {
 		return aMarketPeak;
 	}
@@ -714,7 +703,6 @@ public class CustomerMarket {
 	 * 
 	 * @return c-Markt Peak
 	 */
-	// TODO
 	public int getCMarketPeak() {
 		return cMarketPeak;
 	}
