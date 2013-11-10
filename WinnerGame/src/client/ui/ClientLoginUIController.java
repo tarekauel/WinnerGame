@@ -110,8 +110,6 @@ public class ClientLoginUIController implements Initializable {
     	loginModel.getUdpClient().start();
 		// Search for Server 
 		while (loginModel.getUdpClient().getTcpPortOfServer() == 0) {
-			//TODO:show Progress
-			System.out.println("progress");
 		}
 		if (loginModel.getUdpClient().getTcpPortOfServer() == -1) {
 			//Konnte Server nicht finden!
@@ -123,7 +121,6 @@ public class ClientLoginUIController implements Initializable {
 		//Send Login Message
 		String name = loginNameField.getText();
 		String password = passwordField.getText();
-		//TODO: Get Location
 		String chosenLocation = getChosenLocation();
 		loginModel.getClient().writeMessage(new LoginMessage(name, password, chosenLocation));
 		LoginConfirmationMessage message = (LoginConfirmationMessage) loginModel.getClient().readMessage();

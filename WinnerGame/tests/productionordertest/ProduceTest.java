@@ -73,7 +73,6 @@ public class ProduceTest {
 		prodOrd.produce(0.001, c.getProduction().getMachine());
 		assertEquals(1, prodOrd.getPanel().getQuality());
 	}
-	//TODO: Um InputParameter zu pruefen fehlt die passende Exception es wird immer null zurueckgeliefert momentan
 
 
 }

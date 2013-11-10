@@ -68,15 +68,7 @@ public class GameEngineRoundTest {
 				.readMessage();
 		assertEquals(true, message3.getSuccess());
 
-		/*fail();
-		//TODO:Sonderlogik Runde 1 implementieren
-		// Get Game Data
-		GameDataMessageToClient gameMessage1 = (GameDataMessageToClient) c1.readMessage();
-		assertEquals(Constant.BankAccount.START_CAPITAL, gameMessage1.cash);
-		GameDataMessageToClient gameMessage2 = (GameDataMessageToClient) c2.readMessage();
-		assertEquals(Constant.BankAccount.START_CAPITAL, gameMessage2.cash);
-		GameDataMessageToClient gameMessage3 = (GameDataMessageToClient) c3.readMessage();
-		assertEquals(Constant.BankAccount.START_CAPITAL, gameMessage3.cash);*/
+		
 		
 		// Set GameData
 		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();

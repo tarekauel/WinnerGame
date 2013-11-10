@@ -195,11 +195,9 @@ public class GameTestConsole {
 		}
 
 		for (GameDataMessageToClient answer : game.startNextRound(messages)) {
-			//TODO:Probearbeit:
 			
 			data = answer;
 			ClientUIStart.main(null);
-			//END OF WoRK
 			System.out.println("Auswertung Spieler" + answer.getPlayerName());
 			
 			System.out.println("Antwort vom Purchase");

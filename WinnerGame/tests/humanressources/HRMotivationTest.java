@@ -35,13 +35,6 @@ public class HRMotivationTest {
 		assertEquals(true, expected.equals(averageWage));
 	}
 	
-	@Test
-	public void testAverageBenefit() throws Exception {
-		/*h1.bookBenefit("Sport", 10);
-		h2.bookBenefit("Sport", 10);
-		// TODO Runde muss fakebar sein!
-		assertEquals( 15000,  MarketData.getMarketData().getAverageBenefit());*/
-	}
 	
 	@Test
 	public void testMotivation() throws Exception{

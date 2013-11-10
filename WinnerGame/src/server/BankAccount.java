@@ -112,7 +112,7 @@ public class BankAccount implements IRoundSensitive {
 	 * @throws IllegalArgumentException
 	 */
 	private void checkAmount(long amount) throws IllegalArgumentException {
-		if (amount < 0) { // TODO: geaendert, da zum Beispiel keine Lagerkosten anfallen und dann mit 0 abgebucht wird
+		if (amount < 0) {
 			throw new IllegalArgumentException("Amount darf nicht < 0 sein");
 		}
 	}
