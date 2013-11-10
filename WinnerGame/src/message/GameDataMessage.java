@@ -8,6 +8,10 @@ import java.io.Serializable;
  */
 public abstract class GameDataMessage implements IMessage, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String playerName="";
 
 	public GameDataMessage(String playerName) {

@@ -8,6 +8,10 @@ import java.io.Serializable;
  *         eine Loginanfrage gesendet.
  */
 public class LoginConfirmationMessage implements IMessage, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Boolean success = false;
 	private String info = "";
 

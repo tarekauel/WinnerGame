@@ -8,6 +8,10 @@ import java.io.Serializable;
  *         gesendet.
  */
 public class GameOverMessage implements IMessage, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name = "";
 	private String info = "";
 	

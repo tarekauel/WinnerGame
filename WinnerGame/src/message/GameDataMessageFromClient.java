@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public class GameDataMessageFromClient   extends GameDataMessage implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GameDataMessageFromClient(String playerName, PurchaseFromClient purchase,
 			ProductionFromClient production, DistributionFromClient distribution,
 			boolean increaseMachineLevel, HumanResourcesFromClient humanResources,
@@ -28,6 +33,11 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 	public final boolean buyMarketResearch;
 
 	public static class PurchaseFromClient implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public PurchaseFromClient(ArrayList<RequestFromClient> requests,
 				ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers) {
 			this.requests = requests;
@@ -38,6 +48,10 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 		// und
 		public static class RequestFromClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public RequestFromClient(String name, int quality) {
 				this.name = name;
 				this.quality = quality;
@@ -50,6 +64,10 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 		// Qualitaet
 		public  static class AcceptedSupplierOfferFromClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public AcceptedSupplierOfferFromClient(String name, int quality, int quantity) {
 				this.name = name;
 				this.quality = quality;
@@ -67,11 +85,20 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 	public  static class ProductionFromClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ProductionFromClient(ArrayList<ProductionOrderFromClient> orders) {
 			this.orders = orders;
 		}
 
 		public  static class ProductionOrderFromClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public ProductionOrderFromClient(int qualityWafer, int qualityCase,
 					int quantity) {
 
@@ -91,12 +118,21 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 	public  static class DistributionFromClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public DistributionFromClient(ArrayList<OfferFromClient> offers) {
 			this.offers = offers;
 		}
 
 		public static class OfferFromClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public OfferFromClient(int quality, int quantityToSell, int price) {
 				this.quality = quality;
 				this.quantityToSell = quantityToSell;
@@ -113,6 +149,11 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 	public static class HumanResourcesFromClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public HumanResourcesFromClient(ArrayList<BenefitBookingFromClient> benefits) {
 
 			this.benefits = benefits;
@@ -120,6 +161,10 @@ public class GameDataMessageFromClient   extends GameDataMessage implements Seri
 
 		public static class BenefitBookingFromClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public BenefitBookingFromClient(String name, int duration) {
 				this.name = name;
 				this.duration = duration;

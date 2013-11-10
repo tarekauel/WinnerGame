@@ -10,6 +10,11 @@ import server.TMotivation;
 public class GameDataMessageToClient extends GameDataMessage implements
 		Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public GameDataMessageToClient(String playerName,
 			PurchaseToClient purchase, ProductionToClient production,
 			StorageToClient storage, DistributionToClient distribution,
@@ -48,6 +53,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 	public final ArrayList<Loser> listOfLosers =  new ArrayList<Loser>();
 
 	public static class Loser implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public final String name;
 		public final int round;
 		public Loser(String name, int round) {
@@ -58,6 +67,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 	}
 	
 	public static class PurchaseToClient implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public PurchaseToClient(ArrayList<RequestToClient> requests) {
 			this.requests = requests;
 		}
@@ -65,6 +79,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 		public final ArrayList<RequestToClient> requests; // ewige Liste
 
 		public static class RequestToClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public RequestToClient(String name, int quality,
 					ArrayList<SupplierOfferToClient> supplierOffers) {
 				this.name = name;
@@ -78,6 +97,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 			public final int quality;
 
 			public static class SupplierOfferToClient implements Serializable {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				public SupplierOfferToClient(String name, int quality,
 						int orderedQuantity, int price, int round) {
 					this.name = name;
@@ -99,11 +122,20 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 	public static class ProductionToClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ProductionToClient(ArrayList<ProductionOrderToClient> orders) {
 			this.orders = orders;
 		}
 
 		public static class ProductionOrderToClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public ProductionOrderToClient(int qualityWafer, int qualityCase,
 					int qualityPanel, int quantity, int producedQuantity,
 					int costs) {
@@ -132,6 +164,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 	public static class StorageToClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public StorageToClient(int storageCostsWafer, int storageCostsCase,
 				int storageCostsPanel,
 				ArrayList<StorageElementToClient> storageElements) {
@@ -144,6 +181,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class StorageElementToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public StorageElementToClient(String type, int quality, int costs,
 					int quantity) {
 				this.type = type;
@@ -172,6 +213,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 	public static class DistributionToClient implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public DistributionToClient(ArrayList<OfferToClient> offers, int costsPerOffer) {
 			this.offers = offers;
 			this.costsPerOffer = costsPerOffer;
@@ -179,6 +224,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class OfferToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public OfferToClient(int quality, int quantityToSell,
 					int quantitySold, int price, int round, int costs) {
 				this.quality = quality;
@@ -206,6 +255,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 	public static class HumanResourcesToClient implements Serializable {
 
 		
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		public HumanResourcesToClient(
 				ArrayList<BenefitBookingToClient> benefits,
@@ -235,6 +289,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 		public static class BenefitBookingToClient implements Serializable {
 
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public BenefitBookingToClient(String name, int remainingRounds,
 					int costsPerRound) {
 				
@@ -249,6 +307,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 		
 		public static class PossibleBenefit implements Serializable {
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public PossibleBenefit(String name, int costsPerRound) {
 				super();
 				this.name = name;
@@ -261,6 +323,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 	}
 
 	public static class MarketingToClient implements Serializable {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		public MarketingToClient(boolean isBooked,int peakAMarket, int peakCMarket,
 				ArrayList<MarketShareToClient> marketShares,
@@ -284,12 +351,20 @@ public class GameDataMessageToClient extends GameDataMessage implements
 		// For HR
 
 		public static class MotivationRoundToClient implements Serializable {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			int round;
 			int motivation;
 		}
 
 		public static class RessourcePriceToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public RessourcePriceToClient(int quality, int price) {
 
 				this.quality = quality;
@@ -303,6 +378,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class MarketShareToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public MarketShareToClient(int share, String name) {
 				super();
 				this.share = share;
@@ -317,6 +396,11 @@ public class GameDataMessageToClient extends GameDataMessage implements
 	}
 
 	public static class ReportingToClient implements Serializable {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		public ReportingToClient(ArrayList<FixCostToClient> fixCosts,
 				MachineryToClient machinery,
@@ -337,6 +421,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 		
 		public static class FixCostToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public FixCostToClient(String nameOfDepartment, int costs) {
 
 				this.nameOfDepartment = nameOfDepartment;
@@ -349,6 +437,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class MachineryToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public MachineryToClient(int level, int maxCapacity,
 					int averageUsage, int usageLastRound) {
 
@@ -366,6 +458,10 @@ public class GameDataMessageToClient extends GameDataMessage implements
 
 		public static class CashValueOfRoundToClient implements Serializable {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			public CashValueOfRoundToClient(int round, long costs) {
 
 				this.round = round;
