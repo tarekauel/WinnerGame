@@ -11,17 +11,10 @@ public class MarketData {
 	// Singleton-Referenz
 	private static MarketData data = null;
 	
-	// Referenz auf den Beschaffungsmarkt
-	private SupplierMarket supplierMarket;
-	
 	// Referenz auf den Absatzmarkt
 	private CustomerMarket customerMarket;
 	
-	// Liste mit Durchschnittslöhen
-	private ArrayList<TWage> wages = null;
 	
-	// Runde, in der die Löhne gelten;
-	private int round = 0;
 	
 	// Liste der Personalabteilungen
 	private ArrayList<HumanResources> listOfHr = new ArrayList<HumanResources>();
@@ -44,8 +37,7 @@ public class MarketData {
 	 */
 	private MarketData() {
 		
-		supplierMarket = SupplierMarket.getMarket();
-		customerMarket = CustomerMarket.getMarket();
+	
 	}
 	
 	/**

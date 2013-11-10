@@ -6,10 +6,6 @@ import java.util.TreeSet;
 
 import constant.Constant;
 
-/**
- * Created by: User: Lars Trey Date: 28.09.13 Time: 17:22
- */
-
 public class Company {
 
 	private String name;
@@ -35,27 +31,6 @@ public class Company {
 	 * @throws Exception
 	 *             falls falsche eingabe werte
 	 * @exception IllegalArgumentException
-	 */
-	/*
-	 * public Company(Location l) throws Exception {
-	 * 
-	 * if (!checkLocation(l)) { throw new
-	 * IllegalArgumentException("Ungültiger Standort"); }
-	 * 
-	 * // erzeuge Bankkonto mit 1 Mio Kapital bankAccount = new
-	 * BankAccount(this); // setze Location
-	 * 
-	 * this.location = l; // 'Kaufe die Location'
-	 * bankAccount.decreaseBalance(l.getPurchasePrice());
-	 * 
-	 * // Erzuege alle Abteilungen this.purchase = new Purchase(this);
-	 * this.production = new Production(this); this.storage = new Storage(this);
-	 * this.distribution = new Distribution(this); this.humanResources = new
-	 * HumanResources(this); this.marketResearch = new MarketResearch(this);
-	 * 
-	 * // Anmelden an der Gamengine GameEngine.getGameEngine().addCompany(this);
-	 * 
-	 * }
 	 */
 
 	public Company(Location l, String name) throws Exception {
