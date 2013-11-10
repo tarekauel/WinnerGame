@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 import constant.Constant;
 
-/**
- * Created by: User: Lars Trey Date: 28.09.13 Time: 18:11
- */
-// TODO: ueberpruefung ob Benefits noch gueltig, entfernen aus bookedbenefits,
-// kosten die benefits per round verursachen
-// TODO alle wagelevel rechnungen / 10 000
+
 public class HumanResources extends DepartmentRoundSensitive {
 
 	// Lohn pro Runde pro Mitarbeiter
@@ -42,9 +37,7 @@ public class HumanResources extends DepartmentRoundSensitive {
 
 		setWagePerRound(new TWage(c.getLocation().getInitWage(), GameEngine.getGameEngine().getRound(),c.getLocation().getWageLevel() )); 
 		this.wagesSum = calcWagesSum();
-		// TODO: BENEFIT BOOKING!?
-		// this.benefitBooking = new BenefitBooking();
-
+		
 		// HR bei MarketData registrieren, um den durchschnittslohn zu
 		// uebermitteln
 		MarketData.getMarketData().addHR(this);
@@ -79,7 +72,6 @@ public class HumanResources extends DepartmentRoundSensitive {
 
 			// Auf Gleichheit ueberpruefne
 			if (bB.getBenefit().equals(benefit)) {
-				// TODO durch Nachricht ersetzen?!
 				throw new IllegalArgumentException("Beneift bereits gebucht");
 			}
 		}
@@ -185,7 +177,6 @@ public class HumanResources extends DepartmentRoundSensitive {
 	 * @throws Exception
 	 */
 	public int getMotivation() throws Exception {
-		// TODO: testen mit unterschieden zur letzten Runde!
 		// Gehaltsunterschied zur Vorrunde
 		double diffWageToLastRound = 1.0;
 
@@ -271,7 +262,7 @@ public class HumanResources extends DepartmentRoundSensitive {
 		
 		influenceBenefitToAverage = ( influenceBenefitToAverage > 1.45 ) ? 1.45 : influenceBenefitToAverage;
 
-		// Motivation gewichtet berechnen TODO: mal checken
+		// Motivation gewichtet berechnen
 		double motivation = (influenceWageToLastRound
 				* (Constant.HumanResources.IMPACT_DIFF_INTERNAL / 100.0) + influenceWageToAverage
 				* (Constant.HumanResources.IMPACT_DIFF_MARKET / 100.0))

@@ -5,10 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by: User: Lars Trey Date: 28.09.13 Time: 17:16
- */
-
 public class Location {
 
 	private int advantage;

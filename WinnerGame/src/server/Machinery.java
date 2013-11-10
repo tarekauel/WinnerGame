@@ -8,13 +8,6 @@ import java.util.Random;
 
 import constant.Constant;
 
-/**
- * @author Lars
- * 
- *         Klasse für die Maschine mit Attributen für das level. Hiervon
- *         abgeleitet bietet die Klasse an, wieviel eine Maschine produzieren
- *         kann und wie groß die Auslastung ist
- */
 public class Machinery implements IRoundSensitive {
 	// Maschinen ausbaustufe
 	private int level;
