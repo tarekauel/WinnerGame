@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import server.Company;
 import server.Location;
 
-/**
- * 
- * @author D059270 Speichert entsprechende Daten des Spielers. Über getter und
- *         setter kann auf die Attribute zugegriffen werden.
- * 
- */
 
 public class Player {
 

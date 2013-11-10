@@ -3,11 +3,6 @@ package server.connection;
 import kigegner.KI;
 import kigegner.KITarek;
 
-/**
- * 
- * @author D059270 Der Server stellt die Kommunikation zwischen Client und
- *         Server her.
- */
 public class ServerUITest  {
 	/**
 	 * startet den Server

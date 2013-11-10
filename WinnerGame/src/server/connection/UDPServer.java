@@ -6,13 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
-/**
- * Der UDP Server lauscht an einem definierten UDP-Port und wartet auf Broadcast
- * von Clients und antwortet mit der IP und den TCP-Port
- * 
- * @author D059270
- * 
- */
 public class UDPServer extends Thread {
 	DatagramSocket socket = null;
 	int tcpGamePort;

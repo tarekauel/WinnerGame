@@ -11,11 +11,7 @@ import server.GameEngine;
 import server.Location;
 import constant.Constant;
 
-/**
- * 
- * @author D059270 Der Server stellt die Kommunikation zwischen Client und
- *         Server her.
- */
+
 public class Server {
 	private static Server server;
 	private ArrayList<Player> playerList = new ArrayList<Player>();

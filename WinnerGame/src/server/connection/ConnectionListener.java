@@ -5,15 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
-/**
- * 
- * @author D059270
- * 
- *         Der Connection Listerner wartet auf neue Clients und legt für diese
- *         neue Verbindungen an. Er sollte hierfür in einem neuen Thread
- *         gestartet werden.
- * 
- */
+
 public class ConnectionListener extends Thread {
 
 	private int port = 0;

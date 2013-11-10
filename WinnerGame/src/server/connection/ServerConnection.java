@@ -13,14 +13,7 @@ import message.LoginConfirmationMessage;
 import message.LoginMessage;
 import server.GameEngine;
 
-/**
- * 
- * @author D059270
- * 
- *         Die ServerConnection stellt eine einzelne Verbindung mit einem Client
- *         da und sollte in einem neuen Thread gestartet werden.
- * 
- */
+
 
 public class ServerConnection extends Thread {
 	private Socket clientSocket;
