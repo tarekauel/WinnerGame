@@ -1,6 +1,6 @@
 package scenarien;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -124,7 +124,6 @@ public class RoundScenario {
 			return;
 		}
 		//wieviele panels hatten wir vorher?
-		int before = sePanel.getQuantity();
 		//senden an Gameengine
 		toSend.add(msg.getSendMessage());
 		toReceive = GameEngine.getGameEngine().startNextRound(toSend);

@@ -15,7 +15,6 @@ import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFro
 import message.GameDataMessageFromClient.PurchaseFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
-import message.GameDataMessageToClient;
 import message.LoginConfirmationMessage;
 import message.LoginMessage;
 
@@ -125,13 +124,13 @@ public class GameEngineRoundTest {
 		c2.writeMessage(gameMessagefromClient2);
 		c3.writeMessage(gameMessagefromClient3);
 		
-		//Get new GameData
+		//Get GameData
 		
-		GameDataMessageToClient gameMessageToClient1 = (GameDataMessageToClient) c1.readMessage();
+		c1.readMessage();
 		
-		GameDataMessageToClient gameMessageToClient2 = (GameDataMessageToClient) c2.readMessage();
+		c2.readMessage();
 	
-		GameDataMessageToClient gameMessageToClient3 = (GameDataMessageToClient) c3.readMessage();
+		c3.readMessage();
 	
 		//Neuer Client versucht sich einzuloggen, was nicht funktionieren darf
 		Client c4 = new Client();

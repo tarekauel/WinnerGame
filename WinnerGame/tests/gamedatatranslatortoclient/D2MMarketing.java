@@ -12,7 +12,6 @@ import message.GameDataMessageFromClient.ProductionFromClient.ProductionOrderFro
 import message.GameDataMessageFromClient.PurchaseFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOfferFromClient;
 import message.GameDataMessageFromClient.PurchaseFromClient.RequestFromClient;
-import message.GameDataMessageToClient;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -74,7 +73,7 @@ public class D2MMarketing {
 	@Test
 	public void getCompleteProductionOrder() throws Exception {
 		
-		 ArrayList<GameDataMessageToClient> gameDataMessageToClients = GameEngine.getGameEngine().startNextRound(gameDataMessages);
+		 GameEngine.getGameEngine().startNextRound(gameDataMessages);
 	
 		 
 		

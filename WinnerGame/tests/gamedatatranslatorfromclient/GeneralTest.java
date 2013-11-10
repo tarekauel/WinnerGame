@@ -134,8 +134,8 @@ public class GeneralTest {
 	@Test (expected = java.lang.NullPointerException.class)
 	public void purchaseNull() throws Exception {
 		//erstellen der Listen
-		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
-		ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers = new ArrayList<AcceptedSupplierOfferFromClient>();
+		
+		
 		ArrayList<ProductionOrderFromClient> orders = new ArrayList<ProductionOrderFromClient>();
 		ArrayList<OfferFromClient> offers = new ArrayList<OfferFromClient>();
 		ArrayList<BenefitBookingFromClient> benefits =  new ArrayList<BenefitBookingFromClient>();
@@ -157,7 +157,6 @@ public class GeneralTest {
 		//erstellen der Listen
 		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
 		ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers = new ArrayList<AcceptedSupplierOfferFromClient>();
-		ArrayList<ProductionOrderFromClient> orders = new ArrayList<ProductionOrderFromClient>();
 		ArrayList<OfferFromClient> offers = new ArrayList<OfferFromClient>();
 		ArrayList<BenefitBookingFromClient> benefits =  new ArrayList<BenefitBookingFromClient>();
 		
@@ -179,7 +178,6 @@ public class GeneralTest {
 		ArrayList<RequestFromClient> requests = new ArrayList<RequestFromClient>();
 		ArrayList<AcceptedSupplierOfferFromClient> acceptedSupplierOffers = new ArrayList<AcceptedSupplierOfferFromClient>();
 		ArrayList<ProductionOrderFromClient> orders = new ArrayList<ProductionOrderFromClient>();
-		ArrayList<OfferFromClient> offers = new ArrayList<OfferFromClient>();
 		ArrayList<BenefitBookingFromClient> benefits =  new ArrayList<BenefitBookingFromClient>();
 		
 		//erstellen der Objekte mit den Listen gefuellt
