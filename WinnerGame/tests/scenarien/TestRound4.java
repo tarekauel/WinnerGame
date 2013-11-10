@@ -99,6 +99,7 @@ public class TestRound4 {
 		msg.addOffer(g.getQuality(), 10, 1000 * g.getCosts());
 		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
 		StorageElement sePanel = null;
+		toSend = new ArrayList<GameDataMessageFromClient>();
 		for(StorageElement e: se){
 			if (e.getProduct().getName()=="Panel"){
 				sePanel = e;
@@ -123,6 +124,7 @@ public class TestRound4 {
 		msg.addOffer(g.getQuality(), 10, 1);
 		ArrayList<StorageElement> se = c1.getStorage().getAllStorageElements();
 		StorageElement sePanel = null;
+		toSend = new ArrayList<GameDataMessageFromClient>();
 		for(StorageElement e: se){
 			if (e.getProduct().getName()=="Panel"){
 				sePanel = e;
