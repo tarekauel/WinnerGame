@@ -9,10 +9,8 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import server.Location;
 import server.connection.Server;
 import client.connection.Client;
-import client.connection.UDPClient;
 import constant.Constant;
 
 public class ConnectionTest {

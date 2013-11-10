@@ -11,7 +11,7 @@ public aspect NewLogger {
 	private PrintWriter out;
 
 	public NewLogger() throws FileNotFoundException {
-		out = new PrintWriter( "LOG-"+System.currentTimeMillis()+".txt");
+		out = new PrintWriter( System.out );
 	}
 	
 	
