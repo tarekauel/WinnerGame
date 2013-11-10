@@ -127,12 +127,16 @@ public class RoundScenario {
 		int before = sePanel.getQuantity();
 		//senden an Gameengine
 		toSend.add(msg.getSendMessage());
-		GameEngine.getGameEngine().startNextRound(toSend);
+		toReceive = GameEngine.getGameEngine().startNextRound(toSend);
+		received = toReceive.remove(toReceive.size()-1);
+		
 		//finaler Test:
-		//vergleich der anzahl der panels
-		if(sePanel.getQuantity() >= before){
-			fail("Es wurde nichts verkauft!");
+		if(received.distribution.offers.get(0).quantitySold > 0 ){
+			//Test hat geklappt
+		}else{
+			fail("Nichts verkauft");
 		}
+		
 
 	}
 
