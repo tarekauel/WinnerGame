@@ -128,7 +128,7 @@ public class UITestKI extends Thread {
 		
 		if (data.round == 6) {
 			ClientGameUIStart.main(null);
-			this.stop();
+			
 		}
 		
 		if (data.round == 100) {

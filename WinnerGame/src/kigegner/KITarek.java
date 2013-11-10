@@ -12,7 +12,6 @@ import message.GameDataMessageToClient.StorageToClient.StorageElementToClient;
 import message.LoginConfirmationMessage;
 import message.LoginMessage;
 import client.connection.Client;
-import client.ui.ClientGameUIStart;
 import constant.Constant;
 
 public class KITarek extends Thread {

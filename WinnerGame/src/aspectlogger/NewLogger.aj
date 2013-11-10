@@ -7,7 +7,7 @@ import annotation.Log;
 
 @DontLog
 public aspect NewLogger {
-	/*
+	
 	private PrintWriter out;
 
 	public NewLogger() throws FileNotFoundException {
@@ -67,5 +67,5 @@ public aspect NewLogger {
 	}
 	
 	
-	*/
+	
 }

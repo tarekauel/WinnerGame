@@ -1,8 +1,5 @@
 package aspectlogger;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-
 import annotation.DontLog;
 import annotation.FakeRandom;
 import annotation.FakeSupplierMarketOfferQualities;

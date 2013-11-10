@@ -154,7 +154,7 @@ public class UITestKISchlau extends Thread {
 
 		if (readMessage.round == 6) {
 			ClientGameUIStart.main(null);
-			this.stop();
+			
 		}
 
 		

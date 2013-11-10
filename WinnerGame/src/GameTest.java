@@ -12,13 +12,12 @@ import server.Request;
 import server.Resource;
 import server.Storage;
 import server.SupplierMarket;
-import server.TMarketShare;
 
 public class GameTest {
 
 	public static void main(String[] args) throws Exception {
 		
-		GameEngine g = GameEngine.getGameEngine();
+		GameEngine.getGameEngine();
 		
 		Benefit.initBenefits();
 
@@ -81,10 +80,6 @@ public class GameTest {
 
 		CustomerMarket.getMarket().handleAllOffers();
 
-		ArrayList<TMarketShare> shares = CustomerMarket.getMarket()
-				.getMarketShares();
-
-		int i = 1;
-
+		
 	}
 }
