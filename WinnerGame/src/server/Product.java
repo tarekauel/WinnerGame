@@ -4,7 +4,7 @@ import constant.Constant;
 
 /**
  * 
- * @author D059270 Die Klasse Product stellt die Superklasse der Produkttypen
+ * Die Klasse Product stellt die Superklasse der Produkttypen
  *         Ressorce und FinishedGood dar. Name, Kosten und Qalität werden von
  *         Product geführt.
  */

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Diese Klasse enthält alle Statistischen Marktdaten
- * @author Tarek
  *
  */
 public class MarketData {

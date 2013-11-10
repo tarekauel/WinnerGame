@@ -9,7 +9,6 @@ import constant.Constant;
  * wieder aus. Es ist eine Abteilung des Unternehmens.
  * 
  * 
- * @author Felix
  * 
  */
 

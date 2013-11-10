@@ -6,10 +6,8 @@ package server;
  * Dieser Typ gibt den Marktanteil (in 100% ( d.h. ein Monopol sind 10000 !))
  * einer Firma an
  * 
- * @author Tarek
  * 
  */
-// TODO: ist jetz ein Typ :D
 public class TMarketShare {
 
 	private Company c;

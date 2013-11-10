@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author D059270 Stellt eine Nachfrage nach einem Rohstoff in einer bestimmten
+ *  Stellt eine Nachfrage nach einem Rohstoff in einer bestimmten
  *         Qualität dar. Angebote hierzu können über getSpplierOffers abgerufen
  *         werden.
  */

@@ -54,7 +54,6 @@ public class SupplierMarket {
 	 * 
 	 * @return SupplierMarket: Instanz des Marktes
 	 */
-	// TODO:
 	public static SupplierMarket getMarket() {
 
 		// Pruefe, ob der Markt bereits erstellt worden ist und geben es zurück
@@ -65,7 +64,6 @@ public class SupplierMarket {
 	/**
 	 * Private Konstruktor zur Umsetzung des Singleton-Musters
 	 */
-	// TODO
 	private SupplierMarket() {
 		waferPricelist = new TreeSet<TResourcePrice>();
 		casePricelist = new TreeSet<TResourcePrice>();
@@ -98,10 +96,7 @@ public class SupplierMarket {
 		}
 
 		// Pruefe ob Purchase noch nicht in der Liste steht
-		if (listOfPurchase.indexOf(p) == -1) { // TODO: indexOf geht auf
-			// equals (muss ggf. noch
-			// implementiert werden)
-
+		if (listOfPurchase.indexOf(p) == -1) {
 			// Abteilung muss hinzugefügt werden
 			listOfPurchase.add(p);
 
@@ -275,7 +270,6 @@ public class SupplierMarket {
 				}
 
 				// Spread berechnen und addieren fuer j < i
-				// TODO eventuell Einfluss auf Nachbarn anders berechnen
 				if (j < i) {
 					newSpreadsCase[j] += share - share * (i - j) / influenceOnNeighbours;
 				} else {

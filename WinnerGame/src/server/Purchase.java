@@ -9,7 +9,6 @@ import constant.Constant;
  * kann an den beschaffungsmarkt neue Anfragen stellen und die Antworten
  * daraufhin mit der Angabe der gewuenschten Menge annehmen.
  * 
- * @author Felix
  * 
  */
 

@@ -8,7 +8,6 @@ import constant.Constant;
 /**
  * Klasse für den Produktionsauftrag
  * 
- * @author Lars
  * 
  */
 public class ProductionOrder {

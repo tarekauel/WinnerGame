@@ -6,10 +6,6 @@ import constant.Constant;
  * Ist eine Abteilung des Unternehmens. Sie enthaelt die Information ob die MarektData
  * beim Client angezeigt werden soll oder nicht
  * 
- * Created by:
- * User: Lars Trey
- * Date: 28.09.13
- * Time: 18:11
  */
 
 public class MarketResearch extends Department {

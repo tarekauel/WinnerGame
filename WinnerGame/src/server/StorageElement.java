@@ -6,7 +6,6 @@ package server;
  * Jedes StorageElement besitzt ein Produkt, was ein Fertigprodukt oder ein Rohstoff sein kann.
  * Zur Erzeugung muss eine Menge angegeben werden, mit der der Artikel eingelagert wird.
  * 
- * @author felix
  *
  */
 
@@ -91,7 +90,6 @@ public class StorageElement {
 	 * 		   false sonst
 	 */
 	public boolean increaseQuantity(int quantity){
-		//TODO: durchschnittspreis neu berechnen!
 		
 		if(quantity>0){
 			this.quantity = this.quantity + quantity;

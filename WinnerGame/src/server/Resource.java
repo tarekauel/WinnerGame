@@ -3,8 +3,6 @@ package server;
 
 /**
  * 
- * @author D059270 Resorce erbt von Prodct und kann nur ein Wafer oder ein
- *         Gehäuse sein.
  */
 public class Resource extends Product {
 	

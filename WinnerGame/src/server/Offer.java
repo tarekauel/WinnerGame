@@ -6,7 +6,6 @@ import java.io.IOException;
  * Dabei muss er die Menge, den Preis und das zu verkaufende Produkt angeben.
  * Es wird dabei auch überprueft, ob das Produkt existiert bzw ob es in der gewuenschten
  * Menge verkauft werden kann.
- * @author Felix
  *
  */
 

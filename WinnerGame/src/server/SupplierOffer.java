@@ -6,7 +6,6 @@ import message.GameDataMessageFromClient.PurchaseFromClient.AcceptedSupplierOffe
 
 /**
  * 
- * @author D059270 Stellt eine von max. 3 Angeboten zu einer Request dar.
  */
 
 public class SupplierOffer {
